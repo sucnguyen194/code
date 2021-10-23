@@ -168,9 +168,6 @@ Route::get('lien-he.html', [App\Http\Controllers\ContactController::class,'index
 Route::get('contact.html', [App\Http\Controllers\ContactController::class,'index'])->name('contact.index');
 Route::post('contact', [App\Http\Controllers\ContactController::class,'store'])->name('send.contact');
 
-Route::get('video.html', [App\Http\Controllers\VideoController::class,'index'])->name('video.index');
-Route::get('gallery.html', [App\Http\Controllers\GalleryController::class,'index'])->name('gallery.index');
-
 Route::get('tag/{alias}',[App\Http\Controllers\SearchController::class,'tag'])->name('tag.show');
 Route::get('search', [App\Http\Controllers\SearchController::class,'search'])->name('search');
 

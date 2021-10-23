@@ -15,9 +15,7 @@ class CreateSupportsTable extends Migration
     {
         Schema::create('supports', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
             $table->string('image')->nullable();
-            $table->text('description')->nullable();
             $table->string('job')->nullable();
             $table->string('hotline')->nullable();
             $table->string('email')->nullable();
@@ -33,8 +31,6 @@ class CreateSupportsTable extends Migration
             $table->string('type')->nullable();
             $table->string('public')->default(1);
             $table->string('status')->default(2);
-            $table->longText('content')->nullable();
-            $table->string('lang');
             $table->integer('sort')->default(0);
             $table->timestamps();
         });
