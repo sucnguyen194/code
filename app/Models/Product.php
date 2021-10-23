@@ -59,7 +59,7 @@ class Product extends Model
         if($this->photo)
             $image = $this->photo[0];
 
-        return resize_image($image);
+        return resize_image($image, setting('site.product.size'));
     }
 
     public function getPercentAttribute(){

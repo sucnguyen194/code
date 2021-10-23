@@ -442,3 +442,9 @@ ul.grid {
 .menu_action a {
     border:1px solid #fff;
 }
+
+@media (max-width: 420px) {
+    .w-xs-100 {
+        width: 100%;
+    }
+}

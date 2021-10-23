@@ -70,7 +70,7 @@ class Post extends Model
 
     public function getThumbAttribute(){
 
-        return resize_image($this->image);
+        return resize_image($this->image, setting('site.post.size'));
     }
 
     public static function boot(){

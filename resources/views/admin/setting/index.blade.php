@@ -253,7 +253,7 @@
 
                     </fieldset>
                     <fieldset title="3">
-                        <legend>Mã bổ xung (Marketing...)</legend>
+                        <legend>Mã bổ xung</legend>
                         <div class="card-box mt-1">
                             <div class="row ">
                                 <div class="col-md-6">
@@ -325,36 +325,45 @@
                         </div>
                     </fieldset>
                     <fieldset title="5" class="">
-                        <legend>Cấu hình & API</legend>
+                        <legend>API</legend>
 
                         <div class="bg-white">
                             <div class="card-body">
+                                <div class="w-25 w-xs-100">
+                                    <label for="google_analytics_id">Google Analytics ID</label>
+                                    <input type="text" class="form-control" value="{{setting('api.google_analytics_id')}}" id="google_analytics_id" name="data[api.google_analytics_id]">
+                                </div>
 
-                                <label for="google_analytics_id">Google Analytics ID</label>
-                                <input type="text" class="form-control" value="{{setting('api.google_analytics_id')}}" id="google_analytics_id" name="data[api.google_analytics_id]">
                             </div>
                             <hr class="border-light m-0">
 
                             <div class="card-body">
-                                <label for="facebook_app_secret">Imgur client ID</label>
-                                <input type="text" class="form-control" value="{{setting('api.imgur_client_id')}}" id="facebook_app_secret" name="data[api.imgur_client_id]">
+                                <div class="w-25 w-xs-100">
+                                    <label for="facebook_app_secret">Imgur client ID</label>
+                                    <input type="text" class="form-control" value="{{setting('api.imgur_client_id')}}" id="facebook_app_secret" name="data[api.imgur_client_id]">
+                                </div>
                             </div>
                             <hr class="border-light m-0">
 
                             <div class="card-body">
+                                <div class="w-25 w-xs-100">
                                 <label class="font-weight-semibold mb-4">Facebook App</label>
                                 <div class="form-group">
-                                    <label for="facebook_app_ip">App ID <a href="https://developers.facebook.com/apps/" target="_blank">(FACEBOOK for Developers)</a> </label>
+                                    <label for="facebook_app_ip">App ID <a href="https://developers.facebook.com/apps/" class="small" target="_blank">(FACEBOOK for Developers)</a> </label>
                                     <input type="text" class="form-control" value="{{setting('api.facebook_app_ip')}}" id="facebook_app_ip" name="data[api.facebook_app_ip]">
                                 </div>
-                                <div class="form-group mb-0">
-                                    <label for="facebook_app_secret">App Secret</label>
-                                    <input type="text" class="form-control" value="{{setting('api.facebook_app_secret')}}" id="facebook_app_secret" name="data[api.facebook_app_secret]">
+                                    <div class="form-group mb-0">
+                                        <label for="facebook_app_secret">App Secret</label>
+                                        <input type="text" class="form-control" value="{{setting('api.facebook_app_secret')}}" id="facebook_app_secret" name="data[api.facebook_app_secret]">
+                                    </div>
                                 </div>
+
                             </div>
                             <hr class="border-light m-0">
                             <div class="card-body">
                                 <label class="font-weight-semibold mb-4">Facebook Messages</label>
+
+                                <div class="w-25 w-xs-100">
                                 <div class="form-group">
                                     <label for="facebook_app_ip">App ID </label>
                                     <input type="text" class="form-control" value="{{setting('api.chat_message_id')}}" id="chat_message_id" name="data[api.chat_message_id]">
@@ -363,25 +372,92 @@
                                     <label for="chat_message_text">App messages</label>
                                     <input type="text" class="form-control" value="{{setting('api.chat_message_text')}}" id="chat_message_text" name="data[api.chat_message_text]">
                                 </div>
+                                </div>
                             </div>
                             <hr class="border-light m-0">
                             <div class="card-body">
                                 <input type="hidden" value="0" name="data[api.google_captcha]">
                                <label class="font-weight-semibold mb-4"> Google reCAPTCHA  <input type="checkbox" {{checked(setting('api.google_captcha'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.google_captcha]" data-size="small"/></label>
+                                <div class="w-25 w-xs-100">
                                 <div class="form-group">
-                                    <label for="re_captcha_key">reCAPTCHA site key <a href="https://www.google.com/recaptcha/lib/create" target="_blank">(Google reCAPTCHA)</a> </label>
+                                    <label for="re_captcha_key">Site key <a href="https://www.google.com/recaptcha/lib/create" class="small" target="_blank">(Google reCAPTCHA)</a> </label>
                                     <input type="text" class="form-control" value="{{setting('api.re_captcha_key')}}" id="re_captcha_key" name="data[api.re_captcha_key]">
                                 </div>
                                 <div class="form-group mb-0">
-                                    <label for="re_captcha_secret">reCAPTCHA secret key</label>
+                                    <label for="re_captcha_secret">Secret key</label>
                                     <input type="text" class="form-control" value="{{setting('api.re_captcha_secret')}}" id="re_captcha_secret" name="data[api.re_captcha_secret]">
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+                    <fieldset title="6" class="">
+                        <legend>Cấu hình</legend>
+
+                        <div class="bg-white">
+                            <div class="card-body">
+                                <label class="font-weight-semibold mb-4">Bài viết <small>(Blog, page, ...)</small></label>
+                                <div class="row">
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Thumbnail</label>
+                                        <select class="form-control" name="data[site.post.size]">
+                                            <option value="s" {{selected(setting('site.post.size'),'s')}}>90x90</option>
+                                            <option value="t" {{selected(setting('site.post.size'),'t')}}>160x160</option>
+                                            <option value="m" {{selected(setting('site.post.size'),'m')}}>320x320</option>
+                                            <option value="l" {{selected(setting('site.post.size'),'l')}}>640x640</option>
+                                            <option value="h" {{selected(setting('site.post.size'),'h')}}>1024x1024</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Trang chủ</label>
+                                        <input id="touchspin" type="text" value="{{setting('site.post.index')}}" name="data[site.post.index]">
+                                    </div>
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Danh mục</label>
+                                        <input id="touchspin" type="text" value="{{setting('site.post.category')}}" name="data[site.post.category]">
+                                    </div>
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Tin liên quan</label>
+                                        <input id="touchspin" type="text" value="{{setting('site.post.related')}}" name="data[site.post.related]">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <label class="font-weight-semibold mb-4">Sản phẩm <small>(sản phẩm, gallery, video,...)</small></label>
+                                <div class="row">
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Thumbnail</label>
+                                        <select class="form-control" name="data[site.product.size]">
+                                            <option value="s" {{selected(setting('site.product.size'),'s')}}>90x90</option>
+                                            <option value="t" {{selected(setting('site.product.size'),'t')}}>160x160</option>
+                                            <option value="m" {{selected(setting('site.product.size'),'m')}}>320x320</option>
+                                            <option value="l" {{selected(setting('site.product.size'),'l')}}>640x640</option>
+                                            <option value="h" {{selected(setting('site.product.size'),'h')}}>1024x1024</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Trang chủ</label>
+                                        <input id="touchspin" type="text" value="{{setting('site.product.index')}}" name="data[site.product.index]">
+                                    </div>
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Danh mục</label>
+                                        <input id="touchspin" type="text" value="{{setting('site.product.category')}}" name="data[site.product.category]">
+                                    </div>
+                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                        <label>Sản phẩm iên quan</label>
+                                        <input id="touchspin" type="text" value="{{setting('site.product.related')}}" name="data[site.product.related]">
+                                    </div>
                                 </div>
                             </div>
 
                             <hr class="border-light m-0">
                             <div class="card-body">
                                 <input type="hidden" value="0" name="data[site.languages]">
-                                <label class="font-weight-semibold"> Multilingual <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
+                                <label class="font-weight-semibold mb-0"> Multilingual <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
                             </div>
                             <hr class="border-light m-0">
                             <div class="card-body">
@@ -389,12 +465,12 @@
                                     <input type="hidden" value="0" name="data[site.maintenance]">
                                     <label class="font-weight-semibold"> Bảo trì <input type="checkbox" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size="small"/></label>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="password">Mật khẩu (mật khẩu để reivew khi website bảo trì)</label>
-                                    <input type="text" class="form-control" value="{{setting('site.password')}}" id="password" name="data[site.password]">
+                                <div class="w-25 w-xs-100">
+                                    <div class="form-group">
+                                        <label for="password">Mật khẩu  <small>(reivew khi website bảo trì)</small></label>
+                                        <input type="text" class="form-control" value="{{setting('site.password')}}" id="password" name="data[site.password]">
+                                    </div>
                                 </div>
-
                                 <div class="form-group mb-0">
                                     <label for="note_maintenance">Ghi chú</label>
                                     <textarea type="text" class="form-control" id="note_maintenance" rows="4"  name="data[site.note.maintenance]">{{setting('site.note.maintenance')}}</textarea>
