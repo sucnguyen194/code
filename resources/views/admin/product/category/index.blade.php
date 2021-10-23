@@ -93,7 +93,7 @@
         </div>
         <!-- end row -->
     </div>
-    <input type="hidden" class="type" value="{{\App\Enums\CategoryType::product}}">
+    <input type="hidden" class="type" value="{{\App\Enums\CategoryType::category}}">
 @stop
 @section('scripts')
     <script>

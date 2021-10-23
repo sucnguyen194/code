@@ -134,8 +134,6 @@ class CategoryController extends Controller
 
         $category->forceFill($request->data);
         $category->admin_edit = Auth::id();
-        $category->status = $request->status ? ActiveDisable::active : ActiveDisable::disable;
-        $category->public = $request->public ? ActiveDisable::active : ActiveDisable::disable;
         $category->save();
 
         return flash('Cập nhật thành công');
