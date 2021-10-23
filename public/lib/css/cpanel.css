@@ -136,7 +136,8 @@ div.checkbox {
 .card-box {
     background: #fff;
     border-radius: 3px;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+    box-shadow: unset;
+    /*box-shadow: 0 2px 4px rgb(0 0 0 / 10%);*/
 }
 .btn-primary {
     background: -webkit-gradient(linear,left top,left bottom,from(#4d97c1),to(#3995ca));
