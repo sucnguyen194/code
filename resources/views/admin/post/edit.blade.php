@@ -180,12 +180,12 @@
                         <label class="font-15 mb-0">Trạng thái</label>
                         <hr>
                         <div class="checkbox">
-                            <input id="checkbox_public" {{$post->public == 1 ? "checked" : ""}} type="checkbox" value="1" name="public">
+                            <input id="checkbox_public" {{checked($post->public, 1)}} type="checkbox" value="1" name="public">
                             <label for="checkbox_public">Hiển thị</label>
                         </div>
 
                         <div class="checkbox">
-                            <input id="checkbox_status" {{$post->status == 1 ? "checked" : ""}} type="checkbox" value="1" name="status">
+                            <input id="checkbox_status" {{checked($post->status, 1)}} type="checkbox" value="1" name="status">
                             <label for="checkbox_status" class="mb-0">Nổi bật</label>
                         </div>
                     </div>

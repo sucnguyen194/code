@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\SystemType;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Models\Lang;
 use App\Models\Product;
-use App\Models\User;
-use Image, Session, Schema;
 
 class GalleryController extends Controller
 {

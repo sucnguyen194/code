@@ -2,19 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\LeverUser;
-use App\Enums\ProductSessionType;
-use App\Enums\SystemType;
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 use App\Models\Order;
-use App\Models\Product;
-use App\Models\ProductSession;
-use App\Models\User;
-use App\Models\UserAgency;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Cart,Session;
 
 class OrderController extends Controller
 {
@@ -25,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        if(auth()->id() > 1) $this->authorize('order.view');
+        $this->authorize('order.view');
 
         return view('admin.order.index');
     }
@@ -52,7 +42,7 @@ class OrderController extends Controller
     }
 
     public function print($id){
-
+        $this->authorize('order.view');
         $order = Order::find($id);
 
         if(!$order)
@@ -89,7 +79,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        if(auth()->id() > 1) $this->authorize('order.view');
+        $this->authorize('order.view');
         return view('admin.order.edit',compact('order'));
 
     }

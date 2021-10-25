@@ -4,23 +4,15 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ActiveDisable;
 use App\Enums\CategoryType;
 use App\Enums\PostType;
-use App\Enums\SystemType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTranslationRequest;
 use App\Http\Requests\UpdateTranslationRequest;
-use App\Jobs\CreatePostLangs;
-use App\Jobs\CreateTags;
 use App\Models\Admin;
-use App\Models\Alias;
 use App\Models\Category;
-use App\Models\Lang;
 use App\Models\Post;
-use App\Models\PostLang;
 use App\Models\Translation;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Session;
+
 
 class PostController extends Controller
 {

@@ -5,7 +5,6 @@ use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller {
 	public function index(){

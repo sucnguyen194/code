@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\ActiveDisable;
 use App\Http\Controllers\Controller;
 use App\Models\Photo;
-use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller

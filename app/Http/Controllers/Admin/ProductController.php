@@ -3,29 +3,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\ActiveDisable;
 use App\Enums\CategoryType;
-use App\Enums\SystemType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTranslationRequest;
 use App\Http\Requests\UpdateTranslationRequest;
-use App\Jobs\CreatePostLangs;
-use App\Jobs\CreateTags;
 use App\Models\Admin;
-use App\Models\Alias;
 use App\Models\Attribute;
-use App\Models\AttributeCategory;
 use App\Models\Category;
-use App\Models\Lang;
-use App\Models\Photo;
-use App\Models\PostLang;
 use App\Models\Product;
-use App\Models\ProductSession;
-use App\Models\User;
-use App\Models\UserAgency;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
-use Session, Image;
 
 class ProductController extends Controller
 {

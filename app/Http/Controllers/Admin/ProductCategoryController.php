@@ -2,14 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Enums\CategoryType;
-use App\Enums\SystemType;
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 use App\Models\Category;
-use App\Models\Lang;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProductCategoryController extends Controller
 {

@@ -2,23 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\ActiveDisable;
-use App\Enums\AliasType;
-use App\Enums\CategoryType;
-use App\Enums\Upload;
 use App\Http\Controllers\Controller;
-use App\Enums\SystemType;
 use App\Http\Requests\StoreTranslationRequest;
-use App\Jobs\CreatePostLangs;
-use App\Models\Alias;
 use App\Models\Category;
-use App\Models\Lang;
-use App\Models\Post;
-use App\Models\PostLang;
 use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Permission;
 
 class CategoryController extends Controller
 {

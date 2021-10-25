@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\SystemType;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,13 +14,13 @@ class SourceController extends Controller
      */
     public function index()
     {
-        if(auth()->id() > 1) $this->authorize('setting.source');
+        $this->authorize('setting.source');
 
         return view('admin.source.list');
     }
 
     public function load(Request $request){
-        if(auth()->id() > 1) $this->authorize('setting.source');
+        $this->authorize('setting.source');
 
         $path = $request->path;
         $file = file_get_contents($path);
@@ -29,7 +28,7 @@ class SourceController extends Controller
     }
 
     public function push(Request $request){
-        if(auth()->id() > 1) $this->authorize('setting.source');
+        $this->authorize('setting.source');
 
         $content = $request->put_file;
         $dir = $request->dir;
