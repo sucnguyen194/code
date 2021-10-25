@@ -105,20 +105,19 @@ class HomeController extends Controller
 
                 switch ($translation->category->type) {
                     case (CategoryType::product):
-                        $paginate = setting('site.product.category') ?? 12;
                         $products = Product::with(['category','admin','categories', 'translation'])->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })->orWhere('category_id',$translation->category->id)
-                            ->public()->paginate($paginate);
+                            ->public()->paginate(setting('site.product.category') ?? 20);
 
                         return view('product.category', compact('translation','products'));
                         break;
                     case (CategoryType::post):
-                        $paginate = setting('site.post.category') ?? 12;
+
                         $posts = Post::with(['category','admin','categories', 'translation'])->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })->orWhere('category_id',$translation->category->id)
-                        ->public()->paginate($paginate);
+                        ->public()->paginate(setting('site.post.category') ?? 12);
 
                         return view('post.category', compact('translation','posts'));
                         break;
