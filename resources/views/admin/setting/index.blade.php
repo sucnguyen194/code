@@ -369,7 +369,7 @@
                                     <input type="text" class="form-control" value="{{setting('api.chat_message_id')}}" id="chat_message_id" name="data[api.chat_message_id]">
                                 </div>
                                 <div class="form-group mb-0">
-                                    <label for="chat_message_text">App messages</label>
+                                    <label for="chat_message_text">App ID messages</label>
                                     <input type="text" class="form-control" value="{{setting('api.chat_message_text')}}" id="chat_message_text" name="data[api.chat_message_text]">
                                 </div>
                                 </div>
@@ -398,7 +398,8 @@
 
                         <div class="bg-white">
                             <div class="card-body">
-                                <label class="font-weight-semibold mb-4">Bài viết <small>(Blog, page, ...)</small></label>
+                                <label class="font-weight-semibold">Bài viết <small>(Blog, page, ...)</small></label>
+                                <p class="small mb-4">Cấu hình kích thước hình ảnh thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</p>
                                 <div class="row">
                                     <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
                                         <label>Thumbnail</label>
@@ -427,7 +428,8 @@
 
                             <hr class="border-light m-0">
                             <div class="card-body">
-                                <label class="font-weight-semibold mb-4">Sản phẩm <small>(sản phẩm, gallery, video,...)</small></label>
+                                <label class="font-weight-semibold">Sản phẩm <small>(sản phẩm, gallery, video,...)</small></label>
+                                <p class="small mb-4">Cấu hình kích thước hình ảnh thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</p>
                                 <div class="row">
                                     <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
                                         <label>Thumbnail</label>
@@ -457,7 +459,9 @@
                             <hr class="border-light m-0">
                             <div class="card-body">
                                 <input type="hidden" value="0" name="data[site.languages]">
-                                <label class="font-weight-semibold mb-0"> Multilingual <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
+                                <label class="font-weight-semibold"> Multilingual <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
+                                <p class="small mb-0">Cấu hình website đa ngôn ngữ</p>
+
                             </div>
                             <hr class="border-light m-0">
                             <div class="card-body">

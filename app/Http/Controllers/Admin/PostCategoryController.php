@@ -17,14 +17,18 @@ class PostCategoryController extends Controller
     public function create(){
         $this->authorize('blog.create');
 
-        $categories = Category::whereType(CategoryType::post)->withTranslation()->latest()->get();
+        $categories = Category::query()->with('translation', function ($q){
+            $q->select('name','slug','id','category_id');
+        })->whereType(CategoryType::post)->latest()->get();
         return view('admin.post.category.create',compact('categories'));
     }
 
     public function edit(Category $category){
         $this->authorize('blog.edit');
 
-        $categories = Category::whereType($category->type)->whereNotIn('id',[$category->id])->withTranslation()->public()->latest()->get();
+        $categories = Category::query()->with('translation', function ($q){
+            $q->select('id','name','category_id');
+        })->whereType($category->type)->whereNotIn('id',[$category->id])->public()->latest()->get();
 
         $translations = $category->translations->load('language');
 

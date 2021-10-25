@@ -11,7 +11,7 @@ class VideoController extends Controller {
 
 	    $this->authorize('video.view');
 
-        $admins = Admin::when(auth()->id() > 1, function ($q){
+        $admins = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
         })->get();
 
@@ -28,7 +28,7 @@ class VideoController extends Controller {
       $this->authorize('video.edit');
 
         $translations = $video->translations->load('language');
-
+        $video = $video->load('translation');
 
         return view('admin.video.edit', compact('video','translations'));
     }

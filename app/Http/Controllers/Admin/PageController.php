@@ -12,7 +12,7 @@ class PageController extends Controller
     {
         $this->authorize('blog.view');
 
-        $admins = Admin::when(auth()->id() > 1, function ($q){
+        $admins = Admin::select('id','name','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
         })->get();
 

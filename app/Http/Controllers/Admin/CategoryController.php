@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function data(){
 
         $categories = Category::with(['admin', 'translation' => function($q){
-                $q->locale();
+                $q->select('id','name','slug','category_id');
             }])->whereType(\request()->type)
             ->when(\request()->user,function ($q, $user){
                 return $q->whereUserId($user);

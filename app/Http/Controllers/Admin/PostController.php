@@ -25,9 +25,11 @@ class PostController extends Controller
     {
         $this->authorize('blog.view');
 
-        $categories = Category::whereType(PostType::post)->withTranslation()->public()->get();
+        $categories = Category::query()->with('translation',function($q){
+            $q->select('id','name','category_id');
+        })->whereType(CategoryType::post)->public()->latest()->get();
 
-        $authors = Admin::when(auth()->id() > 1, function ($q){
+        $authors = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
         })->get();
 
@@ -37,8 +39,12 @@ class PostController extends Controller
     public function data(){
 
         $posts = Post::query()->with(['category' => function($q){
-                $q->withTranslation();
-            }, 'admin'])
+                $q->with('translation', function($q){
+                    $q->select('name','slug','category_id');
+                });
+            }, 'admin', 'translation' => function($q){
+                $q->select('name','slug','post_id');
+            }])
             ->when(\request()->type,function ($q, $type){
                 return $q->whereType($type);
             })
@@ -61,7 +67,7 @@ class PostController extends Controller
                     ->orwhereHas('categories' , function ($q) use ($category) {
                         $q->whereCategoryId($category);
                     });
-            })->withTranslation();
+            });
 
         return datatables()->of($posts)
             ->editColumn('title', function ($post){
@@ -88,7 +94,9 @@ class PostController extends Controller
     {
         $this->authorize('blog.create');
 
-        $categories = Category::whereType(CategoryType::post)->withTranslation()->public()->latest()->get();
+        $categories = Category::query()->with('translation',function($q){
+            $q->select('id','name','category_id');
+        })->whereType(CategoryType::post)->public()->latest()->get();
 
         return view('admin.post.create',compact('categories'));
     }
@@ -133,7 +141,9 @@ class PostController extends Controller
     {
         $this->authorize('blog.edit');
 
-        $categories = Category::whereType(CategoryType::post)->withTranslation()->public()->get();
+        $categories = Category::query()->with('translation',function($q){
+            $q->select('id','name','category_id');
+        })->whereType(CategoryType::post)->public()->latest()->get();
 
         $translations = $post->translations->load('language');
 

@@ -29,9 +29,15 @@ class MenuController extends Controller
     {
         $this->authorize('menu');
 
-        $categories = Category::withTranslation()->public()->get();
-        $pages = Post::whereType(PostType::page)->withTranslation()->public()->get();
-        $menus = Menu::position()->withTranslation()->sort()->get();
+        $categories = Category::query()->with('translation', function ($q){
+            $q->select('name','slug','category_id');
+        })->public()->get();
+        $pages = Post::query()->with('translation', function($q){
+            $q->select('name','slug','post_id');
+        })->whereType(PostType::page)->public()->get();
+        $menus = Menu::query()->select('id')->with('translation', function($q){
+            $q->select('name','slug','menu_id');
+        })->position()->sort()->get();
 
         return view('admin.menu.index', compact('categories','pages','menus'));
     }
@@ -45,7 +51,7 @@ class MenuController extends Controller
     {
         $this->authorize('menu');
 
-        $menus = Menu::position()->sort()->get();
+        $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})->position()->sort()->get();
 
         return view('admin.menu.create', compact('menus'));
     }
@@ -92,7 +98,8 @@ class MenuController extends Controller
     {
         $this->authorize('menu');
 
-        $menus = Menu::position()->withTranslation()->sort()->get();
+        $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})
+            ->where('id','!=', $menu->id)->position()->sort()->get();
         $translations = $menu->translations->load('language');
 
         return view('admin.menu.edit', compact('menus','menu','translations'));

@@ -16,14 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        if(auth()->id() > 1){
-            $this->authorize('admin.view');
-            $admins = Admin::where('id','>', 1)->get();
-        }else{
-            $admins = Admin::get();
-        }
-
-        return view('admin.admin.index',compact('admins'));
+        return view('admin.admin.index');
     }
 
 
@@ -34,7 +27,7 @@ class AdminController extends Controller
         if(auth()->id() == 1)
             $admins = Admin::query();
 
-        $admins->with('roles')->when(\request('search'),function ($q, $search){
+        $admins->select('id','name','email','created_at')->with('roles')->when(\request('search'),function ($q, $search){
             return $q->where('id', $search)->orWhere('name', 'like', '%'.$search.'%')->orWhere('email', 'like', '%'.$search.'%');
         });
 

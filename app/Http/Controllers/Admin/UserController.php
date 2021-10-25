@@ -23,7 +23,7 @@ class UserController extends Controller
     }
 
     public function data(){
-        $users = User::query()->when(request()->search,function($q, $search){
+        $users = User::query()->select('id','name','email','created_at')->when(request()->search,function($q, $search){
            return $q->where('name','like',"%$search%")->orWhere('id',$search)->orWhere('email','like',"%$search%");
         });
 

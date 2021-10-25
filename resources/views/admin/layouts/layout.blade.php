@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title') - {{setting('site.name.'.session('lang'))}}</title>
+    <title>@yield('title') - {{setting('site.name',1)}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,6 +10,7 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{setting('site.favicon')}}">
     @yield('styles')
+
     <link href="{{asset('lib/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet" />
     <link href="{{asset('lib/assets/libs/switchery/switchery.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('lib/assets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css" />
@@ -29,8 +30,8 @@
     <link href="{{asset('lib/css/cpanel.css')}}" rel="stylesheet" type="text/css">
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>--}}
+{{--    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>--}}
 
     <!-- ckeditor-->
     <script src="/lib/ckeditor/build/ckeditor.js"></script>
@@ -110,18 +111,6 @@
             <li>
                 <button class="button-menu-mobile waves-effect waves-light"> <i class="fe-menu"></i> </button>
             </li>
-            {{--            <li class="d-none d-sm-block">--}}
-            {{--                <form class="app-search" method="get" action="">--}}
-            {{--                    <div class="app-search-box">--}}
-            {{--                        <div class="input-group">--}}
-            {{--                            <input type="text" class="form-control" placeholder="Search...">--}}
-            {{--                            <div class="input-group-append">--}}
-            {{--                                <button class="btn" type="submit"> <i class="fe-search"></i> </button>--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                    </div>--}}
-            {{--                </form>--}}
-            {{--            </li>--}}
         </ul>
     </div>
     <!-- end Topbar -->
@@ -430,7 +419,7 @@
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12"> Admin Cpanel</div>
+                    <div class="col-md-12"> Admin Cpanel - Support <a href="https://www.facebook.com/thietkewebsitegiare247194" target="_blank">Facebook</a> </div>
                 </div>
             </div>
         </footer>

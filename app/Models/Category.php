@@ -16,7 +16,7 @@ class Category extends Model
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class);
+        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
     public function admin(){
@@ -33,12 +33,6 @@ class Category extends Model
 
     public function parents(){
         return $this->hasMany(Category::class,'parent_id');
-    }
-
-    public function scopeWithTranslation($q){
-        $q->with('translation', function ($q){
-            $q->locale();
-        });
     }
 
     public function scopePublic($q) {

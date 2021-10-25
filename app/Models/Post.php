@@ -25,7 +25,7 @@ class Post extends Model
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class);
+        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
     public function admin(){

@@ -40,8 +40,11 @@ if(!function_exists('resize_image')){
 
 if (! function_exists('setting')) {
 
-    function setting($key=null, $default = null)
+    function setting($key=null, $lang = null, $default = null)
     {
+        if($lang)
+            $key = $key.'.'.session('lang');
+
         if (is_null($key)) {
             return new Setting();
         }

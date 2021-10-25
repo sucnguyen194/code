@@ -19,7 +19,7 @@
                     </div>
                     <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif</p>
                     <div class="dropzone text-center pl-2 pr-2 pb-1 pt-2">
-                        <img src="{{$photo->image}}" class="rounded img-thumbnail" id="image_src" style="max-height: 200px">
+                        <img src="{{$photo->image}}" class="rounded img-thumbnail" id="image_src">
 
                         <div class="input-group mt-2 mb-1">
                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>

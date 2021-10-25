@@ -17,7 +17,7 @@ class CustomerController extends Controller
     {
         $this->authorize('contact');
 
-        $admins = Admin::when(auth()->id() > 1, function ($q){
+        $admins = Admin::select('name','email','id')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
         })->get();
 

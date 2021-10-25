@@ -94,10 +94,10 @@ class HomeController extends Controller
                         return view('product.show', compact('translation'));
                         break;
                     case (ProductType::video):
-                        return view('video.show', compact('translation'));
+                        return view('product.video.show', compact('translation'));
                         break;
                     default:
-                        return view('gallery.show', compact('translation'));
+                        return view('product.gallery.show', compact('translation'));
                         break;
                 }
                 break;
@@ -106,19 +106,19 @@ class HomeController extends Controller
                 switch ($translation->category->type) {
                     case (CategoryType::product):
                         $paginate = setting('site.product.category') ?? 12;
-                        $products = Product::with(['category','admin','categories'])->orwhereHas('categories',function($q) use ($translation) {
+                        $products = Product::with(['category','admin','categories', 'translation'])->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })->orWhere('category_id',$translation->category->id)
-                            ->public()->withTranslation()->paginate($paginate);
+                            ->public()->paginate($paginate);
 
                         return view('product.category', compact('translation','products'));
                         break;
                     case (CategoryType::post):
                         $paginate = setting('site.post.category') ?? 12;
-                        $posts = Post::with(['category','admin','categories'])->orwhereHas('categories',function($q) use ($translation) {
+                        $posts = Post::with(['category','admin','categories', 'translation'])->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })->orWhere('category_id',$translation->category->id)
-                        ->public()->withTranslation()->paginate($paginate);
+                        ->public()->paginate($paginate);
 
                         return view('post.category', compact('translation','posts'));
                         break;

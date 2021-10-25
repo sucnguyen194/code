@@ -19,7 +19,7 @@ class ContactController extends Controller
     {
         if(auth()->id() > 1) $this->authorize('contact');
 
-        $admins = Admin::when(auth()->id() > 1, function ($q){
+        $admins = Admin::select('name','id','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
         })->get();
 

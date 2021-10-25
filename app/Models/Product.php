@@ -21,17 +21,11 @@ class Product extends Model
     }
 
     public function translations(){
-        return $this->hasMany(Translation::class);
+        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
     public function translation(){
         return $this->hasOne(Translation::class);
-    }
-
-    public function scopeWithTranslation($q){
-        $q->with('translation', function ($q){
-            $q->locale();
-        });
     }
 
     public function category(){

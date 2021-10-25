@@ -17,11 +17,7 @@ class PhotoController extends Controller
     {
        $this->authorize('media');
 
-        $photos = Photo::when(request()->position, function($q, $position){
-            $q->wherePosition($position);
-        })->latest()->get();
-
-        return  view('admin.photo.index',compact('photos'));
+        return  view('admin.photo.index');
     }
 
     public function data(){

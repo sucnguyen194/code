@@ -13,13 +13,7 @@ class Menu extends Model
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class);
-    }
-
-    public function scopeWithTranslation($q){
-        $q->with('translation', function ($q){
-            $q->locale();
-        });
+        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
     public function parents(){

@@ -87,7 +87,7 @@
                                 <th data-field="name" data-formatter="titleFormatter">
                                     Sản phẩm
                                 </th>
-                                <th data-field="category.name">
+                                <th data-field="category.translation.name">
                                     Danh mục
                                 </th>
                                 <th data-field="code">

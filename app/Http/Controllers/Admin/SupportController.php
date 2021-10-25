@@ -26,7 +26,9 @@ class SupportController extends Controller
     }
 
     public function data(){
-        $supports = Support::query()->with('admin')
+        $supports = Support::query()->with(['admin', 'translation' => function($q){
+            $q->select('name','support_id');
+        }])
             ->when(\request()->type,function($q, $type){
                 return $q->whereType($type);
             })

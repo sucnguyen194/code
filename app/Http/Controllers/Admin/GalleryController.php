@@ -17,7 +17,7 @@ class GalleryController extends Controller
     {
         $this->authorize('gallery.view');
 
-        $admins = Admin::when(auth()->id() > 1, function ($q){
+        $admins = Admin::select('name','email','id')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
         })->get();
 
