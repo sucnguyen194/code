@@ -164,7 +164,7 @@
                                                 </div>
 
                                                 <ol class="dd-list">
-                                                    {{admin_menu_sub($menus, $items->id)}}
+                                                    {{\App\Http\Controllers\Admin\MenuController::sub($menus, $items->id)}}
                                                 </ol>
 
                                             </li>

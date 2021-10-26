@@ -68,6 +68,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::resource('photos',PhotoController::class);
 
         //Menus
+        Route::get('/sort/menus', [App\Http\Controllers\Admin\MenuController::class,'setMenuSort'])->name('ajax.menu.sort');
         Route::post('/append/menus', [App\Http\Controllers\Admin\MenuController::class,'append'])->name('ajax.append.menu');
         Route::get('/menus/{position}/position', [App\Http\Controllers\Admin\MenuController::class,'position'])->name('change.position.menu');
         Route::resource('menus',MenuController::class);
@@ -125,8 +126,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::get('ajax/data/sort', [App\Http\Controllers\Admin\AjaxController::class,'getEditDataSort'])->name('ajax.data.sort');
         Route::get('ajax/data/public', [App\Http\Controllers\Admin\AjaxController::class,'getEditDataPublic'])->name('ajax.data.public');
         Route::get('ajax/data/status',[App\Http\Controllers\Admin\AjaxController::class,'getEditDataStatus'])->name('ajax.data.status');
-
-        Route::get('ajax/menu/sort', [App\Http\Controllers\Admin\AjaxController::class,'getEditMenuSort'])->name('ajax.menu.sort');
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     });

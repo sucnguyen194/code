@@ -254,35 +254,3 @@ if(!function_exists('scan_full_dir')){
         }
     }
 }
-
-if(!function_exists('menu_update_position')){
-    function menu_update_position($menu,$parent_id=0){
-        foreach($menu as $key => $items){
-            $update = \App\Models\Menu::find($items->id);
-            $update->update(['sort' => $key,'parent_id' => $parent_id]);
-
-            if(isset($items->children)){
-                menu_update_position($items->children,$items->id);
-            }
-        }
-    }
-}
-
-if(!function_exists('admin_menu_sub')){
-    function admin_menu_sub($data,$parent_id){
-
-        foreach($data->where('parent_id', $parent_id) as $items){
-            echo '<li class="dd-item" data-id="'.$items->id.'">';
-            echo '<div class="dd-handle">'.$items->translation->name.'</div>';
-            echo '<div class="menu_action">';
-            echo '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
-            echo '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
-            echo '</div>';
-
-            echo '<ol class="dd-list">';
-            admin_menu_sub($data,$items->id);;
-            echo '</ol>';
-            echo '</li>';
-        }
-    }
-}

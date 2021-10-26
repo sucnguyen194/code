@@ -61,10 +61,4 @@ class AjaxController extends Controller {
         $data->update(['public' => $public,'admin_edit' => Auth::id()]);
         return $data;
     }
-
-    public function getEditMenuSort(){
-        $menu = request()->val;
-        $menu = json_decode($menu);
-        menu_update_position($menu);
-    }
 }
