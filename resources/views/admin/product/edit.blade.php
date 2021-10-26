@@ -336,12 +336,12 @@
                         <label class="mb-0">Trạng thái</label>
                         <hr>
                         <div class="checkbox">
-                            <input id="checkbox_public" {{checked($product->public,1)}} type="checkbox" name="data[public]" value="1">
+                            <input id="checkbox_public" {{checked($product->public,1)}} type="checkbox" name="public" value="1">
                             <label for="checkbox_public">Hiển thị</label>
                         </div>
 
                         <div class="checkbox">
-                            <input id="checkbox_status" type="checkbox" {{checked($product->status,1)}}name="data[status]" value="1">
+                            <input id="checkbox_status" type="checkbox" {{checked($product->status,1)}}name="status" value="1">
                             <label for="checkbox_status" class="mb-0">Nổi bật</label>
                         </div>
                     </div>
