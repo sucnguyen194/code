@@ -95,13 +95,13 @@
                         <div class="card-box">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <div class="form-group">
+                                    <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
                                         <label>Mã sản phẩm</label>
                                         <input type="text" class="form-control" value="{{$product->code}}" id="code" name="data[code]">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="form-group">
+                                    <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
                                         <label>Giá bán: <span id="format-price" class="text-success">{{number_format($product->price)}}</span></label>
                                         <input type="text" class="form-control" min="0" value="{{$product->price}}" id="price" name="data[price]">
                                     </div>
