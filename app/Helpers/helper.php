@@ -157,12 +157,6 @@ if(!function_exists('str_limit')){
     }
 }
 
-if(!function_exists('redirect_lang')){
-    function redirect_lang($alias = 'HOME'){
-        echo '<input type="hidden" class="vue-alias" value="'.$alias.'">';
-    }
-}
-
 //Scan file
 if(!function_exists('scan_full_dir')){
     function scan_full_dir($dir,$child = false){
@@ -261,17 +255,6 @@ if(!function_exists('scan_full_dir')){
     }
 }
 
-//Menu
-if(!function_exists('sub_menu_category_checkbox')){
-    function sub_menu_category_checkbox($data,$parent,$tab='<span class="ml-2"></span>'){
-        foreach ($data->where('parent_id', $parent) as $key => $value) {
-
-            echo '<label>'.$tab.'<span class="tree-sub"></span><a href="javascript:void(0)" class="addmenu text-secondary" data-type="category" data-id="'.$value->id.'"><span class="text-left"><i class="fe-plus pr-1"></i></span>'.$value->translation->name.'</a></label><br>';
-            sub_menu_category_checkbox($data, $value->id,$tab.'<span class="ml-2"></span>');
-        }
-    }
-}
-
 if(!function_exists('menu_update_position')){
     function menu_update_position($menu,$parent_id=0){
         foreach($menu as $key => $items){
@@ -289,9 +272,8 @@ if(!function_exists('admin_menu_sub')){
     function admin_menu_sub($data,$parent_id){
 
         foreach($data->where('parent_id', $parent_id) as $items){
-            $icon = '<i class="fa fa-star" aria-hidden="true"></i>';
             echo '<li class="dd-item" data-id="'.$items->id.'">';
-            echo '<div class="dd-handle"><span class="pr-1">'.$icon.'</span> '.$items->translation->name.'</div>';
+            echo '<div class="dd-handle">'.$items->translation->name.'</div>';
             echo '<div class="menu_action">';
             echo '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             echo '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';

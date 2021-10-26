@@ -155,7 +155,7 @@
                                         @foreach($menus->where('parent_id', 0) as $items)
                                             <li class="dd-item" data-id="{{$items->id}}">
                                                 <div class="dd-handle">
-                                                    <i class="fa fa-star pr-1" aria-hidden="true"></i> {{optional($items->translation)->name}}
+                                                    {{optional($items->translation)->name}}
                                                 </div>
 
                                                 <div class="menu_action">

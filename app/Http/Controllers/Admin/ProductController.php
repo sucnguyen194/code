@@ -89,7 +89,7 @@ class ProductController extends Controller
         $this->authorize('product.create');
 
         $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::oldest('sort')->withTranslation()->get();
+        $attributes = Attribute::with('translation')->oldest('sort')->get();
 
         return view('admin.product.create', compact('categories','attributes'));
     }
@@ -166,7 +166,7 @@ class ProductController extends Controller
         if(auth()->id() > 1) $this->authorize('product.edit');
 
         $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::oldest('sort')->withTranslation()->get();
+        $attributes = Attribute::with('translation')->oldest('sort')->get();
         $translations = $product->translations->load('language');
 
         return view('admin.product.edit',compact('product','categories','attributes','translations'));
