@@ -29,17 +29,11 @@ class MenuController extends Controller
     {
         $this->authorize('menu');
 
-        $categories = Category::query()->with('translation', function ($q){
-            $q->select('name','slug','category_id');
-        })->public()->get();
-        $pages = Post::query()->with('translation', function($q){
-            $q->select('name','slug','post_id');
-        })->whereType(PostType::page)->public()->get();
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
         })->position()->sort()->get();
 
-        return view('admin.menu.index', compact('categories','pages','menus'));
+        return view('admin.menu.index', compact('menus'));
     }
 
     /**

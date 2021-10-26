@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\Photo;
-use App\Models\PostLang;
 use App\Models\Setting;
-use Illuminate\Support\Facades\Storage;
+
 
 if(!function_exists('languages')){
     function languages(){
@@ -40,11 +38,13 @@ if(!function_exists('resize_image')){
 
 if (! function_exists('setting')) {
 
-    function setting($key=null, $default = null)
+    function setting($key=null, $config =null,  $default = null)
     {
         if (is_null($key)) {
             return new Setting();
         }
+        if($config)
+            $key = $key.'.'.session('lang');
 
         if (is_array($key)) {
             return Setting::set($key[0], $key[1]);
