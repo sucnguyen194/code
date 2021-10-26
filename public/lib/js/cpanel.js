@@ -166,7 +166,7 @@ function Popup(data)
 }
 function number_format(int){
     if(int > 999 || int < - 999){
-        return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }else{
         return int;
     }

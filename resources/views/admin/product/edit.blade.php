@@ -102,14 +102,14 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Giá bán</label>
+                                        <label>Giá bán: <span id="format-price" class="text-success">{{number_format($product->price)}}</span></label>
                                         <input type="text" class="form-control" min="0" value="{{$product->price}}" id="price" name="data[price]">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-0">
-                                        <label>Giá khuyến mại</label>
-                                        <input type="text" class="form-control" value="0" min="{{$product->price_sale}}" id="price_sale" name="data[price_sale]">
+                                        <label>Giá KM: <span id="format-price-sale" class="text-success">{{number_format($product->price_sale)}}</span></label>
+                                        <input type="text" class="form-control" value="{{$product->price_sale}}" min="0" id="price_sale" name="data[price_sale]">
                                     </div>
                                 </div>
                             </div>
@@ -431,6 +431,21 @@
             $('.tab-pane').removeClass('active').hide();
             $(pane).addClass('active').show();
         });
+
+        let price = document.getElementById('price');
+        let sale = document.getElementById('price_sale');
+        let format_price = document.getElementById('format-price');
+        let format_price_sale = document.getElementById('format-price-sale');
+
+        $(price).on('keyup',function (){
+            let value = $(this).val();
+            $(format_price).text(number_format(value));
+        })
+
+        $(sale).on('keyup',function (){
+            let value = $(this).val();
+            $(format_price_sale).text(number_format(value));
+        })
     </script>
 @stop
 

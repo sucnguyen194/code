@@ -62,21 +62,21 @@
                                 <div class="card-box">
                                     <div class="row">
                                         <div class="col-lg-4">
-                                            <div class="form-group">
+                                            <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
                                                 <label>Mã sản phẩm</label>
                                                 <input type="text" class="form-control" value="{{\Illuminate\Support\Str::upper(\Illuminate\Support\Str::random(7))}}" id="code" name="data[code]">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Giá bán</label>
-                                                <input type="text" class="form-control" min="0" value="0" id="price" name="data[price]">
+                                            <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
+                                                <label>Giá bán: <span id="format-price" class="text-success">0</span></label>
+                                                <input type="number" class="form-control" min="0" value="0" id="price" name="data[price]">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group mb-0">
-                                                <label>Giá khuyến mại</label>
-                                                <input type="text" class="form-control" value="0" min="0" id="price_sale" name="data[price_sale]">
+                                                <label>Giá KM: <span id="format-price-sale" class="text-success">0</span></label>
+                                                <input type="number" class="form-control" value="0" min="0" id="price_sale" name="data[price_sale]">
                                             </div>
                                         </div>
                                     </div>
@@ -276,6 +276,22 @@
             $('.tab-pane').removeClass('active').hide();
             $(pane).addClass('active').show();
         });
+
+        let price = document.getElementById('price');
+        let sale = document.getElementById('price_sale');
+        let format_price = document.getElementById('format-price');
+        let format_price_sale = document.getElementById('format-price-sale');
+
+        $(price).on('keyup',function (){
+            let value = $(this).val();
+            $(format_price).text(number_format(value));
+        })
+
+        $(sale).on('keyup',function (){
+            let value = $(this).val();
+            $(format_price_sale).text(number_format(value));
+        })
+
     </script>
 @stop
 
