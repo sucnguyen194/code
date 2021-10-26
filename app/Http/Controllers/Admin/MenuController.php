@@ -35,7 +35,7 @@ class MenuController extends Controller
         $pages = Post::query()->with('translation', function($q){
             $q->select('name','slug','post_id');
         })->whereType(PostType::page)->public()->get();
-        $menus = Menu::query()->select('id')->with('translation', function($q){
+        $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
         })->position()->sort()->get();
 

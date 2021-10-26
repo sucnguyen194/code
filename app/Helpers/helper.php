@@ -40,11 +40,8 @@ if(!function_exists('resize_image')){
 
 if (! function_exists('setting')) {
 
-    function setting($key=null, $lang = null, $default = null)
+    function setting($key=null, $default = null)
     {
-        if($lang)
-            $key = $key.'.'.session('lang');
-
         if (is_null($key)) {
             return new Setting();
         }
@@ -63,9 +60,9 @@ if (! function_exists('nav_active')) {
 
     function nav_active($segment, $class='active')
     {
-      //  $segment = str_replace(['index','create'],['*'],$segment);
+        //  $segment = str_replace(['index','create'],['*'],$segment);
         $path = request()->path();
-       return $path == $segment.'.html' ? $class : "";
+        return $path == $segment.'.html' ? $class : "";
     }
 }
 
@@ -269,7 +266,7 @@ if(!function_exists('sub_menu_category_checkbox')){
     function sub_menu_category_checkbox($data,$parent,$tab='<span class="ml-2"></span>'){
         foreach ($data->where('parent_id', $parent) as $key => $value) {
 
-           echo '<label>'.$tab.'<span class="tree-sub"></span><a href="javascript:void(0)" class="addmenu text-secondary" data-type="category" data-id="'.$value->id.'"><span class="text-left"><i class="fe-plus pr-1"></i></span>'.$value->translation->name.'</a></label><br>';
+            echo '<label>'.$tab.'<span class="tree-sub"></span><a href="javascript:void(0)" class="addmenu text-secondary" data-type="category" data-id="'.$value->id.'"><span class="text-left"><i class="fe-plus pr-1"></i></span>'.$value->translation->name.'</a></label><br>';
             sub_menu_category_checkbox($data, $value->id,$tab.'<span class="ml-2"></span>');
         }
     }
@@ -294,7 +291,7 @@ if(!function_exists('admin_menu_sub')){
         foreach($data->where('parent_id', $parent_id) as $items){
             $icon = '<i class="fa fa-star" aria-hidden="true"></i>';
             echo '<li class="dd-item" data-id="'.$items->id.'">';
-            echo '<div class="dd-handle"><span class="pr-1">'.$icon.'</span> '.optional($items->translation)->name.'</div>';
+            echo '<div class="dd-handle"><span class="pr-1">'.$icon.'</span> '.$items->translation->name.'</div>';
             echo '<div class="menu_action">';
             echo '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             echo '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';

@@ -1,12 +1,12 @@
 @extends('admin.layouts.layout')
 @section('title')
-Danh sách menu
+    Danh sách menu
 @stop
 @section('content')
 
-<div class="container-fluid">
-        @csrf
-        <!-- start page title -->
+    <div class="container-fluid">
+    @csrf
+    <!-- start page title -->
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
@@ -29,7 +29,7 @@ Danh sách menu
                     <div class="action-datatable text-right mb-2">
                         <a href="{{route('admin.menus.create')}}" class="btn btn-primary waves-effect width-md waves-light ajax-modal">
                             <span class="icon-button"><i class="fe-plus pr-1"></i></span> Thêm mới</a>
-                        <textarea id="nestable-output" name="menuval" style="display: none;"></textarea>
+
                     </div>
                 </div>
             </div>
@@ -46,31 +46,88 @@ Danh sách menu
                             </p>
                         </div>
                         <div class="card-box">
-                            <h4 class="header-title mb-3"><b>Danh mục sản phẩm</b></h4>
-                            <div class="form-groupmb mb-0">
-                                @foreach($categories->where('parent_id', 0)->where('type',\App\Enums\CategoryType::product) as $item)
-                                    <label class="w-100"><a href="javascript:void(0)" class="addmenu text-secondary" data-type="{{\App\Enums\CategoryType::category}}" data-id="{{$item->id}}"><span class=""><i class="fe-plus pr-1"></i>  {{$item->translation->name}}</span></a></label>
-                                    {{sub_menu_category_checkbox($categories,$item->id)}}
-                                @endforeach
+                            <div class="form-group mb-0">
+                                <table class="table table-bordered table-hover bs-table"
+                                       data-toolbar="#custom-toolbar"
+                                       data-url="{{ route('admin.categories.data',['type' => \App\Enums\CategoryType::product]) }}"
+                                       data-side-pagination="server"
+                                       data-pagination="false"
+                                       data-search="true"
+                                       data-search-on-enter-key="false"
+                                       data-show-search-button="false"
+                                       data-sort-name="created_at"
+                                       data-sort-order="desc"
+                                       data-filename="categories"
+                                       data-cookie="true"
+                                       data-cookie-id-table="categories"
+                                       data-tree-show-field="translation.name"
+                                       data-parent-id-field="parent_id"
+                                >
+                                    <thead>
+                                    <tr>
+                                        <th data-field="translation.name" data-formatter="categoryFormatter">
+                                            Danh mục sản phẩm
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
+
                             </div>
                         </div>
 
                         <div class="card-box">
-                            <h4 class="header-title mb-3"><b>Danh mục Blog</b></h4>
                             <div class="form-group mb-0">
-                                @foreach($categories->where('parent_id', 0)->where('type',\App\Enums\CategoryType::post) as $item)
-                                    <label class="w-100"><a href="javascript:void(0)" class="addmenu text-secondary" data-type="{{\App\Enums\CategoryType::category}}" data-id="{{$item->id}}"><i class="fe-plus pr-1"></i>  {{$item->translation->name}}</a></label>
-                                    {{sub_menu_category_checkbox($categories,$item->id)}}
-                                @endforeach
+                                <table class="table table-bordered table-hover bs-table category-table"
+                                       data-toolbar="#custom-toolbar"
+                                       data-url="{{ route('admin.categories.data',['type' => \App\Enums\CategoryType::post]) }}"
+                                       data-side-pagination="server"
+                                       data-pagination="false"
+                                       data-search="true"
+                                       data-search-on-enter-key="false"
+                                       data-show-search-button="false"
+                                       data-sort-name="created_at"
+                                       data-sort-order="desc"
+                                       data-filename="categories"
+                                       data-cookie="true"
+                                       data-cookie-id-table="categories"
+                                       data-tree-show-field="translation.name"
+                                       data-parent-id-field="parent_id"
+                                >
+                                    <thead>
+                                    <tr>
+                                        <th data-field="translation.name" data-formatter="categoryFormatter">
+                                            Danh mục blog
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
 
                         <div class="card-box">
-                            <h4 class="header-title mb-3"><b>Pages</b></h4>
                             <div class="form-group mb-0">
-                                @foreach($pages as $item)
-                                    <label class="w-100"><a href="javascript:void(0)" class="addmenu text-secondary" data-type="{{\App\Enums\PostType::page}}" data-id="{{$item->id}}"><span class=""><i class="fe-plus pr-1"></i>  {{$item->translation->name}}</span></a></label>
-                                @endforeach
+                                <table class="table table-bordered table-hover bs-table"
+                                       data-toolbar="#custom-toolbar"
+                                       data-url="{{ route('admin.posts.data',['type' => \App\Enums\PostType::page]) }}"
+                                       data-side-pagination="server"
+                                       data-pagination="false"
+                                       data-search="true"
+                                       data-search-on-enter-key="false"
+                                       data-show-search-button="false"
+                                       data-sort-name="created_at"
+                                       data-sort-order="desc"
+                                       data-filename="categories"
+                                       data-cookie="true"
+                                       data-cookie-id-table="categories"
+                                >
+                                    <thead>
+                                    <tr>
+                                        <th data-field="translation.name" data-formatter="titleFormatter">
+                                            Page
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -81,39 +138,40 @@ Danh sách menu
                                 * Danh sách menu tùy thuộc vào "vị trí" hiển thị tại thời điển hiện tại (top, bottom, left,right,home).
                             </p>
 
-                            <div class="form-group">
-                                <label><strong class="text-tranform">VI TRÍ</strong></label>
-                                <select id="position" class="form-control" data-toggle="select2">
-                                    <option value="top" {{selected(session('menu_position'),'top')}} class="form-control">MENU TOP</option>
-                                    <option value="home" {{selected(session('menu_position'),'home')}} class="form-control">MENU HOME</option>
-                                    <option value="left" {{selected(session('menu_position'),'left')}} class="form-control">MEN LEFT</option>
-                                    <option value="right" {{selected(session('menu_position'),'right')}} class="form-control">MENU RIGHT</option>
-                                    <option value="bottom" {{selected(session('menu_position'),'bottom')}} class="form-control">MENU BOTTOM</option>
-                                </select>
-                            </div>
+                                <textarea id="nestable-output" class="d-none" name="menuval"></textarea>
+                                <div class="form-group">
+                                    <label><strong class="text-tranform">VI TRÍ</strong></label>
+                                    <select id="position" class="form-control" data-toggle="select2">
+                                        <option value="top" {{selected(session('menu_position'),'top')}} class="form-control">MENU TOP</option>
+                                        <option value="home" {{selected(session('menu_position'),'home')}} class="form-control">MENU HOME</option>
+                                        <option value="left" {{selected(session('menu_position'),'left')}} class="form-control">MEN LEFT</option>
+                                        <option value="right" {{selected(session('menu_position'),'right')}} class="form-control">MENU RIGHT</option>
+                                        <option value="bottom" {{selected(session('menu_position'),'bottom')}} class="form-control">MENU BOTTOM</option>
+                                    </select>
+                                </div>
 
-                            <div class="custom-dd dd" id="nestable">
-                                <ol class="dd-list" id="result_data">
-                                    @foreach($menus->where('parent_id', 0) as $items)
-                                        <li class="dd-item" data-id="{{$items->id}}">
-                                            <div class="dd-handle">
-                                                <i class="fa fa-star pr-1" aria-hidden="true"></i> {{optional($items->translation)->name}}
-                                            </div>
+                                <div class="custom-dd dd" id="nestable">
+                                    <ol class="dd-list" id="result_data">
+                                        @foreach($menus->where('parent_id', 0) as $items)
+                                            <li class="dd-item" data-id="{{$items->id}}">
+                                                <div class="dd-handle">
+                                                    <i class="fa fa-star pr-1" aria-hidden="true"></i> {{optional($items->translation)->name}}
+                                                </div>
 
-                                            <div class="menu_action">
-                                                <a href="{{route('admin.menus.edit',$items)}}" title="Sửa" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a>
-                                                <a href="{{route('admin.menus.destroy',$items)}}" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a>
-                                            </div>
+                                                <div class="menu_action">
+                                                    <a href="{{route('admin.menus.edit',$items)}}" title="Sửa" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a>
+                                                    <a href="{{route('admin.menus.destroy',$items)}}" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a>
+                                                </div>
 
-                                            <ol class="dd-list">
-                                                {{admin_menu_sub($menus, $items->id)}}
-                                            </ol>
+                                                <ol class="dd-list">
+                                                    {{admin_menu_sub($menus, $items->id)}}
+                                                </ol>
 
-                                        </li>
-                                    @endforeach
+                                            </li>
+                                        @endforeach
 
-                                </ol>
-                            </div>
+                                    </ol>
+                                </div>
 
                         </div><!-- end col -->
                     </div>
@@ -152,26 +210,54 @@ Danh sách menu
         }
     </style>
 
-    <link href="{{asset('lib/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet" />
-    <link href="{{asset('lib/assets/libs/switchery/switchery.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('lib/assets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('lib/assets/libs/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('lib/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css')}}" rel="stylesheet" type="text/css" />
-
-    <!-- Summernote css -->
-    <link href="{{asset('lib/assets/libs/summernote/summernote-bs4.css')}}" rel="stylesheet" type="text/css" />
     <!-- Plugins css -->
     <link href="/lib/assets/libs/nestable2/jquery.nestable.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .treegrid-expander {
+            display: none!important;
+        }
+        .treegrid-expanded .treegrid-expander {
+            background: url('https://cdnjs.cloudflare.com/ajax/libs/jquery-treegrid/0.2.0/img/collapse.png') no-repeat;
+            width: 16px;
+            height: 16px;
+            display: inline-block!important;
+            position: relative;
+            cursor: pointer;
+        }
+    </style>
 @stop
 @section('scripts')
 
+    <script>
+        function titleFormatter(value, row){
+            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu" data-id="'+row.id+'" data-type="{{\App\Enums\PostType::page}}">'+value +'</a>';
+        }
+        function categoryFormatter(value, row){
+            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu" data-id="'+row.id+'" data-type="{{\App\Enums\CategoryType::category}}">'+value +'</a>';
+        }
+
+        $(document).on('post-body.bs.table.', function() {
+            var columns = $table.bootstrapTable('getOptions').columns
+            console.log(columns[0][0]);
+            if (columns && columns[0][0].visible) {
+                $table.treegrid({
+                    treeColumn: 0,
+                    onChange: function() {
+                        $table.bootstrapTable('resetView')
+                    }
+                })
+            }
+        });
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function(){
-            $('.addmenu').click(function(){
-               var _token = $('input[name="_token"]').val();
-               var url = '{{route('admin.ajax.append.menu')}}';
-               var type = $(this).data('type');
-               var id = $(this).data('id');
+            $(document).on('click','.addmenu',function (){
+                var _token = $('input[name="_token"]').val();
+                var url = '{{route('admin.ajax.append.menu')}}';
+                var type = $(this).data('type');
+                var id = $(this).data('id');
                 $.ajax({
                     url:url,
                     type:'post',
@@ -186,7 +272,6 @@ Danh sách menu
                     }
                 })
             })
-
 
             $('#position').change(function(){
                 position = $(this).val();
