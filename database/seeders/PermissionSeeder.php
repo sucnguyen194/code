@@ -34,8 +34,8 @@ class PermissionSeeder extends Seeder
         $blog = Permission::create(['name' => 'blog', 'title' => 'Blog','parent_id' => 0,'guard_name' => 'admin']);
         Permission::create(['name' => 'blog.view', 'title' => 'Xem nội dung','parent_id' => $blog->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'blog.create', 'title' => 'Thêm nội dung','parent_id' => $blog->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'blog.edit', 'title' => 'Media','parent_id' => $blog->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'blog.destroy', 'title' => 'Media','parent_id' => $blog->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'blog.edit', 'title' => 'Sửa nội dung','parent_id' => $blog->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'blog.destroy', 'title' => 'Xóa nội dung','parent_id' => $blog->id,'guard_name' => 'admin']);
 
         $product = Permission::create(['name' => 'product', 'title' => 'Sản phẩm','parent_id' => 0,'guard_name' => 'admin']);
         Permission::create(['name' => 'product.view', 'title' => 'Xem sản phẩm','parent_id' => $product->id,'guard_name' => 'admin']);

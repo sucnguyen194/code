@@ -52,7 +52,7 @@
                                             <textarea class="form-control summernote" data-height="200" id="summernote" name="translation[{{$key}}][description]"></textarea>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="">
                                             <label>Nội dung</label>
                                             <textarea class="form-control summernote" data-height="500" id="summerbody" name="translation[{{$key}}][content]"></textarea>
                                         </div>
