@@ -56,49 +56,8 @@ class User extends Authenticatable
         return $this->hasMany(SocialIdentity::class);
     }
 
-    public function systems(){
-        return $this->belongsToMany(System::class);
-    }
-    public function sessions(){
-        return $this->hasMany(ProductSession::class,'user_id');
-    }
-
-    public function imports(){
-        return $this->hasMany(ProductSession::class,'user_id')->whereType(ProductSessionType::getKey(ProductSessionType::import));
-    }
-
-    public function exports(){
-        return $this->hasMany(ProductSession::class,'user_id')->whereType(ProductSessionType::getKey(ProductSessionType::export));
-    }
-
-    public function transactions(){
-        return $this->hasMany(Transaction::class);
-    }
-
-    public function increaseBalance($amount, $note='', $model = null){
-        $transaction = new Transaction();
-        $transaction->amount = $amount;
-        $transaction->note = $note;
-        $transaction->admin_id = Auth::id();
-        if ($model instanceof Model){
-            $transaction->source()->associate($model);
-        }
-
-        $transaction->balance = $this->debt + $amount;
-
-        DB::transaction(function () use ($transaction){
-            $this->transactions()->save($transaction);
-        });
-
-        return $this;
-    }
-
     public static function boot(){
         parent::boot();
 
-        static::deleting(function($user){
-            File::delete($user->avata);
-            $user->transactions()->delete();
-        });
     }
 }
