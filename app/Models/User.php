@@ -2,15 +2,9 @@
 
 namespace App\Models;
 
-use App\Enums\ProductSessionType;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
