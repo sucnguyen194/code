@@ -21,11 +21,11 @@ class Product extends Model
     }
 
     public function translations(){
-        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
+        return $this->hasMany(Translation::class);
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class);
+        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
     public function category(){
