@@ -821,7 +821,7 @@
         e.preventDefault();
         if($(this).data('confirm')){
             Swal.fire({
-                title: 'Bạn chắc chắn?',
+                title: 'Bạn có chắc không?',
                 text:  $(this).data('confirm'),
                 icon: 'warning',
                 showCancelButton: true,
@@ -831,11 +831,6 @@
                 cancelButtonText: 'Quay lại'
             }).then((result) => {
                 if (result.isConfirmed) {
-                // Swal.fire(
-                //   'Deleted!',
-                //   'Your file has been deleted.',
-                //   'success'
-                // )
                 ajaxlink(this);
             }
         })
