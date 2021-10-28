@@ -509,6 +509,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js" integrity="sha512-mh+AjlD3nxImTUGisMpHXW03gE6F4WdQyvuFRkjecwuWLwD2yCijw4tKA3NsEFpA1C3neiKhGXPSIGSfCYPMlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css" integrity="sha512-gp+RQIipEa1X7Sq1vYXnuOW96C4704yI1n0YB9T/KqdvqaEgL6nAuTSrKufUX3VBONq/TPuKiXGLVgBKicZ0KA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+{{--<script src="https://www.jquery-az.com/javascript/alert/dist/sweetalert.min.js"></script>--}}
+{{--<link href="https://www.jquery-az.com/javascript/alert/dist/sweetalert.css" rel="stylesheet">--}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @include('errors.note')
 <style>
     .clearfix {
@@ -812,15 +816,38 @@
     });
 
     $('.ajax-link').off('dblclick');
+
     $(document).on('click','.ajax-link',function(e){
-        var url=$(this).attr('href');
+        e.preventDefault();
+        if($(this).data('confirm')){
+            Swal.fire({
+                title: 'Bạn chắc chắn?',
+                text:  $(this).data('confirm'),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Quay lại'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                // Swal.fire(
+                //   'Deleted!',
+                //   'Your file has been deleted.',
+                //   'success'
+                // )
+                ajaxlink(this);
+            }
+        })
+        }else{
+            ajaxlink(this);
+        }
+    });
+    function ajaxlink(ele){
+        var url= $(ele).attr('href');
         if (!url)
             return false;
-        $this=$(this);
-        if($this.data('confirm')){
-            if(!confirm($this.data('confirm')))
-                return false;
-        }
+        $this= $(ele);
 
         let method = 'GET';
         if($this.data('method')){
@@ -843,18 +870,30 @@
             $('#ajax-modal').modal('hide');
         });
 
-        // $.get( url, function( result ) {
-        //     flash(result);
-        //     if($this.data('refresh')){
-        //         $table.bootstrapTable('refresh',{silent: true});
-        //     }
-        //     if($this.data('row')){
-        //         $(e.target).parents('tr').remove();
-        //     }
-        // },"json");
-
         return false;
-    });
+    }
+</script>
+<script>
+    function JSalert(){
+        swal({   title: "Your account will be deleted permanently!",
+                text: "Are you sure to proceed?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Remove My Account!",
+                cancelButtonText: "No, I am not sure!",
+                closeOnConfirm: false,
+                closeOnCancel: false },
+            function(isConfirm){
+                if (isConfirm)
+                {
+                    console.log(isConfirm);
+                }
+                else {
+                    console.log(isConfirm);
+                }
+            });
+    }
 </script>
 <script type="text/javascript">
     // Ajax form
