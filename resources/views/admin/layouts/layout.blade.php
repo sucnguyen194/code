@@ -868,28 +868,7 @@
         return false;
     }
 </script>
-<script>
-    function JSalert(){
-        swal({   title: "Your account will be deleted permanently!",
-                text: "Are you sure to proceed?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, Remove My Account!",
-                cancelButtonText: "No, I am not sure!",
-                closeOnConfirm: false,
-                closeOnCancel: false },
-            function(isConfirm){
-                if (isConfirm)
-                {
-                    console.log(isConfirm);
-                }
-                else {
-                    console.log(isConfirm);
-                }
-            });
-    }
-</script>
+
 <script type="text/javascript">
     // Ajax form
     function ajaxform(ele){

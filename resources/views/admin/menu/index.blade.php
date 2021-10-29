@@ -160,11 +160,11 @@
 
                                                 <div class="menu_action">
                                                     <a href="{{route('admin.menus.edit',$items)}}" title="Sửa" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a>
-                                                    <a href="{{route('admin.menus.destroy',$items)}}" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a>
+                                                    <a href="{{route('admin.menus.destroy',$items)}}" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a>
                                                 </div>
 
                                                 <ol class="dd-list">
-                                                    {{\App\Http\Controllers\Admin\MenuController::sub($menus, $items->id)}}
+                                                    {!! \App\Http\Controllers\Admin\MenuController::sub($menus, $items->id) !!}
                                                 </ol>
 
                                             </li>
@@ -228,6 +228,104 @@
     </style>
 @stop
 @section('scripts')
+    <script type="text/javascript">
+        // Ajax form
+        function ajaxformmenu(ele){
+            var html = document.getElementById('result_data');
+
+            $(ele).ajaxSubmit({
+                headers: {
+                    "X-CSRF-Token": $('meta[name=_token]').attr('content')
+                },
+                beforeSubmit:function(formData, jqForm, options){
+                    $(ele).find('[type=submit]').attr('disabled', true);
+
+                },
+                complete: function(xhr, statusText, $form  ){
+
+                    $(ele).find('[type=submit]').attr('disabled', false);
+
+                    let result = xhr.responseText;
+
+                    $(html).html(result).show();
+                    $('.dd-empty').hide();
+                    $('#ajax-modal').modal('hide');
+
+                    if($(ele).find('input[name="_method"]').length){
+                        flash({'message':'Cập nhật thành công!', 'type': 'success'});
+                    }else{
+                        flash({'message':'Thêm mới thành công!', 'type': 'success'});
+                    }
+                }
+
+            });
+            return false;
+        }
+        $(document).on('submit','.ajax-form-menu',function(e){
+            e.preventDefault();
+
+            ajaxformmenu(this);
+            return false;
+        });
+    </script>
+    <script>
+        $('.ajax-link-menu').off('dblclick');
+
+        $(document).on('click','.ajax-link-menu',function(e){
+            e.preventDefault();
+            if($(this).data('confirm')){
+                Swal.fire({
+                    title: 'Bạn có chắc không?',
+                    text:  $(this).data('confirm'),
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xác nhận',
+                    cancelButtonText: 'Quay lại'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        ajaxmenu(this);
+                    }
+                })
+            }
+        });
+        function ajaxmenu(ele){
+            var url= $(ele).attr('href');
+
+            if (!url)
+                return false;
+            $this= $(ele);
+
+            let method = 'GET';
+            if($this.data('method')){
+                method = $this.data('method');
+            }
+
+            $.ajax({
+                method: method,
+                url: url,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                // dataType: 'json'
+            }).done(function( result ) {
+                let html = document.getElementById('result_data');
+                let  success = {
+                    'message' : 'Xóa bản ghi thành công!',
+                    'type' : 'success'
+                }
+                $(html).html(result);
+                if($(html).children().length == 0){
+                    $(html).hide();
+                    $('.dd-empty').show();
+                }
+                flash(success);
+
+                $('#ajax-modal').modal('hide');
+            });
+
+            return false;
+        }
+    </script>
 
     <script>
         function titleFormatter(value, row){
@@ -239,7 +337,7 @@
 
         $(document).on('post-body.bs.table.', function() {
             var columns = $table.bootstrapTable('getOptions').columns
-            console.log(columns[0][0]);
+
             if (columns && columns[0][0].visible) {
                 $table.treegrid({
                     treeColumn: 0,
@@ -266,17 +364,34 @@
                         'type':type,'id':id,'_token':_token,
                     },
                     success:function(result){
-                        $('#result_data').append(result);
-                        $('.dd-empty').remove();
+                        $('#result_data').append(result).show();
+                        $('.dd-empty').hide();
                         flash({'message':'Thêm mới thành công!', 'type': 'success'});
                     }
                 })
             })
 
             $('#position').change(function(){
-                position = $(this).val();
-                url = "{{route('admin.change.position.menu',":position")}}".replace(':position', position);
-                window.location.href = url;
+                var _token = $('meta[name=_token]').attr('content');
+                var position = $(this).val();
+                var url = "{{route('admin.change.position.menu',":position")}}".replace(':position', position);
+                var html = document.getElementById('result_data');
+                $.ajax({
+                    url:url,
+                    type:'get',
+                    cache:false,
+                    data:{
+                        'position':position,'_token':_token,
+                    },
+                    success:function(result){
+                        $(html).html(result).show();
+                        $('.dd-empty').hide();
+                        if(result.length == 0){
+                            $(html).hide();
+                            $('.dd-empty').show();
+                        }
+                    }
+                })
             });
 
             var updateOutput = function(e)

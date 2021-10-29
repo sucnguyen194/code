@@ -68,7 +68,11 @@ class MenuController extends Controller
 
         session()->put('menu_position', $menu->position);
 
-        return  flash('Thêm mới thành công!', 1, route('admin.menus.index'));
+        $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
+            $q->select('name','slug','menu_id');
+        })->position()->sort()->get();
+
+        return  $this->menu($menus);
     }
 
     /**
@@ -120,7 +124,11 @@ class MenuController extends Controller
 
         session()->put('menu_position', $menu->position);
 
-        return flash('Cập nhật thành công', 1, route('admin.menus.index'));
+        $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
+            $q->select('name','slug','menu_id');
+        })->position()->sort()->get();
+
+        return  $this->menu($menus);
     }
 
     /**
@@ -135,14 +143,24 @@ class MenuController extends Controller
 
         $menu->delete();
 
-        return flash('Xóa bản ghi thành công', 1, route('admin.menus.index'));
+        $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
+            $q->select('name','slug','menu_id');
+        })->position()->sort()->get();
+
+        return  $this->menu($menus);
     }
 
     public function position(Request $request){
         $this->authorize('menu');
 
         session()->put('menu_position',$request->position);
-        return flash('Cập nhật thành công');
+
+        $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
+            $q->select('name','slug','menu_id');
+        })->position()->sort()->get();
+
+        return  $this->menu($menus);
+        //return flash('Cập nhật thành công');
 
     }
     public function append(Request $request){
@@ -159,18 +177,18 @@ class MenuController extends Controller
         if($request->type == PostType::page)
             $transltions = Post::find($request->id);
 
-        foreach ($transltions->translations as $transltion){
-            $menu->translation()->create(['name' => $transltion->name, 'slug' => $transltion->slug,'locale' => $transltion->locale]);
+        foreach ($transltions->translations as $translation){
+            $menu->translation()->create(['name' => $translation->name, 'slug' => $translation->slug,'locale' => $translation->locale]);
         }
 
         $append = '<li class="dd-item" data-id="'.$menu->id.'">';
         $append .= '<div class="dd-handle">'.optional($menu->translation)->name.'</div>';
         $append .= '<div class="menu_action">';
         $append .= '<a href="'.route('admin.menus.edit',$menu).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
-        $append .= '<a href="'.route('admin.menus.destroy',$menu).'" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
+        $append .= '<a href="'.route('admin.menus.destroy',$menu).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
         $append .= '</div>';
 
-        echo $append;
+        return $append;
     }
 
     public function setMenuSort(){
@@ -190,19 +208,39 @@ class MenuController extends Controller
         }
     }
 
-    public  static function sub($data,$parent_id){
-        foreach($data->where('parent_id', $parent_id) as $items){
-            echo '<li class="dd-item" data-id="'.$items->id.'">';
-            echo '<div class="dd-handle">'.$items->translation->name.'</div>';
-            echo '<div class="menu_action">';
-            echo '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
-            echo '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
-            echo '</div>';
+    public function menu($menus){
+        $html = "";
+        foreach($menus->where('parent_id',0) as $items){
+            $html .= '<li class="dd-item" data-id="'.$items->id.'">';
+            $html .= '<div class="dd-handle">'.$items->translation->name.'</div>';
+            $html .= '<div class="menu_action">';
+            $html .= '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            $html .= '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
+            $html .= '</div>';
 
-            echo '<ol class="dd-list">';
-            static::sub($data,$items->id);;
-            echo '</ol>';
-            echo '</li>';
+            $html .= '<ol class="dd-list">';
+            $html .=  static::sub($menus,$items->id);;
+            $html .= '</ol>';
+            $html .= '</li>';
         }
+        return $html;
+    }
+
+    public static function sub($data,$parent_id){
+        $html = "";
+        foreach($data->where('parent_id', $parent_id) as $items){
+            $html .= '<li class="dd-item" data-id="'.$items->id.'">';
+            $html .= '<div class="dd-handle">'.$items->translation->name.'</div>';
+            $html .= '<div class="menu_action">';
+            $html .= '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            $html .= '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
+            $html .= '</div>';
+
+            $html .= '<ol class="dd-list">';
+            $html .= static::sub($data,$items->id);;
+            $html .= '</ol>';
+            $html .= '</li>';
+        }
+        return $html;
     }
 }
