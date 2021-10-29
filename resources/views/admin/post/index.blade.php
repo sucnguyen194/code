@@ -87,7 +87,7 @@
                                 <th data-field="title" data-formatter="titleFormatter">
                                     Tiêu đề
                                 </th>
-                                <th data-field="category.translation.name">
+                                <th data-field="category.translation.name" data-formatter="categoryFormatter">
                                     Danh mục
                                 </th>
                                 <th data-field="admin.name">
@@ -162,6 +162,20 @@
             }else{
                 return  '<img src="/lib/images/no-image.png" class="rounded" width="80">'
             }
+        }
+
+        function categoryFormatter(value, row){
+
+            let html = value ? '<div class="w-100">'+value+'</div>' : '';
+            let categories = row.categories;
+
+            if($(categories).length > 0){
+                categories.map(function (val){
+                    html  +=  '<span class="small font-italic badge badge-light-primary">'+ val.translation.name + '</span> ';
+                }).join(' ');
+            }
+
+            return html;
         }
 
         function titleFormatter(value, row){

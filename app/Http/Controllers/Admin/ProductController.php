@@ -39,7 +39,9 @@ class ProductController extends Controller
                 $q->with('translation', function ($q){
                     $q->select('name','slug','category_id');
                 });
-            },'admin','translation' => function($q){
+            },'admin','categories' => function($q){
+                    $q->with('translation');
+             } ,'translation' => function($q){
                 $q->select('name','slug','product_id');
             }])->whereType(request()->type)
             ->when(request()->author,function($q, $author){

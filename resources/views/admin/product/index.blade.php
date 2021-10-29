@@ -87,7 +87,7 @@
                                 <th data-field="name" data-formatter="titleFormatter">
                                     Sản phẩm
                                 </th>
-                                <th data-field="category.translation.name">
+                                <th data-field="category.translation.name" data-formatter="categoryFormatter">
                                     Danh mục
                                 </th>
                                 <th data-field="code">
@@ -135,6 +135,20 @@
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';
         }
 
+        function categoryFormatter(value, row){
+            let html = '<div class="w-100">'+value+'</div>';
+            let categories = row.categories;
+            console.log(categories);
+
+            if($(categories).length > 0){
+                categories.map(function (val){
+                    html  +=  '<span class="small font-italic badge badge-light-primary">'+ val.translation.name + '</span> ';
+                }).join(' ');
+            }
+
+            return html;
+        }
+
 
         function imageFormatter(value, row) {
             if(value){
@@ -176,7 +190,6 @@
         }
 
         function priceFormatter(value,row){
-            console.log(row.price_sale);
 
             if(row.price_sale > 0 && row.price_sale < value){
                 return number_format(row.price_sale) + ' <small><strike>('+number_format(value)+')</strike></small>';

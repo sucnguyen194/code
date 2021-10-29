@@ -42,7 +42,9 @@ class PostController extends Controller
                 $q->with('translation', function($q){
                     $q->select('name','slug','category_id');
                 });
-            }, 'admin', 'translation' => function($q){
+            }, 'admin','categories' => function($q){
+                $q->with('translation');
+            } , 'translation' => function($q){
                 $q->select('name','slug','post_id');
             }])
             ->when(\request()->type,function ($q, $type){
