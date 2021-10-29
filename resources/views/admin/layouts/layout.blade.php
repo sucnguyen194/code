@@ -54,7 +54,7 @@
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 @foreach(languages()->where('value','<>',session()->get('lang')) as $item)
                     <!-- item-->
-                        <a href="{{route('languages.change',$item->value)}}" class="dropdown-item notify-item"><span
+                        <a href="{{route('admin.languages.change',$item->value)}}" class="dropdown-item notify-item"><span
                                 class="align-middle">{{$item->name}}</span> </a>
                     @endforeach
                 </div>

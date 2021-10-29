@@ -1,7 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Enums\ActiveDisable;
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\Product;
+use Illuminate\Support\Facades\App;
 
 class AjaxController extends Controller {
 
@@ -59,5 +62,20 @@ class AjaxController extends Controller {
         $data['count'] = 0;
         $data['total'] = 0;
         return response()->json($data);
+    }
+
+    public function change($lang){
+        $language = Language::whereValue($lang)->first();
+            if(!$language)
+                return flash('Đã có lỗi xảy ra', 0);
+
+        $languages = Language::whereNotIn('value',[$lang])->get();
+        foreach ($languages as $item){
+            $item->update(['status' => ActiveDisable::disable]);
+        }
+        $language->update(['status' => ActiveDisable::active]);
+        session()->put('lang',$lang);
+
+        return flash('Cập nhật thành công!');
     }
 }

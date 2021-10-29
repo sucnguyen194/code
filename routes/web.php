@@ -99,6 +99,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::resource('sources',SourceController::class);
 
         //languages
+        Route::get('change/{lang}/languages', [App\Http\Controllers\Admin\LanguageController::class,'change'])->name('languages.change');
         Route::post('active/{id}/languages',[App\Http\Controllers\Admin\LanguageController::class,'active'])->name('languages.active');
         Route::get('data/languages',[App\Http\Controllers\Admin\LanguageController::class,'data'])->name('languages.data');
 
@@ -149,7 +150,7 @@ Route::group(['prefix' => 'ajax','as' => 'ajax.'], function () {
     Route::get('order/destroy', [App\Http\Controllers\AjaxController::class,'destroy'])->name('order.destroy');
 });
 
-Route::get('change/{lang}/languages', [App\Http\Controllers\Admin\LanguageController::class,'change'])->name('languages.change');
+Route::get('change/{lang}/languages', [App\Http\Controllers\AjaxController::class,'change'])->name('languages.change');
 
 Route::get('lien-he.html', [App\Http\Controllers\ContactController::class,'index']);
 Route::get('contact.html', [App\Http\Controllers\ContactController::class,'index'])->name('contact.index');

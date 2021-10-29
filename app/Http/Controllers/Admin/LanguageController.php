@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ActiveDisable;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class LanguageController extends Controller
 
 
     public function data(){
+        $this->authorize('setting.language');
         $langs = Language::query()->when(\request()->search,function($q, $search){
             return $q->where('name','like',"%{$search}%")->orWhere('id',$search);
         });
@@ -153,12 +155,17 @@ class LanguageController extends Controller
     }
 
     public function change($lang){
-        $language = Language::whereValue($lang);
-        $languages = Language::whereNotIn('id',[$lang])->get();
+        $this->authorize('setting.language');
+        $language = Language::whereValue($lang)->first();
+
+        if(!$language)
+            return flash('Đã có lỗi xảy ra', 0);
+
+        $languages = Language::whereNotIn('value',[$lang])->get();
         foreach ($languages as $item){
-            $item->update(['status' => 2]);
+            $item->update(['status' => ActiveDisable::disable]);
         }
-        $language->update(['status' => 1]);
+        $language->update(['status' => ActiveDisable::active]);
         session()->put('lang',$lang);
         App::setLocale($lang);
         return flash('Cập nhật thành công!');
