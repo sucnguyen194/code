@@ -509,8 +509,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js" integrity="sha512-mh+AjlD3nxImTUGisMpHXW03gE6F4WdQyvuFRkjecwuWLwD2yCijw4tKA3NsEFpA1C3neiKhGXPSIGSfCYPMlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css" integrity="sha512-gp+RQIipEa1X7Sq1vYXnuOW96C4704yI1n0YB9T/KqdvqaEgL6nAuTSrKufUX3VBONq/TPuKiXGLVgBKicZ0KA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-{{--<script src="https://www.jquery-az.com/javascript/alert/dist/sweetalert.min.js"></script>--}}
-{{--<link href="https://www.jquery-az.com/javascript/alert/dist/sweetalert.css" rel="stylesheet">--}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @include('errors.note')
@@ -786,10 +784,15 @@
     $(document).on('click','.ajax-modal',function(e){
         e.preventDefault();
 
+        $('select').each(function() {
+            $(this).select2({
+                dropdownParent: $(this).parent(),
+                placeholder: $(this).data('placeholder'),
+            });
+        });
+
         $(e.target).attr('disabled',true);
         $(e.target).addClass('disabled');
-        console.log('open modal');
-
 
         $remote=$(this).data('remote')||$(this).attr('href');
         $('#ajax-modal, .modal-backdrop').remove();

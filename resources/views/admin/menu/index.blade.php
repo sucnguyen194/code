@@ -141,7 +141,7 @@
                                 <textarea id="nestable-output" class="d-none" name="menuval"></textarea>
                                 <div class="form-group">
                                     <label><strong class="text-tranform">VI TRÍ</strong></label>
-                                    <select id="position" class="form-control" data-toggle="select2">
+                                    <select class="form-control position" data-toggle="select2">
                                         <option value="top" {{selected(session('menu_position'),'top')}} class="form-control">MENU TOP</option>
                                         <option value="home" {{selected(session('menu_position'),'home')}} class="form-control">MENU HOME</option>
                                         <option value="left" {{selected(session('menu_position'),'left')}} class="form-control">MEN LEFT</option>
@@ -228,6 +228,7 @@
     </style>
 @stop
 @section('scripts')
+
     <script type="text/javascript">
         // Ajax form
         function ajaxformmenu(ele){
@@ -263,7 +264,6 @@
         }
         $(document).on('submit','.ajax-form-menu',function(e){
             e.preventDefault();
-
             ajaxformmenu(this);
             return false;
         });
@@ -318,6 +318,7 @@
                     $(html).hide();
                     $('.dd-empty').show();
                 }
+
                 flash(success);
 
                 $('#ajax-modal').modal('hide');
@@ -371,7 +372,7 @@
                 })
             })
 
-            $('#position').change(function(){
+            $('.position').change(function(){
                 var _token = $('meta[name=_token]').attr('content');
                 var position = $(this).val();
                 var url = "{{route('admin.change.position.menu',":position")}}".replace(':position', position);
