@@ -39,7 +39,7 @@ class PhotoController extends Controller
 
         return datatables()->of($photos)
 
-            ->editColumn('image', function ($photo){
+            ->editColumn('thumbnail', function ($photo){
                 return $photo->thumb;
             })
             ->editColumn('created_at', function ($photo){

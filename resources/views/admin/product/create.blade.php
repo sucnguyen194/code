@@ -267,6 +267,7 @@
     <script>
         $(document).on('click','.view-image',function(){
             let image = $(this).attr('data-image');
+            $('#viewImage').modal('show');
             $('.showImage').attr('src', image);
         })
         $('[data-toggle="tab"]').on('click',function(e){

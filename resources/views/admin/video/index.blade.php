@@ -75,7 +75,7 @@
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-formatter="sortFormatter">STT</th>
-                                <th data-field="thumbnail" data-width="150">Ảnh</th>
+                                <th data-field="thumbnail" data-formatter="imageFormatter" data-width="100">Ảnh</th>
                                 <th data-field="name" data-formatter="titleFormatter">
                                     Tiêu đề
                                 </th>
@@ -120,6 +120,14 @@
 
         function sortFormatter(value, row) {
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';
+        }
+
+        function imageFormatter(value, row) {
+            if(value){
+                return  '<img src="'+value+'" class="rounded" width="80">'
+            }else{
+                return  '<img src="/lib/images/no-image.png" class="rounded" width="80">'
+            }
         }
 
         function statusFormatter(value, row) {
