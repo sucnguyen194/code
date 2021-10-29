@@ -115,7 +115,7 @@
     </div>
     <!-- end Topbar -->
     <!-- ========== Left Sidebar Start ========== -->
-    <div class="left-side-menu">
+    <div class="left-side-menu p-0">
         <div class="slimscroll-menu">
             <!--- Sidemenu -->
             <div id="sidebar-menu">
