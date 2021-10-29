@@ -104,18 +104,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
 
         Route::resource('languages', LanguageController::class);
 
-        //module
-        Route::get('modules/action/{table}', [App\Http\Controllers\Admin\ModuleController::class,'actionIndex'])->name('action.module.index');
-        Route::get('modules/action/{table}/create',[App\Http\Controllers\Admin\ModuleController::class,'createAction'])->name('action.module.add');
-        Route::post('modules/action/{table}/store', [App\Http\Controllers\Admin\ModuleController::class,'storeAction']);
-        Route::get('modules/action/{table}/{id}/edit',[App\Http\Controllers\Admin\ModuleController::class,'editAction'])->name('action.module.edit');
-        Route::post('modules/action/{table}/{id}/update',[App\Http\Controllers\Admin\ModuleController::class,'updateAction']);
-        Route::get('modules/action/{table}/{id}/destroy', [App\Http\Controllers\Admin\ModuleController::class,'detroyAction'])->name('action.module.destroy');
-
-        Route::get('data/modules',[App\Http\Controllers\Admin\ModuleController::class,'data'])->name('modules.data');
-        Route::resource('modules',ModuleController::class);
-
-
         Route::get('data/comments',[App\Http\Controllers\Admin\CommentController::class,'data'])->name('comments.data');
         Route::get('comments/{type}/list',[App\Http\Controllers\Admin\CommentController::class,'list'])->name('comments.list');
         Route::get('comments/{type}/{id}/reply',[App\Http\Controllers\Admin\CommentController::class,'reply'])->name('comments.reply');

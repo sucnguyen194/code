@@ -87,11 +87,5 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'setting.update', 'title' => 'Cập nhật hệ thống','parent_id' => $setting->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'setting.source', 'title' => 'Sửa website','parent_id' => $setting->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'setting.language', 'title' => 'Ngôn ngữ','parent_id' => $setting->id,'guard_name' => 'admin']);
-
-        $module = Permission::create(['name' => 'module', 'title' => 'Bảng phụ','parent_id' => 0,'guard_name' => 'admin']);
-        Permission::create(['name' => 'module.view', 'title' => 'Xem bảng phụ','parent_id' => $module->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'module.create', 'title' => 'Thêm bảng phụ','parent_id' => $module->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'module.edit', 'title' => 'Sửa bảng phụ','parent_id' => $module->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'module.destroy', 'title' => 'Xóa bảng phụ','parent_id' => $module->id,'guard_name' => 'admin']);
     }
 }

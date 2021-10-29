@@ -358,40 +358,7 @@
                             </ul>
                         </li>
                     @endcan
-                    @can('module.view')
-                        <li>
-                            <a href="javascript: void(0);">
-                                <i class="pe-7s-settings"></i>
-                                <span> Bảng phụ </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="nav-second-level nav" aria-expanded="false">
-                                @can('module.create')
-                                    <li>
-                                        <a href="{{route('admin.modules.create')}}">Tạo mới</a>
-                                    </li>
-                                @endcan
-                                <li>
-                                    <a href="{{route('admin.modules.index')}}">Danh sách bảng phụ</a>
-                                </li>
-                                @if(\App\Models\Module::count())
-                                    <li>
-                                        <a href="javascript: void(0);" aria-expanded="false">
-                                            Bảng phụ
-                                            <span class="menu-arrow"></span>
-                                        </a>
-                                        <ul class="nav-third-level nav" aria-expanded="false">
-                                            @foreach(\App\Models\Module::get() as $module)
-                                                <li>
-                                                    <a href="{{route('admin.action.module.index',$module->table)}}">{{$module->name}}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                @endif
-                            </ul>
-                        </li>
-                    @endcan
+
                 </ul>
             </div>
             <!-- End Sidebar -->

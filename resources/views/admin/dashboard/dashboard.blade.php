@@ -122,7 +122,13 @@
             </div>
         </div>
         <!-- end row -->
-
+        <div class="card-box">
+            <div class="tool-share">
+                <div class="w-100 mb-1"><a href="https://developers.facebook.com/tools/debug/" target="_blank">1. Tool sửa lỗi share facebook</a></div>
+                <div class="w-100 mb-1"><a href="https://developers.zalo.me/tools/debug-sharing" target="_blank">2. Tool sửa lỗi share zalo</a></div>
+                <div class="w-100 font-italic">* Click vào tool cần sửa lỗi -> past đường dẫn của bài viết vào thanh công cụ của tool</div>
+            </div>
+        </div>
     </div>
 @stop
 
