@@ -17,6 +17,8 @@
 
 @endforeach
 
+@include('include.comment')
+
 
 <!-------------------------->
 <!-----------SOURCSE----------->

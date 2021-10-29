@@ -202,7 +202,22 @@
         </div>
     @endforeach
 </div>
-
+<style>
+    .qtv {
+        display: inline;
+        vertical-align: middle;
+        font-style: normal;
+        background-color: #eebc49;
+        color: #222;
+        font-size: 10px;
+        padding: 5px 5px 3px 5px;
+        border-radius: 2px;
+        width: auto;
+        height: auto;
+        line-height: 1;
+        margin-left: 5px;
+    }
+</style>
 <!-- Init js -->
 <script type="text/javascript">
     $(document).ready(function(){
