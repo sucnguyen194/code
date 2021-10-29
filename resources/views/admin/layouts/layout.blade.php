@@ -350,15 +350,17 @@
                                     </li>
                                 @endcan
 
-                                <li>
-                                    <a href="{{route('admin.logs')}}">
-                                        System Logs
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
                     @endcan
 
+                    <li>
+                        <a href="{{route('admin.logs')}}">
+                            <i class="pe-7s-attention"></i>
+                            <span>System Logs</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- End Sidebar -->
