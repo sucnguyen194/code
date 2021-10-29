@@ -43,11 +43,6 @@ class LoginController extends Controller
         $this->redirectTo = url()->previous();
     }
 
-    public function showLoginForm()
-    {
-        return view('Auth.login');
-    }
-
     public function redirect($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -65,9 +60,6 @@ class LoginController extends Controller
 
         $user = $this->createUser($info,$provider);
         Auth::login($user, true);
-
-//        if(Auth::user()->lever <= 1)
-//            return  redirect()->route('admin.dashboard')->withInput()->with(['message' => 'Đăng nhập thành công!']);
 
         return flash('Đăng nhập thành công!',1, route('home'));
     }
