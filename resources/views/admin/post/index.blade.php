@@ -87,7 +87,7 @@
                                 <th data-field="title" data-formatter="titleFormatter">
                                     Tiêu đề
                                 </th>
-                                <th data-field="category.translation.name" data-formatter="categoryFormatter">
+                                <th data-field="category" data-formatter="categoryFormatter">
                                     Danh mục
                                 </th>
                                 <th data-field="admin.name">
@@ -168,16 +168,18 @@
             let route = "";
 
             if(row.category){
-                let slug = row.category.translation.slug;
+                let slug = value.translation.slug;
                 route += '{{route('slug',':slug')}}'.replace(':slug', slug);
             }
-            let html = value ? '<a class="w-100 font-weight-bold" href="'+route+'" target="_blank">'+value+'</a> ' : '';
+            let html = value ? '<a class="w-100 font-weight-bold" href="'+route+'" target="_blank">'+value.translation.name+'</a> ' : '';
             let categories = row.categories;
 
             if($(categories).length > 0){
                 html += '<hr style="margin: 4px 0; border-top: 1px solid #e2e2e2">';
                 categories.map(function (val){
-                    html  +=  '<span class="small badge badge-light-primary">'+ val.translation.name + '</span> ';
+                    if(value.id != val.id){
+                        html  +=  '<span class="small badge badge-light-primary">'+ val.translation.name + '</span> ';
+                    }
                 }).join(' ');
             }
 

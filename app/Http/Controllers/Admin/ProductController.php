@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function data(){
         $products = Product::query()->with(['category' => function($q){
                 $q->with('translation', function ($q){
-                    $q->select('name','slug','category_id');
+                    $q->select('id','name','slug','category_id');
                 });
             },'admin','categories' => function($q){
                     $q->with('translation');

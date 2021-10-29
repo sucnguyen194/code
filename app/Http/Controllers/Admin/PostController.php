@@ -40,7 +40,7 @@ class PostController extends Controller
 
         $posts = Post::query()->with(['category' => function($q){
                 $q->with('translation', function($q){
-                    $q->select('name','slug','category_id');
+                    $q->select('id','name','slug','category_id');
                 });
             }, 'admin','categories' => function($q){
                 $q->with('translation');

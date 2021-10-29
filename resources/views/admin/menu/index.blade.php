@@ -333,10 +333,10 @@
 
     <script>
         function titleFormatter(value, row){
-            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu" data-id="'+row.id+'" data-type="{{\App\Enums\PostType::page}}">'+value +'</a>';
+            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu font-weight-bold" data-id="'+row.id+'" data-type="{{\App\Enums\PostType::page}}">'+value +'</a>';
         }
         function categoryFormatter(value, row){
-            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu" data-id="'+row.id+'" data-type="{{\App\Enums\CategoryType::category}}">'+value +'</a>';
+            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu font-weight-bold" data-id="'+row.id+'" data-type="{{\App\Enums\CategoryType::category}}">'+value +'</a>';
         }
 
         $(document).on('post-body.bs.table.', function() {

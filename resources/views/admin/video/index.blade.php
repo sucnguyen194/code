@@ -149,7 +149,7 @@
         }
 
         function videoFormatter(value){
-            return 'https://www.youtube.com/watch?v='+value+'';
+            return '<a href="https://www.youtube.com/watch?v='+value+'" class="font-weight-bold" target="_blank">https://www.youtube.com/watch?v='+ value +'</a>';
         }
 
         function titleFormatter(value, row){
