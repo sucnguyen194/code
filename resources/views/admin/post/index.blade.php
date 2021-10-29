@@ -165,13 +165,19 @@
         }
 
         function categoryFormatter(value, row){
+            let route = "";
 
-            let html = value ? '<div class="w-100">'+value+'</div>' : '';
+            if(row.category){
+                let slug = row.category.translation.slug;
+                route += '{{route('slug',':slug')}}'.replace(':slug', slug);
+            }
+            let html = value ? '<a class="w-100 font-weight-bold" href="'+route+'" target="_blank">'+value+'</a> ' : '';
             let categories = row.categories;
 
             if($(categories).length > 0){
+                html += '<hr style="margin: 4px 0; border-top: 1px solid #e2e2e2">';
                 categories.map(function (val){
-                    html  +=  '<span class="small font-italic badge badge-light-primary">'+ val.translation.name + '</span> ';
+                    html  +=  '<span class="small badge badge-light-primary">'+ val.translation.name + '</span> ';
                 }).join(' ');
             }
 
@@ -179,7 +185,7 @@
         }
 
         function titleFormatter(value, row){
-            return '<a href="'+ '{{ route('slug', ':id') }}'.replace(':id',row.translation.slug) +'" target="_blank">'+ value +'</a>';
+            return '<a href="'+ '{{ route('slug', ':id') }}'.replace(':id',row.translation.slug) +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
         }
 
         function actionFormatter(value, row){

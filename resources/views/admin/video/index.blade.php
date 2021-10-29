@@ -153,7 +153,7 @@
         }
 
         function titleFormatter(value, row){
-            return '<a href="'+ '{{ route('slug', ':id') }}'.replace(':id',row.translation.slug) +'" target="_blank">'+ value +'</a>';
+            return '<a href="'+ '{{ route('slug', ':id') }}'.replace(':id',row.translation.slug) +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
         }
 
         function actionFormatter(value, row){
