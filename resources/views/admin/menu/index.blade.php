@@ -217,6 +217,9 @@
         .treegrid-expander {
             display: none!important;
         }
+        .treegrid-expander.treegrid-expander-collapsed {
+            display: inline-block!important;
+        }
         .treegrid-expanded .treegrid-expander {
             background: url('https://cdnjs.cloudflare.com/ajax/libs/jquery-treegrid/0.2.0/img/collapse.png') no-repeat;
             width: 16px;
