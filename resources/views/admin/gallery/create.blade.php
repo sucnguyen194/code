@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-lg" style="max-width: 800px!important" role="document">
     <form action="{{route('admin.products.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
@@ -26,7 +26,7 @@
                 <div class="tab-content pt-0">
                     <div class="form-group position-relative box-action-image">
                         <label>Hình ảnh</label>
-                        <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:2.2rem;top:1.3rem">
+                        <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:0;top:0">
                             <label class="item-input mb-0">
                                 <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> Chọn ảnh
                             </label>
@@ -125,15 +125,21 @@
         </div>
     </form>
 </div>
-<div id="viewImage" class="modal fade" tabindex="-1" aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
+<div id="viewImage" class="modal fade modal-gallery" tabindex="-1" aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content text-center">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hình ảnh</h5>
+                <button type="button" class="close" data-dismiss="modal-gallery" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
             <div class="modal-body">
                 <img src="" class="img-fluid showImage">
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"> Đóng</button>
-            </div>
+{{--            <div class="modal-footer">--}}
+{{--                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"> Đóng</button>--}}
+{{--            </div>--}}
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Gallery @stop
+@section('title') Album @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Gallery</li>
+                            <li class="breadcrumb-item active">Album</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Gallery</h4>
+                    <h4 class="page-title">Album</h4>
                 </div>
             </div>
         </div>

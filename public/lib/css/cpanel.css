@@ -18,6 +18,10 @@ img {
 .required {
     color: #e83e8c;
 }
+.modal-lg {
+    min-width: auto;
+    max-width: fit-content;
+}
 .table td, .table th {
     vertical-align: middle!important;
 }
