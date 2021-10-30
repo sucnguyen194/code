@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Attribute extends Model
 {
@@ -18,6 +19,45 @@ class Attribute extends Model
 
     public function translation(){
         return $this->hasOne(Translation::class)->whereLocale(session('lang'));
+    }
+
+    public function getTitleAttribute(){
+        return $this->translation->name;
+    }
+
+    public function getSlugAttribute(){
+        if(!$this->title)
+            return;
+
+        $name = $this->title;
+
+        $slug = request()->fullUrl().'?attr='.$name;
+
+        if(request()->attr && !empty(request()->attr))
+            $slug = request()->fullUrl().','.$name;
+
+        if(empty(request()->attr) && request()->has('attr'))
+            $slug = request()->fullUrl().$name;
+
+        $attributes = explode(',', request()->attr);
+
+        if(in_array($name, $attributes))
+            $slug = "javascript:void(0)";
+
+
+        return $slug;
+    }
+
+    public function getRemoveSlugAttribute(){
+        $slug = Str::replace($this->title, '', request()->attr);
+
+        if(Str::contains(request()->attr ,$this->title.','))
+            $slug = Str::replace($this->title.',', '', request()->attr);
+
+        if(Str::contains(request()->attr ,','.$this->title))
+            $slug = Str::replace(','.$this->title, '', request()->attr);
+
+        return request()->url().'?attr='.$slug;
     }
 
     public static function boot()

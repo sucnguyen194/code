@@ -14,7 +14,7 @@ class AddValueInAttributesTalbe extends Migration
     public function up()
     {
         Schema::table('attributes', function (Blueprint $table) {
-            $table->integer('value')->after('name')->nullable();
+            $table->integer('value')->after('id')->nullable();
         });
     }
 

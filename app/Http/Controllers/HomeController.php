@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CategoryType;
 use App\Enums\PostType;
 use App\Enums\ProductType;
+use App\Models\Attribute;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Translation;
@@ -105,9 +106,17 @@ class HomeController extends Controller
 
                 switch ($translation->category->type) {
                     case (CategoryType::product):
+
                         $products = Product::with(['category','admin','categories', 'translation'])->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })->orWhere('category_id',$translation->category->id)
+                            ->when(request()->attr, function ($q){
+                                $q->whereHas('attributes', function ($q) {
+                                    $q->whereHas('translations', function($q) {
+                                        $q->whereIn('name', explode(',', request()->attr));
+                                    });
+                                });
+                            })
                             ->public()->paginate(setting('site.product.category') ?? 20);
 
                         return view('product.category', compact('translation','products'));

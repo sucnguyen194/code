@@ -46,19 +46,19 @@ class AjaxController extends Controller {
     }
     public function getEditDataSort(){
         $data = $this->getSystem(request()->type);
-        $data->update(['sort' => request()->num,'admin_edit' => Auth::id()]);
+        $data->update(['sort' => request()->num]);
         return $data;
     }
     public function getEditDataStatus(){
         $data = $this->getSystem(request()->type);
         $status = $data->status == ActiveDisable::active ? ActiveDisable::disable :  ActiveDisable::active;
-        $data->update(['status' => $status,'admin_edit' => Auth::id()]);
+        $data->update(['status' => $status]);
         return $data;
     }
     public function getEditDataPublic(){
         $data = $this->getSystem(request()->type);
         $public = $data->public == ActiveDisable::active ? ActiveDisable::disable :  ActiveDisable::active;
-        $data->update(['public' => $public,'admin_edit' => Auth::id()]);
+        $data->update(['public' => $public]);
         return $data;
     }
 }

@@ -64,9 +64,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Danh mục</label>
+                    <label>Nhóm</label>
                     <select class="form-control" data-toggle="select2" name="data[category_id]">
-                        <option value="0">Chọn danh mục</option>
+                        <option value="0">Chọn nhóm</option>
                         @foreach($categories as $item )
                             <option value="{{$item->id}}" {{selected($attribute->category_id, $item->id)}} class="font-weight-bold">{{$item->translation->name}}</option>
                         @endforeach

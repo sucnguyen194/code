@@ -114,6 +114,29 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if($attributes->count())
+                            <div class="card-box clearfix">
+                                <label class="mb-0">Bộ lọc</label>
+                                <hr>
+                                <div class="row">
+                                    @foreach($attributes->where('category_id',0) as $attribute)
+                                        <div class="col-lg-6 form-group">
+                                            <label>{{$attribute->translation->name}}</label>
+                                            <select name="attribute[]" class="form-control">
+                                                <option value=""> Chọn {{\Illuminate\Support\Str::lower($attribute->translation->name)}}</option>
+                                                @foreach($attributes->where('category_id', $attribute->id) as $sub)
+                                                    <option value="{{$sub->id}}" {{selected($sub->id, $product->attributes->pluck('id')->toArray())}}>{{$sub->translation->name}}</option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                            </div>
+                        @endif
+
                     <div class="card-box position-relative box-action-image">
                         <label>Hình ảnh</label>
                         <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:2.2rem;top:1.3rem">
@@ -271,25 +294,6 @@
                             @endforeach
                     </div>
 
-
-                    @if($attributes->count())
-{{--                        <div class="card-box clearfix">--}}
-{{--                            <label class="mb-0">Thuộc tính</label>--}}
-{{--                            <hr>--}}
-
-{{--                            <div class="row">--}}
-{{--                                @foreach($attributes as $attribute)--}}
-{{--                                    <div class="col-lg-6">--}}
-{{--                                        <div class="checkbox">--}}
-{{--                                            <input type="checkbox" value="{{$attribute->id}}" class="radio-blue" {{checked($attribute->id, $product->cate_attributes->pluck('id')->toArray())}} name="cate_attribute[]" id="attribute_{{$attribute->id}}">--}}
-{{--                                            <label for="attribute_{{$attribute->id}}">{{$attribute->translation->name}}</label>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @endforeach--}}
-{{--                            </div>--}}
-
-{{--                        </div>--}}
-                    @endif
                     {{--                    <div class="card-box clearfix">--}}
                     {{--                        <label>Thuộc tính sản phẩm</label>--}}
                     {{--                        <table data-dynamicrows class="table table-bordered table-striped mb-0">--}}

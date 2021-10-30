@@ -9,7 +9,6 @@ if(!function_exists('languages')){
     }
 }
 
-
 if(!function_exists('resize_image')){
     function resize_image($image, $size = 'm'){
         $check = strpos($image,'i.imgur.com');

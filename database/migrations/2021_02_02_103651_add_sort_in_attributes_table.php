@@ -14,7 +14,7 @@ class AddSortInAttributesTable extends Migration
     public function up()
     {
         Schema::table('attributes', function (Blueprint $table) {
-            $table->integer('sort')->after('category_id')->default(9999);
+            $table->integer('sort')->after('category_id')->default(0);
         });
     }
 
