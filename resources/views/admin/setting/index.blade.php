@@ -266,7 +266,7 @@
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Mã bổ xung phía trước  <code> &lt;/head&gt; </code></label>
+                                    <label for="imgur_client_id">Mã bổ xung trước  <code> &lt;/head&gt; </code></label>
                                     <p>Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code> &lt;/head&gt; </code>. Hệ thống chấp nhận mã html, javascript, css </p>
                                 </div>
                             </div>
@@ -284,7 +284,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Mã bổ xung phía trước  <code>  &lt;/body&gt;  </code></label>
+                                    <label for="imgur_client_id">Mã bổ xung trước  <code>  &lt;/body&gt;  </code></label>
                                     <p>Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code>  &lt;/body&gt;  </code>. Hệ thống chấp nhận mã html, javascript, css </p>
                                 </div>
                             </div>
