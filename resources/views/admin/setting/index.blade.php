@@ -62,7 +62,7 @@
                                                         <input type="text" class="form-control" name="data[site.company.{{$language->value}}]" id="company" value="{{setting('site.company.'.$language->value)}}">
                                                     </div>
 
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-0">
                                                         <label for="slogan">Slogan</label>
                                                         <input type="text" class="form-control" name="data[site.slogan.{{$language->value}}]" id="slogan" value="{{setting('site.slogan.'.$language->value)}}">
                                                     </div>
@@ -206,116 +206,236 @@
                     </fieldset>
                     <fieldset title="2">
                         <legend>Thông tin liên hệ</legend>
-                        <div class="card-box mt-1">
-                            <div class="row">
-                                <div class="col-md-4">
+
+                        <div class="row mt-1">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Thông tin liên hệ</label>
+                                    <p>Nhập email, hotline, ... Thông tin sẽ được hiển thị trên website để khách hàng có thể liên hệ với cửa hàng.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
                                     <div class="form-group">
-                                        <label for="email">Email <small class="required">(* Địa chỉ nhận email từ khách hàng)</small></label>
+                                        <label for="email">Email <code class="required">(* Địa chỉ nhận email từ khách hàng)</code></label>
                                         <input type="text" class="form-control" id="email" value="{{setting('contact.email')}}" name="data[contact.email]">
                                     </div>
-                                    <div class="form-group mb-0">
-                                        <label for="phone">Điện thoại</label>
-                                        <input type="text" class="form-control" id="phone" value="{{setting('contact.phone')}}" name="data[contact.phone]">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="hotline">Hotline</label>
-                                        <input type="text" class="form-control" value="{{setting('contact.hotline')}}" id="hotline" name="data[contact.hotline]">
+                                        <input type="tel" class="form-control" value="{{setting('contact.hotline')}}" id="hotline" name="data[contact.hotline]">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="phone">Điện thoại</label>
+                                        <input type="tel" class="form-control" id="phone" value="{{setting('contact.phone')}}" name="data[contact.phone]">
                                     </div>
 
-                                    <div class="form-group mb-0">
+                                    <div class="form-group">
                                         <label for="fax">Fax</label>
                                         <input type="text" class="form-control" value="{{setting('contact.fax')}}" id="fax" name="data[contact.fax]">
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="numbercall">Action Call</label>
-                                        <input type="text" class="form-control" value="{{setting('contact.numbercall')}}" id="numbercall" name="data[contact.numbercall]">
-                                    </div>
-
                                     <div class="form-group mb-0">
                                         <label for="time_open">Thời gian mở cửa</label>
                                         <input type="text" class="form-control" value="{{setting('contact.time_open')}}" id="time_open" name="data[contact.time_open]">
                                     </div>
                                 </div>
-
                             </div>
-                            <hr>
-
-                            <div class="form-group">
-                                <label for="map">iFrame Google Map</label>
-                                <textarea name="data[contact.map]" id="map" cols="30" rows="5" class="form-control">{!! setting('contact.map') !!}</textarea>
+                        </div>
+                        <hr class="border-primary">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Google map</label>
+                                    <p>Nhúng mã <code> &lt;/iframe&gt; </code> được cung cấp bởi Google map. <a href="https://www.google.com/maps/place/H%C3%A0+N%E1%BB%99i,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0227788,105.8194541,14z/data=!3m1!4b1!4m5!3m4!1s0x3135ab9bd9861ca1:0xe7887f7b72ca17a9!8m2!3d21.0277644!4d105.8341598?hl=vi-VN" target="_blank">Tìm hiểu thêm.</a> </p>
+                                </div>
                             </div>
-
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="map">iFrame Google Map</label>
+                                        <textarea name="data[contact.map]" id="map" cols="30" rows="5" class="form-control">{!! setting('contact.map') !!}</textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                        <hr class="border-primary">
                     </fieldset>
                     <fieldset title="3">
                         <legend>Mã bổ xung</legend>
-                        <div class="card-box mt-1">
-                            <div class="row ">
-                                <div class="col-md-6">
+
+                        <div class="row mt-1">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Mã bổ xung phía trước  <code> &lt;/head&gt; </code></label>
+                                    <p>Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code> &lt;/head&gt; </code>. Hệ thống chấp nhận mã html, javascript, css </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="remarketing_header">Mã bổ xung phía trước &lt;/head&gt; </label>
+                                        <label for="remarketing_header">Mã bổ xung <code> &lt;/head&gt; </code></label>
                                         <textarea class="form-control" rows="12" name="data[site.remarketing_header]">{!! setting('site.remarketing_header')!!}</textarea>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
 
-                                <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Mã bổ xung phía trước  <code>  &lt;/body&gt;  </code></label>
+                                    <p>Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code>  &lt;/body&gt;  </code>. Hệ thống chấp nhận mã html, javascript, css </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="remarketing_footer">Mã bổ xung phía trước &lt;/body&gt; </label>
+                                        <label for="remarketing_footer">Mã bổ xung <code>  &lt;/body&gt;  </code></label>
                                         <textarea class="form-control" rows="12" name="data[site.remarketing_footer]">{!! setting('site.remarketing_footer') !!}</textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <hr class="border-primary">
                     </fieldset>
                     <fieldset title="4">
                         <legend>Liên kết</legend>
-                        <div class="card-box  mt-1">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                        <div class="row mt-1">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Fanpage facebook</label>
+                                    <p>Nhập url fanpage được cung cấp bởi Facebook. </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
                                         <label for="facebook">Facebook</label>
                                         <input type="text" class="form-control" value="{{setting('social.facebook')}}" id="facebook" name="data[social.facebook]">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="google">Google+</label>
-                                        <input type="text" class="form-control" value="{{setting('social.google')}}" id="google" name="data[social.google]">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="messenger">Messenger</label>
-                                        <input type="text" class="form-control" value="{{setting('social.messenger')}}" id="messenger" name="data[social.messenger]">
-                                    </div>
-                                    <div class="form-group">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Youtube channel</label>
+                                    <p>Nhập url channel được cung cấp bởi Youtube. </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
                                         <label for="youtube">Youtube</label>
                                         <input type="text" class="form-control" value="{{setting('social.youtube')}}" id="youtube" name="data[social.youtube]">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Zalo</label>
+                                    <p>Nhập số điện thoại đã đăng ký Zalo. </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
                                     <div class="form-group mb-0">
                                         <label for="zalo">Zalo</label>
                                         <input type="text" class="form-control" value="{{setting('social.zalo')}}" id="zalo" name="data[social.zalo]">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Skype</label>
+                                    <p>Nhập account đăng ký Skype. </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
                                         <label for="skype">Skype</label>
                                         <input type="text" class="form-control" value="{{setting('social.skype')}}" id="skype" name="data[social.skype]">
                                     </div>
-                                    <div class="form-group">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Twitter</label>
+                                    <p>Nhập url được cung cấp bởi Twitter </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
                                         <label for="twitter">Twitter</label>
                                         <input type="text" class="form-control" value="{{setting('social.twitter')}}" id="twitter" name="data[social.twitter]">
                                     </div>
-                                    <div class="form-group">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Instagram</label>
+                                    <p>Nhập url được cung cấp bởi Instagram </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
                                         <label for="instagram">Instagram</label>
                                         <input type="text" class="form-control" value="{{setting('social.instagram')}}"  id="instagram" name="data[social.instagram]">
                                     </div>
-                                    <div class="form-group">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Linkedin</label>
+                                    <p>Nhập url được cung cấp bởi Linkedin </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
                                         <label for="linkedin">Linkedin</label>
                                         <input type="text" class="form-control" value="{{setting('social.linkedin')}}"  id="linkedin" name="data[social.linkedin]">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Pinterest</label>
+                                    <p>Nhập url được cung cấp bởi Pinterest </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
                                     <div class="form-group mb-0">
                                         <label for="pinterest">Pinterest</label>
                                         <input type="text" class="form-control" value="{{setting('social.pinterest')}}"  id="pinterest" name="data[social.pinterest]">
@@ -323,85 +443,124 @@
                                 </div>
                             </div>
                         </div>
+                        <hr class="border-primary">
+
                     </fieldset>
                     <fieldset title="5" class="">
                         <legend>API</legend>
-
-                        <div class="bg-white">
-                            <div class="card-body">
-                                <div class="w-25 w-xs-100">
-                                    <label for="google_analytics_id">Google Analytics ID</label>
-                                    <input type="text" class="form-control" value="{{setting('api.google_analytics_id')}}" id="google_analytics_id" name="data[api.google_analytics_id]">
-                                </div>
-
-                            </div>
-                            <hr class="border-light m-0">
-
-                            <div class="card-body">
-                                <div class="w-25 w-xs-100">
-                                    <label for="facebook_app_secret">Imgur client ID</label>
-                                    <input type="text" class="form-control" value="{{setting('api.imgur_client_id')}}" id="facebook_app_secret" name="data[api.imgur_client_id]">
-                                </div>
-                            </div>
-                            <hr class="border-light m-0">
-
-                            <div class="card-body">
-                                <div class="w-25 w-xs-100">
-                                <label class="font-weight-semibold mb-4">Facebook App</label>
-                                <div class="form-group">
-                                    <label for="facebook_app_ip">App ID <a href="https://developers.facebook.com/apps/" class="small" target="_blank">(FACEBOOK for Developers)</a> </label>
-                                    <input type="text" class="form-control" value="{{setting('api.facebook_app_ip')}}" id="facebook_app_ip" name="data[api.facebook_app_ip]">
-                                </div>
-                                    <div class="form-group mb-0">
-                                        <label for="facebook_app_secret">App Secret</label>
-                                        <input type="text" class="form-control" value="{{setting('api.facebook_app_secret')}}" id="facebook_app_secret" name="data[api.facebook_app_secret]">
+                        <div class="mt-1">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card-box mb-0 bg-transparent">
+                                        <label for="google_analytics_id">Google Analytics</label>
+                                        <p>Nhập ID tài khoản GA được cung cấp bởi google</p>
                                     </div>
                                 </div>
-
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <label class="font-weight-semibold mb-4">Facebook Messages</label>
-
-                                <div class="w-25 w-xs-100">
-                                <div class="form-group">
-                                    <label for="facebook_app_ip">App ID </label>
-                                    <input type="text" class="form-control" value="{{setting('api.chat_message_id')}}" id="chat_message_id" name="data[api.chat_message_id]">
-                                </div>
-                                <div class="form-group mb-0">
-                                    <label for="chat_message_text">App ID messages</label>
-                                    <input type="text" class="form-control" value="{{setting('api.chat_message_text')}}" id="chat_message_text" name="data[api.chat_message_text]">
-                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card-box mb-0">
+                                        <label for="google_analytics_id">Google Analytics ID</label>
+                                        <input type="text" class="form-control" value="{{setting('api.google_analytics_id')}}" id="google_analytics_id" name="data[api.google_analytics_id]">
+                                    </div>
                                 </div>
                             </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <input type="hidden" value="0" name="data[api.google_captcha]">
-                               <label class="font-weight-semibold mb-4"> Google reCAPTCHA  <input type="checkbox" {{checked(setting('api.google_captcha'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.google_captcha]" data-size="small"/></label>
-                                <div class="w-25 w-xs-100">
-                                <div class="form-group">
-                                    <label for="re_captcha_key">Site key <a href="https://www.google.com/recaptcha/lib/create" class="small" target="_blank">(Google reCAPTCHA)</a> </label>
-                                    <input type="text" class="form-control" value="{{setting('api.re_captcha_key')}}" id="re_captcha_key" name="data[api.re_captcha_key]">
+                            <hr class="border-primary">
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card-box mb-0 bg-transparent">
+                                        <label for="imgur_client_id">Imgur</label>
+                                        <p>Nhập Client ID được cung cấp bởi Imgur</p>
+                                    </div>
                                 </div>
-                                <div class="form-group mb-0">
-                                    <label for="re_captcha_secret">Secret key</label>
-                                    <input type="text" class="form-control" value="{{setting('api.re_captcha_secret')}}" id="re_captcha_secret" name="data[api.re_captcha_secret]">
-                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card-box mb-0">
+                                        <label for="imgur_client_id">Imgur client ID</label>
+                                        <input type="text" class="form-control" value="{{setting('api.imgur_client_id')}}" id="facebook_app_secret" name="data[api.imgur_client_id]">
+                                    </div>
                                 </div>
                             </div>
+                            <hr class="border-primary">
 
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card-box mb-0 bg-transparent">
+                                        <label for="imgur_client_id">Facebook App</label>
+                                        <p>Nhập App ID, App Secret được cung cấp bởi facebook. <a href="https://developers.facebook.com/apps/" class="" target="_blank">Tìm hiểu thêm.</a> </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card-box mb-0">
+                                        <div class="form-group">
+                                            <label for="facebook_app_ip">App ID  </label>
+                                            <input type="text" class="form-control" value="{{setting('api.facebook_app_ip')}}" id="facebook_app_ip" name="data[api.facebook_app_ip]">
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <label for="facebook_app_secret">App Secret</label>
+                                            <input type="text" class="form-control" value="{{setting('api.facebook_app_secret')}}" id="facebook_app_secret" name="data[api.facebook_app_secret]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="border-primary">
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card-box mb-0 bg-transparent">
+                                        <label for="imgur_client_id">Facebook Messages</label>
+                                        <p>Ứng dụng chat trực tuyến từ facebook. Nhập App ID, App ID messages được cung cấp bởi facebook.</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card-box mb-0">
+                                        <div class="form-group">
+                                            <label for="facebook_app_ip">App ID </label>
+                                            <input type="text" class="form-control" value="{{setting('api.chat_message_id')}}" id="chat_message_id" name="data[api.chat_message_id]">
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <label for="chat_message_text">App ID messages</label>
+                                            <input type="text" class="form-control" value="{{setting('api.chat_message_text')}}" id="chat_message_text" name="data[api.chat_message_text]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="border-primary">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card-box mb-0 bg-transparent">
+                                        <label class="font-weight-semibold mb-4"> Google reCAPTCHA  <input type="checkbox" {{checked(setting('api.google_captcha'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.google_captcha]" data-size="small"/></label>
+                                        <p>Ứng dụng chống spam từ google. Thiết lập và nhập site key và secret key được cung cấp bởi google. <a href="https://www.google.com/recaptcha/lib/create" class="" target="_blank">Tìm hiểu thêm.</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card-box mb-0">
+                                        <div class="form-group">
+                                            <label for="re_captcha_key">Site key  </label>
+                                            <input type="text" class="form-control" value="{{setting('api.re_captcha_key')}}" id="re_captcha_key" name="data[api.re_captcha_key]">
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <label for="re_captcha_secret">Secret key</label>
+                                            <input type="text" class="form-control" value="{{setting('api.re_captcha_secret')}}" id="re_captcha_secret" name="data[api.re_captcha_secret]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="border-primary">
                         </div>
 
                     </fieldset>
                     <fieldset title="6" class="">
                         <legend>Cấu hình</legend>
 
-                        <div class="bg-white">
-                            <div class="card-body">
-                                <label class="font-weight-semibold">Bài viết <small>(Blog, page, ...)</small></label>
-                                <p class="small mb-4">Cấu hình kích thước hình ảnh thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</p>
-                                <div class="row">
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                        <div class="row mt-1">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Bài viết <code> (Blog, page, ...) </code></label>
+                                    <p>Cấu hình kích thước hình ảnh <code> thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</code> </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group">
                                         <label>Thumbnail</label>
                                         <select class="form-control" name="data[site.post.size]">
                                             <option value="s" {{selected(setting('site.post.size'),'s')}}>90x90</option>
@@ -411,27 +570,33 @@
                                             <option value="h" {{selected(setting('site.post.size'),'h')}}>1024x1024</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                    <div class="form-group">
                                         <label>Trang chủ</label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.index')}}" name="data[site.post.index]">
                                     </div>
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                    <div class="form-group">
                                         <label>Danh mục</label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.category')}}" name="data[site.post.category]">
                                     </div>
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                    <div class="form-group mb-0">
                                         <label>Tin liên quan</label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.related')}}" name="data[site.post.related]">
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <hr class="border-primary">
 
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <label class="font-weight-semibold">Sản phẩm <small>(sản phẩm, gallery, video,...)</small></label>
-                                <p class="small mb-4">Cấu hình kích thước hình ảnh thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</p>
-                                <div class="row">
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">Sản phẩm <code> (sản phẩm, gallery, video,...) </code></label>
+                                    <p>Cấu hình kích thước hình ảnh <code> thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</code> </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group">
                                         <label>Thumbnail</label>
                                         <select class="form-control" name="data[site.product.size]">
                                             <option value="s" {{selected(setting('site.product.size'),'s')}}>90x90</option>
@@ -441,48 +606,66 @@
                                             <option value="h" {{selected(setting('site.product.size'),'h')}}>1024x1024</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                    <div class="form-group">
                                         <label>Trang chủ</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.index')}}" name="data[site.product.index]">
                                     </div>
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
+                                    <div class="form-group">
                                         <label>Danh mục</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.category')}}" name="data[site.product.category]">
                                     </div>
-                                    <div class="col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 form-group">
-                                        <label>Sản phẩm iên quan</label>
+                                    <div class="form-group mb-0">
+                                        <label>Tin liên quan</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.related')}}" name="data[site.product.related]">
                                     </div>
                                 </div>
                             </div>
-
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <input type="hidden" value="0" name="data[site.languages]">
-                                <label class="font-weight-semibold"> Multilingual <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
-                                <p class="small mb-0">Cấu hình website đa ngôn ngữ</p>
-
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <input type="hidden" value="0" name="data[site.maintenance]">
-                                    <label class="font-weight-semibold"> Bảo trì <input type="checkbox" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size="small"/></label>
-                                </div>
-                                <div class="w-25 w-xs-100">
-                                    <div class="form-group">
-                                        <label for="password">Mật khẩu  <small>(reivew khi website bảo trì)</small></label>
-                                        <input type="text" class="form-control" value="{{setting('site.password')}}" id="password" name="data[site.password]">
-                                    </div>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <label for="note_maintenance">Ghi chú</label>
-                                    <textarea type="text" class="form-control" id="note_maintenance" rows="4"  name="data[site.note.maintenance]">{{setting('site.note.maintenance')}}</textarea>
-                                </div>
-
-                            </div>
                         </div>
 
+                        <hr class="border-primary">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <input type="hidden" value="0" name="data[site.languages]">
+                                    <label class="font-weight-semibold"> Đa ngôn ngữ <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
+                                    <p class="mb-0">Khi kích hoạt tính năng, website ở có thể tùy chọn nội dung với nhiều ngôn ngữ. Cấu hình ngôn ngữ <a href="{{route('admin.languages.index')}}">tại đây </a> </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <label>Danh sách ngôn ngữ</label>
+                                    @foreach(languages() as $item)
+                                        <blockquote class="blockquote mb-0">
+                                            <footer class="blockquote-footer"><cite title="{{$item->name}} ({{$item->value}})" class="font-weight-bold">{{$item->name}} ({{$item->value}})</cite></footer>
+                                        </blockquote>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <input type="hidden" value="0" name="data[site.maintenance]">
+                                    <label class="font-weight-semibold"> Bảo trì website <input type="checkbox" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size="small"/></label>
+                                    <p>Khi kích hoạt tính năng, website sẽ trong trạng thái <code>bảo trì</code>. Quản trị viên vẫn có thể review website bằng <code>mật khẩu</code> bảo mật. </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group">
+                                        <label for="password">Mật khẩu  <code>(reivew khi website bảo trì)</code></label>
+                                        <input type="text" class="form-control" value="{{setting('site.password')}}" id="password" name="data[site.password]">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label for="note_maintenance">Ghi chú</label>
+                                        <textarea type="text" class="form-control" id="note_maintenance" rows="4"  name="data[site.note.maintenance]">{{setting('site.note.maintenance')}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
                     </fieldset>
                     <button type="submit" class="btn btn-primary stepy-finish"><span class="icon-button"><i class="fe-send"></i></span> Lưu lại</button>
                 </div>
