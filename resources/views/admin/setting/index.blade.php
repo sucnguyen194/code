@@ -670,7 +670,7 @@
                     <button type="submit" class="btn btn-primary stepy-finish"><span class="icon-button"><i class="fe-send"></i></span> Lưu lại</button>
                 </div>
 
-                <div class="mt-3">
+                <div class="">
 
                     <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại</button>
                 </div>
