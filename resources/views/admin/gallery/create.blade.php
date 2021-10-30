@@ -194,7 +194,7 @@
                         '</div>' +
                         '</div>' +
                         '</li>').appendTo(slider);
-                    $('#remove-label').hide();
+                    $('#remove-label').removeClass('d-block').hide();
                     $('.loading').fadeOut();
                 })
                 .catch(error => {

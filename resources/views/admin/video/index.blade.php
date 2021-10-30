@@ -75,7 +75,7 @@
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-formatter="sortFormatter">STT</th>
-                                <th data-field="thumbnail" data-formatter="imageFormatter" data-width="100">Ảnh</th>
+                                <th data-field="image" data-formatter="imageFormatter" data-width="100">Ảnh</th>
                                 <th data-field="name" data-formatter="titleFormatter">
                                     Tiêu đề
                                 </th>

@@ -15,6 +15,9 @@ img {
 /*a:hover{*/
 /*    color: #428bca;*/
 /*}*/
+.required {
+    color: #e83e8c;
+}
 .table td, .table th {
     vertical-align: middle!important;
 }
