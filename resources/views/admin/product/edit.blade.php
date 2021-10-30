@@ -116,7 +116,7 @@
                         </div>
 
                         @if($attributes->count())
-                            <div class="card-box clearfix">
+                            <div class="card-box pb-1 clearfix">
                                 <label class="mb-0">Bộ lọc</label>
                                 <hr>
                                 <div class="row">

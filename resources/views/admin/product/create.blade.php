@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 @if($attributes->count())
-                                    <div class="card-box clearfix">
+                                    <div class="card-box pb-1 clearfix">
                                         <label class="mb-0">Bộ lọc</label>
                                         <hr>
                                         <div class="row">
@@ -102,6 +102,38 @@
 
                                     </div>
                                 @endif
+
+{{--                                <div class="card-box">--}}
+{{--                                    <label>Thuộc tính sản phẩm</label>--}}
+{{--                                    <table data-dynamicrows class="table table-bordered table-striped mb-0">--}}
+{{--                                        <thead>--}}
+{{--                                        <tr>--}}
+{{--                                            <th>Màu mắc</th>--}}
+{{--                                            <th>Size</th>--}}
+{{--                                            <th>Hành động</th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        <tbody>--}}
+{{--                                        <tr>--}}
+{{--                                            <td>--}}
+{{--                                                <input type="text" name="fields[0][color]" class="form-control">--}}
+
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <input type="text" name="fields[0][size]" class="form-control">--}}
+
+{{--                                            </td>--}}
+
+{{--                                            <td>--}}
+{{--                                                <i class="fas fa-minus" data-remove></i>--}}
+{{--                                                <i class="fas fa-arrows-alt" data-move></i>--}}
+{{--                                                <i class="fas fa-plus" data-add></i>--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
+{{--                                        </tbody>--}}
+{{--                                    </table>--}}
+{{--                                </div>--}}
+
                                 <div class="card-box position-relative box-action-image">
                                     <label>Hình ảnh</label>
                                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:2.2rem;top:1.3rem">
@@ -130,29 +162,6 @@
 
                                 @foreach(languages() as $key => $language)
                                     <div class="tab-pane language-{{$language->value}} {{$key == 0 ? 'active' : null}}" >
-{{--                                        <div class="card-box">--}}
-{{--                                            <label>Thuộc tính sản phẩm</label>--}}
-{{--                                            <table data-dynamicrows class="table table-bordered table-striped mb-0">--}}
-{{--                                                <thead>--}}
-{{--                                                <tr>--}}
-{{--                                                    <th>Tên thuộc tính</th>--}}
-{{--                                                    <th>Giá trị</th>--}}
-{{--                                                    <th>Hành động</th>--}}
-{{--                                                </tr>--}}
-{{--                                                </thead>--}}
-{{--                                                <tbody>--}}
-{{--                                                <tr>--}}
-{{--                                                    <td><input type="text" name="fields[0][name]" class="form-control"></td>--}}
-{{--                                                    <td><input type="text" name="fields[0][value]" class="form-control"></td>--}}
-{{--                                                    <td>--}}
-{{--                                                        <i class="fas fa-minus" data-remove></i>--}}
-{{--                                                        <i class="fas fa-arrows-alt" data-move></i>--}}
-{{--                                                        <i class="fas fa-plus" data-add></i>--}}
-{{--                                                    </td>--}}
-{{--                                                </tr>--}}
-{{--                                                </tbody>--}}
-{{--                                            </table>--}}
-{{--                                        </div>--}}
                                         <div class="card-box">
                                             <div class="d-flex mb-2">
                                                 <label class="font-weight-bold">Tối ưu SEO</label>
