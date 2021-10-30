@@ -39,12 +39,6 @@ class Attribute extends Model
         if(empty(request()->attr) && request()->has('attr'))
             $slug = request()->fullUrl().$name;
 
-        $attributes = explode(',', request()->attr);
-
-        if(in_array($name, $attributes))
-            $slug = "javascript:void(0)";
-
-
         return $slug;
     }
 
