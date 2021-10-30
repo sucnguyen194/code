@@ -288,7 +288,7 @@
                                     <a href="{{route('admin.products.categories.index')}}">Danh mục sản phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.attributes.index')}}">Bộ lọc sản phẩm</a>
+                                    <a href="{{route('admin.attributes.index')}}">Phân loại sản phẩm</a>
                                 </li>
 
                             </ul>

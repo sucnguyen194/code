@@ -117,7 +117,7 @@
 
                         @if($attributes->count())
                             <div class="card-box pb-1 clearfix">
-                                <label class="mb-0">Bộ lọc</label>
+                                <label class="mb-0">Phân loại</label>
                                 <hr>
                                 <div class="row">
                                     @foreach($attributes->where('category_id',0) as $attribute)
