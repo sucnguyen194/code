@@ -130,7 +130,7 @@
         <div class="modal-content text-center">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Hình ảnh</h5>
-                <button type="button" class="close" data-dismiss="modal-gallery" aria-label="Close">
+                <button type="button" class="close" onclick="jQuery('.modal-gallery').modal('hide');" data-dismiss="modal-gallery" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -143,7 +143,11 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+<style>
+    #ajax-modal {
+        overflow-y: scroll;
+    }
+</style>
 <link href="/lib/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
 <script src="/lib/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 <script src="/lib/js/cpanel.js"></script>

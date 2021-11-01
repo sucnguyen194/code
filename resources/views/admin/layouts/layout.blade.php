@@ -480,6 +480,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="/lib/assets/libs/tooltipster/tooltipster.bundle.min.js"></script>
+
 @include('errors.note')
 <style>
     .clearfix {

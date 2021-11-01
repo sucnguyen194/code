@@ -64,7 +64,7 @@
 
                                     <div class="form-group">
                                         <label>Nội dung</label>
-                                        <textarea class="form-control summernote" data-height="500" id="summerbody" name="translation[{{$key}}][content]">{!! $translation->description !!}</textarea>
+                                        <textarea class="form-control summernote" data-height="500" id="summerbody" name="translation[{{$key}}][content]">{!! $translation->content !!}</textarea>
                                     </div>
                                 </div>
                             </div>

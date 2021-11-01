@@ -136,6 +136,11 @@
 
 @section('scripts')
     <script>
+        $(document).on('click','.coppy-image',function (){
+            var image = $(this).data('image');
+            navigator.clipboard.writeText(image);
+            flash({'message': 'Coppy link ảnh thành công!', 'type': 'success'});
+        })
         $(document).on('click','.view-image',function(){
             let image = $(this).data('image');
             $('#viewImage').modal('show');
@@ -179,7 +184,7 @@
             if(!value)
                 return "";
 
-            return '<a href="'+ value +'" target="_blank">'+ value +'</a>';
+            return '<a href="javascript:void(0)" target="_blank">'+ value +'</a> <span style="cursor: pointer; font-size: 15px" data-image="'+value+'" class="badge badge-light-success coppy-image tooltip-hover"  id="tooltip-hover" title="* Coppy hình ảnh" ><i class="fa fa-clone" aria-hidden="true"></i></span> ';
         }
 
         function imageFormatter(value, row) {

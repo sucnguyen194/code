@@ -107,7 +107,7 @@ class HomeController extends Controller
                 switch ($translation->category->type) {
                     case (CategoryType::product):
 
-                        $products = Product::with(['category','admin','categories', 'translation'])->orwhereHas('categories',function($q) use ($translation) {
+                        $products = Product::with(['category','admin','categories', 'translation'])->whereHas('translation')->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })->orWhere('category_id',$translation->category->id)
                             ->when(request()->attr, function ($q){
@@ -123,7 +123,7 @@ class HomeController extends Controller
                         break;
                     case (CategoryType::post):
 
-                        $posts = Post::with(['category','admin','categories', 'translation'])->orwhereHas('categories',function($q) use ($translation) {
+                        $posts = Post::with(['category','admin','categories', 'translation'])->whereHas('translation')->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })->orWhere('category_id',$translation->category->id)
                         ->public()->paginate(setting('site.post.category') ?? 12);
