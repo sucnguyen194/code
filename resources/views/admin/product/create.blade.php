@@ -106,7 +106,7 @@
 
                                     </div>
                                 @endif
-
+                                
 {{--                                <div class="card-box">--}}
 {{--                                    <label>Thuộc tính sản phẩm</label>--}}
 {{--                                    <table data-dynamicrows class="table table-bordered table-striped mb-0">--}}
@@ -301,7 +301,6 @@
 
         $(price).on('keyup',function (){
             let value = $(this).val();
-            console.log(value);
             value = value.replaceAll(',','');
             $(this).val(number_format(value))
             $(format_price).val(value);
