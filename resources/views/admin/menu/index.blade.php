@@ -217,6 +217,9 @@
         .treegrid-expander {
             display: none!important;
         }
+       .treegrid-indent + .treegrid-expander {
+           display: inline-block!important;
+       }
         .treegrid-expander.treegrid-expander-collapsed {
             display: inline-block!important;
         }
