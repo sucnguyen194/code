@@ -130,7 +130,7 @@
                                                 @foreach($attributes->where('category_id', $attribute->id) as $parent)
                                                     <div class="checkbox">
                                                         <input id="checkbox_attibute_{{$parent->id}}" type="checkbox" name="attribute[]" value="{{$parent->id}}" {{checked($parent->id, $product->attributes->pluck('id')->toArray())}}>
-                                                        <label for="checkbox_attibute_{{$parent->id}}">{{$parent->title}}</label>
+                                                        <label for="checkbox_attibute_{{$parent->id}}" class="{{$loop->last ? "mb-0" : ""}}">{{$parent->title}}</label>
                                                     </div>
                                                 @endforeach
                                             </div>
