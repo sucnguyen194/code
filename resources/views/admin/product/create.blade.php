@@ -22,7 +22,7 @@
         <!-- end page title -->
     </div>
     <div class="container" id="vue-app">
-        <form method="post" action="{{route('admin.products.store')}}" class="ajax-form1" enctype="multipart/form-data">
+        <form method="post" action="{{route('admin.products.store')}}" class="ajax-form" enctype="multipart/form-data">
             <div class="row">
                 @csrf
                 <div class="col-lg-8">
