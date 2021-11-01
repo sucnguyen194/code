@@ -114,22 +114,23 @@
                                 </div>
                             </div>
                         </div>
-
                         @if($attributes->count())
                             <div class="card-box pb-1 clearfix">
-                                <label class="mb-0">Phân loại</label>
-                                <hr>
+                                <label>Phân loại</label>
+
                                 <div class="row">
                                     @foreach($attributes->where('category_id',0) as $attribute)
-                                        <div class="col-lg-6 form-group">
-                                            <label>{{$attribute->translation->name}}</label>
-                                            <select name="attribute[]" class="form-control">
-                                                <option value=""> Chọn {{\Illuminate\Support\Str::lower($attribute->translation->name)}}</option>
-                                                @foreach($attributes->where('category_id', $attribute->id) as $sub)
-                                                    <option value="{{$sub->id}}" {{selected($sub->id, $product->attributes->pluck('id')->toArray())}}>{{$sub->translation->name}}</option>
+                                        <div class="col-lg-4 form-group">
+                                            <div class="border h-100 p-2">
+                                                <label>{{$attribute->translation->name}}</label>
+                                                <hr class="mt-0 border-primary">
+                                                @foreach($attributes->where('category_id', $attribute->id) as $parent)
+                                                    <div class="checkbox">
+                                                        <input id="checkbox_attibute_{{$parent->id}}" type="checkbox" name="attribute[]" value="{{$parent->id}}" {{checked($parent->id, $product->attributes->pluck('id')->toArray())}}>
+                                                        <label for="checkbox_attibute_{{$parent->id}}">{{$parent->title}}</label>
+                                                    </div>
                                                 @endforeach
-                                            </select>
-
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>

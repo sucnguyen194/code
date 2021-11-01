@@ -43,7 +43,7 @@ class ProductController extends Controller
                     $q->with('translation');
              } ,'translation' => function($q){
                 $q->select('name','slug','product_id');
-            }])->whereType(request()->type)
+            }])->whereHas('translation')->whereType(request()->type)
             ->when(request()->author,function($q, $author){
                 $q->where('admin_id',$author);
             })
@@ -104,6 +104,7 @@ class ProductController extends Controller
      */
     public function store(StoreTranslationRequest $request)
     {
+
        $this->authorize('product.create')
        || $this->authorize('video.create')
        || $this->authorize('gallery.create');
@@ -139,9 +140,11 @@ class ProductController extends Controller
         }
 
         $product->save();
-        $product->categories()->attach($request->category_id);
-        $product->attributes()->attach($request->attribute);
+
         $product->translations()->createMany($request->translation);
+        $product->categories()->attach($request->category_id);
+
+        $product->attributes()->attach($request->attribute);
 
         return  flash('Thêm mới thành công', 1 , $product->route);
     }
@@ -221,16 +224,13 @@ class ProductController extends Controller
         $product->public = $request->public ? ActiveDisable::active : ActiveDisable::disable;
         $product->save();
 
-        $product->categories()->sync($request->category_id);
-        $product->attributes()->sync($request->attribute);
-
         //translations
         foreach ($request->translation as $translation):
             $product->translation()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        if($request->back)
-            return  flash('Cập nhật thành công!',1 , route($product->route));
+        $product->categories()->sync($request->category_id);
+        $product->attributes()->sync($request->attribute);
 
         return  flash('Cập nhật thành công!');
     }

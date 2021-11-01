@@ -304,7 +304,7 @@
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Fanpage facebook</label>
+                                    <label for="facebook">Fanpage facebook</label>
                                     <p>Nhập url fanpage được cung cấp bởi Facebook. </p>
                                 </div>
                             </div>
@@ -322,7 +322,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Youtube channel</label>
+                                    <label for="youtube">Youtube channel</label>
                                     <p>Nhập url channel được cung cấp bởi Youtube. </p>
                                 </div>
                             </div>
@@ -340,7 +340,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Zalo</label>
+                                    <label for="zalo">Zalo</label>
                                     <p>Nhập số điện thoại đã đăng ký Zalo. </p>
                                 </div>
                             </div>
@@ -358,7 +358,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Skype</label>
+                                    <label for="skype">Skype</label>
                                     <p>Nhập account đăng ký Skype. </p>
                                 </div>
                             </div>
@@ -376,7 +376,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Twitter</label>
+                                    <label for="twitter">Twitter</label>
                                     <p>Nhập url được cung cấp bởi Twitter </p>
                                 </div>
                             </div>
@@ -394,7 +394,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Instagram</label>
+                                    <label for="instagram">Instagram</label>
                                     <p>Nhập url được cung cấp bởi Instagram </p>
                                 </div>
                             </div>
@@ -412,7 +412,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Linkedin</label>
+                                    <label for="linkedin">Linkedin</label>
                                     <p>Nhập url được cung cấp bởi Linkedin </p>
                                 </div>
                             </div>
@@ -430,7 +430,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Pinterest</label>
+                                    <label for="pinterest">Pinterest</label>
                                     <p>Nhập url được cung cấp bởi Pinterest </p>
                                 </div>
                             </div>
@@ -474,7 +474,7 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="card-box mb-0">
-                                        <label for="imgur_client_id">Imgur client ID</label>
+                                        <label for="imgur_client_id">Imgur client ID <code>[ 6ac7b24eeb97e2f ]</code></label>
                                         <input type="text" class="form-control" value="{{setting('api.imgur_client_id')}}" id="facebook_app_secret" name="data[api.imgur_client_id]">
                                     </div>
                                 </div>

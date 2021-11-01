@@ -46,7 +46,7 @@ class PostController extends Controller
                 $q->with('translation');
             } , 'translation' => function($q){
                 $q->select('name','slug','post_id');
-            }])
+            }])->whereHas('translation')
             ->when(\request()->type,function ($q, $type){
                 return $q->whereType($type);
             })

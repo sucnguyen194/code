@@ -45,7 +45,7 @@ class MenuController extends Controller
     {
         $this->authorize('menu');
 
-        $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})->position()->sort()->get();
+        $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})->whereHas('translation')->position()->sort()->get();
 
         return view('admin.menu.create', compact('menus'));
     }
