@@ -19,7 +19,7 @@
                     <input type="email" class="form-control" id="email" name="data[email]"  value="{{$user->email}}">
                 </div>
                 <div class="form-group">
-                    <label for="password">Mật khẩu <span class="required">*</span></label>
+                    <label for="password">Mật khẩu </label>
                     <input type="text" class="form-control" id="password" name="password">
                 </div>
 
