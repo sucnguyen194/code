@@ -100,16 +100,19 @@
                                         <input type="text" class="form-control" value="{{$product->code}}" id="code" name="data[code]">
                                     </div>
                                 </div>
+
                                 <div class="col-lg-4">
                                     <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
-                                        <label>Giá bán: <span id="format-price" class="text-success">{{number_format($product->price)}}</span></label>
-                                        <input type="text" class="form-control" min="0" value="{{$product->price}}" id="price" name="data[price]">
+                                        <label>Giá bán:</label>
+                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control" min="0" value="{{number_format($product->price)}}" id="price">
+                                        <input type="number" class="form-control d-none" min="0" value="{{$product->price}}" id="format-price" name="data[price]">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-0">
-                                        <label>Giá KM: <span id="format-price-sale" class="text-success">{{number_format($product->price_sale)}}</span></label>
-                                        <input type="text" class="form-control" value="{{$product->price_sale}}" min="0" id="price_sale" name="data[price_sale]">
+                                        <label>Giá khuyến mãi:</label>
+                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control" value="{{number_format($product->price_sale)}}" min="0" id="price_sale">
+                                        <input type="number" class="form-control d-none" value="{{$product->price_sale}}" min="0" id="format-price-sale" name="data[price_sale]">
                                     </div>
                                 </div>
                             </div>
@@ -444,12 +447,17 @@
 
         $(price).on('keyup',function (){
             let value = $(this).val();
-            $(format_price).text(number_format(value));
+            console.log(value);
+            value = value.replaceAll(',','');
+            $(this).val(number_format(value))
+            $(format_price).val(value);
         })
 
         $(sale).on('keyup',function (){
             let value = $(this).val();
-            $(format_price_sale).text(number_format(value));
+            value = value.replaceAll(',','');
+            $(this).val(number_format(value))
+            $(format_price_sale).val(value);
         })
     </script>
 @stop
