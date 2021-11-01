@@ -42,17 +42,17 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label class="form-label required">Tên chương trình</label>
+                        <label class="form-label">Tên chương trình <span class="required">*</span> </label>
                         <input type="text" name="discount[name]" class="form-control" value="{{ $discount->name }}" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label required">Code giảm giá</label>
+                        <label class="form-label">Code giảm giá <span class="required">*</span></label>
                         <input type="text" name="discount[code]" class="form-control" value="{{ Str::upper($discount->code) }}" required>
                     </div>
 
                     <div class="form-group" style="max-width: 300px">
-                        <label class="form-label required">Giá trị</label>
+                        <label class="form-label">Giá trị <span class="required">*</span></label>
 
                         <div class="input-group discount">
                             <input type="number" name="discount[value]" step="0.01" min="0" class="form-control"  value="{{ $discount->value }}" required>
@@ -95,7 +95,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="form-label required">Thời gian bắt đầu</label>
+                            <label class="form-label">Thời gian bắt đầu <span class="required">*</span></label>
                             <input type="text" name="discount[start_at]" class="form-control datetimepicker" value="{{ optional($discount->start_at)->format('d-m-Y H:i:s') }}" required>
                         </div>
                         <div class="form-group col-md-6">
@@ -152,19 +152,17 @@
                     </div>
 
                     <div class="form-group">
-
-                        <label class="custom-control custom-checkbox">
+                        <div class="checkbox">
                             <input type="hidden" name="discount[status]" value="0">
-                            <input type="checkbox" class="custom-control-input" name="discount[status]" value="1" {{ checked($discount->status , \App\Enums\Activation::true()) }}>
-                            <span class="custom-control-label">Active</span>
-                        </label>
+                            <input id="checkbox_status" type="checkbox" name="discount[status]" value="1" {{ checked($discount->status , \App\Enums\Activation::true()) }}>
+                            <label for="checkbox_status" class="mb-0">Active</label>
+                        </div>
 
-                        <label class="custom-control custom-checkbox d-none">
+                        <div class="checkbox d-none">
                             <input type="hidden" name="discount[public]" value="0">
-                            <input type="checkbox" class="custom-control-input" name="discount[public]" value="1" {{ checked($discount->public, true) }}>
-                            <span class="custom-control-label">Public</span>
-                        </label>
-
+                            <input id="checkbox_public" type="checkbox" name="discount[public]" value="1" {{ checked($discount->public, true) }}>
+                            <label for="checkbox_public" class="mb-0">Public</label>
+                        </div>
                     </div>
                 </div>
 
