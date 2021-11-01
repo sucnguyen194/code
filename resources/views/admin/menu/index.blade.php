@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    Danh sách menu
+   Menu
 @stop
 @section('content')
 
