@@ -188,7 +188,7 @@
         }
 
         function imageFormatter(value, row) {
-            return  '<img src="'+value+'" class="rounded view-image" data-image="'+row.image+'" style="cursor: pointer" width="120">';
+            return  '<img src="'+row.thumb+'" class="rounded view-image" data-image="'+row.image+'" style="cursor: pointer" width="120">';
         }
 
         function actionFormatter(value, row){

@@ -28,16 +28,16 @@
     </form>
 </div>
 <?php
-    $comments = $translation->item->comments;
+    $comments = $translation->item->comments->where('status', \App\Enums\ActiveDisable::active);
 ?>
 <div class="list-group-item">
     @foreach($comments->where('parent_id',0) as $comment)
         <div class="item-comment mb-3">
             <div class="item-comment-top mb-3">
                 <div class="row">
-                    <div class="col-md-1 item-avatar text-center">
-                        <img src="/lib/assets/images/users/{{$comment->admin_id ? "avatar-1.jpg" : "avatar-3.jpg"}}" alt="" class="rounded-circle img-thumbnail">
-                    </div>
+{{--                    <div class="col-md-1 item-avatar text-center">--}}
+{{--                        <img src="/lib/assets/images/users/{{$comment->admin_id ? "avatar-1.jpg" : "avatar-3.jpg"}}" alt="" class="rounded-circle img-thumbnail">--}}
+{{--                    </div>--}}
                     <div class="col-md-11">
                         <div class="item-name">
                             @if($comment->admin_id)
@@ -88,9 +88,9 @@
                 <div class="sub-comment mb-3 ml-5">
                     <div class="item-comment-top mb-3">
                         <div class="row">
-                            <div class="col-md-1 item-avatar">
-                                <img src="/lib/assets/images/users/{{$sub->admin_id ? "avatar-1.jpg" : "avatar-3.jpg"}}" alt="" class="rounded-circle img-thumbnail">
-                            </div>
+{{--                            <div class="col-md-1 item-avatar">--}}
+{{--                                <img src="/lib/assets/images/users/{{$sub->admin_id ? "avatar-1.jpg" : "avatar-3.jpg"}}" alt="" class="rounded-circle img-thumbnail">--}}
+{{--                            </div>--}}
                             <div class="col-md-11">
                                 <div class="item-name">
                                     @if($sub->admin_id)
@@ -139,13 +139,13 @@
                         <div class="sub-comment mb-3 ml-5">
                             <div class="item-comment-top mb-3">
                                 <div class="row">
-                                    <div class="col-md-1 item-avatar">
-                                        @if($sub_sub->admin_id)
-                                            <img src="/lib/assets/images/users/avatar-1.jpg" alt="" class="rounded-circle img-thumbnail">
-                                        @else
-                                            <img src="/lib/assets/images/users/avatar-3.jpg" alt="" class="rounded-circle img-thumbnail">
-                                        @endif
-                                    </div>
+{{--                                    <div class="col-md-1 item-avatar">--}}
+{{--                                        @if($sub_sub->admin_id)--}}
+{{--                                            <img src="/lib/assets/images/users/avatar-1.jpg" alt="" class="rounded-circle img-thumbnail">--}}
+{{--                                        @else--}}
+{{--                                            <img src="/lib/assets/images/users/avatar-3.jpg" alt="" class="rounded-circle img-thumbnail">--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
                                     <div class="col-md-11">
                                         <div class="item-name">
 {{--                                                    <span class="status-comment font-15">--}}

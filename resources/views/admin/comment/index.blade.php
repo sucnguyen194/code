@@ -50,7 +50,7 @@
                                     Bình luận cuối cùng
                                 </th>
                                 <th data-field="commenter">
-                                   NgƯời bình luận
+                                   Người bình luận
                                 </th>
 
                                 <th data-field="comment_count" data-width="150" data-sortable="true" data-visible="true">
