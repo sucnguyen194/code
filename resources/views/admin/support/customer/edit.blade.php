@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="form-group" style="max-width: 770px">
-                                <label for="description">Đánh giá </label>
+                                <label for="description">Bình luận </label>
                                 <textarea class="form-control summernote" id="summernote" data-height="200"
                                           name="translation[{{$key}}][description]">{!! $translation->description !!}</textarea>
                             </div>
