@@ -3,8 +3,16 @@ namespace App\Models;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Setting extends Model{
+
+    use LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
+
     const CREATED_AT = null;
     protected $guarded  = [];
     protected $primaryKey = 'name';

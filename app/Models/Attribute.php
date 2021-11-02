@@ -4,9 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Attribute extends Model
 {
+    use LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
+
     protected $guarded = [];
 
     public function translations(){

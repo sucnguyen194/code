@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Invoice extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
 
     protected $casts = [
         'due_date' => 'datetime',

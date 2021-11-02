@@ -7,11 +7,12 @@ use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-//use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
+
 
 class Discount extends Model
 {
-    use HasFactory, CastsEnums, SoftDeletes;
+    use HasFactory, CastsEnums, SoftDeletes, LogsActivity;
 
     protected static $logUnguarded = true;
     protected static $submitEmptyLogs = false;

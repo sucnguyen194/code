@@ -6,10 +6,15 @@ use App\Enums\ActiveDisable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Translation extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
 
     protected $guarded = [];
 

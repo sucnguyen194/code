@@ -6,9 +6,16 @@ use App\Enums\ActiveDisable;
 use App\Enums\AliasType;
 use App\Enums\SystemType;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Category extends Model
 {
+    use LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
+
     protected $guarded = ['id'];
 
     public function translations(){

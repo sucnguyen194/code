@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use Cart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Order extends Model
 {
+    use LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
+
     protected $guarded = ['id'];
 
     protected $table = 'orders';

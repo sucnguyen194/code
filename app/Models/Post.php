@@ -7,9 +7,16 @@ use App\Enums\PostType;
 use App\Enums\SystemType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Post extends Model
 {
+    use LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
+
     protected $guarded = [];
 
     protected $casts = [

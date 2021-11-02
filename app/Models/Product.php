@@ -6,9 +6,16 @@ use App\Enums\ActiveDisable;
 use App\Enums\ProductType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends Model
 {
+    use LogsActivity;
+
+    protected static $logUnguarded = true;
+    protected static $submitEmptyLogs = false;
+    protected static $logOnlyDirty = true;
+
     protected $guarded = ['id'];
 
     protected $casts = [
