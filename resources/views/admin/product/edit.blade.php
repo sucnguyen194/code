@@ -159,7 +159,7 @@
                                     <span class="text-muted font-13">Có thể upload <strong>Nhiều</strong> hình ảnh</span>
                                 </label>
                             </div>
-                            <ul class="slider-holder pl-0 mb-0 w-100 ui-sortable" id="sortable">
+                            <ul class="slider-holder pl-0 mb-0 w-100 ui-sortable {{$product->photo ? "d-inline-block" : "d-none"}} " id="sortable">
                                 @if($product->photo)
                                 @foreach($product->photo as $photo)
                                     <li class="box-product-images ui-sortable-handle d-inline-block">

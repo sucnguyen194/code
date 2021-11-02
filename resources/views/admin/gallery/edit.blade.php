@@ -52,7 +52,7 @@
                                 </label>
                             </div>
 
-                            <ul class="slider-holder pl-0 mb-0 w-100 ui-sortable" id="sortable">
+                            <ul class="slider-holder pl-0 mb-0 w-100 ui-sortable {{$gallery->photo ? "d-inline-block" : "d-none"}}" id="sortable">
                                 @if($gallery->photo)
                                     @foreach($gallery->photo as $photo)
                                         <li class="box-product-images ui-sortable-handle d-inline-block">

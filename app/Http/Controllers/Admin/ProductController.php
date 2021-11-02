@@ -49,7 +49,7 @@ class ProductController extends Controller
             })
             ->when(request()->search, function ($q, $keyword){
                 return $q->whereHas('translation',function ($q) use ($keyword){
-                    return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%');
+                    return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%')->orWhere('code', 'like', '%'.$keyword.'%');
                 });
             })
             ->when(request()->status,function($q, $status){
