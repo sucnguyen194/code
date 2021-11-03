@@ -7,11 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
+use Yadahan\AuthenticationLog\AuthenticationLogable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles, LogsActivity;
-    
+    use HasFactory, Notifiable, AuthenticationLogable, HasRoles, LogsActivity;
+
     protected static $logUnguarded = true;
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;

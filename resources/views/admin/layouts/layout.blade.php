@@ -801,8 +801,8 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
+                cancelButtonText: 'Quay lại',
                 confirmButtonText: 'Xác nhận',
-                cancelButtonText: 'Quay lại'
             }).then((result) => {
                 if (result.isConfirmed) {
                 ajaxlink(this);
