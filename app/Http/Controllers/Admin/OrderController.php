@@ -21,6 +21,7 @@ class OrderController extends Controller
     }
 
     public function data(){
+        $this->authorize('order.view');
         $orders = Order::query()->with('user')
             ->when(\request()->status,function($q, $status){
                 $q->whereStatus($status);
@@ -115,7 +116,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        if(auth()->id() > 1) $this->authorize('order.destroy');
+        $this->authorize('order.destroy');
 
         $order->delete();
         return flash('Xóa thành công!');

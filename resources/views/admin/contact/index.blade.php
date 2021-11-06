@@ -117,9 +117,13 @@
         }
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.contacts.show', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light"><i class="pe-7s-look"></i></a> ';
+            let html = '';
+            @can('contact.edit')
+            html = '<a href="'+ '{{ route('admin.contacts.show', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light"><i class="pe-7s-look"></i></a> ';
+            @endcan
+            @can('contact.destroy')
             html+='<a href="'+ '{{ route('admin.contacts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
-
+            @endcan
             return html;
         }
 

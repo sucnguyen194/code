@@ -27,7 +27,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $this->authorize('menu');
+        $this->authorize('menu.view');
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
@@ -43,7 +43,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $this->authorize('menu');
+        $this->authorize('menu.create');
 
         $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})->whereHas('translation')->position()->sort()->get();
 
@@ -58,7 +58,7 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('menu');
+        $this->authorize('menu.create');
 
         $menu = new Menu();
         $menu->forceFill($request->data);
@@ -94,7 +94,7 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        $this->authorize('menu');
+        $this->authorize('menu.edit');
 
         $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})
             ->where('id','!=', $menu->id)->position()->sort()->get();
@@ -112,7 +112,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        $this->authorize('menu');
+        $this->authorize('menu.edit');
 
         $menu->forceFill($request->data);
         $menu->save();
@@ -139,7 +139,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        $this->authorize('menu');
+        $this->authorize('menu.destroy');
 
         $menu->delete();
 
@@ -151,7 +151,7 @@ class MenuController extends Controller
     }
 
     public function position(Request $request){
-        $this->authorize('menu');
+        $this->authorize('menu.view');
 
         session()->put('menu_position',$request->position);
 
@@ -164,7 +164,7 @@ class MenuController extends Controller
 
     }
     public function append(Request $request){
-       $this->authorize('menu');
+       $this->authorize('menu.create');
 
         $menu = new Menu();
         $menu->position  = session()->get('menu_position');
@@ -184,7 +184,9 @@ class MenuController extends Controller
         $append = '<li class="dd-item" data-id="'.$menu->id.'">';
         $append .= '<div class="dd-handle">'.optional($menu->translation)->name.'</div>';
         $append .= '<div class="menu_action">';
+        if(auth()->user()->can('menu.edit'))
         $append .= '<a href="'.route('admin.menus.edit',$menu).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+        if(auth()->user()->can('menu.destroy'))
         $append .= '<a href="'.route('admin.menus.destroy',$menu).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
         $append .= '</div>';
 
@@ -192,12 +194,16 @@ class MenuController extends Controller
     }
 
     public function setMenuSort(){
+
+        $this->authorize('menu.edit');
+
         $menus = request()->val;
         $menus = json_decode($menus);
         $this->updateMenuSort($menus);
     }
 
     public function updateMenuSort($menus, $parent_id=0){
+        $this->authorize('menu.edit');
         foreach($menus as $key => $items){
             $update = Menu::find($items->id);
             $update->update(['sort' => $key,'parent_id' => $parent_id]);
@@ -214,7 +220,9 @@ class MenuController extends Controller
             $html .= '<li class="dd-item" data-id="'.$items->id.'">';
             $html .= '<div class="dd-handle">'.$items->translation->name.'</div>';
             $html .= '<div class="menu_action">';
+            if(auth()->user()->can('menu.edit'))
             $html .= '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            if(auth()->user()->can('menu.destroy'))
             $html .= '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
             $html .= '</div>';
 
@@ -232,7 +240,9 @@ class MenuController extends Controller
             $html .= '<li class="dd-item" data-id="'.$items->id.'">';
             $html .= '<div class="dd-handle">'.$items->translation->name.'</div>';
             $html .= '<div class="menu_action">';
+            if(auth()->user()->can('menu.edit'))
             $html .= '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            if(auth()->user()->can('menu.destroy'))
             $html .= '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
             $html .= '</div>';
 

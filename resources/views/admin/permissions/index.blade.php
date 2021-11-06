@@ -21,10 +21,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box table-responsive">
+                    @can('permission.create')
                     <div class="action-datatable text-right">
                         <a href="{{route('admin.permissions.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
                             <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
                     </div>
+                    @endcan
                     <div id="custom-toolbar">
 
                     </div>
@@ -90,8 +92,14 @@
         });
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.permissions.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            let html = '';
+            @can('permission.edit')
+            html = '<a href="'+ '{{ route('admin.permissions.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            @endcan
+
+            @can('permission.destroy')
             html+='<a href="'+ '{{ route('admin.permissions.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            @endcan
             return html;
         }
 

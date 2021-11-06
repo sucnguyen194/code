@@ -26,11 +26,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-left" id="nestable_list_menu">
+                    @can('menu.create')
                     <div class="action-datatable text-right mb-2">
                         <a href="{{route('admin.menus.create')}}" class="btn btn-primary waves-effect width-md waves-light ajax-modal">
                             <span class="icon-button"><i class="fe-plus pr-1"></i></span> Thêm mới</a>
 
                     </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -159,8 +161,13 @@
                                                 </div>
 
                                                 <div class="menu_action">
+                                                    @can('menu.create')
                                                     <a href="{{route('admin.menus.edit',$items)}}" title="Sửa" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a>
+                                                    @endcan
+
+                                                    @can('menu.destroy')
                                                     <a href="{{route('admin.menus.destroy',$items)}}" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a>
+                                                    @endcan
                                                 </div>
 
                                                 <ol class="dd-list">
@@ -358,6 +365,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
+            @can('menu.create')
             $(document).on('click','.addmenu',function (){
                 var _token = $('input[name="_token"]').val();
                 var url = '{{route('admin.ajax.append.menu')}}';
@@ -377,7 +385,9 @@
                     }
                 })
             })
+            @endcan
 
+            @can('menu.edit')
             $('.position').change(function(){
                 var _token = $('meta[name=_token]').attr('content');
                 var position = $(this).val();
@@ -433,7 +443,9 @@
                     }
                 });
             });
+            @endcan
         });
+
     </script>
 
     <!-- Plugins js-->

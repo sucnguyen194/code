@@ -90,8 +90,13 @@
         }
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.comments.reply', [':type', ':id' ]) }}'.replace(':id',row.id).replace(':type','{{$type}}') +'" class="btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            let html = '';
+            @can('comment.edit')
+            html = '<a href="'+ '{{ route('admin.comments.reply', [':type', ':id' ]) }}'.replace(':id',row.id).replace(':type','{{$type}}') +'" class="btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            @endcan
+            @can('comment.destroy')
             html+='<a href="'+ '{{ route('admin.comments.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            @endcan
             return html;
         }
 

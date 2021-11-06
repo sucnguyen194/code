@@ -21,8 +21,10 @@
             <div class="col-12">
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
+                        @can('contact.create')
                         <a href="{{route('admin.supports.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
                             <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                        @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
@@ -119,7 +121,7 @@
 
         function statusFormatter(value, row) {
 
-            let html = '<div class="checkbox" >';
+            let html = '';
             let public = null;
             let status = null;
 
@@ -131,6 +133,8 @@
                 status = "checked";
             }
 
+            @can('contact.edit')
+                html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
             html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">Hiển thị</label>';
             html += '</div>';
@@ -140,7 +144,23 @@
             html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">Nổi bật</label>';
             html += '</div>';
 
-            return html;
+            @endcan
+
+                @cannot('contact.edit')
+
+                html += '<div class="checkbox">';
+            html += '<input '+public+' type="checkbox" name="public">';
+            html += '<label>Hiển thị</label>';
+            html += '</div>';
+
+            html += '<div class="checkbox">';
+            html += '<input '+status+' type="checkbox" name="status">';
+            html += '<label class="mb-0">Nổi bật</label>';
+            html += '</div>';
+
+            @endcan
+
+                return html;
         }
 
         {{--function titleFormatter(value, row){--}}
@@ -148,9 +168,15 @@
         {{--}--}}
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.supports.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
-            html+='<a href="'+ '{{ route('admin.supports.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
-            return html;
+            let html = '';
+            @can('contact.edit')
+                html += '<a href="'+ '{{ route('admin.supports.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            @endcan
+
+                @can('contact.destroy')
+                html+='<a href="'+ '{{ route('admin.supports.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a>';
+            @endcan
+                return html;
         }
 
     </script>

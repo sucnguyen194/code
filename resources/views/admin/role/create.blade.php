@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-lg" style="max-width: 800px" role="document">
     <form action="{{route('admin.roles.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
@@ -20,7 +20,7 @@
                                 <label class="text-uppercase">{{$permission->title}}</label>
                                 @foreach($permissions->where('parent_id',$permission->id) as $parent)
                                     <div class="item-systems">
-                                        <div class="mb-1 checkbox">
+                                        <div class="checkbox">
                                             <input id="checkbox{{$parent->id}}" type="checkbox"  name="permissions[]" value="{{$parent->id}}">
                                             <label for="checkbox{{$parent->id}}"><span class="tree-sub"></span> {{$parent->title}} </label>
                                         </div>

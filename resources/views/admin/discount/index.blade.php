@@ -23,8 +23,10 @@
         <div class="col-12">
             <div class="card-box table-responsive">
                 <div class="action-datatable text-right">
+                    @can('discount.create')
                     <a href="{{route('admin.discounts.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
                         <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                    @endcan
                 </div>
                 <div id="custom-toolbar">
 
@@ -122,9 +124,13 @@
 
         function actionFormatter(value, row){
             let html = '<div class="">';
+            @can('discount.edit')
 			html += '<a href="'+ '{{ route('admin.discounts.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            @endcan
         	html+='<a href="'+ '{{ route('admin.discounts.history', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-info waves-effect waves-light" title="Xem lịch sử"><i class="fe-file-text"></i></a> ';
+            @can('discount.destroy')
         	html+='<a href="'+ '{{ route('admin.discounts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a>';
+            @endcan
             html+='</div>';
         	return html;
         }

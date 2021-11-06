@@ -15,12 +15,13 @@ class PhotoController extends Controller
      */
     public function index()
     {
-       $this->authorize('media');
+       $this->authorize('photo.view');
 
         return  view('admin.photo.index');
     }
 
     public function data(){
+        $this->authorize('photo.view');
 
         $photos = Photo::query()
             ->when(request()->position, function ($q, $position){
@@ -58,7 +59,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        $this->authorize('media');
+        $this->authorize('photo.create');
 
         return  view('admin.photo.create');
     }
@@ -71,7 +72,7 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('media');
+        $this->authorize('photo.create');
 
         $images = $request->images;
 
@@ -109,7 +110,7 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        $this->authorize('media');
+        $this->authorize('photo.edit');
 
         return  view('admin.photo.edit',compact('photo'));
     }
@@ -123,7 +124,7 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        $this->authorize('media');
+        $this->authorize('photo.edit');
 
         $photo->forceFill($request->data);
         $photo->admin_edit = auth()->id();
@@ -140,7 +141,7 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        $this->authorize('media');
+        $this->authorize('photo.destroy');
 
         $photo->delete();
         return flash('Xóa thành công!');

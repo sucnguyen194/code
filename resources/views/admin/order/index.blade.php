@@ -142,7 +142,9 @@
                 function actionFormatter(value, row) {
 
                     let html = '<a href="' + '{{ route('admin.orders.print', ':id') }}'.replace(':id', row.id) + '" class="ajax-modal btn btn-purple waves-effect waves-light"><i class="pe-7s-print"></i></a> ';
+                    @can('order.destroy')
                     html += '<a href="' + '{{ route('admin.orders.destroy', ':id') }}'.replace(':id', row.id) + '" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+                    @endcan
                     return html;
                 }
 

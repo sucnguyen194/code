@@ -150,7 +150,7 @@
                             </ul>
                         </li>
                     @endcan
-                    @can('menu')
+                    @can('menu.view')
                         <li>
                             <a href="{{route('admin.menus.index')}}">
                                 <i class="pe-7s-menu"></i>
@@ -158,7 +158,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('media')
+                    @can('photo.view')
                         <li>
                             <a href="{{route('admin.photos.index')}}">
                                 <i class="pe-7s-photo-gallery"></i>
@@ -166,7 +166,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('contact')
+                    @can('contact.view')
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-micro"></i>
@@ -186,7 +186,7 @@
                             </ul>
                         </li>
                     @endcan
-                    @can('comment')
+                    @can('comment.view')
                         <?php
                             $comments = \App\Models\Comment::whereStatus(\App\Enums\ActiveDisable::disable)->get();
                         ?>

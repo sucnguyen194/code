@@ -21,8 +21,10 @@
             <div class="col-12">
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
+                        @can('product.create')
                         <a href="{{route('admin.attributes.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
                             <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                        @endcan
                     </div>
                     <div id="custom-toolbar">
 
@@ -95,9 +97,16 @@
 
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.attributes.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
-            html+='<a href="'+ '{{ route('admin.attributes.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
-            return html;
+
+            let html = '';
+            @can('product.edit')
+                html += '<a href="'+ '{{ route('admin.attributes.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            @endcan
+
+                @can('product.destroy')
+                html+='<a href="'+ '{{ route('admin.attributes.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            @endcan
+                return html;
         }
 
     </script>

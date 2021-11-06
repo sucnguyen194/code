@@ -25,12 +25,12 @@ class CommentController extends Controller
 
 
     public function list($type){
-        $this->authorize('comment');
+        $this->authorize('comment.view');
         return  view('admin.comment.index', compact('type'));
     }
 
     public function reply($type, $id){
-        $this->authorize('comment');
+        $this->authorize('comment.edit');
 
         $reply = $type == CommentMap::products ? Product::findOrFail($id) : Post::findOrFail($id);
         $reply->withTranslation();
@@ -41,7 +41,7 @@ class CommentController extends Controller
 
 
     public function data(){
-
+        $this->authorize('comment.view');
         $comments = request()->type == CommentMap::products ? new Product() : new Post();
 
         $comments = $comments->query()->whereHas('comments')
@@ -95,7 +95,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('comment');
+        $this->authorize('comment.create');
 
         Validator::make($request->data,[
             'comment' => 'required',
@@ -151,7 +151,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('comment');
+        $this->authorize('comment.edit');
 
         $comment = Comment::findOrFail($id);
 
@@ -175,7 +175,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('comment');
+        $this->authorize('comment.destroy');
 
         Comment::query()->whereCommentId($id)->delete();
 

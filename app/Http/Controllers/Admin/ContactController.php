@@ -17,7 +17,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        if(auth()->id() > 1) $this->authorize('contact');
+        $this->authorize('contact.view');
 
         $admins = Admin::select('name','id','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
@@ -27,6 +27,8 @@ class ContactController extends Controller
     }
 
     public function data(){
+        $this->authorize('contact.view');
+
         $contacts = Contact::query()->whereRepId(0)
             ->when(request()->status,function($q, $status){
                 $q->whereStatus($status);
@@ -80,7 +82,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        if(auth()->id() > 1) $this->authorize('contact');
+        $this->authorize('contact.edit');
 
         $replys = Contact::whereRepId($contact->id)->get();
 
@@ -110,7 +112,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        if(auth()->id() > 1) $this->authorize('contact');
+        $this->authorize('contact.update');
 
         Validator::make($request->data,[
             'note' => 'required'
@@ -135,7 +137,7 @@ class ContactController extends Controller
 
     public function destroy(Contact $contact)
     {
-        if(auth()->id() > 1) $this->authorize('contact');
+        $this->authorize('contact.destroy');
 
         $contact->delete();
 

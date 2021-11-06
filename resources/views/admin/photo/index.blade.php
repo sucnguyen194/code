@@ -23,8 +23,10 @@
             <div class="col-12">
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
+                        @can('photo.create')
                         <a href="{{route('admin.photos.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
                             <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                        @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
@@ -192,8 +194,13 @@
         }
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.photos.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            let html = '';
+            @can('photo.edit')
+            html = '<a href="'+ '{{ route('admin.photos.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            @endcan
+                @can('photo.destroy')
             html+='<a href="'+ '{{ route('admin.photos.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            @endcan
             return html;
         }
 

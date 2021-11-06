@@ -22,8 +22,10 @@
             <div class="col-12">
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
+                        @can('user.create')
                         <a href="{{route('admin.users.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
                             <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                        @endcan
                     </div>
                     <div id="custom-toolbar">
 
@@ -88,8 +90,13 @@
         }
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.users.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            let html = '';
+            @can('user.edit')
+            html += '<a href="'+ '{{ route('admin.users.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            @endcan
+            @can('user.edit')
             html+='<a href="'+ '{{ route('admin.users.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            @endcan
             return html;
         }
 
