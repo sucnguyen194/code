@@ -9,7 +9,18 @@
 <!-------------------------->
 <!-----------SOURCSE----------->
 <!-------------------------->
-@include('include.attribute')
+
+@foreach(\App\Models\Language::all() as $lang)
+
+    <a href="{{route('languages.change', $lang->value)}}">{{$lang->name}}</a>
+
+    @endforeach
+
+<h1>{{$translation->name}}</h1>
+<hr>
+<p>
+    {!! $translation->description !!}
+</p>
 <!-------------------------->
 <!-----------SOURCSE----------->
 <!-------------------------->

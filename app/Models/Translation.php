@@ -50,6 +50,9 @@ class Translation extends Model
 
         if($this->product_id)
             return  $this->product;
+
+        if($this->category_id)
+            return  $this->category;
     }
 
     public function scopeLocale($q){

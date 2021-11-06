@@ -226,7 +226,7 @@ class ProductController extends Controller
 
         //translations
         foreach ($request->translation as $translation):
-            $product->translation()->updateOrCreate(['locale' => $translation['locale']], $translation);
+            $product->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
         $product->categories()->sync($request->category_id);

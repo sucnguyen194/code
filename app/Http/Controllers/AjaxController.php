@@ -76,6 +76,6 @@ class AjaxController extends Controller {
         $language->update(['status' => ActiveDisable::active]);
         session()->put('lang',$lang);
 
-        return flash('Cập nhật thành công!');
+        return redirect()->back()->withInput();
     }
 }

@@ -50,7 +50,7 @@
                                data-url="{{ route('admin.categories.data',['type' => \App\Enums\CategoryType::product]) }}"
                                data-side-pagination="server"
                                data-pagination="true"
-                               data-search="true"
+                               data-search="false"
                                data-search-on-enter-key="false"
                                data-show-search-button="false"
                                data-sort-name="created_at"

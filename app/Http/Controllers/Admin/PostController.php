@@ -170,7 +170,7 @@ class PostController extends Controller
             if(Translation::whereSlug($translation['slug'])->where('post_id','!=', $post->id)->count())
                 return  flash('Đường dẫn đã tồn tại',0);
 
-            $post->translation()->updateOrCreate(['locale' => $translation['locale']], $translation);
+            $post->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
         $post->forceFill($request->data);

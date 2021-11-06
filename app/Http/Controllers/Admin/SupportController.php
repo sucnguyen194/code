@@ -132,7 +132,7 @@ class SupportController extends Controller
 
         //translations
         foreach ($request->translation as $translation):
-            $support->translation()->updateOrCreate(['locale' => $translation['locale']], $translation);
+            $support->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
         return flash('Cập nhật thành công!', 1);

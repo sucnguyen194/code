@@ -23,7 +23,7 @@ class Category extends Model
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
+        return $this->hasOne(Translation::class,'category_id')->where('locale',session()->get('lang'));
     }
 
     public function admin(){

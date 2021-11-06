@@ -615,14 +615,14 @@
                                         <input id="touchspin" type="text" value="{{setting('site.product.category')}}" name="data[site.product.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>Tin liên quan</label>
+                                        <label>Sản phẩm liên quan</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.related')}}" name="data[site.product.related]">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <hr class="border-primary">
+                        @can('setting.language')
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
@@ -634,7 +634,7 @@
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <label>Danh sách ngôn ngữ</label>
-                                    @foreach(languages() as $item)
+                                    @foreach(\App\Models\Language::oldest()->get() as $item)
                                         <blockquote class="blockquote mb-0">
                                             <footer class="blockquote-footer"><cite title="{{$item->name}} ({{$item->value}})" class="font-weight-bold">{{$item->name}} ({{$item->value}})</cite></footer>
                                         </blockquote>
@@ -643,7 +643,7 @@
                             </div>
                         </div>
                         <hr class="border-primary">
-
+                        @endcan
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">

@@ -30,7 +30,7 @@ class CategoryController extends Controller
                 return $q->whereAdminId($author);
             })
             ->when(request()->search, function ($q, $keyword){
-                return $q->with('translation',function ($q) use ($keyword){
+                return $q->whereHas('translation',function ($q) use ($keyword){
                     return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%');
                 });
             })
@@ -118,7 +118,7 @@ class CategoryController extends Controller
             if(Translation::whereSlug($translation['slug'])->where('post_id','!=', $category->id)->count())
                 return  flash('Đường dẫn đã tồn tại',0);
 
-            $category->translation()->updateOrCreate(['locale' => $translation['locale']], $translation);
+            $category->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
         $category->forceFill($request->data);

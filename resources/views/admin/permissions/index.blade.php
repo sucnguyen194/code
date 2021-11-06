@@ -32,25 +32,28 @@
                         <table class="table table-bordered table-hover bs-table"
                                data-toolbar="#custom-toolbar"
                                data-url="{{ route('admin.permissions.data')}}"
-
-                               data-search="true"
+                               data-show-refresh="false"
+                               data-show-columns="false"
+                               data-show-export="false"
+                               data-side-pagination="server"
+                               data-pagination="false"
+                               data-search="false"
                                data-search-on-enter-key="false"
                                data-show-search-button="false"
                                data-filename="permissions"
                                data-cookie="true"
-
-                               data-tree-show-field="title"
                                data-cookie-id-table="permissions"
+                               data-tree-show-field="title"
                                data-parent-id-field="parent_id"
                                  >
                             <thead>
                             <tr>
 
-                                <th data-field="title" data-sortable="true">
+                                <th data-field="title">
                                     Tên
                                 </th>
 
-                                <th data-field="name" data-sortable="true">
+                                <th data-field="name" >
                                     Giá trị
                                 </th>
 
@@ -74,7 +77,7 @@
     <script>
         $(document).on('post-body.bs.table', function() {
             var columns = $table.bootstrapTable('getOptions').columns
-            console.log(columns[0][1]);
+
             if (columns && columns[0][1].visible) {
 
                 $table.treegrid({

@@ -115,7 +115,7 @@ class AttributeController extends Controller
 
         //translations
         foreach ($request->translation as $translation):
-            $attribute->translation()->updateOrCreate(['locale' => $translation['locale']], $translation);
+            $attribute->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
         return flash('Thêm mới thành công!');

@@ -59,8 +59,6 @@ class HomeController extends Controller
 
     public function translation($slug)
     {
-        $translation = Translation::whereSlug($slug)->firstOrFail();
-
         if(setting('site.maintenance')){
             if(!session()->has('site.password') && setting('site.password')){
                 session()->put('url', request()->url());
@@ -68,37 +66,52 @@ class HomeController extends Controller
             }
         }
 
+        $translation = Translation::whereSlug($slug)->first();
+
+        if(!$translation)
+            return  redirect()->route('home');
+
         if($translation->locale != session('lang')){
+
+            $translation = $translation->item->translation;
+
             App::setLocale($translation->locale);
-            session()->put('lang', $translation->lang);
+            session()->put('lang', $translation->locale);
+
+            return  redirect()->route('slug', $translation->slug);
         }
 
         switch (true) {
             case ($translation->post):
                 $this->setView($translation->post);
+                $related = Translation::whereCategoryId($translation->item->category_id)
+                    ->where('post_id','!=', $translation->post_id)->latest('sort')->latest()->take(config('site.post.related') ?? 10 )->get();
 
                 switch ($translation->post->type) {
                     case (PostType::post):
-                        return view('post.show', compact('translation'));
+                        return view('post.show', compact('translation', 'related'));
                         break;
 
                     default;
-                        return view('post.page', compact('translation'));
+                        return view('post.page', compact('translation', 'related'));
                 }
                 break;
 
             case ($translation->product):
                 $this->setView($translation->product);
 
+                $related = Translation::whereCategoryId($translation->item->category_id)
+                    ->where('product_id','!=', $translation->product_id)->latest('sort')->latest()->take(config('site.product.related') ?? 10 )->get();
+
                 switch ($translation->product->type) {
                     case (ProductType::product):
-                        return view('product.show', compact('translation'));
+                        return view('product.show', compact('translation','related'));
                         break;
                     case (ProductType::video):
-                        return view('product.video.show', compact('translation'));
+                        return view('product.video.show', compact('translation','related'));
                         break;
                     default:
-                        return view('product.gallery.show', compact('translation'));
+                        return view('product.gallery.show', compact('translation','related'));
                         break;
                 }
                 break;

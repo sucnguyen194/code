@@ -119,7 +119,7 @@ class MenuController extends Controller
 
         //translations
         foreach ($request->translation as $translation):
-            $menu->translation()->updateOrCreate(['locale' => $translation['locale']], $translation);
+            $menu->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
         session()->put('menu_position', $menu->position);
