@@ -18,7 +18,7 @@
             </div>
         </div>
         <!-- end page title -->
-   
+
         @can('order.view')
         <div class="row">
             <!-- end col -->

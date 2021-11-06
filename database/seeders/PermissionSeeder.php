@@ -37,11 +37,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'menu.edit', 'title' => 'Sửa menu','parent_id' => $menu->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'menu.destroy', 'title' => 'Xóa menu','parent_id' => $menu->id,'guard_name' => 'admin']);
 
-        $image = Permission::create(['name' => 'image', 'title' => 'Image','parent_id' => 0,'guard_name' => 'admin']);
-        Permission::create(['name' => 'image.view', 'title' => 'Xem image','parent_id' => $image->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'image.create', 'title' => 'Thêm image','parent_id' => $image->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'image.edit', 'title' => 'Sửa image','parent_id' => $image->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'image.destroy', 'title' => 'Xóa image','parent_id' => $image->id,'guard_name' => 'admin']);
+        $image = Permission::create(['name' => 'photo', 'title' => 'Hình ảnh','parent_id' => 0,'guard_name' => 'admin']);
+        Permission::create(['name' => 'photo.view', 'title' => 'Xem hình ảnh','parent_id' => $image->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'photo.create', 'title' => 'Thêm hình ảnh','parent_id' => $image->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'photo.edit', 'title' => 'Sửa hình ảnh','parent_id' => $image->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'photo.destroy', 'title' => 'Xóa hình ảnh','parent_id' => $image->id,'guard_name' => 'admin']);
 
         $contact = Permission::create(['name' => 'contact', 'title' => 'Tin nhắn','parent_id' => 0,'guard_name' => 'admin']);
         Permission::create(['name' => 'contact.view', 'title' => 'Xem tin nhắn','parent_id' => $contact->id,'guard_name' => 'admin']);
@@ -89,11 +89,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'video.edit', 'title' => 'Sửa video','parent_id' => $video->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'video.destroy', 'title' => 'Xóa video','parent_id' => $video->id,'guard_name' => 'admin']);
 
-        $gallery = Permission::create(['name' => 'gallery', 'title' => 'Gallery','parent_id' => 0,'guard_name' => 'admin']);
-        Permission::create(['name' => 'gallery.view', 'title' => 'Xem gallery','parent_id' => $gallery->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'gallery.create', 'title' => 'Thêm gallery','parent_id' => $gallery->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'gallery.edit', 'title' => 'Sửa gallery','parent_id' => $gallery->id,'guard_name' => 'admin']);
-        Permission::create(['name' => 'gallery.destroy', 'title' => 'Xóa gallery','parent_id' => $gallery->id,'guard_name' => 'admin']);
+        $gallery = Permission::create(['name' => 'gallery', 'title' => 'Thư viện','parent_id' => 0,'guard_name' => 'admin']);
+        Permission::create(['name' => 'gallery.view', 'title' => 'Xem thư viện','parent_id' => $gallery->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'gallery.create', 'title' => 'Thêm thư viện','parent_id' => $gallery->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'gallery.edit', 'title' => 'Sửa thư viện','parent_id' => $gallery->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'gallery.destroy', 'title' => 'Xóa thư viện','parent_id' => $gallery->id,'guard_name' => 'admin']);
 
         $permission = Permission::create(['name' => 'permission', 'title' => 'Permission','parent_id' => 0,'guard_name' => 'admin']);
         Permission::create(['name' => 'permission.view', 'title' => 'Xem permission','parent_id' => $permission->id,'guard_name' => 'admin']);
