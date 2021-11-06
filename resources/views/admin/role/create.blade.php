@@ -15,7 +15,7 @@
                 </div>
                 <div class="row">
                     @foreach($permissions->where('parent_id',0) as $key => $permission)
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <div class="border h-100 p-2">
                                 <label class="text-uppercase">{{$permission->title}}</label>
                                 @foreach($permissions->where('parent_id',$permission->id) as $parent)

@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $this->authorize('contact');
+        $this->authorize('support.view');
 
         $admins = Admin::select('name','email','id')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
@@ -31,7 +31,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $this->authorize('contact');
+        $this->authorize('support.create');
         return view('admin.support.customer.create');
     }
 
@@ -57,7 +57,7 @@ class CustomerController extends Controller
      */
     public function edit(Support $customer)
     {
-        $this->authorize('contact');
+        $this->authorize('support.edit');
         $translations = $customer->translations->load('language');
         return view('admin.support.customer.edit',compact('customer','translations'));
     }

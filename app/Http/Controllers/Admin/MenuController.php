@@ -31,7 +31,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->position()->sort()->get();
+        })->whereHas('translation')->position()->sort()->get();
 
         return view('admin.menu.index', compact('menus'));
     }
@@ -70,7 +70,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->position()->sort()->get();
+        })->whereHas('translation')->position()->sort()->get();
 
         return  $this->menu($menus);
     }
@@ -97,7 +97,7 @@ class MenuController extends Controller
         $this->authorize('menu.edit');
 
         $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})
-            ->where('id','!=', $menu->id)->position()->sort()->get();
+            ->where('id','!=', $menu->id)->whereHas('translation')->position()->sort()->get();
         $translations = $menu->translations->load('language');
 
         return view('admin.menu.edit', compact('menus','menu','translations'));
@@ -145,7 +145,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->position()->sort()->get();
+        })->whereHas('translation')->position()->sort()->get();
 
         return  $this->menu($menus);
     }
@@ -157,7 +157,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->position()->sort()->get();
+        })->whereHas('translation')->position()->sort()->get();
 
         return  $this->menu($menus);
         //return flash('Cập nhật thành công');
@@ -178,7 +178,7 @@ class MenuController extends Controller
             $transltions = Post::find($request->id);
 
         foreach ($transltions->translations as $translation){
-            $menu->translation()->create(['name' => $translation->name, 'slug' => $translation->slug,'locale' => $translation->locale]);
+            $menu->translations()->create(['name' => $translation->name, 'slug' => $translation->slug,'locale' => $translation->locale]);
         }
 
         $append = '<li class="dd-item" data-id="'.$menu->id.'">';

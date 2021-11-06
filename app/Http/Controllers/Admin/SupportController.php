@@ -16,7 +16,7 @@ class SupportController extends Controller
      */
     public function index()
     {
-        $this->authorize('contact');
+        $this->authorize('support.view');
 
         $admins = Admin::when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
@@ -26,9 +26,10 @@ class SupportController extends Controller
     }
 
     public function data(){
+        $this->authorize('support.view');
         $supports = Support::query()->with(['admin', 'translation' => function($q){
             $q->select('name','support_id');
-        }])
+        }])->whereHas('translation')
             ->when(\request()->type,function($q, $type){
                 return $q->whereType($type);
             })
@@ -66,7 +67,7 @@ class SupportController extends Controller
      */
     public function create()
     {
-        $this->authorize('contact');
+        $this->authorize('support.create');
 
         return view('admin.support.create');
     }
@@ -79,7 +80,7 @@ class SupportController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('contact');
+        $this->authorize('support.create');
 
         $support = new Support();
         $support->forceFill($request->data);
@@ -109,7 +110,7 @@ class SupportController extends Controller
      */
     public function edit(Support $support)
     {
-        $this->authorize('contact');
+        $this->authorize('support.edit');
         $translations = $support->translations->load('language');
 
         return view('admin.support.edit',compact('support','translations'));
@@ -124,7 +125,7 @@ class SupportController extends Controller
      */
     public function update(Request $request, Support $support)
     {
-        $this->authorize('contact');
+        $this->authorize('support.edit');
 
         $support->forceFill($request->data);
         $support->admin_edit = auth()->id();
@@ -146,7 +147,7 @@ class SupportController extends Controller
      */
     public function destroy(Support  $support)
     {
-        $this->authorize('contact');
+        $this->authorize('support.destroy');
 
         $support->delete();
 

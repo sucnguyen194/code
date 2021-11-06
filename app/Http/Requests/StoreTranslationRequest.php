@@ -29,7 +29,7 @@ class StoreTranslationRequest extends FormRequest
          $rules = Validator::make(request()->translation,[
             '*.name' => 'required',
             '*.locale' => 'required',
-            '*.slug' => 'required|unique:translations,slug',
+            '*.slug' => 'required',
          ]);
 
         return $rules->validate();

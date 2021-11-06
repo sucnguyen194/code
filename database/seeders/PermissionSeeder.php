@@ -25,6 +25,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'discount.edit', 'title' => 'Sửa mã giảm giá','parent_id' => $discount->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'discount.destroy', 'title' => 'Xóa mã giảm giá','parent_id' => $discount->id,'guard_name' => 'admin']);
 
+        $support = Permission::create(['name' => 'support', 'title' => 'Hỗ trợ','parent_id' => 0,'guard_name' => 'admin']);
+        Permission::create(['name' => 'support.view', 'title' => 'Xem hỗ trợ','parent_id' => $support->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'support.create', 'title' => 'Thêm hỗ trợ','parent_id' => $support->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'support.edit', 'title' => 'Sửa hỗ trợ','parent_id' => $support->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'support.destroy', 'title' => 'Xóa hỗ trợ','parent_id' => $support->id,'guard_name' => 'admin']);
+
         $menu = Permission::create(['name' => 'menu', 'title' => 'Menu','parent_id' => 0,'guard_name' => 'admin']);
         Permission::create(['name' => 'menu.view', 'title' => 'Xem menu','parent_id' => $menu->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'menu.create', 'title' => 'Thêm menu','parent_id' => $menu->id,'guard_name' => 'admin']);

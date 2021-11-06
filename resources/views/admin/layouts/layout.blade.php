@@ -52,7 +52,7 @@
 
             <li class="dropdown notification-list dropdown d-lg-inline-block"> <a class="nav-link dropdown-toggle mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">{{implode(languages()->where('value',Session::get('lang'))->pluck('name')->toArray())}} </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                @foreach(languages()->where('value','<>',session()->get('lang')) as $item)
+                @foreach(\App\Models\Language::where('value','<>',session()->get('lang'))->get() as $item)
                     <!-- item-->
                         <a href="{{route('admin.languages.change',$item->value)}}" class="dropdown-item notify-item"><span
                                 class="align-middle">{{$item->name}}</span> </a>
@@ -162,11 +162,11 @@
                         <li>
                             <a href="{{route('admin.photos.index')}}">
                                 <i class="pe-7s-photo-gallery"></i>
-                                <span>Image</span>
+                                <span>Hình ảnh</span>
                             </a>
                         </li>
                     @endcan
-                    @can('contact.view')
+                    @canany(['contact.view','support.view'])
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-micro"></i>
@@ -174,15 +174,20 @@
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
+                                @can('support.view')
                                 <li>
                                     <a href="{{route('admin.supports.customers.index')}}">Ý kiến khách hàng</a>
                                 </li>
+
                                 <li>
                                     <a href="{{route('admin.supports.index')}}">Đội ngũ hỗ trợ</a>
                                 </li>
+                                @endcan
+                                    @can('contact.view')
                                 <li>
                                     <a href="{{route('admin.contacts.index')}}">Tin nhắn</a>
                                 </li>
+                                @endcan
                             </ul>
                         </li>
                     @endcan
@@ -254,7 +259,7 @@
                         <li>
                             <a href="{{route('admin.products.galleries.index')}}">
                                 <i class="pe-7s-albums"></i>
-                                <span>Album</span>
+                                <span>Thư viện</span>
                             </a>
                         </li>
                     @endcan

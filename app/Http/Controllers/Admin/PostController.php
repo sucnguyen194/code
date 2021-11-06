@@ -27,7 +27,7 @@ class PostController extends Controller
 
         $categories = Category::query()->with('translation',function($q){
             $q->select('id','name','category_id');
-        })->whereType(CategoryType::post)->public()->latest()->get();
+        })->whereHas('translation')->whereType(CategoryType::post)->public()->latest()->get();
 
         $authors = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
@@ -98,7 +98,7 @@ class PostController extends Controller
 
         $categories = Category::query()->with('translation',function($q){
             $q->select('id','name','category_id');
-        })->whereType(CategoryType::post)->public()->latest()->get();
+        })->whereHas('translation')->whereType(CategoryType::post)->public()->latest()->get();
 
         return view('admin.post.create',compact('categories'));
     }
@@ -145,7 +145,7 @@ class PostController extends Controller
 
         $categories = Category::query()->with('translation',function($q){
             $q->select('id','name','category_id');
-        })->whereType(CategoryType::post)->public()->latest()->get();
+        })->whereHas('translation')->whereType(CategoryType::post)->public()->latest()->get();
 
         $translations = $post->translations->load('language');
 
@@ -164,20 +164,17 @@ class PostController extends Controller
     {
         $this->authorize('blog.edit');
 
-        //translations
-        foreach ($request->translation as $translation):
-            //check slug
-            if(Translation::whereSlug($translation['slug'])->where('post_id','!=', $post->id)->count())
-                return  flash('Đường dẫn đã tồn tại',0);
-
-            $post->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
-        endforeach;
-
         $post->forceFill($request->data);
         $post->admin_edit = Auth::id();
         $post->status = $request->status ? ActiveDisable::active : ActiveDisable::disable;
         $post->public = $request->public ? ActiveDisable::active : ActiveDisable::disable;
         $post->save();
+
+        //translations
+        foreach ($request->translation as $translation):
+            $post->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
+        endforeach;
+
         $post->categories()->sync($request->category_id);
 
         return flash('Cập nhật thành công!');

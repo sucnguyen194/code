@@ -112,18 +112,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //translations
-        foreach ($request->translation as $translation):
-            //check slug
-            if(Translation::whereSlug($translation['slug'])->where('post_id','!=', $category->id)->count())
-                return  flash('Đường dẫn đã tồn tại',0);
-
-            $category->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
-        endforeach;
-
         $category->forceFill($request->data);
         $category->admin_edit = Auth::id();
         $category->save();
+
+        //translations
+        foreach ($request->translation as $translation):
+            $category->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
+        endforeach;
 
         return flash('Cập nhật thành công');
     }

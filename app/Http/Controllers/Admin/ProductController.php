@@ -25,7 +25,7 @@ class ProductController extends Controller
 
         $categories = Category::query()->with('translation', function($q){
             $q->select('id','name','category_id');
-        })->whereType(CategoryType::product)->public()->latest()->get();
+        })->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
 
         $admins = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
@@ -90,8 +90,8 @@ class ProductController extends Controller
     {
         $this->authorize('product.create');
 
-        $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::with('translation')->oldest('sort')->get();
+        $categories = Category::with('translation')->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
+        $attributes = Attribute::with('translation')->whereHas('translation')->oldest('sort')->get();
 
         return view('admin.product.create', compact('categories','attributes'));
     }
@@ -170,8 +170,8 @@ class ProductController extends Controller
     {
         if(auth()->id() > 1) $this->authorize('product.edit');
 
-        $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::with('translation')->oldest('sort')->get();
+        $categories = Category::with('translation')->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
+        $attributes = Attribute::with('translation')->whereHas('translation')->oldest('sort')->get();
         $translations = $product->translations->load('language');
 
         return view('admin.product.edit',compact('product','categories','attributes','translations'));
