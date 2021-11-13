@@ -22,12 +22,12 @@
         </div>
         <!-- end page title -->
     </div>
-    <div class="container" id="update-product">
+    <div class="container-fluid" id="update-product">
         <form method="post" action="{{route('admin.products.update',$product)}}" class="ajax-form" enctype="multipart/form-data">
             <div class="row">
                 @csrf
                 @method('PUT')
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     @if(setting('site.languages'))
                         <ul class="nav nav-tabs tabs-bordered nav-justified pt-1 bg-white">
                             @foreach($translations as $key => $translation)
@@ -59,11 +59,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Mô tả</label>
-                                        <textarea class="form-control summernote" data-height="200" id="summernote" name="translation[{{$key}}][description]">{!! $translation->description !!}</textarea>
+                                        <textarea class="form-control summerdescription" data-height="200" id="summernote" name="translation[{{$key}}][description]">{!! $translation->description !!}</textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Nội dung</label>
+                                        <label>Chi tiết sản phẩm</label>
                                         <textarea class="form-control summernote" data-height="500" id="summerbody" name="translation[{{$key}}][content]">{!! $translation->content !!}</textarea>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Mô tả</label>
-                                            <textarea class="form-control summernote" data-height="200" id="summernote" name="translation[{{$key}}][description]"></textarea>
+                                            <textarea class="form-control summerdescription" data-height="200" id="summernote" name="translation[{{$key}}][description]"></textarea>
                                         </div>
 
                                         <div class="">
@@ -104,14 +104,14 @@
                                 <div class="col-lg-4">
                                     <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
                                         <label>Giá bán:</label>
-                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control" min="0" value="{{number_format($product->price)}}" id="price">
+                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" min="0" value="{{number_format($product->price)}}" id="price">
                                         <input type="number" class="form-control d-none" min="0" value="{{$product->price}}" id="format-price" name="data[price]">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group mb-0">
                                         <label>Giá khuyến mãi:</label>
-                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control" value="{{number_format($product->price_sale)}}" min="0" id="price_sale">
+                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" value="{{number_format($product->price_sale)}}" min="0" id="price_sale">
                                         <input type="number" class="form-control d-none" value="{{$product->price_sale}}" min="0" id="format-price-sale" name="data[price_sale]">
                                     </div>
                                 </div>
@@ -339,7 +339,7 @@
                     {{--                    </div>--}}
 
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="card-box">
                         <label class="mb-0">Trạng thái</label>
                         <hr>
@@ -418,12 +418,16 @@
     <div id="viewImage" class="modal fade" tabindex="-1" aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hình ảnh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
                 <div class="modal-body">
                     <img src="" class="img-fluid showImage">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"> Đóng</button>
-                </div>
+
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

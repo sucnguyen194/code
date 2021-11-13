@@ -38,7 +38,7 @@ class SupportController extends Controller
                     return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%');
                 });
             })
-            ->when(\request()->admin,function($q,$admin){
+            ->when(\request()->author,function($q,$admin){
                 return $q->whereAdminId($admin);
             })
             ->when(\request()->public,function($q, $public){

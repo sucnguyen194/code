@@ -31,16 +31,15 @@
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="public">
-                                    <option value="">Hiên thị (All)</option>
+                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="Hiên thị">
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="status">
-                                    <option value="">Nổi bật (All)</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Nổi bật" name="status">
+                                    <option value=""></option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
@@ -48,8 +47,8 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="author">
-                                    <option value="">Tác giả (All)</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Tác giả" name="author">
+                                    <option value=""></option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>
                                     @endforeach
@@ -57,7 +56,7 @@
                             </div>
                             <div class="mr-2 mb-2" style="width: 200px">
 
-                                <select class="form-control" data-toggle="select2" name="category">
+                                <select class="form-control" data-toggle="select2" name="category" data-allow-clear="true" data-placeholder="Danh mục ">
                                     <option value="">Danh mục (All)</option>
                                     @foreach($categories as $item )
                                         <option value="{{$item->id}}" class="font-weight-bold">{{$item->name}}</option>

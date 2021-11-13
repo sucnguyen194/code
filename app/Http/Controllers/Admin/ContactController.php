@@ -33,8 +33,8 @@ class ContactController extends Controller
             ->when(request()->status,function($q, $status){
                 $q->whereStatus($status);
             })
-            ->when(request()->user,function($q, $user){
-            $q->whereUserEdit($user);
+            ->when(request()->admin,function($q, $admin){
+            $q->whereAdminEdit($admin);
         });
 
         return datatables()->of($contacts)

@@ -68,11 +68,14 @@ div.checkbox {
 }
 .slider-holder.ui-sortable {
     width: calc(100% + 15px);
-    margin-left:  -10px;
+    margin-left: -5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     list-style-type: none;
 }
 .slider-holder.ui-sortable li {
-    width: calc(20% - 1px);
+    width: calc(20% );
+    /*height: 100%!important;*/
     float: left;
     padding-left: 10px;
     margin-top: 10px;
@@ -81,8 +84,7 @@ div.checkbox {
     box-shadow: none;
 }
 .slider-holder.ui-sortable li:first-child {
-    width: calc(40% - 2px);
-    margin-top: 9px;
+
 }
 .slider-holder li .item-image{
     background: #fafbfc;

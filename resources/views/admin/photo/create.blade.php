@@ -69,13 +69,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        let editor = $('.summernote, .summerbody');
-
-        $(editor).each(function (index) {
-            let ele = $(this)[0];
-            let height = $(this).data('height');
-            editors(ele, height);
-        })
         $('select').each(function () {
 
             $(this).select2({

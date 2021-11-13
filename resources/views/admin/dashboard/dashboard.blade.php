@@ -124,49 +124,6 @@
         </div>
         <!-- end row -->
         @endcan
-
-        <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="card-box">
-                    <h4 class="header-title">Nội dung gần đây</h4>
-                    <p class="sub-header">
-
-                    </p>
-
-                    <div class="table-responsive">
-                        <table class="table table-hover m-0 table-actions-bar">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Tiêu đề</th>
-                                <th>Tác giả</th>
-                                <th>Tạo lúc</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach(\App\Models\Translation::whereNotNull('product_id')->orWhereNotNull('post_id')->locale()->latest('id')->take(10)->get() as $key => $translation)
-                            <tr>
-                                <td>{{$key+1}}</td>
-                                <td>
-                                   <a href="{{route('slug',$translation->slug)}}" target="_blank"> {{$translation->name}}</a>
-                                </td>
-                                <td>
-                                    {{$translation->item->admin->name}}
-                                </td>
-                                <td>
-                                    {{$translation->item->created_at->diffForHumans()}}
-                                </td>
-
-                            </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-            <!-- end col -->
-        </div>
         <div class="card-box">
             <div class="tool-share">
                 <div class="w-100 mb-1"><a href="https://developers.facebook.com/tools/debug/" class="font-weight-bold" target="_blank">1. Tool sửa lỗi share facebook</a></div>

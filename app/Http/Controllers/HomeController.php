@@ -84,34 +84,29 @@ class HomeController extends Controller
         switch (true) {
             case ($translation->post):
                 $this->setView($translation->post);
-                $related = Translation::whereCategoryId($translation->item->category_id)
-                    ->where('post_id','!=', $translation->post_id)->latest('sort')->latest()->take(config('site.post.related') ?? 10 )->get();
 
                 switch ($translation->post->type) {
                     case (PostType::post):
-                        return view('post.show', compact('translation', 'related'));
+                        return view('post.show', compact('translation'));
                         break;
 
                     default;
-                        return view('post.page', compact('translation', 'related'));
+                        return view('post.page', compact('translation'));
                 }
                 break;
 
             case ($translation->product):
                 $this->setView($translation->product);
 
-                $related = Translation::whereCategoryId($translation->item->category_id)
-                    ->where('product_id','!=', $translation->product_id)->latest('sort')->latest()->take(config('site.product.related') ?? 10 )->get();
-
                 switch ($translation->product->type) {
                     case (ProductType::product):
-                        return view('product.show', compact('translation','related'));
+                        return view('product.show', compact('translation'));
                         break;
                     case (ProductType::video):
-                        return view('product.video.show', compact('translation','related'));
+                        return view('product.video.show', compact('translation'));
                         break;
                     default:
-                        return view('product.gallery.show', compact('translation','related'));
+                        return view('product.gallery.show', compact('translation'));
                         break;
                 }
                 break;

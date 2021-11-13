@@ -22,11 +22,11 @@
         </div>
         <!-- end page title -->
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <form method="post" action="{{route('admin.posts.store')}}" class="ajax-form" enctype="multipart/form-data">
             <div class="row">
                 @csrf
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     @if(setting('site.languages'))
                         <ul class="nav nav-tabs tabs-bordered nav-justified pt-1 bg-white">
                             @foreach(languages() as $key => $language)
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Mô tả</label>
-                                        <textarea class="form-control summernote" data-height="200" id="summernote" name="translation[{{$key}}][description]"></textarea>
+                                        <textarea class="form-control summerdescription" data-height="200" id="summernote" name="translation[{{$key}}][description]"></textarea>
                                     </div>
 
                                     <div class="">
@@ -102,7 +102,7 @@
                             @endforeach
                         </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="card-box">
                         <label class="font-15 mb-0">Trạng thái</label>
                         <hr>

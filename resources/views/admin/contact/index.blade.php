@@ -26,7 +26,7 @@
                         <form method="get" class="form-inline filter-form">
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="status">
+                                <select class="form-control" data-toggle="select2" name="status" data-allow-clear="true" data-placeholder="Trạng thái">
                                     <option value="">Trạng thái (All)</option>
                                     <option value="1">Đã xem</option>
                                     <option value="2"> Chưa xem</option>
@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="user">
+                                <select class="form-control" data-toggle="select2" name="user" data-allow-clear="true" data-placeholder="Người duyệt" name="author">
                                     <option value="">Người duyệt (All)</option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>

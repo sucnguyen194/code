@@ -11,14 +11,7 @@
 <!-------------------------->
 <!-----------SOURCSE----------->
 <!-------------------------->
-@foreach($translation->tags as $tag)
-
-    <a href="{{route('tag.show', $tag->slug)}}" class="badge badge-primary">{{$tag->name}}</a>
-
-@endforeach
-
-@include('include.comment')
-
+{!! $translation->content !!}
 
 <!-------------------------->
 <!-----------SOURCSE----------->

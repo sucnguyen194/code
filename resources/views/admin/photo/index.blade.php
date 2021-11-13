@@ -31,7 +31,7 @@
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="public">
+                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="Hiên thị">
                                     <option value="">Hiên thị (All)</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="position">
+                                <select class="form-control" data-toggle="select2" name="position" data-allow-clear="true" data-placeholder="Vị trí">
                                     <option value="">Vị trí (All)</option>
                                     @foreach(\App\Enums\Position::getInstances() as $item)
                                         <option value="{{$item->key}}">{{$item->description}}</option>

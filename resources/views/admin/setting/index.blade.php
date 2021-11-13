@@ -26,12 +26,12 @@
         <div class="col-md-12">
             <form action="{{route('admin.settings')}}" method="post" id="form-update" class="ajax-form" enctype="multipart/form-data">
                 <div class="mt-3">
-
+                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> Reset</button>
                     <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại</button>
                 </div>
                 @csrf
                 <div id="wizard-clickable" >
-                    <fieldset title="1">
+                    <fieldset title="1" class="p-0">
                         <legend>Thông tin Website</legend>
                         <div class="row mt-1">
                             <div class="col-md-8">
@@ -48,7 +48,6 @@
                                 </ul>
                                 @endif
                                 <div class="tab-content pt-0">
-
                                         @foreach(languages() as $key => $language)
                                             <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
                                                 <div class="card-box">
@@ -79,12 +78,12 @@
                                                     </div>
                                                     <div class="form-group mb-0">
                                                         <label for="contact">Chi tiết liên hệ</label>
-                                                        <textarea class="form-control summernote" id="summercontact" name="data[contact.detail.{{$language->value}}]">{!! setting('contact.detail.'.$language->value) !!}</textarea>
+                                                        <textarea class="form-control summerdescription" id="summercontact" name="data[contact.detail.{{$language->value}}]">{!! setting('contact.detail.'.$language->value) !!}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="card-box">
                                                     <label for="footer">Nội dung chân trang</label>
-                                                    <textarea class="form-control summernote" id="summernote" name="data[site.footer.{{$language->value}}]">{!! setting('site.footer.'.$language->value) !!}</textarea>
+                                                    <textarea class="form-control summerdescription" id="summernote" name="data[site.footer.{{$language->value}}]">{!! setting('site.footer.'.$language->value) !!}</textarea>
                                                 </div>
                                                 <div class="card-box">
                                                     <div class="d-flex mb-2">
@@ -204,7 +203,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset title="2">
+                    <fieldset title="2" class="p-0">
                         <legend>Thông tin liên hệ</legend>
 
                         <div class="row mt-1">
@@ -260,7 +259,7 @@
 
                         <hr class="border-primary">
                     </fieldset>
-                    <fieldset title="3">
+                    <fieldset title="3" class="p-0">
                         <legend>Mã bổ xung</legend>
 
                         <div class="row mt-1">
@@ -299,7 +298,7 @@
                         </div>
                         <hr class="border-primary">
                     </fieldset>
-                    <fieldset title="4">
+                    <fieldset title="4" class="p-0">
                         <legend>Liên kết</legend>
                         <div class="row mt-1">
                             <div class="col-lg-5">
@@ -446,7 +445,7 @@
                         <hr class="border-primary">
 
                     </fieldset>
-                    <fieldset title="5" class="">
+                    <fieldset title="5" class="p-0">
                         <legend>API</legend>
                         <div class="mt-1">
                             <div class="row">
@@ -548,7 +547,7 @@
                         </div>
 
                     </fieldset>
-                    <fieldset title="6" class="">
+                    <fieldset title="6" class="p-0">
                         <legend>Cấu hình</legend>
 
                         <div class="row mt-1">
@@ -671,7 +670,7 @@
                 </div>
 
                 <div class="">
-
+                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> Reset</button>
                     <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại</button>
                 </div>
             </form>

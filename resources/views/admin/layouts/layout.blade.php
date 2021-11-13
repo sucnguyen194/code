@@ -33,8 +33,7 @@
 {{--    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>--}}
 {{--    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>--}}
 
-    <!-- ckeditor-->
-    <script src="/lib/ckeditor/build/ckeditor.js"></script>
+    <script src="/lib/tinymce/tinymce.min.js"></script>
     <!-- Cpanel -->
     <script src="{{asset('lib/js/cpanel.js')}}"></script>
 </head>
@@ -200,7 +199,7 @@
                                 <i class="pe-7s-comment"></i>
                                 <span>Bình luận</span>
                                 <span class="menu-arrow"></span>
-                                <span class="badge badge-danger badge-pill">{{$comments->count()}}</span>
+                               @if($comments->count()) <span class="badge badge-danger badge-pill">{{$comments->count()}}</span>@endif
                                 <ul class="nav-second-level" aria-expanded="false">
                                     @can('blog.view')
                                         <li>
@@ -582,35 +581,124 @@
 
     }));
 </script>
-<script>
-    function editors(ele, height = 300){
-        ClassicEditor.create( ele,{
-            cloudServices: {
-                tokenUrl: "https://33333.cke-cs.com/token/dev/ijrDsqFix838Gh3wGO3F77FSW94BwcLXprJ4APSp3XQ26xsUHTi0jcb1hoBt",
-                uploadUrl: "https://33333.cke-cs.com/easyimage/upload/"
-            },
-        })
-            .then( editor => {
-                //window.editor = editor;
-                editor.editing.view.change( writer => {
-                    writer.setStyle( 'height', height+'px', editor.editing.view.document.getRoot() );
-                } );
-            } )
-            .catch( error => {
-                console.error( 'There was a problem initializing the editor.', error );
-            } );
-    }
+<script type="text/javascript">
+    var links = "{{route('home')}}";
 
+    $(document).ready(function(){
+        tinymce.init({
+            language : 'vi',
+            plugins: "wordcount textcolor image  link  anchor   charmap media   lists responsivefilemanager",
+            toolbar: [
+                'fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat',
+
+            ],
+
+            height : "150",
+            menubar: true,
+            wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
+            wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
+            textcolor_cols: 6,
+            textcolor_map: [
+                'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
+                'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
+                'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
+            ],
+            textcolor_rows: 5,
+            fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
+            style_formats: [
+                {title: "Header 1", format: "h1"},
+                {title: "Header 2", format: "h2"},
+                {title: "Header 3", format: "h3"},
+                {title: "Header 4", format: "h4"},
+                {title: "Header 5", format: "h5"},
+                {title: "Header 6", format: "h6"},
+                {title: "Paragraph", format: "p"},
+                {title: "Blockquote", format: "blockquote"},
+                {title: "Div", format: "div"},
+                {title: "Pre", format: "pre"}
+            ],
+            // content_css: [
+            //     '/public/css/app.css'
+            // ],
+            link_class_list: [
+                {title: 'Geen', value: ''}
+            ],
+            table_class_list: [
+                {title: 'Tabel', value: 'table'},
+                {title: 'Table Style', value: 'table-style'}
+            ],
+            relative_urls: false,
+            selector: ".summerdescription",
+            image_advtab: true,
+            filemanager_title: "Filemanager",
+            external_filemanager_path: links+"/lib/filemanager/",
+            external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
+        });
+
+    });
 </script>
+
+
+<script type="text/javascript">
+    var links = "{{route('home')}}";
+
+    $(document).ready(function(){
+        tinymce.init({
+            language : 'vi',
+            plugins: "wordcount textcolor image link hr preview anchor code insertdatetime charmap media table print lists responsivefilemanager",
+            toolbar: [
+                'preview code | styleselect | bold italic underline strikethrough subscript superscript charmap | anchor link unlink image media | forecolor backcolor | cut copy paste | alignleft aligncenter alignright alignjustify | table | bullist numlist outdent indent | removeformat | undo redo | fontsizeselect | hr insertdatetime print | newdocument | responsivefilemanager',
+            ],
+            height : "500",
+            menubar: true,
+            wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
+            wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
+            textcolor_cols: 6,
+            textcolor_map: [
+                'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
+                'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
+                'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
+            ],
+            textcolor_rows: 5,
+            fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
+            style_formats: [
+                {title: "Header 1", format: "h1"},
+                {title: "Header 2", format: "h2"},
+                {title: "Header 3", format: "h3"},
+                {title: "Header 4", format: "h4"},
+                {title: "Header 5", format: "h5"},
+                {title: "Header 6", format: "h6"},
+                {title: "Paragraph", format: "p"},
+                {title: "Blockquote", format: "blockquote"},
+                {title: "Div", format: "div"},
+                {title: "Pre", format: "pre"}
+            ],
+            // content_css: [
+            //     '/public/css/app.css'
+            // ],
+
+            link_class_list: [
+                {title: 'Geen', value: ''}
+            ],
+            table_class_list: [
+                {title: 'Tabel', value: 'table'},
+                {title: 'Table Style', value: 'table-style'}
+            ],
+
+            relative_urls: false,
+            selector: ".summernote",
+            image_advtab: true,
+            filemanager_title: "Filemanager",
+            external_filemanager_path: links+"/lib/filemanager/",
+            external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
+        });
+
+    });
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
-        let editor = $('.summernote, .summerbody');
 
-        $(editor).each(function(index){
-            let ele = $(this)[0];
-            let height = $(this).data('height');
-            editors(ele, height);
-        })
         $('select').each(function() {
 
             $(this).select2({

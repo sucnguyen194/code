@@ -30,7 +30,7 @@
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="public">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Hiên thị"  name="public">
                                     <option value="">Hiên thị (All)</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
@@ -38,16 +38,16 @@
                                 </select>
                             </div>
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="status">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Nổi bật" name="status">
                                     <option value="">Nổi bật (All)</option>
-                                    @foreach(\App\Enums\ActiveDisable::getInstances() as $status)
-                                        <option value="{{$status->value}}"> {{$status->description}}</option>
+                                    @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
+                                        <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="user">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Tác giả" name="author">
                                     <option value="">Tác giả (All)</option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>

@@ -27,7 +27,7 @@
                     @foreach(languages() as $key => $language)
                         <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
                             <div class="form-group">
-                                <label>Tiêu đề</label>
+                                <label>Tiêu đề <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="{{$language->value}}"
                                        seo="{{$language->name}}" onkeyup="ChangeToSlug(this);"
                                        name="translation[{{$key}}][name]">
@@ -152,13 +152,6 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        let editor = $('.summernote, .summerbody');
-
-        $(editor).each(function (index) {
-            let ele = $(this)[0];
-            let height = $(this).data('height');
-            editors(ele, height);
-        })
         $('select').each(function () {
 
             $(this).select2({
