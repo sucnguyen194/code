@@ -21,10 +21,10 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo('menu.edit');
         $admin->givePermissionTo('menu.destroy');
 
-        $admin->givePermissionTo('image.view');
-        $admin->givePermissionTo('image.create');
-        $admin->givePermissionTo('image.edit');
-        $admin->givePermissionTo('image.destroy');
+        $admin->givePermissionTo('photo.view');
+        $admin->givePermissionTo('photo.create');
+        $admin->givePermissionTo('photo.edit');
+        $admin->givePermissionTo('photo.destroy');
 
         $admin->givePermissionTo('comment.view');
         $admin->givePermissionTo('comment.create');
