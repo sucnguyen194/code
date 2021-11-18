@@ -707,7 +707,7 @@
 
             var text = $(this).find('option:selected').text();
             text = text.replaceAll(/\xA0/g, "");
-            test =  $(this).closest('.form-group').find('.select2-selection__rendered').text();
+            $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
             //console.log(test);
         });
 
