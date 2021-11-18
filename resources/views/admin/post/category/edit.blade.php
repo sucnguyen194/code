@@ -67,7 +67,6 @@
                                 </div>
                             </div>
                         @endforeach
-
                     @endif
                 </div>
 
@@ -75,9 +74,7 @@
                     <label>Danh mục cha</label>
                     <select class="form-control" data-toggle="select2" name="data[parent_id]">
                         <option value="0">Chọn danh mục</option>
-                        @foreach($categories as $item )
-                            <option value="{{$item->id}}" {{selected($item->id, $category->parent_id)}} class="font-weight-bold">{{$item->translation->name}}</option>
-                        @endforeach
+                        @include('admin.render.options',['options' => $categories, 'selected' => $category->parent_id])
                     </select>
                 </div>
 
@@ -201,20 +198,19 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        let editor = $('.summernote, .summerbody');
-
-        $(editor).each(function (index) {
-            let ele = $(this)[0];
-            let height = $(this).data('height');
-            editors(ele, height);
-        })
-        $('select').each(function () {
-
+        $('select').each(function() {
             $(this).select2({
                 dropdownParent: $(this).parent(),
                 placeholder: $(this).data('placeholder'),
+            }).on('change', function(e){
+                var data = $(this).find('option:selected').text();
+                var text = data.replaceAll(/\xA0/g, "");
+                $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
             });
+
+            var text = $(this).find('option:selected').text();
+            text = text.replaceAll(/\xA0/g, "");
+            $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
         });
     })
-
 </script>

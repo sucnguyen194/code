@@ -358,10 +358,7 @@
                             <label>Danh mục chính</label>
                             <select class="form-control" data-toggle="select2" name="data[category_id]">
                                 <option value="0">Chọn danh mục</option>
-                                @foreach($categories as $item)
-                                    <option value="{{$item->id}}" {{selected($item->id, $product->category_id)}} class="font-weight-bold">{{$item->translation->name}}</option>
-
-                                @endforeach
+                                @include('admin.render.options', ['options' => $categories, 'selected' => $product->category_id])
                             </select>
                         </div>
                     </div>
@@ -370,9 +367,7 @@
                             <label>Danh mục phụ</label>
                             <p class="font-13">* Chọn được nhiều danh mục</p>
                             <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" name="category_id[]" data-placeholder="Chọn danh mục phụ">
-                                @foreach($categories as $item )
-                                    <option value="{{$item->id}}" {{selected($item->id,$product->categories->pluck('id')->toArray())}} class="font-weight-bold">{{$item->translation->name}}</option>
-                                @endforeach
+                                @include('admin.render.options', ['options' => $categories, 'selected' => $product->categories->pluck('id')->toArray()])
                             </select>
                         </div>
                     </div>
@@ -468,7 +463,7 @@
 
 @section('scripts')
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="/lib/assets/js/pages/form-advanced.init.js"></script>
+{{--    <script src="/lib/assets/js/pages/form-advanced.init.js"></script>--}}
     <script src="/lib/js/dynamicrows/dynamicrows.js"></script>
     <script>
         $('[data-dynamicrows]').dynamicrows();

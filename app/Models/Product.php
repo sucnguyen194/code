@@ -53,14 +53,14 @@ class Product extends Model
         return  $this->belongsTo(Admin::class);
     }
 
-    public function getThumbAttribute(){
-
+    public function getImagesAttribute(){
         $image = $this->image;
-
         if($this->photo)
             $image = $this->photo[0];
-
-        return resize_image($image, setting('site.product.size'));
+        return $image;
+    }
+    public function getThumbAttribute(){
+        return resize_image($this->images, setting('site.product.size'));
     }
 
     public function getPercentAttribute(){

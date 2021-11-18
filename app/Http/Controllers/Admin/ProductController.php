@@ -69,8 +69,11 @@ class ProductController extends Controller
             ->editColumn('name',function($product){
                 return $product->translation->name;
             })
-            ->editColumn('image',function($product){
+            ->editColumn('thumb',function($product){
                 return $product->thumb;
+            })
+            ->editColumn('image',function($product){
+                return $product->images;
             })
             ->editColumn('created_at', function ($product){
                 return $product->created_at->diffForHumans();

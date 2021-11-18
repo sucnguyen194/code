@@ -44,9 +44,7 @@
                         <label>Danh mục cha</label>
                         <select class="form-control" data-toggle="select2" name="data[parent_id]">
                             <option value="0">Chọn danh mục</option>
-                            @foreach($categories as $item )
-                                <option value="{{$item->id}}" class="font-weight-bold">{{$item->translation->name}}</option>
-                            @endforeach
+                            @include('admin.render.options',['options' => $categories, 'selected' => 0])
                         </select>
                     </div>
 
@@ -54,15 +52,15 @@
                         <label>Vị trí</label>
                         <select class="form-control" data-toggle="select2" name="data[position]">
                             <option value="0">Chọn ví trí</option>
-                            <option value="1" {{old('data.position') == 1 ? "selected" : ""}}>Vị trí số 1</option>
-                            <option value="2" {{old('data.position') == 2 ? "selected" : ""}}>Vị trí số 2</option>
-                            <option value="3" {{old('data.position') == 3 ? "selected" : ""}}>Vị trí số 3</option>
-                            <option value="4" {{old('data.position') == 4 ? "selected" : ""}}>Vị trí số 4</option>
-                            <option value="5" {{old('data.position') == 5 ? "selected" : ""}}>Vị trí số 5</option>
-                            <option value="6" {{old('data.position') == 6 ? "selected" : ""}}>Vị trí số 6</option>
-                            <option value="7" {{old('data.position') == 7 ? "selected" : ""}}>Vị trí số 7</option>
-                            <option value="8" {{old('data.position') == 8 ? "selected" : ""}}>Vị trí số 8</option>
-                            <option value="9" {{old('data.position') == 9 ? "selected" : ""}}>Vị trí số 9</option>
+                            <option value="1">Vị trí số 1</option>
+                            <option value="2">Vị trí số 2</option>
+                            <option value="3">Vị trí số 3</option>
+                            <option value="4">Vị trí số 4</option>
+                            <option value="5" >Vị trí số 5</option>
+                            <option value="6">Vị trí số 6</option>
+                            <option value="7">Vị trí số 7</option>
+                            <option value="8">Vị trí số 8</option>
+                            <option value="9">Vị trí số 9</option>
 
                         </select>
                     </div>
@@ -171,20 +169,19 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        let editor = $('.summernote, .summerbody');
-
-        $(editor).each(function (index) {
-            let ele = $(this)[0];
-            let height = $(this).data('height');
-            editors(ele, height);
-        })
-        $('select').each(function () {
-
+        $('select').each(function() {
             $(this).select2({
                 dropdownParent: $(this).parent(),
                 placeholder: $(this).data('placeholder'),
+            }).on('change', function(e){
+                var data = $(this).find('option:selected').text();
+                var text = data.replaceAll(/\xA0/g, "");
+                $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
             });
+
+            var text = $(this).find('option:selected').text();
+            text = text.replaceAll(/\xA0/g, "");
+            $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
         });
     })
-
 </script>

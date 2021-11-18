@@ -85,7 +85,7 @@
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
                                 <th data-formatter="sortFormatter" data-width="100">STT</th>
-                                <th data-field="image" data-formatter="imageFormatter"  data-width="100">Ảnh</th>
+                                <th data-field="thumb" data-formatter="imageFormatter"  data-width="100">Ảnh</th>
                                 <th data-field="name" data-formatter="titleFormatter">
                                     Sản phẩm
                                 </th>
@@ -123,6 +123,28 @@
         <!-- end row -->
     </div>
     <input type="hidden" class="type" value="{{\App\Enums\ProductType::product}}">
+    <div id="viewImage" class="modal fade" tabindex="-1" aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hình ảnh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="img-fluid showImage">
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <style>
+        .modal-lg {
+            min-width: auto;
+            max-width: fit-content;
+        }
+    </style>
 @endsection
 
 @section('scripts')
@@ -130,6 +152,12 @@
         $(document).ready(function(){
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
+            })
+
+            $(document).on('click','.view-image',function(){
+                let image = $(this).data('image');
+                $('#viewImage').modal('show');
+                $('.showImage').attr('src', image);
             })
         })
 
@@ -165,8 +193,9 @@
         }
 
         function imageFormatter(value, row) {
+            console.log(row);
             if(value){
-                return  '<img src="'+value+'" class="rounded" width="80">'
+                return  '<img src="'+value+'" class="rounded view-image" data-image="'+row.image+'" width="80">'
             }else{
                 return  '<img src="/lib/images/no-image.png" class="rounded" width="80">'
             }

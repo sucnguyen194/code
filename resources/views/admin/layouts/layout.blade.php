@@ -695,14 +695,38 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
-        $('select').each(function() {
-
+        $('select:not(".select2-multiple")').each(function() {
             $(this).select2({
-                    dropdownParent: $(this).parent(),
-                    placeholder: $(this).data('placeholder'),
-                });
+                dropdownParent: $(this).parent(),
+                placeholder: $(this).data('placeholder'),
+            }).on('change', function(e){
+                var data = $(this).find('option:selected').text();
+                var text = data.replaceAll(/\xA0/g, "");
+                $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
+            });
+
+            var text = $(this).find('option:selected').text();
+            text = text.replaceAll(/\xA0/g, "");
+            test =  $(this).closest('.form-group').find('.select2-selection__rendered').text();
+            //console.log(test);
         });
+
+        $("select.select2-multiple").on("select2:select select2:unselect", function (e) {
+            var li = $('li.select2-selection__choice');
+
+            $.each(li, function (index, value) {
+                var html = $(value).html();
+                html = html.replaceAll('&nbsp;', "");
+                 $(value).html(html);
+            })
+        })
+        var li = $('li.select2-selection__choice');
+
+        $.each(li, function (index, value) {
+            var html = $(value).html();
+            html = html.replaceAll('&nbsp;', "");
+            $(value).html(html);
+        })
     })
 </script>
 

@@ -193,18 +193,13 @@
                             <label>Danh mục chính</label>
                             <select class="form-control" data-toggle="select2" name="data[category_id]">
                                 <option value="0">Chọn danh mục</option>
-                                @foreach($categories as $item )
-                                    <option value="{{$item->id}}" {{selected($item->id, $post->category_id)}}>{{$item->translation->name}}</option>
-                                @endforeach
+                                @include('admin.render.options', ['options' => $categories, 'selected' => $post->category_id])
                             </select>
                     </div>
                     <div class="card-box">
                         <label>Danh mục phụ</label>
-
                         <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" name="category_id[]" data-placeholder="Chọn danh mục phụ">
-                            @foreach($categories as $item )
-                                <option value="{{$item->id}}" {{selected($item->id, $post->categories->pluck('id')->toArray())}}>{{$item->translation->name}}</option>
-                            @endforeach
+                            @include('admin.render.options', ['options' => $categories, 'selected' => $post->categories->pluck('id')->toArray()])
                         </select>
                     </div>
 

@@ -452,7 +452,10 @@ ul.grid {
 .menu_action a {
     border:1px solid #fff;
 }
-
+.select2-container .select2-selection--multiple .select2-selection__choice {
+    display: table;
+    float: unset;
+}
 @media (max-width: 420px) {
     .w-xs-100 {
         width: 100%;

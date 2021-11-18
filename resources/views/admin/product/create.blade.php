@@ -222,15 +222,12 @@
                             <label for="checkbox_status" class="mb-0">Nổi bật</label>
                         </div>
                     </div>
-
                     <div class="card-box">
                         <div class="form-group mb-0">
                             <label>Danh mục chính</label>
-                            <select class="form-control" data-toggle="select2" data-placeholder="Chọn danh mục" name="data[category_id]">
+                            <select class="form-control" data-toggle="select2" name="data[category_id]">
                                 <option value="0">Chọn danh mục</option>
-                                @foreach($categories as $item )
-                                    <option value="{{$item->id}}" class="font-weight-bold">{{$item->translation->name}}</option>
-                                @endforeach
+                                @include('admin.render.options', ['options' => $categories, 'selected' => 0])
                             </select>
                         </div>
                     </div>
@@ -239,9 +236,7 @@
                             <label>Danh mục phụ</label>
                             <p class="font-13">* Chọn được nhiều danh mục</p>
                             <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" name="category_id[]" data-placeholder="Chọn danh mục phụ">
-                                @foreach($categories as $item )
-                                    <option value="{{$item->id}}" class="font-weight-bold">{{$item->translation->name}}</option>
-                                @endforeach
+                                @include('admin.render.options', ['options' => $categories, 'selected' => 0])
                             </select>
                         </div>
                     </div>
@@ -284,6 +279,10 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+@stop
+
+@section('scripts')
     <script>
         $(document).on('click','.view-image',function(){
             let image = $(this).attr('data-image');
@@ -318,11 +317,8 @@
         })
 
     </script>
-@stop
-
-@section('scripts')
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-     <script src="/lib/assets/js/pages/form-advanced.init.js"></script>
+{{--     <script src="/lib/assets/js/pages/form-advanced.init.js"></script>--}}
     <script src="/lib/js/dynamicrows/dynamicrows.js"></script>
     <script>
         $('[data-dynamicrows]').dynamicrows();

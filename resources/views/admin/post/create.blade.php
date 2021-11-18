@@ -121,9 +121,7 @@
                             <label>Danh mục chính</label>
                             <select class="form-control" data-toggle="select2" name="data[category_id]">
                                 <option value="0">Chọn danh mục</option>
-                                @foreach($categories as $item )
-                                    <option value="{{$item->id}}">{{$item->translation->name}}</option>
-                                @endforeach
+                                @include('admin.render.options', ['options' => $categories, 'selected' => 0])
                             </select>
                         </div>
                     </div>
@@ -132,9 +130,7 @@
                             <label>Danh mục phụ</label>
                             <p>* Ghi chú: Chọn được nhiều danh mục</p>
                             <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" name="category_id[]" data-placeholder="Chọn danh mục phụ">
-                                @foreach($categories as $item )
-                                    <option value="{{$item->id}}">{{$item->translation->name}}</option>
-                                @endforeach
+                                @include('admin.render.options', ['options' => $categories, 'selected' => 0])
                             </select>
                         </div>
                     </div>

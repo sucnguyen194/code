@@ -72,7 +72,7 @@ class MenuController extends Controller
             $q->select('name','slug','menu_id');
         })->whereHas('translation')->position()->sort()->get();
 
-        return  $this->menu($menus);
+        return  view('admin.render.menu', compact('menus'));
     }
 
     /**
@@ -128,7 +128,7 @@ class MenuController extends Controller
             $q->select('name','slug','menu_id');
         })->position()->sort()->get();
 
-        return  $this->menu($menus);
+        return  view('admin.render.menu', compact('menus'));
     }
 
     /**
@@ -147,7 +147,7 @@ class MenuController extends Controller
             $q->select('name','slug','menu_id');
         })->whereHas('translation')->position()->sort()->get();
 
-        return  $this->menu($menus);
+        return  view('admin.render.menu', compact('menus'));
     }
 
     public function position(Request $request){
@@ -159,9 +159,7 @@ class MenuController extends Controller
             $q->select('name','slug','menu_id');
         })->whereHas('translation')->position()->sort()->get();
 
-        return  $this->menu($menus);
-        //return flash('Cập nhật thành công');
-
+        return  view('admin.render.menu', compact('menus'));
     }
     public function append(Request $request){
        $this->authorize('menu.create');
@@ -181,16 +179,7 @@ class MenuController extends Controller
             $menu->translations()->create(['name' => $translation->name, 'slug' => $translation->slug,'locale' => $translation->locale]);
         }
 
-        $append = '<li class="dd-item" data-id="'.$menu->id.'">';
-        $append .= '<div class="dd-handle">'.optional($menu->translation)->name.'</div>';
-        $append .= '<div class="menu_action">';
-        if(auth()->user()->can('menu.edit'))
-        $append .= '<a href="'.route('admin.menus.edit',$menu).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
-        if(auth()->user()->can('menu.destroy'))
-        $append .= '<a href="'.route('admin.menus.destroy',$menu).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
-        $append .= '</div>';
-
-        return $append;
+        return view('admin.render.append_menu', compact('menu'));
     }
 
     public function setMenuSort(){
@@ -212,45 +201,5 @@ class MenuController extends Controller
                 $this->updateMenuSort($items->children,$items->id);
             }
         }
-    }
-
-    public function menu($menus){
-        $html = "";
-        foreach($menus->where('parent_id',0) as $items){
-            $html .= '<li class="dd-item" data-id="'.$items->id.'">';
-            $html .= '<div class="dd-handle">'.$items->translation->name.'</div>';
-            $html .= '<div class="menu_action">';
-            if(auth()->user()->can('menu.edit'))
-            $html .= '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
-            if(auth()->user()->can('menu.destroy'))
-            $html .= '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
-            $html .= '</div>';
-
-            $html .= '<ol class="dd-list">';
-            $html .=  static::sub($menus,$items->id);;
-            $html .= '</ol>';
-            $html .= '</li>';
-        }
-        return $html;
-    }
-
-    public static function sub($data,$parent_id){
-        $html = "";
-        foreach($data->where('parent_id', $parent_id) as $items){
-            $html .= '<li class="dd-item" data-id="'.$items->id.'">';
-            $html .= '<div class="dd-handle">'.$items->translation->name.'</div>';
-            $html .= '<div class="menu_action">';
-            if(auth()->user()->can('menu.edit'))
-            $html .= '<a href="'.route('admin.menus.edit',$items).'" title="Sửa" class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
-            if(auth()->user()->can('menu.destroy'))
-            $html .= '<a href="'.route('admin.menus.destroy',$items).'" title="Xóa" class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a> ';
-            $html .= '</div>';
-
-            $html .= '<ol class="dd-list">';
-            $html .= static::sub($data,$items->id);;
-            $html .= '</ol>';
-            $html .= '</li>';
-        }
-        return $html;
     }
 }
