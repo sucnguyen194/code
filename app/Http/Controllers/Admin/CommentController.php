@@ -33,7 +33,7 @@ class CommentController extends Controller
         $this->authorize('comment.edit');
 
         $reply = $type == CommentMap::products ? Product::findOrFail($id) : Post::findOrFail($id);
-        $reply->withTranslation();
+        $reply->load('translation');
         $comments = $reply->comments;
 
         return view('admin.comment.edit', compact('reply','comments','type'));
@@ -44,13 +44,12 @@ class CommentController extends Controller
         $this->authorize('comment.view');
         $comments = request()->type == CommentMap::products ? new Product() : new Post();
 
-        $comments = $comments->query()->whereHas('comments')
+        $comments = $comments->query()->with('translation')->whereHas('comments')
             ->when(request()->search, function ($q, $keyword){
                 return $q->whereHas('translation',function ($q) use ($keyword){
                     return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%');
                 });
-            })
-            ->withTranslation();
+            });
 
         return datatables()->of($comments)
             ->editColumn('title',function ($comment){
@@ -58,7 +57,7 @@ class CommentController extends Controller
             })
 
             ->editColumn('comment_last',function ($comment){
-                return $comment->comments->last()->comment;
+                return str_limit($comment->comments->last()->comment, 1000);
             })
 
             ->editColumn('comment_count',function ($comment){
@@ -101,7 +100,7 @@ class CommentController extends Controller
             'comment' => 'required',
             'name' => 'required',
             'email' => 'email|required',
-        ]);
+        ])->validate();
         $translation = Translation::whereSlug($request->slug)->first();
         if(!$translation)
             return flash('Đã có lỗi xảy ra. Vui lòng thủ lại!',4);

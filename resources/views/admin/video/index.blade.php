@@ -158,7 +158,7 @@
 
             @endcan
 
-                @cannot('video.edit')
+             @cannot('video.edit')
 
                 html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';
@@ -185,11 +185,11 @@
 
         function actionFormatter(value, row){
             let html = '';
-            @can('view.edit')
+            @can('video.edit')
             html += '<a href="'+ '{{ route('admin.products.videos.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             @endcan
 
-                @can('view.destroy')
+                @can('video.destroy')
             html+='<a href="'+ '{{ route('admin.products.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;

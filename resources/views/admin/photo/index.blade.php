@@ -72,9 +72,7 @@
                                 <th data-field="image" data-formatter="imageFormatter" data-width="120">
                                     Hình ảnh
                                 </th>
-                                <th data-field="image" data-formatter="linkFormatter">
-                                    Link ảnh
-                                </th>
+
                                 <th data-field="name">
                                     Tiêu đề
                                 </th>
@@ -87,9 +85,9 @@
                                     Vị trí
                                 </th>
 
-{{--                                <th data-field="created_at" data-sortable="true" data-width="150" data-visible="true">--}}
-{{--                                    Tạo lúc--}}
-{{--                                </th>--}}
+                                <th data-field="target" data-width="100" >
+                                    Target
+                                </th>
 
                                 <th data-formatter="statusFormatter" data-width="150">
                                     Trạng thái
@@ -182,12 +180,6 @@
             return '<a href="'+ value +'" target="_blank">'+ value +'</a>';
         }
 
-        function linkFormatter(value){
-            if(!value)
-                return "";
-
-            return '<a href="javascript:void(0)" target="_blank">'+ value +'</a> <span style="cursor: pointer; font-size: 15px" data-image="'+value+'" class="badge badge-light-success coppy-image tooltip-hover"  id="tooltip-hover" title="* Coppy hình ảnh" ><i class="fa fa-clone" aria-hidden="true"></i></span> ';
-        }
 
         function imageFormatter(value, row) {
             return  '<img src="'+row.thumb+'" class="rounded view-image" data-image="'+row.image+'" style="cursor: pointer" width="120">';
@@ -201,6 +193,10 @@
                 @can('photo.destroy')
             html+='<a href="'+ '{{ route('admin.photos.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
+
+            if(row.image)
+              html +='<a href="javascript:void(0)" class="btn btn-purple coppy-image waves-effect waves-light tooltip-hover" title="Coppy link ảnh" data-image="'+row.image+'">Coppy</a>';
+
             return html;
         }
 

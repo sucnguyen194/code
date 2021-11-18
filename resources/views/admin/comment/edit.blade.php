@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item">#ID{{$reply->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Bài viết <a href="{{route('slug',$reply->translation->slug)}}" target="_blank">#{{$reply->translation->name}}</a></h4>
+                    <h4 class="page-title"> <a href="{{route('slug',$reply->translation->slug)}}" target="_blank">#{{$reply->translation->name}}</a></h4>
                 </div>
             </div>
         </div>
@@ -29,22 +29,23 @@
                     @csrf
                     <div class="form-group">
                         <label class="font-weight-bold">Bình luận</label>
-                        <textarea rows="4" class="form-control" name="data[comment]" required></textarea>
+                        <textarea rows="4" class="form-control summerdescription" name="data[comment]"></textarea>
                         <input type="hidden" name="slug" value="{{$reply->translation->slug}}" readonly>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" name="data[name]" class="form-control" required value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
                             </div>
                             <div class="col-lg-6">
-                                <input type="email" name="data[email]" class="form-control" required value="{{auth()->user()->email}}" placeholder="Email *">
+                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi</button>
+                    <div class="form-group text-right">
+                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
+                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
                     </div>
                 </form>
             </div>
@@ -67,8 +68,11 @@
                                             <strong>{{$comment->name}}</strong>
                                         @endif
                                     </div>
-                                    <div class="item-comment mt-1">
-                                        @if($comment->hidden == \App\Enums\ActiveDisable::active)  {!! $comment->comment !!} @else <em>Bình luận đã bị ẩn</em> @endif
+                                    <div class="item-comment mt-1 {{$comment->hidden != \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
+                                        {!! $comment->comment !!}
+                                    </div>
+                                    <div class="item-hidden mt-1 {{$comment->hidden == \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
+                                        <em>Bình luận đã bị ẩn</em>
                                     </div>
                                     <div class="action-comment mt-1">
                                         @if($comment->admin_id)
@@ -86,7 +90,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label class="font-weight-bold">Bình luận</label>
-                                        <textarea rows="4" class="form-control" name="data[comment]" required></textarea>
+                                        <textarea rows="4" class="form-control summerdescription" name="data[comment]"></textarea>
                                         <input type="hidden" name="slug" value="{{$reply->translation->slug}}">
                                         <input type="hidden" name="data[parent_id]" value="{{$comment->id}}">
                                         <input type="hidden" value="{{$comment->id}}" name="reply">
@@ -94,15 +98,16 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <input type="text" name="data[name]" class="form-control" required value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="email" name="data[email]" class="form-control" required value="{{auth()->user()->email}}" placeholder="Email *">
+                                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi</button>
+                                    <div class="form-group text-right">
+                                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
+                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
                                     </div>
                                 </form>
                             </div>
@@ -125,8 +130,11 @@
                                                     <strong>{{$sub->name}}</strong>
                                                 @endif
                                             </div>
-                                            <div class="item-comment mt-1">
-                                                @if($sub->hidden == \App\Enums\ActiveDisable::active)  {!! $sub->comment !!} @else <em>Bình luận đã bị ẩn</em> @endif
+                                            <div class="item-comment mt-1 {{$sub->hidden != \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
+                                                  {!! $sub->comment !!}
+                                            </div>
+                                            <div class="item-hidden mt-1 {{$sub->hidden == \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
+                                               <em>Bình luận đã bị ẩn</em>
                                             </div>
                                             <div class="action-comment mt-1">
                                                 @if($sub->admin_id)
@@ -142,7 +150,7 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label class="font-weight-bold">Bình luận</label>
-                                                <textarea rows="4" class="form-control" name="data[comment]" required></textarea>
+                                                <textarea rows="4" class="form-control summerdescription" name="data[comment]"></textarea>
                                                 <input type="hidden" name="slug" value="{{$reply->translation->slug}}">
                                                 <input type="hidden" value="{{$sub->id}}" name="data[parent_id]">
                                                 <input type="hidden" value="{{$sub->id}}" name="reply">
@@ -150,15 +158,16 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <input type="text" name="data[name]" class="form-control" required value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                                        <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <input type="email" name="data[email]" class="form-control" required value="{{auth()->user()->email}}" placeholder="Email *">
+                                                        <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi</button>
+                                            <div class="form-group text-right">
+                                                <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
+                                                <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
                                             </div>
                                         </form>
                                     </div>
@@ -181,8 +190,11 @@
                                                             <strong>{{$sub_sub->name}}</strong>
                                                         @endif
                                                     </div>
-                                                    <div class="item-comment mt-1">
-                                                        @if($sub_sub->hidden == \App\Enums\ActiveDisable::active)  {!! $sub_sub->comment !!} @else <em>Bình luận đã bị ẩn</em> @endif
+                                                    <div class="item-comment mt-1 {{$sub_sub->hidden != \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
+                                                        {!! $sub_sub->comment !!}
+                                                    </div>
+                                                    <div class="item-hidden mt-1 {{$sub_sub->hidden == \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
+                                                        <em>Bình luận đã bị ẩn</em>
                                                     </div>
                                                     <div class="action-comment mt-1">
                                                         @if($sub_sub->admin_id)
@@ -203,20 +215,21 @@
                                                         <input type="hidden" name="slug" value="{{$reply->translation->slug}}">
                                                         <input type="hidden" value="{{$sub->id}}" name="data[parent_id]">
                                                         <input type="hidden" value="{{$sub_sub->id}}" name="reply">
-                                                        <textarea rows="4" class="form-control" name="data[comment]" required></textarea>
+                                                        <textarea rows="4" class="form-control summerdescription" name="data[comment]"></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <input type="text" name="data[name]" class="form-control" required value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <input type="email" name="data[email]" class="form-control" required value="{{auth()->user()->email}}" placeholder="Email *">
+                                                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi</button>
+                                                    <div class="form-group text-right">
+                                                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
+                                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -229,10 +242,6 @@
                 @endforeach
             </div>
         </div>
-
-
-
-
     </div>
     <script>
         $('.box-comment').hide();
@@ -242,5 +251,16 @@
             box.show();
             box.find('textarea').val('@'+name+': ');
         }
+
+        $('.ajax-link').click(function(){
+           let comment =  $(this).closest('.item-comment');
+           if($(comment).find('.item-comment').hasClass('d-none')){
+               $(comment).find('.item-comment').removeClass('d-none');
+               $(comment).find('.item-hidden').addClass('d-none');
+           }else{
+               $(comment).find('.item-comment').addClass('d-none');
+               $(comment).find('.item-hidden').removeClass('d-none');
+           }
+        })
     </script>
 @stop

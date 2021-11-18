@@ -23,6 +23,7 @@ class CreateMediasTable extends Migration
             $table->string('position')->nullable();
             $table->integer('type_id')->default(0);
             $table->string('type')->nullable();
+            $table->string('target')->default('_self');
             $table->integer('admin_id')->nullable();
             $table->integer('admin_edit')->nullable();
             $table->integer('public')->default(1);

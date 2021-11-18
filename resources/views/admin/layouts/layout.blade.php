@@ -44,7 +44,7 @@
     <div class="navbar-custom">
         <ul class="list-unstyled topnav-menu float-right mb-0">
             @php
-                $contact = \App\Models\Contact::whereRepId(0)->oldest('status')->orderByDesc('created_at')->get();
+                $contact = \App\Models\Contact::whereRepId(0)->oldest('status')->latest()->get();
             @endphp
             <li class="redirect-website"><a href="{{route('home')}}" class="nav-link dropdown-toggle mr-0 waves-effect waves-light" target="_blank"><i class="fas fa-home h3 text-white"></i></a> </li>
 
@@ -59,10 +59,10 @@
                 </div>
             </li>
 
-            <li class="dropdown notification-list"> <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="dripicons-bell noti-icon"></i> <span class="badge badge-pink rounded-circle noti-icon-badge">{{$contact->where('status',0)->count()}}</span></a>
+            <li class="dropdown notification-list"> <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="dripicons-bell noti-icon"></i> <span class="badge badge-pink rounded-circle noti-icon-badge">{{$contact->count()}}</span></a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <div class="dropdown-header noti-title">
-                        <h5 class="text-overflow m-0"><span class="float-right"> <span class="badge badge-danger float-right">{{$contact->where('status',0)->count()}}</span> </span>Thông báo</h5>
+                        <h5 class="text-overflow m-0"><span class="float-right"> <span class="badge badge-danger float-right">{{$contact->count()}}</span> </span>Thông báo</h5>
                     </div>
                     <div class="slimscroll noti-scroll">
                         @foreach($contact->take(10) as $item)
@@ -215,7 +215,9 @@
                             </a>
                         </li>
                     @endcan
+                    @canany(['blog.view', 'video.view','gallery.view'])
                     <li class="menu-title">Nội dung</li>
+                    @endcan
                     @can('blog.view')
                         <li class="">
                             <a href="javascript:void(0)">
@@ -270,8 +272,10 @@
                             </a>
                         </li>
                     @endcan
-                    <li class="menu-title">Bán hàng</li>
 
+                    @canany(['product.view', 'discount.view','order.view','user.view'])
+                    <li class="menu-title">Bán hàng</li>
+                    @endcan
                     @can('product.view')
                         <li>
                             <a href="javascript:void(0)">
@@ -338,11 +342,7 @@
                                 <li>
                                     <a href="{{route('admin.settings')}}">Cấu hình hệ thống</a>
                                 </li>
-                                @can('setting.alias')
-                                    <li>
-                                        <a href="{{route('admin.alias.index')}}">Đường dẫn</a>
-                                    </li>
-                                @endcan
+
                                 @can('setting.source')
                                     <li>
                                         <a href="{{route('admin.sources.index')}}">Sửa website</a>
@@ -357,14 +357,13 @@
 
                             </ul>
                         </li>
-                    @endcan
-
                     <li>
                         <a href="{{route('admin.logs')}}">
                             <i class="pe-7s-attention"></i>
                             <span>System Logs</span>
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </div>
             <!-- End Sidebar -->
@@ -587,9 +586,9 @@
     $(document).ready(function(){
         tinymce.init({
             language : 'vi',
-            plugins: "wordcount textcolor image  link  anchor   charmap media   lists responsivefilemanager",
+            plugins: "wordcount textcolor code preview image  link  anchor   charmap media   lists responsivefilemanager",
             toolbar: [
-                'fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat',
+                'preview code | fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat',
 
             ],
 
@@ -637,8 +636,6 @@
 
     });
 </script>
-
-
 <script type="text/javascript">
     var links = "{{route('home')}}";
 

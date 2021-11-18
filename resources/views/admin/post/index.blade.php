@@ -60,7 +60,7 @@
                                 <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Danh mục" name="category">
                                     <option value="">Danh mục (All)</option>
                                     @foreach($categories as $item )
-                                        <option value="{{$item->id}}" class="font-weight-bold">{{$item->name}}</option>
+                                        <option value="{{$item->id}}" class="font-weight-bold">{{$item->translation->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -197,8 +197,13 @@
             if($(categories).length > 0){
                 html += '<hr style="margin: 4px 0; border-top: 1px solid #e2e2e2">';
                 categories.map(function (val){
+                    let _route = "";
+
                     if(value.id != val.id){
-                        html  +=  '<span class="small badge badge-light-primary">'+ val.translation.name + '</span> ';
+                        let _slug = val.translation.slug;
+                        _route += '{{route('slug',':slug')}}'.replace(':slug', _slug);
+
+                        html  +=  '<a href="'+_route+'" class="small badge badge-light-primary" target="_blank">'+ val.translation.name + '</a> ';
                     }
                 }).join(' ');
             }

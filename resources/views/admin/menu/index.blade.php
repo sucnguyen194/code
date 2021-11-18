@@ -44,9 +44,10 @@
                         <div class="card-box">
                             <h4 class="header-title">Thêm nhanh</h4>
                             <p class="sub-header mb-0">
-                                * Phía dưới gồm các danh mục sản phẩm, bài viết, page... Click vào tên danh mục, bài viết... sẽ được thêm trực tiếp vào menu.
+                                * Phía dưới gồm các <code>danh mục sản phẩm, bài viết, page... Click vào tên danh mục, bài viết...</code>  sẽ được thêm trực tiếp vào menu.
                             </p>
                         </div>
+                        @can('product.view')
                         <div class="card-box">
                             <div class="form-group mb-0">
                                 <table class="table table-bordered table-hover bs-table"
@@ -54,7 +55,10 @@
                                        data-url="{{ route('admin.categories.data',['type' => \App\Enums\CategoryType::product]) }}"
                                        data-side-pagination="server"
                                        data-pagination="false"
-                                       data-search="true"
+                                       data-search="false"
+                                       data-show-refresh="false"
+                                       data-show-columns="false"
+                                       data-show-export="false"
                                        data-search-on-enter-key="false"
                                        data-show-search-button="false"
                                        data-sort-name="created_at"
@@ -76,7 +80,9 @@
 
                             </div>
                         </div>
+                        @endcan
 
+                        @can('blog.view')
                         <div class="card-box">
                             <div class="form-group mb-0">
                                 <table class="table table-bordered table-hover bs-table category-table"
@@ -84,7 +90,10 @@
                                        data-url="{{ route('admin.categories.data',['type' => \App\Enums\CategoryType::post]) }}"
                                        data-side-pagination="server"
                                        data-pagination="false"
-                                       data-search="true"
+                                       data-search="false"
+                                       data-show-refresh="false"
+                                       data-show-columns="false"
+                                       data-show-export="false"
                                        data-search-on-enter-key="false"
                                        data-show-search-button="false"
                                        data-sort-name="created_at"
@@ -113,7 +122,10 @@
                                        data-url="{{ route('admin.posts.data',['type' => \App\Enums\PostType::page]) }}"
                                        data-side-pagination="server"
                                        data-pagination="false"
-                                       data-search="true"
+                                       data-search="false"
+                                       data-show-refresh="false"
+                                       data-show-columns="false"
+                                       data-show-export="false"
                                        data-search-on-enter-key="false"
                                        data-show-search-button="false"
                                        data-sort-name="created_at"
@@ -132,12 +144,13 @@
                                 </table>
                             </div>
                         </div>
+                         @endcan
                     </div>
                     <div class="col-md-6">
                         <div class="card-box">
                             <h4 class="header-title"><b>Danh sách menu</b></h4>
                             <p class="sub-header">
-                                * Danh sách menu tùy thuộc vào "vị trí" hiển thị tại thời điển hiện tại (top, bottom, left,right,home).
+                                * Danh sách menu tùy thuộc vào <code>"vị trí"</code> hiển thị tại thời điển hiện tại <code>(top, bottom, left,right,home).</code>
                             </p>
 
                                 <textarea id="nestable-output" class="d-none" name="menuval"></textarea>
@@ -161,7 +174,7 @@
                                                 </div>
 
                                                 <div class="menu_action">
-                                                    @can('menu.create')
+                                                    @can('menu.edit')
                                                     <a href="{{route('admin.menus.edit',$items)}}" title="Sửa" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a>
                                                     @endcan
 
@@ -282,8 +295,8 @@
         });
     </script>
     <script>
+        @can('menu.destroy')
         $('.ajax-link-menu').off('dblclick');
-
         $(document).on('click','.ajax-link-menu',function(e){
             e.preventDefault();
             if($(this).data('confirm')){
@@ -303,6 +316,7 @@
                 })
             }
         });
+
         function ajaxmenu(ele){
             var url= $(ele).attr('href');
 
@@ -339,14 +353,15 @@
 
             return false;
         }
+        @endcan
     </script>
 
     <script>
         function titleFormatter(value, row){
-            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu font-weight-bold" data-id="'+row.id+'" data-type="{{\App\Enums\PostType::page}}">'+value +'</a>';
+            return '<a href="javascript:void(0)" class="addmenu font-weight-bold" data-id="'+row.id+'" data-type="{{\App\Enums\PostType::page}}">'+value +'</a>';
         }
         function categoryFormatter(value, row){
-            return '<a href="javascript:void(0)" title="Thêm mới" class="addmenu font-weight-bold" data-id="'+row.id+'" data-type="{{\App\Enums\CategoryType::category}}">'+value +'</a>';
+            return '<a href="javascript:void(0)" class="addmenu font-weight-bold" data-id="'+row.id+'" data-type="{{\App\Enums\CategoryType::category}}">'+value +'</a>';
         }
 
         $(document).on('post-body.bs.table.', function() {

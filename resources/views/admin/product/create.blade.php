@@ -226,7 +226,7 @@
                     <div class="card-box">
                         <div class="form-group mb-0">
                             <label>Danh mục chính</label>
-                            <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Chọn danh mục" name="data[category_id]">
+                            <select class="form-control" data-toggle="select2" data-placeholder="Chọn danh mục" name="data[category_id]">
                                 <option value="0">Chọn danh mục</option>
                                 @foreach($categories as $item )
                                     <option value="{{$item->id}}" class="font-weight-bold">{{$item->translation->name}}</option>

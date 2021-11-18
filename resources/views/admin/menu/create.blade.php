@@ -33,7 +33,7 @@
                                        name="translation[{{$key}}][name]">
                             </div>
                             <div class="form-group">
-                                <label>Đường dẫn <span class="required">*</span></label>
+                                <label>Đường dẫn </label>
                                 <div class="d-flex form-control">
                                     <span>{{route('home')}}/</span><input type="text" class="border-0 slug"
                                                                           id="{{$language->value}}"

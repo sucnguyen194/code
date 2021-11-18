@@ -112,10 +112,8 @@ class ProductController extends Controller
         $product = new Product;
         $product->fill($request->data);
 
-        if($request->input('data.price_sale')){
-            if($request->input('data.price_sale') > $request->input('data.price'))
-                return flash('Giá khuyến mại phải thấp hơn giá gốc',3);
-        }
+        if($request->input('data.price_sale') && $request->input('data.price_sale') > $request->input('data.price'))
+            return flash('Giá khuyến mại phải thấp hơn giá gốc',3);
 
         if ($request->input('fields.0.name')){
             $fields = [];
@@ -186,14 +184,12 @@ class ProductController extends Controller
      */
     public function update(UpdateTranslationRequest $request, Product $product)
     {
-         $this->authorize('product.create')
-         || $this->authorize('video.create')
-         || $this->authorize('gallery.create');
+         $this->authorize('product.edit')
+         || $this->authorize('video.edit')
+         || $this->authorize('gallery.edit');
 
-        if($request->input('data.price_sale')){
-            if($request->input('data.price_sale') > $request->input('data.price'))
-                return flash('Giá khuyến mại phải thấp hơn giá gốc',3);
-        }
+        if($request->input('data.price_sale') && $request->input('data.price_sale') > $request->input('data.price'))
+            return flash('Giá khuyến mại phải thấp hơn giá gốc',3);
 
         $product->forceFill($request->data);
 

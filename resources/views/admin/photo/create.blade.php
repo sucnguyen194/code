@@ -40,6 +40,16 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>Target</label>
+                    <select id="target" name="data[target]" class="form-control" data-toggle="select2">
+                        <option value="_self">-----</option>
+                        <option value="_parent">_parent</option>
+                        <option value="_top">_top</option>
+                        <option value="_blank">_blank</option>
+                        <option value="_self">_self</option>
+                    </select>
+                </div>
                 <div class="form-group {{!setting('site.languages') ? "d-none" : "" }} ">
                     <label>Ngôn ngữ</label>
                     <select data-toggle="select2" name="data[lang]" class="form-control">

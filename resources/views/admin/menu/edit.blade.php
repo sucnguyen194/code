@@ -35,11 +35,11 @@
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="form-group">
-                                    <label>Tiêu đề <span class="required">*</span></label>
+                                    <label>Tiêu đề</label>
                                     <input type="text" class="form-control" name="translation[{{$key}}][name]" value="{{$translation->name}}" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Đường dẫn <span class="required">*</span></label>
+                                    <label>Đường dẫn</label>
                                     <div class="d-flex form-control">
                                         <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$translation->locale}}" value="{{$translation->slug}}" language="{{$translation->locale}}" seo="{{$translation->language->name}}" onkeyup="ChangeToSlug(this);"name="translation[{{$key}}][slug]">
                                         <span>.html</span>
@@ -59,7 +59,7 @@
                                             <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
                                         </div>
                                         <div class="form-group">
-                                            <label>Đường dẫn <span class="required">*</span></label>
+                                            <label>Đường dẫn </label>
                                             <div class="d-flex form-control">
                                                 <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$language->value}}" value="{{old('data.alias')}}" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
                                                 <span>.html</span>

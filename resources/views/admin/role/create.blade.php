@@ -22,7 +22,7 @@
                                     <div class="item-systems">
                                         <div class="checkbox">
                                             <input id="checkbox{{$parent->id}}" type="checkbox"  name="permissions[]" value="{{$parent->id}}">
-                                            <label for="checkbox{{$parent->id}}"><span class="tree-sub"></span> {{$parent->title}} </label>
+                                            <label for="checkbox{{$parent->id}}" class="{{$loop->last ? "mb-0" : ""}}"><span class="tree-sub"></span> {{$parent->title}} </label>
                                         </div>
                                     </div>
                                 @endforeach
