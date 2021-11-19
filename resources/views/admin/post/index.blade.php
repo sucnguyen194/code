@@ -55,13 +55,10 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mr-2 mb-2" style="width: 200px">
-
+                            <div class="form-group mr-2 mb-2" style="width: 200px">
                                 <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Danh mục" name="category">
                                     <option value="">Danh mục (All)</option>
-                                    @foreach($categories as $item )
-                                        <option value="{{$item->id}}" class="font-weight-bold">{{$item->translation->name}}</option>
-                                    @endforeach
+                                    @include('admin.render.options', ['options' => $categories, 'selected' => 0])
                                 </select>
                             </div>
                         </form>

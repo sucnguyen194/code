@@ -700,15 +700,22 @@
                 dropdownParent: $(this).parent(),
                 placeholder: $(this).data('placeholder'),
             }).on('change', function(e){
-                var data = $(this).find('option:selected').text();
-                var text = data.replaceAll(/\xA0/g, "");
-                $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
+                var span = $('.select2-selection__rendered');
+
+                $.each(span, function (index, value) {
+                    var html = $(value).html();
+                    html = html.replaceAll('&nbsp;', "");
+                    $(value).html(html);
+                });
             });
 
-            var text = $(this).find('option:selected').text();
-            text = text.replaceAll(/\xA0/g, "");
-            $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
-            //console.log(test);
+            var span = $('.select2-selection__rendered');
+
+            $.each(span, function (index, value) {
+                var html = $(value).html();
+                html = html.replaceAll('&nbsp;', "");
+                $(value).html(html);
+            });
         });
 
         $("select.select2-multiple").on("select2:select select2:unselect", function (e) {
