@@ -549,7 +549,7 @@
                     </fieldset>
                     <fieldset title="6" class="p-0">
                         <legend>Cấu hình</legend>
-
+                        @can('blog.view')
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
@@ -585,7 +585,9 @@
                             </div>
                         </div>
                         <hr class="border-primary">
+                        @endcan
 
+                        @canany(['product.view','video.view','gallery.view'])
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
@@ -621,6 +623,8 @@
                             </div>
                         </div>
                         <hr class="border-primary">
+                        @endcan
+
                         @can('setting.language')
                         <div class="row">
                             <div class="col-lg-5">

@@ -3,7 +3,7 @@
     Thêm mới
 @stop
 @section('content')
-
+    <a href="javascript:window.print()">print</a>
     <div class="container-fluid">
         <!-- start page title -->
         <div class="row">

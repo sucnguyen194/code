@@ -67,6 +67,10 @@
                                         @else
                                             <strong>{{$comment->name}}</strong>
                                         @endif
+
+                                      <span class="app-rating-star">
+                                          {!! $comment->rating !!}
+                                      </span>
                                     </div>
                                     <div class="item-comment mt-1 {{$comment->hidden != \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
                                         {!! $comment->comment !!}
@@ -243,6 +247,8 @@
             </div>
         </div>
     </div>
+    <!-- rating js -->
+
     <script>
         $('.box-comment').hide();
         function openComment(id, name){

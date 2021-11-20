@@ -28,6 +28,21 @@ class Comment extends Model
         ]);
     }
 
+    public function getRatingAttribute(){
+        if(!$this->rate)
+            return;
+        $max = 5;
+        $html = null;
+        for($i = 0; $i < $this->rate; $i++ ){
+            $html .= '<i class="fa fa-star text-warning" aria-hidden="true"></i>';
+        }
+
+        for ($i =0 ; $i < $max - $this->rate; $i++){
+            $html .= '<i class="fa fa-star-o" aria-hidden="true"></i>';
+        }
+        return $html;
+    }
+
     public function scopeWithPostTitle($q){
         return $q->addSelect([
             'post_title' => Translation::select('name')->whereColumn('post_id', 'translations.post_id')->locale()->take(1)

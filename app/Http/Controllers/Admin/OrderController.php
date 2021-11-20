@@ -34,9 +34,9 @@ class OrderController extends Controller
             ->editColumn('created_at',function($order){
                 return $order->created_at->format('d/m/Y H:i:s');
             })
-            ->addColumn('amount',function($order){
-                return $order->amount;
-            })
+//            ->addColumn('amount',function($order){
+//                return $order->amount;
+//            })
             ->order(function ($q){
                 $q->orderBy(\request()->input('sort','created_at'),\request()->input('order','desc'));
             })->make(true);

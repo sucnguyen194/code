@@ -46,6 +46,8 @@ class PostController extends Controller
                 $q->with('translation');
             } , 'translation' => function($q){
                 $q->select('name','slug','post_id');
+            },'comments' => function($q){
+                $q->select('id','comment_type','comment_id','rate');
             }])->whereHas('translation')
             ->when(\request()->type,function ($q, $type){
                 return $q->whereType($type);
@@ -74,6 +76,14 @@ class PostController extends Controller
         return datatables()->of($posts)
             ->editColumn('title', function ($post){
                 return $post->translation->name;
+            })
+            ->editColumn('comments', function ($post){
+                return $post->comments->whereNotNull('rate')->count();
+            })
+            ->editColumn('rating', function ($post){
+                if(!$post->comments->count())
+                    return 0;
+                return  round($post->comments->sum('rate') /  $post->comments->whereNotNull('rate')->count(), 1);
             })
             ->editColumn('image', function ($post){
                 return $post->thumb;

@@ -38,7 +38,7 @@
                 <div class="entry-content">
                     {!! $translation->content !!}
                 </div>
-
+                @include('include.comment')
                 <div class="u-label g-bg-primary u-label--lg g-px-15 g-py-8 g-mr-10 g-mb-15">
                     Các tin khác
                 </div>

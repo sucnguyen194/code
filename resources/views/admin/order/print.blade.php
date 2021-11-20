@@ -11,7 +11,7 @@
                     <div class="CssBillPaperSize"
                          style="background-color:white; padding-left:4px;padding-right:4px; margin-left:0px; font-family:tahoma;line-height: 18px;">
                         <div class="CssPrintRow"
-                             style="text-align:center;font-weight:bold;font-size:16px; margin-bottom: 15px">{{setting('site.name')}}</div>
+                             style="text-align:center;font-weight:bold;font-size:16px; margin-bottom: 15px">{{setting('site.name', 1)}}</div>
                         <div class="CssPrintRow" style="font-size: 13px;">{!! setting('contact.detail') !!}</div>
                         <div style="text-align:center">-----------------------------------</div>
                         <div
@@ -21,7 +21,7 @@
                         <div class="CssPrintRow" style="padding: 2px 0;font-size: 13px;">Ngày giờ: {{date('d/m/Y H:i:s', time())}}
                         </div>
                         <div class="CssPrintRow" style="padding: 2px 0;font-size: 13px;">Thu Ngân: Quản
-                            trị {{setting()->name}}</div>
+                            trị {{setting('site.name', 1)}}</div>
                          <div class="CssPrintRow">Số phiếu: #XBA.2021.1084</div>
                         <div class="CssPrintRow" style="padding: 2px 0 4px 0;font-size: 13px;">Khách hàng: {{$order->name}} <span>- {{$order->phone}}</span> <span>- {{$order->address}}</span>
                         </div>
@@ -75,7 +75,7 @@
                                 </tr>
                                 <tr>
                                     <td class="CssNoLine" colspan="4"><span
-                                            style="font-style: italic; font-weight: bold">Bằng chữ:  @{{ DocTienBangChu(total)  }} </span>
+                                            style="font-style: italic; font-weight: bold">Bằng chữ:  <span class="read-total"></span> </span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -108,21 +108,11 @@
             </div>
         </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-<script>
-    var app = new Vue({
-        el: "#detailPrintOrder",
-        data: {
-            total: {{$order->total}},
-        },
-        watch:{
-            total:function(val){
-                app.total = val;
-                console.log(val);
-            }
-        }
 
-    })
+<script>
+    let total = {{$order->total}};
+    $('.read-total').html(DocTienBangChu(total));
+
 
     function DocSo3ChuSo(baso)
     {

@@ -57,7 +57,7 @@ class CommentController extends Controller
             })
 
             ->editColumn('comment_last',function ($comment){
-                return str_limit($comment->comments->last()->comment, 1000);
+                return str_limit($comment->comments->last()->comment, 50);
             })
 
             ->editColumn('comment_count',function ($comment){
@@ -65,6 +65,11 @@ class CommentController extends Controller
             })
             ->editColumn('commenter',function ($comment){
                 return $comment->comments->last()->name;
+            })
+            ->editColumn('ratting',function ($comment){
+                if(!$comment->comments->whereNotNull('rate')->count())
+                    return 0;
+                return  round($comment->comments->whereNotNull('rate')->sum('rate') / $comment->comments->whereNotNull('rate')->count(), 1);
             })
 
             ->editColumn('created_at', function ($comment){

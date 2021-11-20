@@ -96,6 +96,11 @@
                                 <th data-field="price" data-formatter="priceFormatter">
                                     Giá
                                 </th>
+                                @can('comment.view')
+                                    <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
+                                        Đánh giá
+                                    </th>
+                                @endcan
 
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
                                     Tạo lúc
@@ -157,7 +162,10 @@
                 $('.showImage').attr('src', image);
             })
         })
-
+        function commentFormatter(value, row){
+            let html = value + ' ( ' + row.rating + ' <i class="fa fa-star text-warning" aria-hidden="true"></i> )';
+            return html;
+        }
         function sortFormatter(value, row) {
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';
         }

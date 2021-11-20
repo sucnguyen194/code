@@ -52,6 +52,9 @@
                                 <th data-field="commenter">
                                    Người bình luận
                                 </th>
+                                <th data-field="ratting" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
+                                    Đánh giá
+                                </th>
 
                                 <th data-field="comment_count" data-width="150" data-sortable="true" data-visible="true">
                                     Chưa trả lời
@@ -84,9 +87,12 @@
                 $table.bootstrapTable('refresh');
             })
         })
-
+        function commentFormatter(value, row){
+            let html = value + ' <i class="fa fa-star text-warning" aria-hidden="true"></i>';
+            return html;
+        }
         function titleFormatter(value, row){
-            return '<a href="'+ '{{ route('slug', ':slug') }}'.replace(':slug',row.translation.slug) +'" target="_blank">'+ value +'</a>';
+            return '<a href="'+ '{{ route('slug', ':slug') }}'.replace(':slug',row.translation.slug) +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
         }
 
         function actionFormatter(value, row){

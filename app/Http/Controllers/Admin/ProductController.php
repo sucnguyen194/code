@@ -39,10 +39,12 @@ class ProductController extends Controller
                 $q->with('translation', function ($q){
                     $q->select('id','name','slug','category_id');
                 });
-            },'admin','categories' => function($q){
+            },'categories' => function($q){
                     $q->with('translation');
              } ,'translation' => function($q){
                 $q->select('name','slug','product_id');
+            },'admin','comments' => function($q){
+                $q->select('id','comment_type','comment_id','rate');
             }])->whereHas('translation')->whereType(request()->type)
             ->when(request()->author,function($q, $author){
                 $q->where('admin_id',$author);
@@ -74,6 +76,14 @@ class ProductController extends Controller
             })
             ->editColumn('image',function($product){
                 return $product->images;
+            })
+            ->editColumn('comments', function ($product){
+                return $product->comments->whereNotNull('rate')->count();
+            })
+            ->editColumn('rating', function ($product){
+                if(!$product->comments->count())
+                    return 0;
+                return  round($product->comments->sum('rate') /  $product->comments->whereNotNull('rate')->count(), 1);
             })
             ->editColumn('created_at', function ($product){
                 return $product->created_at->diffForHumans();
