@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ActiveDisable;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Contact;
@@ -42,7 +43,10 @@ class ContactController extends Controller
                 return $contact->note ? str_limit($contact->note,100) : "Khách hàng yêu cầu nhận thông báo";
             })
             ->editColumn('updated_at',function ($contact){
-                return $contact->updated_at->diffForHumans();
+                if($contact->updated_at != $contact->created_at)
+                    return $contact->updated_at->diffForHumans();
+
+                return;
             })
             ->editColumn('created_at',function ($contact){
                 return $contact->created_at->diffForHumans();
@@ -86,8 +90,8 @@ class ContactController extends Controller
 
         $replys = Contact::whereRepId($contact->id)->get();
 
-        if($contact->status == 0)
-            $contact->update(['status' => 1,'user_edit' => \Auth::id()]);
+        if($contact->status == ActiveDisable::disable)
+            $contact->update(['status' => ActiveDisable::active,'admin_edit' => \Auth::id()]);
 
         return view('admin.contact.edit',compact('contact','replys'));
     }
@@ -119,7 +123,7 @@ class ContactController extends Controller
         ])->validate();
         $post = new Contact();
         $post->forceFill($request->data);
-        $post->user_id = auth()->id();
+        $post->admin_id = auth()->id();
         $post->rep_id = $contact->id;
         $post->save();
 

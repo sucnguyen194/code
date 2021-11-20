@@ -26,12 +26,6 @@ class Support extends Model
         return $this->hasOne(Translation::class);
     }
 
-    public function scopeWithTranslation($q){
-        $q->with('translation', function ($q){
-            $q->locale();
-        });
-    }
-
     public function admin(){
         return $this->belongsTo(Admin::class);
     }
@@ -45,6 +39,11 @@ class Support extends Model
                 return route('admin.supports.index');
                 break;
         }
+    }
+
+
+    public function scopeOfType($q, $type){
+        return $q->with('translation')->whereHas('translation')->whereType($type)->public()->oldest('sort')->latest();
     }
 
     public function scopePublic($q){

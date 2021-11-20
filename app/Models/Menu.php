@@ -31,38 +31,26 @@ class Menu extends Model
     }
 
     public function scopeSort($q){
-        $q->oldest('sort')->oldest();
+        $q->oldest('sort');
     }
 
-    public function scopeTop($q){
-        $q->wherePosition('top')->oldest('sort');
-    }
-
-    public function scopeBottom($q){
-        $q->wherePosition('bottom')->oldest('sort');
-    }
-
-    public function scopeLeft($q){
-        $q->wherePosition('left')->oldest('sort');
-    }
-
-    public function scopeHome($q){
-        $q->wherePosition('home')->oldest('sort');
-    }
-
-    public function scopeRight($q){
-        $q->wherePosition('right')->oldest('sort');
+    public function scopeOfPosition($q, $position){
+        return $q->with('translation')->whereHas('translation')->wherePosition($position)->sort();
     }
 
     public function getSlugAttribute(){
-        $menu = $this->withTranslation();
+        $menu = $this->translation;
 
-        if($menu->path)
-            return $menu->path;
-        if($menu->translation->slug)
-            return route('slug',$menu->translation->slug);
+        if($this->path)
+            return $this->path;
+        if($menu->slug)
+            return route('slug',$menu->slug);
 
         return route('home');
+    }
+
+    public function getNameAttribute(){
+        return $this->translation->name;
     }
 
     public static function boot(){

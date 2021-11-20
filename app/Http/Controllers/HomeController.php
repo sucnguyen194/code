@@ -115,26 +115,25 @@ class HomeController extends Controller
                 switch ($translation->category->type) {
                     case (CategoryType::product):
 
-                        $products = Product::with(['category','admin','categories', 'translation'])->whereHas('translation')->orwhereHas('categories',function($q) use ($translation) {
+                        $products = Product::with(['category','admin','categories', 'translation'])->whereType(ProductType::product)->where('category_id',$translation->category->id)
+                            ->whereHas('translation')->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
-                        })->orWhere('category_id',$translation->category->id)
-                            ->when(request()->attr, function ($q){
+                            })->when(request()->attr, function ($q){
                                 $q->whereHas('attributes', function ($q) {
                                     $q->whereHas('translations', function($q) {
                                         $q->whereIn('name', explode(',', request()->attr));
                                     });
                                 });
                             })
-                            ->public()->paginate(setting('site.product.category') ?? 20);
+                            ->public()->latest()->paginate(setting('site.product.category') ?? 20);
 
                         return view('product.category', compact('translation','products'));
                         break;
                     case (CategoryType::post):
 
-                        $posts = Post::with(['category','admin','categories', 'translation'])->whereHas('translation')->orwhereHas('categories',function($q) use ($translation) {
+                        $posts = Post::with(['category','admin','categories', 'translation'])->whereType(PostType::post)->whereHas('translation')->where('category_id',$translation->category->id)->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
-                        })->orWhere('category_id',$translation->category->id)
-                        ->public()->paginate(setting('site.post.category') ?? 12);
+                        })                        ->public()->latest()->paginate(setting('site.post.category') ?? 12);
 
                         return view('post.category', compact('translation','posts'));
                         break;

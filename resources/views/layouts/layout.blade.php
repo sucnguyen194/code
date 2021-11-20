@@ -32,14 +32,35 @@
   <base href="{{route('home')}}">
 
   <!-- Latest compiled and minified CSS & JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css" integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{{--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>--}}
+
+{{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--}}
+{{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--}}
+{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css" integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
 {{--    <!-- Vendor js -->--}}
 {{--    <script src="/lib/assets/js/vendor.min.js"></script>--}}
-
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C500%2C600%2C700%2C800%7CPlayfair+Display%7CRoboto%7CRaleway%7CSpectral%7CRubik"/>
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="/assetsfw/vendor/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assetsfw/vendor/icon-line/css/simple-line-icons.css"/>
+    <link rel="stylesheet" href="/assetsfw/vendor/icon-line-pro/style.css"/>
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/assetsfw/vendor/icon-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assetsfw/vendor/icon-hs/style.css"/>
+    <link rel="stylesheet" href="/assetsfw/vendor/hamburgers/hamburgers.min.css"/>
+    <link rel="stylesheet" href="/assetsfw/vendor/hs-megamenu/src/hs.megamenu.css"/>
+    <link rel="stylesheet" href="/assetsfw/vendor/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" href="/assetsfw/vendor/fancybox/jquery.fancybox.min.css"/>
+    <link rel="stylesheet" href="/assets/masterslidejs/masterslider.main.css"/>
+    <!-- CSS Template -->
+    <link rel="stylesheet" href="/assetsfw/css/unify-core.css"/>
+    <link rel="stylesheet" href="/assetsfw/css/unify-components.css"/>
+    <link rel="stylesheet" href="/assets/css/styles.op-tamloi.css"/>
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="/assetsfw/css/custom.css"/>
     <!--*********************************---->
     {!! setting('site.remarketing_header') !!}
 
@@ -56,9 +77,9 @@
   <!--************START*************---->
 
 <!-- Vendor js -->
-<script src="{{asset('lib/assets/js/vendor.min.js')}}"></script>
+{{--<script src="{{asset('lib/assets/js/vendor.min.js')}}"></script>--}}
 <!-- rating js -->
-<script src="https://coderthemes.com/adminox/layouts/vertical/assets/libs/ratings/jquery.raty-fa.js"></script>
+{{--<script src="https://coderthemes.com/adminox/layouts/vertical/assets/libs/ratings/jquery.raty-fa.js"></script>--}}
 <!-- Tost-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
 
@@ -334,19 +355,19 @@
 </script>
 
 <!--*************************---->
-@if(setting('contact.numbercall'))
+
 <!--****STARTACTION CALL*****---->
 {{--<div class="action-call">--}}
 {{--  <div id="phonering-alo-phoneIcon" class="phonering-alo-phone phonering-alo-green phonering-alo-show">--}}
 {{--    <div class="phonering-alo-ph-circle"></div>--}}
 {{--    <div class="phonering-alo-ph-circle-fill"></div>--}}
 {{--    <div class="phonering-alo-ph-img-circle">--}}
-{{--      <a class="pps-btn-img " href="tel:{{setting('numbercall')}}"> <img src="https://wonderads.vn/themes/default/images/v8TniL3.png" alt="Liên hệ" width="50" class="img-responsive"/> </a>--}}
+{{--      <a class="pps-btn-img " href="tel:"> <img src="https://wonderads.vn/themes/default/images/v8TniL3.png" alt="Liên hệ" width="50" class="img-responsive"/> </a>--}}
 {{--    </div>--}}
 {{--  </div>--}}
 {{--</div>--}}
 <!--*****END ACTION CALL*****---->
-@endif
+
 
 @if(setting('api.chat_message_id'))
 <div class="fb-customerchat" page_id="{{setting('api.chat_message_id')}}" greeting_dialog_delay="30" logged_in_greeting="{{setting('api.chat_message_text')}} " logged_out_greeting="{{setting('api.chat_message_text')}} "></div>

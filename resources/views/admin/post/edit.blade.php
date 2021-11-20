@@ -87,12 +87,12 @@
                                         <hr>
                                         <div class="form-group">
                                             <label>Tiêu đề trang</label>
-                                            <p class="font-13">* Ghi chú: Giới hạn tối đa 70 ký tự</p>
+                                            <p class="font-13">* Giới hạn tối đa 70 ký tự</p>
                                             <input type="text" maxlength="70" name="translation[{{$key}}][title_seo]" class="form-control" id="alloptions" value="{{$translation->title_seo}}" language="title_seo_{{$translation->locale}}" onkeyup="changeToTitleSeo(this)" />
                                         </div>
                                         <div class="form-group">
                                             <label>Mô tả trang</label>
-                                            <p class="font-13">* Ghi chú: Giới hạn tối đa 320 ký tự</p>
+                                            <p class="font-13">* Giới hạn tối đa 320 ký tự</p>
                                             <textarea  class="form-control" rows="3" name="translation[{{$key}}][description_seo]" maxlength="320" id="alloptions" language="description_seo_{{$translation->locale}}" onkeyup="changeToDescriptionSeo(this)">{{$translation->description_seo}}</textarea>
                                         </div>
                                         <div class="form-group mb-0">
@@ -149,12 +149,12 @@
                                                 <hr>
                                                 <div class="form-group">
                                                     <label>Tiêu đề trang</label>
-                                                    <p class="font-13">* Ghi chú: Giới hạn tối đa 70 ký tự</p>
+                                                    <p class="font-13">* Giới hạn tối đa 70 ký tự</p>
                                                     <input type="text" maxlength="70" name="translation[{{$key}}][title_seo]" class="form-control" id="alloptions" language="title_seo_{{$language->value}}" onkeyup="changeToTitleSeo(this)" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Mô tả trang</label>
-                                                    <p class="font-13">* Ghi chú: Giới hạn tối đa 320 ký tự</p>
+                                                    <p class="font-13">* Giới hạn tối đa 320 ký tự</p>
                                                     <textarea  class="form-control" rows="3" name="translation[{{$key}}][description_seo]" maxlength="320" id="alloptions" language="description_seo_{{$language->value}}" onkeyup="changeToDescriptionSeo(this)"></textarea>
                                                 </div>
 
@@ -234,7 +234,7 @@
                                 <div class="card-box">
                                     <div class="form-group mb-0">
                                         <label>Tag</label>
-                                        <p class="font-13">* Ghi chú: Từ khóa được phân chia sau dấu phẩy <strong>","</strong></p>
+                                        <p class="font-13">* Từ khóa được phân chia sau dấu phẩy <strong>","</strong></p>
 
                                         <input type="text" name="translation[{{$key}}][tag]" value="{!! $translation->tag !!}" class="form-control"  data-role="tagsinput" placeholder="add tags"/>
                                     </div>
@@ -247,7 +247,7 @@
                                 <div class="card-box">
                                     <div class="form-group mb-0">
                                         <label>Tag</label>
-                                        <p class="font-13">* Ghi chú: Từ khóa được phân chia sau dấu phẩy <strong>","</strong></p>
+                                        <p class="font-13">* Từ khóa được phân chia sau dấu phẩy <strong>","</strong></p>
 
                                         <input type="text" name="translation[{{$key}}][tag]" value="" class="form-control"  data-role="tagsinput" placeholder="add tags"/>
                                     </div>

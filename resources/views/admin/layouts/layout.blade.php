@@ -864,9 +864,9 @@
         let  hidden = $(this).data('hidden');
         if ($(this).val()){
             $(target).removeClass('d-none').attr('src', $(this).val()).show();
-            $(hidden).hide();
+            $(hidden).removeClass('d-block').hide();
         }else{
-            $(target).hide();
+            $(target).removeClass('d-block').hide();
             $(hidden).removeClass('d-none').show();
         }
     });

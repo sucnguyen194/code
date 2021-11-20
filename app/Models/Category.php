@@ -42,12 +42,37 @@ class Category extends Model
         return $this->hasMany(Category::class,'parent_id');
     }
 
+    public function getNameAttribute(){
+        return $this->translation->name;
+    }
+
+    public function getSlugAttribute(){
+        return route('slug', $this->translation->slug);
+    }
+
+    public function getDescriptionAttribute(){
+        return $this->translation->description;
+    }
+
+    public function scopeOfType($q, $type){
+        return $q->whereType($type)->with('translation')->whereHas('translation')->public()->sort();
+    }
+
+    public function scopeSort($q){
+        return $q->oldest('sort')->latest();
+    }
+
     public function scopePublic($q) {
         $q->wherePublic(ActiveDisable::active);
     }
 
     public function scopeStatus($q) {
         $q->whereStatus(ActiveDisable::active);
+    }
+
+    public function getThumbAttribute(){
+
+        return resize_image($this->image);
     }
 
     public static function boot(){

@@ -13,4 +13,5 @@ final class Position extends Enum
 {
     const Slider =   'Slider';
     const Banner =   'Banner';
+    const Logo =   'Logo';
 }

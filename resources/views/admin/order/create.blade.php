@@ -465,7 +465,7 @@
                                     </table>
                                 </div>
                                 <div class="CssBillDetail" style="font-size: 12px">
-                                    <strong>* Ghi chú: <div v-html="print_note" style="padding-left: 15px"></div></strong>
+                                    <strong>* <div v-html="print_note" style="padding-left: 15px"></div></strong>
                                 </div>
                                 <div style="font-style:italic; margin-top:10px;text-align:center; font-size: 13px">Khách hàng vui lòng kiểm tra kĩ, hàng đã thanh toán, ra khỏi kho, kho không chịu trách nhiệm!</div>
                                 <div style="margin-top:10px;text-align:center; font-size: 13px">Xin cảm ơn Quý khách!</div>

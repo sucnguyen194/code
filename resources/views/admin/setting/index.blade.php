@@ -133,7 +133,7 @@
                                     </div>
                                     <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif</p>
                                     <div class="dropzone p-2 text-center">
-                                            <div class="dz-message text-center needsclick mb-1 {{!setting('site.logo') ? 'd-block' : 'd-none'}}" id="site_logo_hidden">
+                                            <div class="dz-message text-center needsclick mb-1 {{!setting('site.logo') ? '' : 'd-none'}}" id="site_logo_hidden">
                                                 <label for="logo-upload" class="w-100 mb-0">
                                                     <div class="icon-dropzone pt-2">
                                                         <i class="h1 text-muted dripicons-cloud-upload"></i>
@@ -142,7 +142,7 @@
                                                 </label>
                                             </div>
 
-                                        <img src="{{setting('site.logo')}}" class="rounded mb-1 {{setting('site.logo') ? 'd-block' : 'd-none'}}" id="site_logo_src">
+                                        <img src="{{setting('site.logo')}}" class="rounded mb-1 {{setting('site.logo') ? '' : 'd-none'}}" id="site_logo_src">
 
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
@@ -160,7 +160,7 @@
                                     </div>
                                     <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif</p>
                                     <div class="dropzone p-2 text-center">
-                                        <div class="dz-message text-center needsclick mb-1 {{!setting('site.og_image') ? 'd-block' : 'd-none'}}" id="site_og_hidden">
+                                        <div class="dz-message text-center needsclick mb-1 {{!setting('site.og_image') ? '' : 'd-none'}}" id="site_og_hidden">
                                             <label for="og-upload" class="w-100 mb-0">
                                                 <div class="icon-dropzone pt-2">
                                                     <i class="h1 text-muted dripicons-cloud-upload"></i>
@@ -168,7 +168,7 @@
                                                 <span class="text-muted font-13">Sử dụng nút <strong>Chọn ảnh</strong> để thêm ảnh</span>
                                             </label>
                                         </div>
-                                        <img src="{{setting('site.og_image')}}" class="rounded mb-1 {{setting('site.og_image') ? 'd-block' : 'd-none'}}" id="site_og_src">
+                                        <img src="{{setting('site.og_image')}}" class="rounded mb-1 {{setting('site.og_image') ? '' : 'd-none'}}" id="site_og_src">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
                                             <input type="text" name="data[site.og_image]" placeholder="Đường dẫn ảnh" id="site_og_url" value="{{setting('site.og_image')}}" class="form-control og-src" data-target="#site_og_src" data-hidden="#site_og_hidden">
@@ -185,7 +185,7 @@
                                     </div>
                                     <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif / Tỷ lệ 1:1 / Kích thước gợi ý 50x50 (px)</p>
                                     <div class="dropzone p-2 text-center">
-                                        <div class="dz-message text-center needsclick mb-1 {{!setting('site.favicon') ? 'd-block' : 'd-none'}}" id="site_favicon_hidden">
+                                        <div class="dz-message text-center needsclick mb-1 {{!setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_hidden">
                                             <label for="favicon-upload" class="w-100 mb-0">
                                                 <div class="icon-dropzone pt-2">
                                                     <i class="h1 text-muted dripicons-cloud-upload"></i>
@@ -193,7 +193,7 @@
                                                 <span class="text-muted font-13">Sử dụng nút <strong>Chọn ảnh</strong> để thêm ảnh</span>
                                             </label>
                                         </div>
-                                        <img src="{{setting('site.favicon')}}" class="rounded mb-1 {{setting('site.favicon') ? 'd-block' : 'd-none'}}" id="site_favicon_src">
+                                        <img src="{{setting('site.favicon')}}" class="rounded mb-1 {{setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_src">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
                                             <input type="text" name="data[site.favicon]" placeholder="Đường dẫn ảnh" id="site_favicon_url" value="{{setting('site.favicon')}}" class="form-control favicon-src" data-target="#site_favicon_src" data-hidden="#site_favicon_hidden">

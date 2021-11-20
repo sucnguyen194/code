@@ -151,8 +151,8 @@ if(!function_exists('disable')){
 }
 
 if(!function_exists('str_limit')){
-    function str_limit($content, $limit=50){
-        return strip_tags(\Illuminate\Support\Str::limit($content, $limit));
+    function str_limit($content, $limit=30){
+        return \Illuminate\Support\Str::words(strip_tags($content), $limit);
     }
 }
 

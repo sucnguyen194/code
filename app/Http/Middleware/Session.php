@@ -30,9 +30,7 @@ class Session
         }else{
             $languages = Language::oldest('status')->take(1)->get();
         }
-
         session()->put('language', $languages);
-
 
         return $next($request);
     }

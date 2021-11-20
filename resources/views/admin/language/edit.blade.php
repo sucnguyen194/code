@@ -20,12 +20,12 @@
                 </div>
                 <div class="form-group">
                     <label>Tên ngôn ngữ <span class="required">*</span></label>
-                    <p>* Ghi chú: tên ngôn ngữ phải khác nhau</p>
+                    <p>* tên ngôn ngữ phải khác nhau</p>
                     <input type="text" class="form-control" value="{{$language->name}}" name="name" required>
                 </div>
                 <div class="form-group">
                     <label>Giá trị <span class="required">*</span></label>
-                    <p>* Ghi chú: Giới hạn tối đa 2 ký tự</p>
+                    <p>* Giới hạn tối đa 2 ký tự</p>
                     <input type="text" maxlength="2" value="{{$language->value}}" name="value" class="form-control" id="alloptions" />
                 </div>
 

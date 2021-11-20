@@ -152,8 +152,8 @@ Route::group(['prefix' => 'ajax','as' => 'ajax.'], function () {
 
 Route::get('change/{lang}/languages', [App\Http\Controllers\AjaxController::class,'change'])->name('languages.change');
 
-Route::get('lien-he.html', [App\Http\Controllers\ContactController::class,'index']);
-Route::get('contact.html', [App\Http\Controllers\ContactController::class,'index'])->name('contact.index');
+//Route::get('lien-he.html', [App\Http\Controllers\ContactController::class,'index']);
+//Route::get('contact.html', [App\Http\Controllers\ContactController::class,'index'])->name('contact.index');
 Route::post('contact', [App\Http\Controllers\ContactController::class,'store'])->name('send.contact');
 
 Route::get('tag/{alias}',[App\Http\Controllers\SearchController::class,'tag'])->name('tag.show');

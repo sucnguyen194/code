@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ActiveDisable;
 use App\Enums\ProductType;
+use App\Enums\TakeItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -75,6 +76,18 @@ class Product extends Model
         return route('slug', $this->translation->slug);
     }
 
+    public function getNameAttribute(){
+        return $this->translation->name;
+    }
+
+    public function getDescriptionAttribute(){
+        return $this->translation->description;
+    }
+
+    public function getContentAttribute(){
+        return $this->translation->content;
+    }
+
     public function getRouteAttribute(){
         switch ($this->type){
             case ProductType::product:
@@ -83,6 +96,33 @@ class Product extends Model
             default:
                 return;
         }
+    }
+
+    public function scopeOfCategory($q, $category){
+        return $q->whereCategoryId($category)->orWhere(function($q) use ($category){
+            $q->whereHas('categories',function($q) use ($category){
+                $q->whereCategoryId($category);
+            });
+        });
+    }
+
+    public function scopeOfTake($q, $take){
+        if($take == TakeItem::index)
+            return $q->take(setting('site.product.index'));
+        if($take == TakeItem::category)
+            return $q->take(setting('site.product.category'));
+        if($take == TakeItem::replated)
+            return $q->take(setting('site.product.related'));
+
+        return $q->take(6);
+    }
+
+    public function scopeOfType($q, $type){
+        return $q->whereType($type)->with('translation')->whereHas('translation')->public();
+    }
+
+    public function scopeSort($q){
+        return $q->oldest('sort')->latest();
     }
 
     public function scopePublic($q){
