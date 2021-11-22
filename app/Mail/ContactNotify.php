@@ -29,8 +29,8 @@ class ContactNotify extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_USERNAME'), setting('site.name.'.session('lang')))
-            ->view('Emails.contact')
-            ->subject(setting('site.name.'.session('lang')));
+        return $this->from(env('MAIL_USERNAME'), setting('site.name',1))
+            ->markdown('emails.contact')
+            ->subject('Liên hệ từ khách hàng!');
     }
 }

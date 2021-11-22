@@ -10,7 +10,6 @@ class AjaxController extends Controller {
 
     public function create($id, $qty = 1, $options = null){
         $product = Product::findOrFail($id);
-        $category = Category::find($product->category_id);
         $weight = $request->weight ?? 0;
         $slug = route('alias',$product->alias);
         $image = asset($product->image);
@@ -29,8 +28,8 @@ class AjaxController extends Controller {
                 'price_old' => $price_old,
                 'image'=> $image,
                 'slug'=> $slug,
-                'category_id'=>$category->id ?? 0,
-                'category_name'=>$category->name ?? null,
+                'category_id'=> optional($product->category->id),
+                'category_name'=> optional($product->category->name),
                 'attributes' => $options
             ]
         ]);

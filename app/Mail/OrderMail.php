@@ -30,7 +30,7 @@ class OrderMail extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_USERNAME'), setting('site.name.'.session('lang')))
-            ->view('Emails.order')
+            ->markdown('emails.order')
             ->with([
                 'name' => auth()->user()->name ?? $this->order->name,
                 'phone' => $this->order->phone,
