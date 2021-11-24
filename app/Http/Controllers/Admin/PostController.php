@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ActiveDisable;
 use App\Enums\CategoryType;
 use App\Enums\PostType;
+use App\Enums\TagType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTranslationRequest;
 use App\Http\Requests\UpdateTranslationRequest;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\Translation;
 use Illuminate\Support\Facades\Auth;
 
@@ -110,7 +112,9 @@ class PostController extends Controller
             $q->select('id','name','category_id');
         })->whereHas('translation')->whereType(CategoryType::post)->public()->latest()->get();
 
-        return view('admin.post.create',compact('categories'));
+        $tags = Tag::ofType(TagType::post)->get();
+
+        return view('admin.post.create',compact('categories','tags'));
     }
 
     /**
@@ -159,7 +163,9 @@ class PostController extends Controller
 
         $translations = $post->translations->load('language');
 
-        return  view('admin.post.edit', compact('post','categories','translations'));
+        $tags = Tag::ofType(TagType::post)->get();
+
+        return  view('admin.post.edit', compact('post','categories','translations','tags'));
     }
 
 

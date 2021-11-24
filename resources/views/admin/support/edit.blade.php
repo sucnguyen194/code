@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Đội ngữ hỗ trợ #ID{{$support->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.support_team')}} #ID{{$support->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,19 +36,19 @@
                     @foreach($translations as $key => $translation)
                         <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
                             <div class="form-group">
-                                <label for="name">Tên nhân viên <span class="required">*</span></label>
+                                <label for="name">{{__('lang.staff')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" name="translation[{{$key}}][name]" id="name" value="{{$translation->name}}">
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span id="basic-addon1" class="input-group-text">Chức vụ</span>
+                                        <span id="basic-addon1" class="input-group-text">{{__('lang.roll')}}</span>
                                     </div>
                                     <input type="text" class="form-control" value="{{$translation->job}}" id="job" name="translation[{{$key}}][job]">
                                 </div>
                             </div>
                             <div class="form-group" style="max-width: 770px">
-                                <label for="description">Đánh giá </label>
+                                <label for="description">{{__('lang.review')}} </label>
                                 <textarea class="form-control summernote" id="summernote" data-height="200"
                                           name="translation[{{$key}}][description]">{!! $translation->description !!}</textarea>
                             </div>
@@ -61,19 +61,19 @@
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                                 <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
                                     <div class="form-group">
-                                        <label>Tên nhân viên <span class="required">*</span></label>
+                                        <label>{{__('lang.staff')}} <span class="required">*</span></label>
                                         <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" name="translation[{{$key}}][name]" >
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span id="basic-addon1" class="input-group-text">Chức vụ</span>
+                                                <span id="basic-addon1" class="input-group-text">{{__('lang.roll')}}</span>
                                             </div>
                                             <input type="text" class="form-control" id="job" name="translation[{{$key}}][job]">
                                         </div>
                                     </div>
                                     <div class="form-group" style="max-width: 770px">
-                                        <label for="description">Đánh giá</label>
+                                        <label for="description">{{__('lang.review')}}</label>
                                         <textarea class="form-control summernote" id="summernote" data-height="200"
                                                   name="translation[{{$key}}][description]"></textarea>
                                     </div>
@@ -90,12 +90,12 @@
                                     </div>
                                 </div>
                                 <div class="media-body ml-3">
-                                    <label class="form-label">Hình ảnh</label>
+                                    <label class="form-label">{{__('lang.image')}}</label>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <input name="data[image]" id="image_url" value="{{$support->image}}" data-target="#image_src"  type="text" class="form-control" placeholder="http://">
                                             <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >Upload..</label>
+                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >{{__('lang.upload')}}..</label>
                             </span>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span id="basic-addon1" class="input-group-text">SĐT</span>
+                                    <span id="basic-addon1" class="input-group-text">{{__('lang.phone')}}</span>
                                 </div>
                                 <input type="tel" class="form-control" id="hotline" value="{{$support->hotline}}" name="data[hotline]">
                             </div>
@@ -113,7 +113,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span id="basic-addon1" class="input-group-text">Email</span>
+                                    <span id="basic-addon1" class="input-group-text">{{__('lang.email')}}</span>
                                 </div>
                                 <input type="email" class="form-control" id="email" value="{{$support->email}}"
                                        name="data[email]">
@@ -142,11 +142,11 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
                 </button>
 
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
                 </button>
             </div>
         </div>
@@ -217,7 +217,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
+            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
 
         let target = $(this).data('target');
 

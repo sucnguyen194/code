@@ -29,7 +29,7 @@ class Post extends Model
     }
 
     public function translations(){
-        return $this->hasMany(Translation::class);
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
     }
 
     public function translation(){
@@ -46,6 +46,10 @@ class Post extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
+    }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
     }
 
     public function getSlugAttribute(){

@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Danh sách quản trị @stop
+@section('title') {{__('lang.account')}} @stop
 @section('content')
     <div class="container-fluid">
 
@@ -9,11 +9,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Danh sách quản trị</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.account')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Danh sách quản trị</h4>
+                    <h4 class="page-title">{{__('lang.account')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     @can('admin.create')
                     <div class="action-datatable text-right">
                         <a href="{{route('admin.admins.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
                     </div>
                     @endif
                     <div id="custom-toolbar">
@@ -49,21 +49,21 @@
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-field="name">
-                                    Họ & tên
+                                    {{__('lang.name')}}
                                 </th>
 
                                 <th data-field="email">
                                     Email
                                 </th>
                                 <th data-field="roles" data-formatter="roleFormatter">
-                                    Phân quyền
+                                    {{__('lang.role')}}
                                 </th>
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
-                                    Tạo lúc
+                                    {{__('lang.created_at')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -97,11 +97,10 @@
             html += '<a href="'+ '{{ route('admin.admins.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             @endcan
             @can('admin.destroy')
-            html+='<a href="'+ '{{ route('admin.admins.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.admins.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }
-
 
     </script>
 @stop

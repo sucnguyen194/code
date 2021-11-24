@@ -163,7 +163,7 @@
             })
         })
         function commentFormatter(value, row){
-            let html = value + ' ( ' + row.rating + ' <i class="fa fa-star text-warning" aria-hidden="true"></i> )';
+            let html = value + ' / ' + row.rating + ' <i class="fa fa-star text-warning" aria-hidden="true"></i> ';
             return html;
         }
         function sortFormatter(value, row) {

@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    Tin nhắn #ID{{$contact->id}}
+    {{__('lang.message')}} #ID{{$contact->id}}
 @stop
 @section('content')
 
@@ -11,12 +11,12 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.contacts.index')}}">Tin nhắn</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.contacts.index')}}">{{__('lang.message')}}</a></li>
                             <li class="breadcrumb-item active">#ID {{$contact->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title"><strong>ĐÃ XEM</strong></h4>
+                    <h4 class="page-title"><strong>{{__('lang.viewed')}}</strong></h4>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                         @if($contact->note)
                         <p>{!! nl2br($contact->note) !!}</p>
                         @else
-                            <p>Khách hàng yêu cầu nhận thông tin: <a href="mailto:{{$contact->email}}" class="font-weight-bold"> {{$contact->email}}</a></p>
+                            <p>{{__('lang.customer_request_to_receive_infomation')}}: <a href="mailto:{{$contact->email}}" class="font-weight-bold"> {{$contact->email}}</a></p>
                         @endif
                         <hr/>
                     </div> <!-- card-box -->
@@ -67,24 +67,24 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3 mt-5">
-                            <lable class="font-weight-bold mb-2">Trả lời</lable>
-                            <p class="mt-2">* Nội dung email không được bỏ trống!</p>
+                            <lable class="font-weight-bold mb-2">{{__('lang.reply')}}</lable>
+                            <p class="mt-2">* {{__('lang.content')}} email {{__('lang.not_null')}}!</p>
                             <textarea class="form-control summernote" data-height="600" name="data[note]"></textarea>
 
                         </div>
 
                         <div class="text-right">
-                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại</a>
+                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}</a>
                             @if(setting('contact.email'))
-                            <button type="submit" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> Trả lời</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> {{__('lang.reply')}}</button>
                             @else
-                                <a href="{{route('admin.settings')}}" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> Email chưa được cấu hình!</a>
+                                <a href="{{route('admin.settings')}}" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> {{__('lang.email_null')}}</a>
                             @endif
                         </div>
                     </form>
                     @else
                         <div class="text-right">
-                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại</a>
+                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}</a>
                         </div>
                     @endif
                     <div class="clearfix"></div>

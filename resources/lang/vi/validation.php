@@ -150,6 +150,7 @@ return [
         'comment'               => 'bình luận',
         'g-recaptcha-response'  => 'captcha',
         'data.email'            => 'email',
+        'data.type'             => 'phân loại',
         'name'                  => 'tên',
         '*.name'                => 'tiêu đề hoặc tên',
         '*.slug'                => 'đường dẫn',

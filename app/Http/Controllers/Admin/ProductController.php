@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\ActiveDisable;
 use App\Enums\CategoryType;
+use App\Enums\TagType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTranslationRequest;
 use App\Http\Requests\UpdateTranslationRequest;
@@ -10,6 +11,7 @@ use App\Models\Admin;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -105,8 +107,9 @@ class ProductController extends Controller
 
         $categories = Category::with('translation')->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
         $attributes = Attribute::with('translation')->whereHas('translation')->oldest('sort')->get();
+        $tags = Tag::ofType(TagType::product)->get();
 
-        return view('admin.product.create', compact('categories','attributes'));
+        return view('admin.product.create', compact('categories','attributes', 'tags'));
     }
 
     /**
@@ -179,13 +182,15 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        if(auth()->id() > 1) $this->authorize('product.edit');
+        $this->authorize('product.edit');
 
         $categories = Category::with('translation')->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
         $attributes = Attribute::with('translation')->whereHas('translation')->oldest('sort')->get();
         $translations = $product->translations->load('language');
 
-        return view('admin.product.edit',compact('product','categories','attributes','translations'));
+        $tags = Tag::ofType(TagType::product)->get();
+
+        return view('admin.product.edit',compact('product','categories','attributes','translations','tags'));
     }
 
     /**

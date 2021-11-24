@@ -76,7 +76,7 @@ class PhotoController extends Controller
 
         $images = $request->images;
 
-        if(!$request->images)
+        if(!$images)
             return flash('Hình ảnh không được bỏ trống',3);
 
         for ($i=0; $i < count($images); $i++){

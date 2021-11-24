@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Video @stop
+@section('title') {{__('lang.video')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,16 +8,15 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Video</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.video')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Video</h4>
+                    <h4 class="page-title">{{__('lang.video')}}</h4>
                 </div>
             </div>
         </div>
         <!-- end page title -->
-
 
         <div class="row">
             <div class="col-12">
@@ -25,20 +24,21 @@
                     <div class="action-datatable text-right">
                         @can('video.create')
                         <a href="{{route('admin.products.videos.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="Hiên thị">
+                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="{{__('lang.display')}}">
+                                    <option value=""></option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Nổi bật" name="status">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.highlights')}}" name="status">
                                     <option value=""></option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Tác giả" name="author">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.author')}}" name="author">
                                     <option value=""></option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>
@@ -75,33 +75,33 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
-                                <th data-formatter="sortFormatter">STT</th>
-                                <th data-field="image" data-formatter="imageFormatter" data-width="100">Ảnh</th>
+                                <th data-formatter="sortFormatter" data-width="150">{{__('lang.sort')}}</th>
+                                <th data-field="image" data-formatter="imageFormatter" data-width="100">{{__('lang.image')}}</th>
                                 <th data-field="name" data-formatter="titleFormatter">
-                                    Tiêu đề
+                                    {{__('lang.title')}}
                                 </th>
                                 <th data-field="video" data-formatter="videoFormatter">
-                                    Video
+                                    {{__('lang.video')}}
                                 </th>
                                 @can('comment.view')
                                     <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
-                                        Đánh giá
+                                        {{__('lang.review')}}
                                     </th>
                                 @endcan
 
                                 <th data-field="admin.name" data-width="150">
-                                    Tác giả
+                                    {{__('lang.author')}}
                                 </th>
                                 <th data-field="created_at" data-width="150" data-sortable="true" data-visible="true">
-                                    Tạo lúc
+                                    {{__('lang.created_at')}}
                                 </th>
 
                                 <th data-formatter="statusFormatter" data-width="150">
-                                    Trạng thái
+                                    {{__('lang.status')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -125,7 +125,7 @@
             })
         })
         function commentFormatter(value, row){
-            let html = value + ' ( ' + row.rating + ' <i class="fa fa-star text-warning" aria-hidden="true"></i> )';
+            let html = value + ' / ' + row.rating + ' <i class="fa fa-star text-warning" aria-hidden="true"></i> ';
             return html;
         }
         function sortFormatter(value, row) {
@@ -157,28 +157,26 @@
             @can('video.edit')
                 html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
-            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">Hiển thị</label>';
+            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('lang.display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox" >';
             html += '<input id="checkbox_status_'+row.id+'" '+status+' type="checkbox" name="status">';
-            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">Nổi bật</label>';
+            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__('lang.highlights')}}</label>';
             html += '</div>';
-
             @endcan
 
              @cannot('video.edit')
 
                 html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';
-            html += '<label>Hiển thị</label>';
+            html += '<label>{{__('lang.display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox">';
             html += '<input '+status+' type="checkbox" name="status">';
-            html += '<label class="mb-0">Nổi bật</label>';
+            html += '<label class="mb-0">{{__('lang.highlights')}}</label>';
             html += '</div>';
-
             @endcan
 
                 return html;
@@ -199,7 +197,7 @@
             @endcan
 
                 @can('video.destroy')
-            html+='<a href="'+ '{{ route('admin.products.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.products.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

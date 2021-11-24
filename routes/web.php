@@ -30,6 +30,11 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::get('data/admins',[App\Http\Controllers\Admin\AdminController::class,'data'])->name('admins.data');
         Route::resource('admins',AdminController::class);
 
+        Route::get('add/tags',[App\Http\Controllers\Admin\TagController::class,'ajax_create'])->name('tags.add');
+        Route::post('add/tags',[App\Http\Controllers\Admin\TagController::class,'add'])->name('tags.add');
+        Route::get('data/tags',[App\Http\Controllers\Admin\TagController::class,'data'])->name('tags.data');
+        Route::resource('tags',TagController::class);
+
         //categories
         Route::get('/categories/data',[App\Http\Controllers\Admin\CategoryController::class,'data'])->name('categories.data');
         Route::resource('categories',CategoryController::class);

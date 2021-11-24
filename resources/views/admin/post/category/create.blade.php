@@ -3,120 +3,33 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                @if(setting('site.languages'))
-                    <ul class="nav nav-tabs tabs-bordered nav-justified bg-white" style="margin-bottom: 20px">
-                        @foreach(languages() as $key => $language)
-                            <li class="nav-item">
-                                <a href="#language-{{$language->value}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$key == 0 ? 'active' : null}}">
-                                    <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
-                                    <span class="d-none d-sm-block">{{$language->name}}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-                <div class="tab-content pt-0">
+               @include('admin.render.create.nav')
+                <div class="tab-content">
                     @foreach(languages() as $key => $language)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
-                            <div class="form-group">
-                                <label>Tiêu đề <span class="required">*</span></label>
-                                <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
-                            </div>
-                            <div class="form-group">
-                                <label>Đường dẫn <span class="required">*</span></label>
-                                <div class="d-flex form-control">
-                                    <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$language->value}}" value="{{old('data.alias')}}" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
-                                    <span>.html</span>
-                                </div>
-                                <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
-                            </div>
+                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
+                            @include('admin.render.create.title')
+
+                            @include('admin.render.create.slug')
                         </div>
                     @endforeach
                 </div>
 
-                    <div class="form-group">
-                        <label>Danh mục cha</label>
-                        <select class="form-control" data-toggle="select2" name="data[parent_id]">
-                            <option value="0">Chọn danh mục</option>
-                            @include('admin.render.options',['options' => $categories, 'selected' => 0])
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Vị trí</label>
-                        <select class="form-control" data-toggle="select2" name="data[position]">
-                            <option value="0">Chọn ví trí</option>
-                            <option value="1">Vị trí số 1</option>
-                            <option value="2">Vị trí số 2</option>
-                            <option value="3">Vị trí số 3</option>
-                            <option value="4">Vị trí số 4</option>
-                            <option value="5" >Vị trí số 5</option>
-                            <option value="6">Vị trí số 6</option>
-                            <option value="7">Vị trí số 7</option>
-                            <option value="8">Vị trí số 8</option>
-                            <option value="9">Vị trí số 9</option>
-
-                        </select>
-                    </div>
+                @include('admin.render.category_parent')
 
                 <div class="form-group position-relative">
-                    <div class="media">
-                        <div class="thumbnail-container square" style="border: 1px dashed #ddd;">
-                            <div style="width: 100px; height: 100px; border: 1px solid #ddd;">
-                                <img src="" class="image_src d-none" id="image_src" width="100%" height="100%">
-                            </div>
-                        </div>
-                        <div class="media-body ml-3">
-                            <label class="form-label">Ảnh đại diện</label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input name="data[image]" id="image_url" data-target="#image_src"  type="text" class="form-control" placeholder="http://">
-                                    <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >Upload..</label>
-                            </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('admin.render.create.media')
                 </div>
 
-{{--                <div class="form-group position-relative">--}}
-{{--                        <div class="media">--}}
-{{--                            <div class="thumbnail-container square" style="border: 1px dashed #ddd;">--}}
-{{--                                <div style="width: 100px; height: 100px; border: 1px solid #ddd;">--}}
-{{--                                    <img src="" class="background_url d-none" id="background_url" width="100%" height="100%">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="media-body ml-3">--}}
-{{--                                <label class="form-label">Ảnh nền</label>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <div class="input-group">--}}
-{{--                                        <input name="data[background]" id="background_url" data-target="#background_src"  type="text" class="form-control" placeholder="http://">--}}
-{{--                                        <span class="input-group-append">--}}
-{{--                                 <label class="btn btn-default" type="button"><input type="file" class="d-none background-upload" id="background-upload" data-target="#background_url" >Upload..</label>--}}
-{{--                            </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                    <input type="hidden" name="data[type]" value="{{\App\Enums\CategoryType::post}}">
+                <input type="hidden" name="data[type]" value="{{\App\Enums\CategoryType::post}}">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
-                </button>
-
-                <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
-                </button>
+                @include('admin.render.modal')
             </div>
         </div>
     </form>
@@ -127,6 +40,11 @@
         let file = $(this).prop('files')[0];
         if (!file)
             return false;
+
+        let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
+
+        if(!imgur_client_id)
+            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
 
@@ -139,7 +57,7 @@
                 method: "POST",
                 body: formData,
                 "headers": {
-                    "Authorization": "Client-ID {{ setting('api.imgur_client_id') }}"
+                    "Authorization": "Client-ID "+ imgur_client_id
                 },
             }
         )
@@ -149,7 +67,11 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error)
+                var obj  = {
+                    'message': '{{__('lang.error')}} {{__('lang.upload')}}: '+error,
+                    'type' :'error'
+                };
+                flash(obj);
                 console.error("Error:", error);
             });
 

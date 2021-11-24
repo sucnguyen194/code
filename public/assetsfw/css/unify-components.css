@@ -16657,7 +16657,7 @@ li:last-child .u-dot-line-v2::after, li:last-child
             order: 2; } }
 
 /*------------------------------------
-  Tags
+  Tag
 ------------------------------------*/
 /* Pagination v1 */
 .u-tags-v1 {
@@ -20160,11 +20160,11 @@ img.u-block-hover__main--magnifier-top-left {
   line-height: 10px; }
 
 .u-blockquote-v2::before {
-  content: "\“";
+  content: "\ï¿½";
   padding-right: 5px; }
 
 .u-blockquote-v2::after {
-  content: "\”";
+  content: "\ï¿½";
   padding-left: 5px; }
 
 .u-blockquote-v3 {

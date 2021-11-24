@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Hình ảnh @stop
+@section('title') {{__('lang.image')}} @stop
 @section('content')
     <div class="container-fluid">
 
@@ -9,11 +9,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Hình ảnh</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.image')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Hình ảnh</h4>
+                    <h4 class="page-title">{{__('lang.image')}}</h4>
                 </div>
             </div>
         </div>
@@ -25,14 +25,14 @@
                     <div class="action-datatable text-right">
                         @can('photo.create')
                         <a href="{{route('admin.photos.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="Hiên thị">
-                                    <option value="">Hiên thị (All)</option>
+                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="{{__('lang.display')}}">
+                                    <option value="">{{__('lang.display')}}</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
@@ -40,8 +40,8 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="position" data-allow-clear="true" data-placeholder="Vị trí">
-                                    <option value="">Vị trí (All)</option>
+                                <select class="form-control" data-toggle="select2" name="position" data-allow-clear="true" data-placeholder="{{__('lang.position')}}">
+                                    <option value="">{{__('lang.position')}}</option>
                                     @foreach(\App\Enums\Position::getInstances() as $item)
                                         <option value="{{$item->key}}">{{$item->description}}</option>
                                     @endforeach
@@ -68,33 +68,33 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
-                                <th data-formatter="sortFormatter" data-width="100">STT</th>
+                                <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
                                 <th data-field="image" data-formatter="imageFormatter" data-width="120">
-                                    Hình ảnh
+                                    {{__('lang.image')}}
                                 </th>
 
                                 <th data-field="name">
-                                    Tiêu đề
+                                    {{__('lang.title')}}
                                 </th>
 
                                 <th data-field="path" data-formatter="pathFormatter">
-                                   Đường dẫn
+                                    {{__('lang.slug')}}
                                 </th>
 
                                 <th data-field="position" data-width="150">
-                                    Vị trí
+                                    {{__('lang.position')}}
                                 </th>
 
                                 <th data-field="target" data-width="100" >
-                                    Target
+                                    {{__('lang.target')}}
                                 </th>
 
                                 <th data-formatter="statusFormatter" data-width="150">
-                                    Trạng thái
+                                    {{__('lang.status')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-switchable="false" data-width="200" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -114,7 +114,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hình ảnh</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -139,7 +139,7 @@
         $(document).on('click','.coppy-image',function (){
             var image = $(this).data('image');
             navigator.clipboard.writeText(image);
-            flash({'message': 'Coppy link ảnh thành công!', 'type': 'success'});
+            flash({'message': '{{__("lang.coppy_success")}}', 'type': 'success'});
         })
         $(document).on('click','.view-image',function(){
             let image = $(this).data('image');
@@ -167,7 +167,7 @@
             }
 
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
-            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">Hiển thị</label>';
+            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('lang.display')}}</label>';
             html += '</div>';
 
             return html;
@@ -191,11 +191,11 @@
             html = '<a href="'+ '{{ route('admin.photos.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
                 @can('photo.destroy')
-            html+='<a href="'+ '{{ route('admin.photos.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.photos.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
 
             if(row.image)
-              html +='<a href="javascript:void(0)" class="btn btn-purple coppy-image waves-effect waves-light tooltip-hover" title="Coppy link ảnh" data-image="'+row.image+'">Coppy</a>';
+              html +='<a href="javascript:void(0)" class="btn btn-purple coppy-image waves-effect waves-light tooltip-hover" title="{{__('lang.coppy')}} {{__('lang.image')}}" data-image="'+row.image+'">{{__('lang.coppy')}}</a>';
 
             return html;
         }

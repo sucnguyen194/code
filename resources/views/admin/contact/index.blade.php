@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Tin nhắn @stop
+@section('title') {{__('lang.message')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,11 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Tin nhắn</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.message')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Tin nhắn</h4>
+                    <h4 class="page-title">{{__('lang.message')}}</h4>
                 </div>
             </div>
         </div>
@@ -26,16 +26,16 @@
                         <form method="get" class="form-inline filter-form">
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="status" data-allow-clear="true" data-placeholder="Trạng thái">
-                                    <option value="">Trạng thái (All)</option>
-                                    <option value="1">Đã xem</option>
-                                    <option value="2"> Chưa xem</option>
+                                <select class="form-control" data-toggle="select2" name="status" data-allow-clear="true" data-placeholder="{{__('lang.status')}}">
+                                    <option value="">{{__('lang.status')}}</option>
+                                    <option value="1">{{__('lang.unview')}}</option>
+                                    <option value="2"> {{__('lang.viewed')}}</option>
                                 </select>
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="user" data-allow-clear="true" data-placeholder="Người duyệt" name="author">
-                                    <option value="">Người duyệt (All)</option>
+                                <select class="form-control" data-toggle="select2" name="user" data-allow-clear="true" data-placeholder="{{__('lang.checker')}}" name="author">
+                                    <option value="">{{__('lang.checker')}}</option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>
                                     @endforeach
@@ -63,22 +63,22 @@
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-field="note">
-                                    Tin nhắn
+                                    {{__('lang.message')}}
                                 </th>
 
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
-                                    Tạo lúc
+                                    {{__('lang.created_at')}}
                                 </th>
                                 <th data-field="updated_at" data-sortable="true" data-visible="true">
-                                    Duyệt lúc
+                                    {{__('lang.checked_at')}}
                                 </th>
 
                                 <th data-field="status" data-formatter="statusFormatter">
-                                    Trạng thái
+                                    {{__('lang.status')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -107,9 +107,9 @@
 
         function statusFormatter(value, row) {
             if(value == 1)
-                return '<a class="font-weight-bold text-primary">Đã xem</a>';
+                return '<a class="font-weight-bold text-primary">{{__('lang.unview')}}</a>';
 
-            return  '<a class="font-weight-bold text-danger">Chưa xem</a>';
+            return  '<a class="font-weight-bold text-danger">{{__('lang.viewed')}}</a>';
         }
 
         function titleFormatter(value, row){
@@ -122,7 +122,7 @@
             html = '<a href="'+ '{{ route('admin.contacts.show', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light"><i class="pe-7s-look"></i></a> ';
             @endcan
             @can('contact.destroy')
-            html+='<a href="'+ '{{ route('admin.contacts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.contacts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

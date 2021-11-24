@@ -19,6 +19,9 @@
     <script>
         var DOMAIN = "{{asset('/')}}";
     </script>
+    <script type="text/javascript">
+        var links = "{{route('home')}}";
+    </script>
 
     <!-- App css -->
     <link href="{{asset('lib/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
@@ -32,7 +35,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 {{--    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>--}}
 {{--    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>--}}
-
     <script src="/lib/tinymce/tinymce.min.js"></script>
     <!-- Cpanel -->
     <script src="{{asset('lib/js/cpanel.js')}}"></script>
@@ -50,19 +52,21 @@
 
 
             <li class="dropdown notification-list dropdown d-lg-inline-block"> <a class="nav-link dropdown-toggle mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">{{implode(languages()->where('value',Session::get('lang'))->pluck('name')->toArray())}} </a>
+                @if(setting('site.languages'))
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 @foreach(\App\Models\Language::where('value','<>',session()->get('lang'))->get() as $item)
                     <!-- item-->
                         <a href="{{route('admin.languages.change',$item->value)}}" class="dropdown-item notify-item"><span
                                 class="align-middle">{{$item->name}}</span> </a>
-                    @endforeach
+                @endforeach
                 </div>
+                @endif
             </li>
 
             <li class="dropdown notification-list"> <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="dripicons-bell noti-icon"></i> <span class="badge badge-pink rounded-circle noti-icon-badge">{{$contact->count()}}</span></a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <div class="dropdown-header noti-title">
-                        <h5 class="text-overflow m-0"><span class="float-right"> <span class="badge badge-danger float-right">{{$contact->count()}}</span> </span>Thông báo</h5>
+                        <h5 class="text-overflow m-0"><span class="float-right"> <span class="badge badge-danger float-right">{{$contact->count()}}</span> </span>{{__('lang.notify')}}</h5>
                     </div>
                     <div class="slimscroll noti-scroll">
                         @foreach($contact->take(10) as $item)
@@ -72,29 +76,28 @@
                                     @if($item->status == 0)
                                         <strong class="bg-danger pl-1 pr-1 text-white rounded-circle">!</strong>
                                     @endif
-                                    {{$item->note ? str_limit($item->note) : 'Khách hàng yêu cầu nhận thông tin'}}<small class="text-muted">{{$item->created_at->diffForHumans()}}</small></p>
+                                    {{$item->note ? str_limit($item->note) : __('lang.customer_request_to_receive_infomation')}}}<small class="text-muted">{{$item->created_at->diffForHumans()}}</small></p>
                             </a>
                             <!-- item-->
                         @endforeach
                     </div>
                     <!-- All-->
-                    <a href="{{route('admin.contacts.index')}}" class="dropdown-item text-center text-primary notify-item notify-all"> Xem tất cả <i class="fi-arrow-right"></i> </a> </div>
+                    <a href="{{route('admin.contacts.index')}}" class="dropdown-item text-center text-primary notify-item notify-all"> {{__('lang.view_all')}} <i class="fi-arrow-right"></i> </a> </div>
             </li>
             <li class="dropdown notification-list"> <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"> <img src="{{Auth::user()->gravatar}}" alt="user-image" class="rounded-circle"> <span class="pro-user-name ml-1"> {{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i> </span> </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
                     <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Xin chào !</h6>
+                        <h6 class="text-overflow m-0">{{__('lang.hello')}} !</h6>
                     </div>
                     <!-- item-->
-                    <a href="{{route('admin.admins.edit',Auth::id())}}" class="dropdown-item notify-item"> <i class="fe-user"></i> <span>Tài khoản</span> </a>
+                    <a href="{{route('admin.admins.edit',Auth::id())}}" class="dropdown-item notify-item"> <i class="fe-user"></i> <span>{{__('lang.account')}}</span> </a>
                     <!-- item-->
-                    <a href="{{route('admin.settings')}}" class="dropdown-item notify-item"> <i class="fe-settings"></i> <span>Settings</span> </a>
+                    <a href="{{route('admin.settings')}}" class="dropdown-item notify-item"> <i class="fe-settings"></i> <span>{{__('lang.setting')}}</span> </a>
                     <!-- item-->
-                    {{--                    <a href="javascript:void(0);" class="dropdown-item notify-item"> <i class="fe-lock"></i> <span>Lock Screen</span> </a>--}}
                     <div class="dropdown-divider"></div>
                     <!-- item-->
-                    <a href="#" onclick="document.querySelector('#logout').submit()" class="dropdown-item notify-item"> <i class="fe-log-out"></i> <span>Thoát</span> </a> </div>
+                    <a href="#" onclick="document.querySelector('#logout').submit()" class="dropdown-item notify-item"> <i class="fe-log-out"></i> <span>{{__('lang.logout')}}</span> </a> </div>
                 <form method="post" action="{{route('admin.logout')}}" class="d-none" id="logout">
                     @csrf
                 </form>
@@ -122,28 +125,28 @@
                     <li>
                         <a href="{{route('admin.dashboard')}}">
                             <i class="pe-7s-home"></i>
-                            <span>Bảng điều khiển</span>
+                            <span>{{__('lang.dashboard')}}</span>
                         </a>
                     </li>
                     @can('admin.view')
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-user"></i>
-                                <span>Quản trị</span>
+                                <span>{{__('lang.administration')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{route('admin.admins.index')}}">Tài khoản</a>
+                                    <a href="{{route('admin.admins.index')}}">{{__('lang.account')}}</a>
                                 </li>
                                 @can('role.view')
                                     <li>
-                                        <a href="{{route('admin.roles.index')}}">Phân quyền</a>
+                                        <a href="{{route('admin.roles.index')}}">{{__('lang.role')}}</a>
                                     </li>
                                 @endcan
                                 @can('permission.view')
                                     <li>
-                                        <a href="{{route('admin.permissions.index')}}">Quyền hạn</a>
+                                        <a href="{{route('admin.permissions.index')}}">{{__('lang.permission')}}</a>
                                     </li>
                                 @endcan
                             </ul>
@@ -161,7 +164,7 @@
                         <li>
                             <a href="{{route('admin.photos.index')}}">
                                 <i class="pe-7s-photo-gallery"></i>
-                                <span>Hình ảnh</span>
+                                <span>{{__('lang.image')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -169,22 +172,22 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-micro"></i>
-                                <span>Hỗ trợ</span>
+                                <span>{{__('lang.support')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('support.view')
                                 <li>
-                                    <a href="{{route('admin.supports.customers.index')}}">Ý kiến khách hàng</a>
+                                    <a href="{{route('admin.supports.customers.index')}}">{{__('lang.customer_reviews')}}</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{route('admin.supports.index')}}">Đội ngũ hỗ trợ</a>
+                                    <a href="{{route('admin.supports.index')}}">{{__('lang.support_team')}}</a>
                                 </li>
                                 @endcan
                                     @can('contact.view')
                                 <li>
-                                    <a href="{{route('admin.contacts.index')}}">Tin nhắn</a>
+                                    <a href="{{route('admin.contacts.index')}}">{{__('lang.message')}}</a>
                                 </li>
                                 @endcan
                             </ul>
@@ -197,60 +200,68 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-comment"></i>
-                                <span>Bình luận</span>
+                                <span>{{__('lang.comment')}}</span>
                                 <span class="menu-arrow"></span>
                                @if($comments->count()) <span class="badge badge-danger badge-pill">{{$comments->count()}}</span>@endif
                                 <ul class="nav-second-level" aria-expanded="false">
                                     @can('blog.view')
                                         <li>
-                                            <a href="{{route('admin.comments.list','posts')}}">Bài viết <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::posts)->count()}}</span></a>
+                                            <a href="{{route('admin.comments.list','posts')}}">{{__('lang.post')}} <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::posts)->count()}}</span></a>
                                         </li>
                                     @endcan
                                     @can('product.view')
                                         <li>
-                                            <a href="{{route('admin.comments.list','products')}}">Sản phẩm <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::products)->count()}}</span></a>
+                                            <a href="{{route('admin.comments.list','products')}}">{{__('lang.product')}} <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::products)->count()}}</span></a>
                                         </li>
                                     @endcan
                                 </ul>
                             </a>
                         </li>
                     @endcan
+                    @can('tag.view')
+                        <li>
+                            <a href="{{route('admin.tags.index')}}">
+                                <i class="pe-7s-ticket"></i>
+                                <span>{{__('lang.tag')}}</span>
+                            </a>
+                        </li>
+                    @endcan
                     @canany(['blog.view', 'video.view','gallery.view'])
-                    <li class="menu-title">Nội dung</li>
+                    <li class="menu-title">{{__('lang.content')}}</li>
                     @endcan
                     @can('blog.view')
                         <li class="">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-news-paper"></i>
-                                <span>Blog</span>
+                                <span>{{__('lang.post')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('blog.create')
                                     <li>
-                                        <a href="{{route('admin.posts.create')}}">Thêm bài viết</a>
+                                        <a href="{{route('admin.posts.create')}}">{{__('lang.create')}}</a>
                                     </li>
                                 @endcan
                                 <li>
-                                    <a href="{{route('admin.posts.index')}}">Danh sách bài viết</a>
+                                    <a href="{{route('admin.posts.index')}}">{{__('lang.list_post')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.posts.categories.index')}}">Danh mục bài viết</a>
+                                    <a href="{{route('admin.posts.categories.index')}}">{{__('lang.category_post')}}</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-wallet"></i>
-                                <span>Page</span>
+                                <span>{{__('lang.page')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{route('admin.posts.pages.create')}}">Thêm mới</a>
+                                    <a href="{{route('admin.posts.pages.create')}}">{{__('lang.create')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.posts.pages.index')}}">Danh sách bài viết</a>
+                                    <a href="{{route('admin.posts.pages.index')}}">{{__('lang.list_post')}}</a>
                                 </li>
                             </ul>
                         </li>
@@ -260,7 +271,7 @@
                         <li>
                             <a href="{{route('admin.products.galleries.index')}}">
                                 <i class="pe-7s-albums"></i>
-                                <span>Thư viện</span>
+                                <span>{{__('lang.gallery')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -268,35 +279,35 @@
                         <li>
                             <a href="{{route('admin.products.videos.index')}}">
                                 <i class="pe-7s-video"></i>
-                                <span>Video</span>
+                                <span>{{__('lang.video')}}</span>
                             </a>
                         </li>
                     @endcan
 
                     @canany(['product.view', 'discount.view','order.view','user.view'])
-                    <li class="menu-title">Bán hàng</li>
+                    <li class="menu-title">{{__('lang.transaction')}}</li>
                     @endcan
                     @can('product.view')
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-plugin"></i>
-                                <span>Sản phẩm</span>
+                                <span>{{__('lang.product')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('product.create')
                                     <li>
-                                        <a href="{{route('admin.products.create')}}">Thêm mới</a>
+                                        <a href="{{route('admin.products.create')}}">{{__('lang.create')}}</a>
                                     </li>
                                 @endcan
                                 <li>
-                                    <a href="{{route('admin.products.index')}}">Danh sách sản phẩm</a>
+                                    <a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.products.categories.index')}}">Danh mục sản phẩm</a>
+                                    <a href="{{route('admin.products.categories.index')}}">{{__('lang.category_product')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.attributes.index')}}">Phân loại sản phẩm</a>
+                                    <a href="{{route('admin.attributes.index')}}">{{__('lang.filter')}}</a>
                                 </li>
 
                             </ul>
@@ -307,7 +318,7 @@
                         <li>
                             <a href="{{route('admin.discounts.index')}}">
                                 <i class="pe-7s-bandaid"></i>
-                                <span>Mã giảm giá</span>
+                                <span> {{__('lang.discount')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -316,7 +327,7 @@
                         <li>
                             <a href="{{route('admin.orders.index')}}">
                                 <i class="pe-7s-cart"></i>
-                                <span>Đơn hàng</span>
+                                <span>{{__('lang.order')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -325,13 +336,13 @@
                         <li>
                             <a href="{{route('admin.users.index')}}">
                                 <i class="pe-7s-users"></i>
-                                <span>Khách hàng</span>
+                                <span>{{__('lang.customer')}}</span>
                             </a>
                         </li>
                     @endcan
 
                     @can('setting.update')
-                        <li class="menu-title">Cấu hình</li>
+                        <li class="menu-title">{{__('lang.setting')}}</li>
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-global"></i>
@@ -340,20 +351,19 @@
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{route('admin.settings')}}">Cấu hình hệ thống</a>
+                                    <a href="{{route('admin.settings')}}">{{__('lang.system_configuration')}}</a>
                                 </li>
 
                                 @can('setting.source')
                                     <li>
-                                        <a href="{{route('admin.sources.index')}}">Sửa website</a>
+                                        <a href="{{route('admin.sources.index')}}">{{__('lang.edit_website')}}</a>
                                     </li>
                                 @endcan
                                 @can('setting.language')
                                     <li>
-                                        <a href="{{route('admin.languages.index')}}">Ngôn ngữ</a>
+                                        <a href="{{route('admin.languages.index')}}">{{__('lang.language')}}</a>
                                     </li>
                                 @endcan
-
 
                             </ul>
                         </li>
@@ -535,10 +545,10 @@
         exportTypes: ['csv', 'txt', 'excel'],
         buttonsClass: 'default',
         formatSearch: function () {
-            return 'Tìm kiếm';
+            return '{{__('lang.search')}}';
         },
         formatNoMatches () {
-            return 'Không có dữ liệu'
+            return '{{__('lang.no_data')}}'
         },
         rowStyle: function (row, index) {
             if (row.deleted_at)
@@ -580,118 +590,7 @@
 
     }));
 </script>
-<script type="text/javascript">
-    var links = "{{route('home')}}";
 
-    $(document).ready(function(){
-        tinymce.init({
-            language : 'vi',
-            plugins: "wordcount textcolor code preview image  link  anchor   charmap media   lists responsivefilemanager",
-            toolbar: [
-                'preview code | fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat',
-
-            ],
-
-            height : "150",
-            menubar: true,
-            wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
-            wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
-            textcolor_cols: 6,
-            textcolor_map: [
-                'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
-                'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
-                'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
-            ],
-            textcolor_rows: 5,
-            fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
-            style_formats: [
-                {title: "Header 1", format: "h1"},
-                {title: "Header 2", format: "h2"},
-                {title: "Header 3", format: "h3"},
-                {title: "Header 4", format: "h4"},
-                {title: "Header 5", format: "h5"},
-                {title: "Header 6", format: "h6"},
-                {title: "Paragraph", format: "p"},
-                {title: "Blockquote", format: "blockquote"},
-                {title: "Div", format: "div"},
-                {title: "Pre", format: "pre"}
-            ],
-            // content_css: [
-            //     '/public/css/app.css'
-            // ],
-            link_class_list: [
-                {title: 'Geen', value: ''}
-            ],
-            table_class_list: [
-                {title: 'Tabel', value: 'table'},
-                {title: 'Table Style', value: 'table-style'}
-            ],
-            relative_urls: false,
-            selector: ".summerdescription",
-            image_advtab: true,
-            filemanager_title: "Filemanager",
-            external_filemanager_path: links+"/lib/filemanager/",
-            external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
-        });
-
-    });
-</script>
-<script type="text/javascript">
-    var links = "{{route('home')}}";
-
-    $(document).ready(function(){
-        tinymce.init({
-            language : 'vi',
-            plugins: "wordcount textcolor image link hr preview anchor code insertdatetime charmap media table print lists responsivefilemanager",
-            toolbar: [
-                'preview code | styleselect | bold italic underline strikethrough subscript superscript charmap | anchor link unlink image media | forecolor backcolor | cut copy paste | alignleft aligncenter alignright alignjustify | table | bullist numlist outdent indent | removeformat | undo redo | fontsizeselect | hr insertdatetime print | newdocument | responsivefilemanager',
-            ],
-            height : "500",
-            menubar: true,
-            wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
-            wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
-            textcolor_cols: 6,
-            textcolor_map: [
-                'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
-                'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
-                'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
-            ],
-            textcolor_rows: 5,
-            fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
-            style_formats: [
-                {title: "Header 1", format: "h1"},
-                {title: "Header 2", format: "h2"},
-                {title: "Header 3", format: "h3"},
-                {title: "Header 4", format: "h4"},
-                {title: "Header 5", format: "h5"},
-                {title: "Header 6", format: "h6"},
-                {title: "Paragraph", format: "p"},
-                {title: "Blockquote", format: "blockquote"},
-                {title: "Div", format: "div"},
-                {title: "Pre", format: "pre"}
-            ],
-            // content_css: [
-            //     '/public/css/app.css'
-            // ],
-
-            link_class_list: [
-                {title: 'Geen', value: ''}
-            ],
-            table_class_list: [
-                {title: 'Tabel', value: 'table'},
-                {title: 'Table Style', value: 'table-style'}
-            ],
-
-            relative_urls: false,
-            selector: ".summernote",
-            image_advtab: true,
-            filemanager_title: "Filemanager",
-            external_filemanager_path: links+"/lib/filemanager/",
-            external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
-        });
-
-    });
-</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -745,7 +644,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
+            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
 
         for(var i=0 ; i < count ; i++){
             let file = $(this).prop('files')[i];
@@ -775,10 +674,10 @@
                         '<input name="photos[]" type="hidden" value="'+ result.data.link +'">' +
                         '<div class="photo-hover-overlay">' +
                         '<div class="box-hover-overlay">' +
-                        '<a class="tooltip-hover view-image text-white" data-image="'+result.data.link+'" data-toggle="modal" data-target="#viewImage" title="Xem hình ảnh">' +
+                        '<a class="tooltip-hover view-image text-white" data-image="'+result.data.link+'" data-toggle="modal" data-target="#viewImage" title="{{__('lang.detail')}}">' +
                         '<i class="far fa-eye"></i>' +
                         '</a>' +
-                        '<a class="pl-2 tooltip-hover text-white" id="slider-delete" title="Xóa hình ảnh">' +
+                        '<a class="pl-2 tooltip-hover text-white" id="slider-delete" title="{{__('lang.destroy')}}">' +
                         '<i class="far fa-trash-alt"></i>' +
                         '</a>' +
                         '</div> '+
@@ -793,7 +692,7 @@
                     $(slider).addClass('d-none');
 
                     var obj  = {
-                        'message': 'Lỗi upload: '+error,
+                        'message': '{{__("lang.error")}} {{__("lang.upload")}}: '+error,
                         'type' :'error'
                     };
                     flash(obj);
@@ -826,7 +725,7 @@
         if (!file)
             return false;
         if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
+            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
 
@@ -850,7 +749,7 @@
             })
             .catch(error => {
                 var obj  = {
-                    'message': 'Lỗi upload: '+error,
+                    'message': '{{__("lang.error")}} upload: '+error,
                     'type' :'error'
                 };
                 flash(obj);
@@ -871,17 +770,11 @@
         }
     });
 </script>
+
 <script>
     $('.ajax-modal').off('dblclick');
     $(document).on('click','.ajax-modal',function(e){
         e.preventDefault();
-
-        $('select').each(function() {
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                placeholder: $(this).data('placeholder'),
-            });
-        });
 
         $(e.target).attr('disabled',true);
         $(e.target).addClass('disabled');
@@ -896,6 +789,12 @@
         });
   */
         $modal.load($remote,function(text,status,xhr){
+            $('select').each(function() {
+                $(this).select2({
+                    dropdownParent: $(this).parent(),
+                    placeholder: $(this).data('placeholder'),
+                });
+            });
 
             $(e.target).attr('disabled',false);
             $(e.target).removeClass('disabled');
@@ -916,14 +815,14 @@
         e.preventDefault();
         if($(this).data('confirm')){
             Swal.fire({
-                title: 'Bạn có chắc không?',
+                title: '{{__("lang.are_you_sure")}}',
                 text:  $(this).data('confirm'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                cancelButtonText: 'Quay lại',
-                confirmButtonText: 'Xác nhận',
+                cancelButtonText: '{{__("lang.back")}}',
+                confirmButtonText: '{{__("lang.confirm")}}',
             }).then((result) => {
                 if (result.isConfirmed) {
                 ajaxlink(this);
@@ -1023,7 +922,57 @@
         return false;
     });
 </script>
+<script type="text/javascript">
+    // Ajax form
+    function ajaxtag(ele){
 
+        let select = $('.select-tag');
+
+        $(ele).ajaxSubmit({
+            headers: {
+                "X-CSRF-Token": $('meta[name=_token]').attr('content')
+            },
+            beforeSubmit:function(formData, jqForm, options){
+                $(ele).find('[type=submit]').attr('disabled', true);
+
+            },
+            complete: function(xhr, statusText, $form  ){
+
+                $(ele).find('[type=submit]').attr('disabled', false);
+
+                let result = xhr.responseJSON;
+
+                if(result.errors){
+                    $.each(result.errors , function (index, value){
+                        var obj = {
+                            'message': value,
+                            'type' : 'error'
+                        }
+                        flash(obj);
+                    });
+                }else{
+                    var data = {
+                        id: result.id,
+                        text: result.translation.name
+                    };
+
+                    var newOption = new Option(data.text, data.id, true, true);
+                    $(select).append(newOption).trigger('change');
+
+                    $('#ajax-modal').modal('hide');
+                    flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
+                }
+            }
+
+        });
+        return false;
+    }
+    $(document).on('submit','.ajax-tag',function(e){
+        e.preventDefault();
+        ajaxtag(this);
+        return false;
+    });
+</script>
 <script>
     function sumFormatter(data) {
         field = this.field;
@@ -1160,7 +1109,7 @@
                 cache:false,
                 data:{'_token':_token,'id':id,'num':num,'type':type},
                 success:function(data){
-                    flash({'message': 'Cập nhật thành công', 'type': 'success'})
+                    flash({'message':" {{__('lang.flash_update')}}", 'type': 'success'})
                 }
             });
         })
@@ -1176,7 +1125,7 @@
                 cache:false,
                 data:{'_token':_token,'id':id,'type':type},
                 success:function(data){
-                    flash({'message': 'Cập nhật thành công', 'type': 'success'})
+                    flash({'message': "{{__('lang.flash_update')}}", 'type': 'success'})
                 }
             });
         })
@@ -1191,7 +1140,7 @@
                 cache:false,
                 data:{'_token':_token,'id':id,'type':type},
                 success:function(data){
-                    flash({'message': 'Cập nhật thành công', 'type': 'success'})
+                    flash({'message': "{{__('lang.flash_update')}}", 'type': 'success'})
                 }
             });
         })

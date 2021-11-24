@@ -29,7 +29,7 @@ class Product extends Model
     }
 
     public function translations(){
-        return $this->hasMany(Translation::class);
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
     }
 
     public function translation(){
@@ -73,19 +73,22 @@ class Product extends Model
     }
 
     public function getSlugAttribute(){
+        if(optional($this->translation)->slug)
+            return route('home');
+
         return route('slug', $this->translation->slug);
     }
 
     public function getNameAttribute(){
-        return $this->translation->name;
+        return optional($this->translation)->name;
     }
 
     public function getDescriptionAttribute(){
-        return $this->translation->description;
+        return optional($this->translation)->description;
     }
 
     public function getContentAttribute(){
-        return $this->translation->content;
+        return optional($this->translation)->content;
     }
 
     public function getRouteAttribute(){

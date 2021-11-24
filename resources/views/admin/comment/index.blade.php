@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Danh sách bình luận @stop
+@section('title') {{__('lang.comment')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,11 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Danh sách bình luận</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.comment')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Danh sách bình luận</h4>
+                    <h4 class="page-title">{{__('lang.comment')}}</h4>
                 </div>
             </div>
         </div>
@@ -44,27 +44,27 @@
                             <tr>
                                 <th data-field="id" data-width="150" data-sortable="true">ID</th>
                                 <th data-field="title" data-formatter="titleFormatter">
-                                    Bài viết
+                                    {{__('lang.title')}}
                                 </th>
                                 <th data-field="comment_last">
-                                    Bình luận cuối cùng
+                                    {{__('lang.end_comment')}}
                                 </th>
                                 <th data-field="commenter">
-                                   Người bình luận
+                                    {{__('lang.commenter')}}
                                 </th>
                                 <th data-field="ratting" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
-                                    Đánh giá
+                                    {{__('lang.review')}}
                                 </th>
 
                                 <th data-field="comment_count" data-width="150" data-sortable="true" data-visible="true">
-                                    Chưa trả lời
+                                    {{__('lang.no_reply')}}
                                 </th>
                                 <th data-field="created_at" data-width="150" data-sortable="true" data-visible="true">
-                                    Cập nhật
+                                    {{__('lang.update')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="150" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -101,7 +101,7 @@
             html = '<a href="'+ '{{ route('admin.comments.reply', [':type', ':id' ]) }}'.replace(':id',row.id).replace(':type','{{$type}}') +'" class="btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
             @can('comment.destroy')
-            html+='<a href="'+ '{{ route('admin.comments.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.comments.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

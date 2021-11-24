@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    Bình luận #{{$reply->id}}
+    {{__('lang.comment')}} #{{$reply->id}}
 @stop
 @section('content')
 
@@ -11,8 +11,8 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.comments.list',$type)}}">Bình luận</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.comments.list',$type)}}">{{__('lang.comment')}}</a></li>
                             <li class="breadcrumb-item">#ID{{$reply->id}}</li>
                         </ol>
                     </div>
@@ -28,24 +28,24 @@
                 <form method="post" action="{{route('admin.comments.store')}}" class="ajax-form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="font-weight-bold">Bình luận</label>
+                        <label class="font-weight-bold">{{__('lang.comment')}}</label>
                         <textarea rows="4" class="form-control summerdescription" name="data[comment]"></textarea>
                         <input type="hidden" name="slug" value="{{$reply->translation->slug}}" readonly>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
                             </div>
                             <div class="col-lg-6">
-                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
+                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('lang.email')}} *">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group text-right">
-                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
-                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
+                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> {{__('lang.reset')}}</button>
+                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> {{__('lang.send')}} <span class="text-lowercase">{{__('lang.comment')}}</span></button>
                     </div>
                 </form>
             </div>
@@ -63,7 +63,7 @@
                                                <i class="{{$comment->status == \App\Enums\ActiveDisable::active ? "pe-7s-like2 text-primary" : "pe-7s-info text-danger"}} font-weight-bold"></i>
                                              </span>
                                         @if($comment->admin_id)
-                                            <strong>{{$comment->email}}</strong> <span class="qtv">QTV</span>
+                                            <strong>{{$comment->email}}</strong> <span class="qtv">{{__('lang.qtv')}} </span>
                                         @else
                                             <strong>{{$comment->name}}</strong>
                                         @endif
@@ -76,13 +76,13 @@
                                         {!! $comment->comment !!}
                                     </div>
                                     <div class="item-hidden mt-1 {{$comment->hidden == \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
-                                        <em>Bình luận đã bị ẩn</em>
+                                        <em>{{__('lang.hidden_comment')}} </em>
                                     </div>
                                     <div class="action-comment mt-1">
                                         @if($comment->admin_id)
-                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$comment->id}}, '{{$comment->email}}')">Trả lời</a>
+                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$comment->id}}, '{{$comment->email}}')">{{__('lang.reply')}} </a>
                                         @else
-                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$comment->id}}, '{{$comment->name}}')">Trả lời</a>
+                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$comment->id}}, '{{$comment->name}}')">{{__('lang.reply')}}</a>
                                         @endif
                                          -   <a class="text-primary font-weight-bold ajax-link" data-method="PUT" data-refresh="true" href="{{route('admin.comments.update',$comment)}}">{{$comment->hidden == \App\Enums\ActiveDisable::active ? "Ẩn bình luận" : "Bỏ ẩn"}}</a>
                                         - {{$comment->created_at->diffForHumans()}}
@@ -93,7 +93,7 @@
                                 <form method="post" action="{{route('admin.comments.store')}}" class="ajax-form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="font-weight-bold">Bình luận</label>
+                                        <label class="font-weight-bold">{{__('lang.comment')}}</label>
                                         <textarea rows="4" class="form-control summerdescription" name="data[comment]"></textarea>
                                         <input type="hidden" name="slug" value="{{$reply->translation->slug}}">
                                         <input type="hidden" name="data[parent_id]" value="{{$comment->id}}">
@@ -102,16 +102,16 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
+                                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('lang.email')}} *">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group text-right">
-                                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
-                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
+                                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> {{__('lang.reset')}}</button>
+                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> {{__('lang.send')}} <span class="text-lowercase">{{__('lang.comment')}}</span></button>
                                     </div>
                                 </form>
                             </div>
@@ -129,7 +129,7 @@
                                                <i class="{{$sub->status == \App\Enums\ActiveDisable::active ? "pe-7s-like2 text-primary" : "pe-7s-info text-danger"}} font-weight-bold"></i>
                                              </span>
                                                 @if($sub->admin_id)
-                                                    <strong>{{$sub->email}}</strong> <span class="qtv">QTV</span>
+                                                    <strong>{{$sub->email}}</strong> <span class="qtv">{{__('lang.qtv')}}</span>
                                                 @else
                                                     <strong>{{$sub->name}}</strong>
                                                 @endif
@@ -138,12 +138,12 @@
                                                   {!! $sub->comment !!}
                                             </div>
                                             <div class="item-hidden mt-1 {{$sub->hidden == \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
-                                               <em>Bình luận đã bị ẩn</em>
+                                               <em>{{__('lang.hidden_comment')}}</em>
                                             </div>
                                             <div class="action-comment mt-1">
                                                 @if($sub->admin_id)
-                                                    <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub->id}}, '{{$sub->email}}')">Trả lời</a> @else
-                                                    <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub->id}}, '{{$sub->name }}')">Trả lời</a> @endif
+                                                    <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub->id}}, '{{$sub->email}}')">{{__('lang.reply')}}</a> @else
+                                                    <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub->id}}, '{{$sub->name }}')">{{__('lang.reply')}}</a> @endif
                                                     -   <a class="text-primary font-weight-bold ajax-link" data-method="PUT" data-refresh="true" href="{{route('admin.comments.update',$sub)}}">{{$sub->hidden == \App\Enums\ActiveDisable::active ? "Ẩn bình luận" : "Bỏ ẩn"}}</a>
                                                     - {{$sub->created_at->diffForHumans()}}
                                             </div>
@@ -153,7 +153,7 @@
                                         <form method="post" action="{{route('admin.comments.store')}}" class="ajax-form" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
-                                                <label class="font-weight-bold">Bình luận</label>
+                                                <label class="font-weight-bold">{{__('lang.comment')}}</label>
                                                 <textarea rows="4" class="form-control summerdescription" name="data[comment]"></textarea>
                                                 <input type="hidden" name="slug" value="{{$reply->translation->slug}}">
                                                 <input type="hidden" value="{{$sub->id}}" name="data[parent_id]">
@@ -162,16 +162,16 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                                        <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
+                                                        <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('lang.email')}} *">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group text-right">
-                                                <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
-                                                <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
+                                                <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> {{__('lang.reset')}}</button>
+                                                <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> {{__('lang.send')}} <span class="text-lowercase">{{__('lang.comment')}}</span></button>
                                             </div>
                                         </form>
                                     </div>
@@ -189,7 +189,7 @@
                                                             <i class="{{$sub_sub->status == \App\Enums\ActiveDisable::active ? "pe-7s-like2 text-primary" : "pe-7s-info text-danger"}} font-weight-bold"></i>
                                                          </span>
                                                         @if($sub_sub->admin_id)
-                                                            <strong>{{$sub_sub->email}}</strong> <span class="qtv">QTV</span>
+                                                            <strong>{{$sub_sub->email}}</strong> <span class="qtv">{{__('lang.qtv')}}</span>
                                                         @else
                                                             <strong>{{$sub_sub->name}}</strong>
                                                         @endif
@@ -198,13 +198,13 @@
                                                         {!! $sub_sub->comment !!}
                                                     </div>
                                                     <div class="item-hidden mt-1 {{$sub_sub->hidden == \App\Enums\ActiveDisable::active ? "d-none" : ""}}">
-                                                        <em>Bình luận đã bị ẩn</em>
+                                                        <em>{{__('lang.hidden_comment')}}</em>
                                                     </div>
                                                     <div class="action-comment mt-1">
                                                         @if($sub_sub->admin_id)
-                                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub_sub->id}}, '{{$sub_sub->email}}')">Trả lời</a>
+                                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub_sub->id}}, '{{$sub_sub->email}}')">{{__('lang.reply')}}</a>
                                                         @else
-                                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub_sub->id}}, '{{$sub_sub->name}}')">Trả lời</a>
+                                                            <a href="javascript:void(0)" class="font-weight-bold" onclick="openComment({{$sub_sub->id}}, '{{$sub_sub->name}}')">{{__('lang.reply')}}</a>
                                                         @endif
                                                             -   <a class="text-primary font-weight-bold ajax-link" data-method="PUT" data-refresh="true" href="{{route('admin.comments.update',$sub_sub)}}">{{$sub_sub->hidden == \App\Enums\ActiveDisable::active ? "Ẩn bình luận" : "Bỏ ẩn"}}</a>
                                                             - {{$sub_sub->created_at->diffForHumans()}}
@@ -215,7 +215,7 @@
                                                 <form method="post" action="{{route('admin.comments.store')}}" class="ajax-form" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="form-group">
-                                                        <label class="font-weight-bold">Bình luận</label>
+                                                        <label class="font-weight-bold">{{__('lang.comment')}}</label>
                                                         <input type="hidden" name="slug" value="{{$reply->translation->slug}}">
                                                         <input type="hidden" value="{{$sub->id}}" name="data[parent_id]">
                                                         <input type="hidden" value="{{$sub_sub->id}}" name="reply">
@@ -224,16 +224,16 @@
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="Họ & tên *">
+                                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="Email *">
+                                                                <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('lang.email')}} *">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group text-right">
-                                                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> Reset</button>
-                                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> Gửi bình luận</button>
+                                                        <button type="reset" class="btn btn-default"><span class="icon-button"><i class="pe-7s-refresh"></i> </span> {{__('lang.reset')}}</button>
+                                                        <button type="submit" class="btn btn-primary"><span class="icon-button"><i class="pe-7s-paper-plane"></i> </span> {{__('lang.send')}} <span class="text-lowercase">{{__('lang.comment')}}</span></button>
                                                     </div>
                                                 </form>
                                             </div>

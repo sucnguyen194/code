@@ -4,20 +4,20 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hình ảnh #ID{{$photo->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}} #ID{{$photo->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group position-relative box-action-image">
-                    <label>Hình ảnh</label>
+                    <label>{{__('lang.image')}}</label>
                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:0;top:0">
                         <label class="item-input mb-0">
-                            <input type="file" id="image-upload" class="d-none image-upload" data-target="#image_url"> Chọn ảnh
+                            <input type="file" id="image-upload" class="d-none image-upload" data-target="#image_url"> {{__('lang.select_image')}}
                         </label>
                     </div>
-                    <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif</p>
+                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
                     <div class="dropzone text-center pl-2 pr-2 pb-1 pt-2">
                         <img src="{{$photo->image}}" class="rounded img-thumbnail" id="image_src">
 
@@ -29,15 +29,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Tiêu đề</label>
+                    <label>{{__('lang.title')}}</label>
                     <input type="text" value="{{$photo->name}}" name="data[name]" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Đường dẫn</label>
+                    <label>{{__('lang.slug')}}</label>
                     <input type="url" value="{{$photo->path}}" name="data[path]" placeholder="http://" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Vị trí hiển thị</label>
+                    <label>{{__('lang.position')}}</label>
 
                     <select data-toggle="select2" name="data[position]" class="form-control">
                         <option value="Nomal">----</option>
@@ -47,7 +47,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Target</label>
+                    <label>{{__('lang.target')}}</label>
                     <select id="target" name="data[target]" class="form-control" data-toggle="select2">
                         <option value="_self">-----</option>
                         <option value="_parent" {{selected($photo->target, '_parent')}}>_parent</option>
@@ -57,7 +57,7 @@
                     </select>
                 </div>
                 <div class="form-group {{!setting('site.languages') ? "d-none" : "" }} ">
-                    <label>Ngôn ngữ</label>
+                    <label>{{__('lang.language')}}</label>
                     <select data-toggle="select2" name="data[lang]" class="form-control">
                         <option value="Nomal">----</option>
                         @foreach(languages() as $item)
@@ -69,12 +69,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
                 </button>
-                <input type="hidden" name="data[type]" value="{{\App\Enums\PhotoType::photo}}">
-
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
                 </button>
             </div>
         </div>
@@ -90,7 +88,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
+            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
 
         let target = $(this).data('target');
 

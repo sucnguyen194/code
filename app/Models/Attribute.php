@@ -17,7 +17,7 @@ class Attribute extends Model
     protected $guarded = [];
 
     public function translations(){
-        return $this->hasMany(Translation::class);
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
     }
 
     public function parents(){

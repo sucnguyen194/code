@@ -19,7 +19,7 @@ class Category extends Model
     protected $guarded = ['id'];
 
     public function translations(){
-        return $this->hasMany(Translation::class);
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
     }
 
     public function translation(){
@@ -42,18 +42,6 @@ class Category extends Model
         return $this->hasMany(Category::class,'parent_id');
     }
 
-    public function getNameAttribute(){
-        return $this->translation->name;
-    }
-
-    public function getSlugAttribute(){
-        return route('slug', $this->translation->slug);
-    }
-
-    public function getDescriptionAttribute(){
-        return $this->translation->description;
-    }
-
     public function scopeOfType($q, $type){
         return $q->whereType($type)->with('translation')->whereHas('translation')->public()->sort();
     }
@@ -68,6 +56,20 @@ class Category extends Model
 
     public function scopeStatus($q) {
         $q->whereStatus(ActiveDisable::active);
+    }
+    public function getNameAttribute(){
+        return optional($this->translation)->name;
+    }
+
+    public function getSlugAttribute(){
+        if(optional($this->translation)->slug)
+            return route('home');
+
+        return route('slug', $this->translation->slug);
+    }
+
+    public function getDescriptionAttribute(){
+        return optional($this->translation)->description;
     }
 
     public function getThumbAttribute(){

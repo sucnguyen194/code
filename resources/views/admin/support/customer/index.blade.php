@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Ý kiến khách hàng @stop
+@section('title') {{__('lang.customer_reviews')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,11 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Ý kiến khách hàng</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.customer_reviews')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Ý kiến khách hàng</h4>
+                    <h4 class="page-title">{{__('lang.customer_reviews')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,22 +24,22 @@
                     <div class="action-datatable text-right">
                         @can('support.create')
                         <a href="{{route('admin.supports.customers.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Hiên thị"  name="public">
-                                    <option value="">Hiên thị (All)</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.display')}}"  name="public">
+                                    <option value="">{{__('lang.display')}}</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Nổi bật" name="status">
-                                    <option value="">Nổi bật (All)</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.highlights')}}" name="status">
+                                    <option value="">{{__('lang.highlights')}}</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
@@ -47,8 +47,8 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="Tác giả" name="author">
-                                    <option value="">Tác giả (All)</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.author')}}" name="author">
+                                    <option value="">{{__('lang.author')}}</option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>
                                     @endforeach
@@ -75,24 +75,24 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
-                                <th data-formatter="sortFormatter" data-width="100">STT</th>
+                                <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
                                 <th data-field="name">
-                                    Nhân viên
+                                    {{__('lang.customer')}}
                                 </th>
 
                                 <th data-field="admin.name">
-                                    Tác giả
+                                    {{__('lang.author')}}
                                 </th>
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
-                                    Tạo lúc
+                                    {{__('lang.created_at')}}
                                 </th>
 
                                 <th data-formatter="statusFormatter" data-width="150">
-                                    Trạng thái
+                                    {{__('lang.status')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -134,29 +134,29 @@
                 status = "checked";
             }
 
-            @can('support.edit')
+            @can('contact.edit')
                 html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
-            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">Hiển thị</label>';
+            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('lang.display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox" >';
             html += '<input id="checkbox_status_'+row.id+'" '+status+' type="checkbox" name="status">';
-            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">Nổi bật</label>';
+            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__('lang.highlights')}}</label>';
             html += '</div>';
 
             @endcan
 
-                @cannot('support.edit')
+                @cannot('contact.edit')
 
                 html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';
-            html += '<label>Hiển thị</label>';
+            html += '<label>{{__('lang.display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox">';
             html += '<input '+status+' type="checkbox" name="status">';
-            html += '<label class="mb-0">Nổi bật</label>';
+            html += '<label class="mb-0">{{__('lang.highlights')}}</label>';
             html += '</div>';
 
             @endcan
@@ -164,9 +164,6 @@
                 return html;
         }
 
-        {{--function titleFormatter(value, row){--}}
-        {{--    return '<a href="'+ '{{ route('admin.supports.edit', ':id') }}'.replace(':id',row.alias) +'" target="_blank">'+ value +'</a>';--}}
-        {{--}--}}
 
         function actionFormatter(value, row){
             let html = '';
@@ -175,7 +172,7 @@
             @endcan
 
                 @can('support.destroy')
-                html+='<a href="'+ '{{ route('admin.supports.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a>';
+                html+='<a href="'+ '{{ route('admin.supports.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a>';
             @endcan
                 return html;
         }
@@ -183,3 +180,4 @@
     </script>
 
 @stop
+

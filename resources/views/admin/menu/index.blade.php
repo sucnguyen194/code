@@ -12,8 +12,8 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Thêm mới</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.create')}}</li>
                         </ol>
                     </div>
                     <h4 class="page-title">Menu</h4>
@@ -29,7 +29,7 @@
                     @can('menu.create')
                     <div class="action-datatable text-right mb-2">
                         <a href="{{route('admin.menus.create')}}" class="btn btn-primary waves-effect width-md waves-light ajax-modal">
-                            <span class="icon-button"><i class="fe-plus pr-1"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus pr-1"></i></span> {{__('lang.create')}}</a>
 
                     </div>
                     @endcan
@@ -42,9 +42,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card-box">
-                            <h4 class="header-title">Thêm nhanh</h4>
+                            <h4 class="header-title">{{__('lang.quick_add')}}</h4>
                             <p class="sub-header mb-0">
-                                * Phía dưới gồm các <code>danh mục sản phẩm, bài viết, page... Click vào tên danh mục, bài viết...</code>  sẽ được thêm trực tiếp vào menu.
+                                {!! __('lang.quick_add_note') !!}
                             </p>
                         </div>
                         @can('product.view')
@@ -72,7 +72,7 @@
                                     <thead>
                                     <tr>
                                         <th data-field="translation.name" data-formatter="categoryFormatter">
-                                            Danh mục sản phẩm
+                                            {{__('lang.category_product')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -107,7 +107,7 @@
                                     <thead>
                                     <tr>
                                         <th data-field="translation.name" data-formatter="categoryFormatter">
-                                            Danh mục blog
+                                            {{__('lang.category_post')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -137,7 +137,7 @@
                                     <thead>
                                     <tr>
                                         <th data-field="translation.name" data-formatter="titleFormatter">
-                                            Page
+                                            {{__('lang.page')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -148,14 +148,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-box">
-                            <h4 class="header-title"><b>Danh sách menu</b></h4>
+                            <h4 class="header-title"><b>{{__('lang.menu_list')}}</b></h4>
                             <p class="sub-header">
-                                * Danh sách menu tùy thuộc vào <code>"vị trí"</code> hiển thị tại thời điển hiện tại <code>(top, bottom, left,right,home).</code>
+                                {!! __('lang.menu_list_note') !!}
                             </p>
 
                                 <textarea id="nestable-output" class="d-none" name="menuval"></textarea>
                                 <div class="form-group">
-                                    <label><strong class="text-tranform">VI TRÍ</strong></label>
+                                    <label><strong class="text-uppercase">{{__('lang.position')}}</strong></label>
                                     <select class="form-control position" data-toggle="select2">
                                         <option value="top" {{selected(session('menu_position'),'top')}} class="form-control">MENU TOP</option>
                                         <option value="home" {{selected(session('menu_position'),'home')}} class="form-control">MENU HOME</option>
@@ -257,9 +257,9 @@
                     $('#ajax-modal').modal('hide');
 
                     if($(ele).find('input[name="_method"]').length){
-                        flash({'message':'Cập nhật thành công!', 'type': 'success'});
+                        flash({'message':'{{__("lang.flash_update")}}', 'type': 'success'});
                     }else{
-                        flash({'message':'Thêm mới thành công!', 'type': 'success'});
+                        flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
                     }
                 }
 
@@ -279,14 +279,14 @@
             e.preventDefault();
             if($(this).data('confirm')){
                 Swal.fire({
-                    title: 'Bạn có chắc không?',
+                    title: '{{__("lang.are_you_sure")}}',
                     text:  $(this).data('confirm'),
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Xác nhận',
-                    cancelButtonText: 'Quay lại'
+                    confirmButtonText: '{{__("lang.confirm")}}',
+                    cancelButtonText: '{{__("lang.back")}}'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         ajaxmenu(this);
@@ -315,7 +315,7 @@
             }).done(function( result ) {
                 let html = document.getElementById('result_data');
                 let  success = {
-                    'message' : 'Xóa bản ghi thành công!',
+                    'message' : '{{__("lang.flash_destroy")}}',
                     'type' : 'success'
                 }
                 $(html).html(result);
@@ -374,7 +374,7 @@
                     success:function(result){
                         $('#result_data').append(result).show();
                         $('.dd-empty').hide();
-                        flash({'message':'Thêm mới thành công!', 'type': 'success'});
+                        flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
                     }
                 })
             })

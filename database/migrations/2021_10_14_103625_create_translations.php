@@ -22,6 +22,7 @@ class CreateTranslations extends Migration
             $table->foreignId('photo_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('support_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('attribute_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('tag_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('locale');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
@@ -29,7 +30,6 @@ class CreateTranslations extends Migration
             $table->string('job')->nullable();
             $table->longText('description')->nullable();
             $table->longText('content')->nullable();
-            $table->longText('tag')->nullable();
             $table->string('title_seo')->nullable();
             $table->string('description_seo')->nullable();
             $table->json('option')->nullable();

@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Menu #ID{{$menu->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.menu')}} #ID{{$menu->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -35,11 +35,11 @@
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="form-group">
-                                    <label>Tiêu đề</label>
+                                    <label>{{__('lang.title')}}</label>
                                     <input type="text" class="form-control" name="translation[{{$key}}][name]" value="{{$translation->name}}" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Đường dẫn</label>
+                                    <label>{{__('lang.slug')}}</label>
                                     <div class="d-flex form-control">
                                         <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$translation->locale}}" value="{{$translation->slug}}" language="{{$translation->locale}}" seo="{{$translation->language->name}}" onkeyup="ChangeToSlug(this);"name="translation[{{$key}}][slug]">
                                         <span>.html</span>
@@ -55,11 +55,11 @@
                                 <div class="tab-pane" id="language-{{$language->value}}">
                                     <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
                                         <div class="form-group">
-                                            <label>Tiêu đề</label>
+                                            <label>{{__('lang.title')}}</label>
                                             <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
                                         </div>
                                         <div class="form-group">
-                                            <label>Đường dẫn </label>
+                                            <label>{{__('lang.slug')}} </label>
                                             <div class="d-flex form-control">
                                                 <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$language->value}}" value="{{old('data.alias')}}" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
                                                 <span>.html</span>
@@ -72,11 +72,11 @@
                         @endif
 
                             <div class="form-group">
-                                <label>Đường dẫn ngoài</label>
+                                <label>{{__('lang.path')}}</label>
                                 <input type="text" class="form-control" id="path" value="{{$menu->path}}" name="data[path]">
                             </div>
                             <div class="form-group">
-                                <label>Danh mục cha</label>
+                                <label>{{__('lang.group')}}</label>
                                 <select id="parent_id" name="data[parent_id]" class="form-control" data-toggle="select2">
                                     <option value="0">-----</option>
                                     @include('admin.render.options', ['options' => $menus, 'selected' => $menu->parent_id])
@@ -84,7 +84,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Target</label>
+                                <label>{{__('lang.target')}}</label>
                                 <select id="target" name="data[target]" class="form-control" data-toggle="select2">
                                     <option {{selected($menu->target,'_self')}} value="_self">-----</option>
                                     <option {{selected($menu->target,'_parent')}} value="_parent">_parent</option>
@@ -94,7 +94,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Kiểu menu</label>
+                                <label>{{__('lang.type')}} <span class="text-lowercase">{{__('lang.menu')}}</span></label>
                                 <select id="type" name="data[type]" class="form-control" data-toggle="select2">
                                     <option {{selected($menu->type,'default')}} value="default">Default</option>
                                     <option {{selected($menu->type,'mega')}} value="mega">Mega Menu</option>
@@ -109,7 +109,7 @@
                                         </div>
                                     </div>
                                     <div class="media-body ml-3">
-                                        <label class="form-label">Icon</label>
+                                        <label class="form-label">{{__('lang.icon')}}</label>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input name="data[image]" id="image_url" data-target="#image_src" value="{{$menu->image}}"  type="text" class="form-control" placeholder="http://">
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Vị trí</label>
+                                <label>{{__('lang.position')}}</label>
                                 <select id="position" class="form-control" data-toggle="select2" name="data[position]">
                                     <option value="top" {{selected($menu->position,'top')}} class="form-control">MENU TOP</option>
                                     <option value="home" {{selected($menu->position,'home')}} class="form-control">MENU HOME</option>
@@ -137,11 +137,11 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
                 </button>
 
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
                 </button>
             </div>
         </div>
@@ -157,7 +157,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
+            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
 
@@ -200,19 +200,44 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('select').each(function() {
+        $('select:not(".select2-multiple")').each(function() {
             $(this).select2({
                 dropdownParent: $(this).parent(),
                 placeholder: $(this).data('placeholder'),
             }).on('change', function(e){
-                var data = $(this).find('option:selected').text();
-                var text = data.replaceAll(/\xA0/g, "");
-                $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
+                var span = $('.select2-selection__rendered');
+
+                $.each(span, function (index, value) {
+                    var html = $(value).html();
+                    html = html.replaceAll('&nbsp;', "");
+                    $(value).html(html);
+                });
             });
 
-            var text = $(this).find('option:selected').text();
-            text = text.replaceAll(/\xA0/g, "");
-            $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
+            var span = $('.select2-selection__rendered');
+
+            $.each(span, function (index, value) {
+                var html = $(value).html();
+                html = html.replaceAll('&nbsp;', "");
+                $(value).html(html);
+            });
         });
+
+        $("select.select2-multiple").on("select2:select select2:unselect", function (e) {
+            var li = $('li.select2-selection__choice');
+
+            $.each(li, function (index, value) {
+                var html = $(value).html();
+                html = html.replaceAll('&nbsp;', "");
+                $(value).html(html);
+            })
+        })
+        var li = $('li.select2-selection__choice');
+
+        $.each(li, function (index, value) {
+            var html = $(value).html();
+            html = html.replaceAll('&nbsp;', "");
+            $(value).html(html);
+        })
     })
 </script>

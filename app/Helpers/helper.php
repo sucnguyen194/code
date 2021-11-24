@@ -163,7 +163,7 @@ if(!function_exists('scan_full_dir')){
         $dir_content_list = scandir($dir);
         foreach($dir_content_list as $k=>$value){
             $path = $dir.$icon[0].$value;
-            $arr = ['.','..','Admin','Auth','Console','Events','Commands','Services','Handlers','Exceptions','Providers','Middleware',              'Requests','Kernel.php','route.php','fonts','font','font-awesome',];
+            $arr = ['.','..','Admin','Auth','Console','Events','Commands','Services','Handlers','Exceptions','Providers','Middleware', 'Requests','Kernel.php','route.php','fonts','font','font-awesome',];
             if(in_array($value,$arr))  {continue;}
             $explode = explode('.',$value);
             $replace = str_replace(array('/','.'),array('_',''), $dir);

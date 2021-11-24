@@ -3,28 +3,24 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group position-relative box-action-image">
-                    <label>Hình ảnh</label>
+                    <label>{{__('lang.image')}}</label>
                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:0;top:0">
                         <label class="item-input mb-0">
-                            <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> Chọn ảnh
+                            <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> {{__('lang.select_image')}}
                         </label>
                     </div>
-                    <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif</p>
+                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
                     <div class="dropzone pl-2 pr-2 pb-1">
                         <div class="dz-message text-center needsclick mb-1" id="remove-label">
                             <label for="slider-file" class="w-100 mb-0">
-                                <div class="icon-dropzone pt-2">
-                                    <i class="h1 text-muted dripicons-cloud-upload"></i>
-                                </div>
-                                <span class="text-muted font-13">Sử dụng nút <strong>Chọn ảnh</strong> để thêm ảnh</span><br>
-                                <span class="text-muted font-13">Có thể upload <strong>Nhiều</strong> hình ảnh</span>
+                                @include('admin.render.note_image')
 
                             </label>
                         </div>
@@ -32,7 +28,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Vị trí hiển thị</label>
+                    <label>{{__('lang.position')}}</label>
                     <select data-toggle="select2" name="data[position]" class="form-control">
                         <option value="Nomal">----</option>
                         @foreach(\App\Enums\Position::getInstances() as $item)
@@ -41,7 +37,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Target</label>
+                    <label>{{__('lang.target')}}</label>
                     <select id="target" name="data[target]" class="form-control" data-toggle="select2">
                         <option value="_self">-----</option>
                         <option value="_parent">_parent</option>
@@ -51,7 +47,7 @@
                     </select>
                 </div>
                 <div class="form-group {{!setting('site.languages') ? "d-none" : "" }} ">
-                    <label>Ngôn ngữ</label>
+                    <label>{{__('lang.language')}}</label>
                     <select data-toggle="select2" name="data[lang]" class="form-control">
                         <option value="Nomal">----</option>
                         @if(setting('site.languages'))
@@ -65,12 +61,12 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
                 </button>
                 <input type="hidden" name="data[type]" value="{{\App\Enums\PhotoType::photo}}">
 
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
                 </button>
             </div>
         </div>
@@ -99,7 +95,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
+            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
 
         for(var i=0 ; i < count ; i++){
             let file = $(this).prop('files')[i];
@@ -132,12 +128,12 @@
                     img += '<div class="input-group">';
                     img += ' <input name="images[]" id="slider-input" type="text" class="form-control" value="'+result.data.link+'" placeholder="http://" >';
                     img += '<span class="input-group-append">';
-                    img += '<label class="btn btn-default mb-0" type="button"><input type="button" class="d-none" id="photo-delete">Delete</label>';
+                    img += '<label class="btn btn-default mb-0" type="button"><input type="button" class="d-none" id="photo-delete">{{__('lang.destroy')}}</label>';
                     img += '</span>';
                     img += '</div></div>';
 
                     img += '<div class="form-group mb-1">';
-                    img += ' <input name="name[]" type="text" class="form-control" value="" placeholder="Tiêu đề">';
+                    img += ' <input name="name[]" type="text" class="form-control" value="" placeholder="{{__('lang.title')}}">';
                     img += '</div>';
 
                     img += '<div class="form-group mb-0">';
@@ -156,7 +152,7 @@
                     $(slider).addClass('d-none');
 
                     var obj  = {
-                        'message': 'Lỗi upload: '+error,
+                        'message': '{{__('lang.error')}} upload: '+error,
                         'type' :'error'
                     };
                     flash(obj);

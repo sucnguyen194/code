@@ -19,6 +19,12 @@ class PermissionSeeder extends Seeder
         Artisan::call('cache:clear');
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
+        $tag = Permission::create(['name' => 'tag', 'title' => 'Tag','parent_id' => 0,'guard_name' => 'admin']);
+        Permission::create(['name' => 'tag.view', 'title' => 'Xem tag','parent_id' => $tag->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'tag.create', 'title' => 'Tạo tag','parent_id' => $tag->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'tag.edit', 'title' => 'Sửa tag','parent_id' => $tag->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'tag.destroy', 'title' => 'Xóa tag','parent_id' => $tag->id,'guard_name' => 'admin']);
+
         $discount = Permission::create(['name' => 'discount', 'title' => 'Mã giảm giá','parent_id' => 0,'guard_name' => 'admin']);
         Permission::create(['name' => 'discount.view', 'title' => 'Xem mã giảm giá','parent_id' => $discount->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'discount.create', 'title' => 'Tạo mã giảm giá','parent_id' => $discount->id,'guard_name' => 'admin']);

@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ý kiến khách hàng #ID{{$customer->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.customer_reviews')}} #ID{{$customer->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,19 +36,19 @@
                     @foreach($translations as $key => $translation)
                         <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
                             <div class="form-group">
-                                <label for="name">Tên khách hàng <span class="required">*</span></label>
+                                <label for="name">{{__('lang.customer')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" name="translation[{{$key}}][name]" id="name" value="{{$translation->name}}">
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span id="basic-addon1" class="input-group-text">Công việc</span>
+                                        <span id="basic-addon1" class="input-group-text">{{__('lang.job')}}</span>
                                     </div>
                                     <input type="text" class="form-control" value="{{$translation->job}}" id="job" name="translation[{{$key}}][job]">
                                 </div>
                             </div>
                             <div class="form-group" style="max-width: 770px">
-                                <label for="description">Bình luận </label>
+                                <label for="description">{{__('lang.comment')}} </label>
                                 <textarea class="form-control summernote" id="summernote" data-height="200"
                                           name="translation[{{$key}}][description]">{!! $translation->description !!}</textarea>
                             </div>
@@ -61,19 +61,19 @@
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                             <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
                                 <div class="form-group">
-                                    <label>Tên khách hàng <span class="required">*</span></label>
+                                    <label>{{__('lang.customer')}} <span class="required">*</span></label>
                                     <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" name="translation[{{$key}}][name]" >
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span id="basic-addon1" class="input-group-text">Công việc</span>
+                                            <span id="basic-addon1" class="input-group-text">{{__('lang.job')}}</span>
                                         </div>
                                         <input type="text" class="form-control" id="job" name="translation[{{$key}}][job]">
                                     </div>
                                 </div>
                                 <div class="form-group" style="max-width: 770px">
-                                    <label for="description">Đánh giá</label>
+                                    <label for="description">{{__('lang.comment')}}</label>
                                     <textarea class="form-control summernote" id="summernote" data-height="200"
                                               name="translation[{{$key}}][description]"></textarea>
                                 </div>
@@ -90,12 +90,12 @@
                                 </div>
                             </div>
                             <div class="media-body ml-3">
-                                <label class="form-label">Hình ảnh</label>
+                                <label class="form-label">{{__('lang.image')}}</label>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <input name="data[image]" id="image_url" value="{{$customer->image}}" data-target="#image_src"  type="text" class="form-control" placeholder="http://">
                                         <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >Upload..</label>
+                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >{{__('lang.upload')}}..</label>
                             </span>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span id="basic-addon1" class="input-group-text">SĐT</span>
+                                <span id="basic-addon1" class="input-group-text">{{__('lang.phone')}}</span>
                             </div>
                             <input type="tel" class="form-control" id="hotline" value="{{$customer->hotline}}" name="data[hotline]">
                         </div>
@@ -113,7 +113,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span id="basic-addon1" class="input-group-text">Email</span>
+                                <span id="basic-addon1" class="input-group-text">{{__('lang.email')}}</span>
                             </div>
                             <input type="email" class="form-control" id="email" value="{{$customer->email}}"
                                    name="data[email]">
@@ -142,81 +142,16 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
                 </button>
 
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
                 </button>
             </div>
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-    $('#image-upload').on('change', function () {
-        let file = $(this).prop('files')[0];
-        if (!file)
-            return false;
-
-        let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
-
-        if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
-
-        let target = $(this).data('target');
-
-        let formData = new FormData();
-        formData.append('image', file);
-        $('.loading').fadeIn();
-
-        fetch(
-            "https://api.imgur.com/3/image",
-            {
-                method: "POST",
-                body: formData,
-                "headers": {
-                    "Authorization": "Client-ID " + imgur_client_id
-                },
-            }
-        )
-            .then(response => response.json())
-            .then(result => {
-                $(target).val(result.data.link).trigger('change');
-                $('.loading').fadeOut();
-            })
-            .catch(error => {
-                alert('Lỗi upload: '+error)
-                console.error("Error:", error);
-            });
-
-    });
-
-    $('#image_url').on('change', function (){
-        let target = $(this).data('target');
-        let  hidden = $(this).data('hidden');
-        if ($(this).val()){
-            $(target).removeClass('d-none').attr('src', $(this).val()).show();
-            $(hidden).hide();
-        }else{
-            $(target).hide();
-            $(hidden).removeClass('d-none').show();
-        }
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('select').each(function () {
-
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                placeholder: $(this).data('placeholder'),
-            });
-        });
-    })
-
-</script>
 <script src="/lib/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
     var links = "{{route('home')}}";
@@ -272,4 +207,66 @@
         });
 
     });
+</script>
+<script type="text/javascript">
+    $('#image-upload').on('change', function () {
+        let file = $(this).prop('files')[0];
+        if (!file)
+            return false;
+
+        let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
+
+        if(!imgur_client_id)
+            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
+
+        let target = $(this).data('target');
+
+        let formData = new FormData();
+        formData.append('image', file);
+        $('.loading').fadeIn();
+
+        fetch(
+            "https://api.imgur.com/3/image",
+            {
+                method: "POST",
+                body: formData,
+                "headers": {
+                    "Authorization": "Client-ID "+ imgur_client_id
+                },
+            }
+        )
+            .then(response => response.json())
+            .then(result => {
+                $(target).val(result.data.link).trigger('change');
+                $('.loading').fadeOut();
+            })
+            .catch(error => {
+                alert('Lỗi upload: '+error)
+                console.error("Error:", error);
+            });
+
+    });
+
+    $('#image_url').on('change', function (){
+        let target = $(this).data('target');
+        let  hidden = $(this).data('hidden');
+        if ($(this).val()){
+            $(target).removeClass('d-none').attr('src', $(this).val()).show();
+            $(hidden).hide();
+        }else{
+            $(target).hide();
+            $(hidden).removeClass('d-none').show();
+        }
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('select').each(function () {
+            $(this).select2({
+                dropdownParent: $(this).parent(),
+                placeholder: $(this).data('placeholder'),
+            });
+        });
+    })
+
 </script>

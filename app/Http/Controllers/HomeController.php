@@ -66,7 +66,7 @@ class HomeController extends Controller
             }
         }
 
-        $translation = Translation::whereSlug($slug)->whereNull('menu_id')->first();
+        $translation = Translation::ofSlug($slug)->first();
 
         if(!$translation || !$translation->item)
             return  redirect()->route('home');

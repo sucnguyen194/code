@@ -17,7 +17,7 @@ use App\Models\Product;
 use App\Models\Setting;
 use App\Models\SocialIdentity;
 use App\Models\Support;
-use App\Models\Tags;
+use App\Models\Tag;
 use App\Models\Translation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
             'discounts'         => Discount::class,
             'invoices'          => Invoice::class,
             'socialidentities'  => SocialIdentity::class,
-            'tags'              => Tags::class
+            'tags'              => Tag::class
 
         ]);
     }

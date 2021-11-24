@@ -16,7 +16,7 @@ class Menu extends Model
     protected $guarded = ['id'];
 
     public function translations(){
-        return $this->hasMany(Translation::class);
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
     }
 
     public function translation(){

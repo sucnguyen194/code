@@ -453,8 +453,15 @@ ul.grid {
     border:1px solid #fff;
 }
 .select2-container .select2-selection--multiple .select2-selection__choice {
+    margin-right: 3px!important;
+}
+.select-category .select2-container .select2-selection--multiple .select2-selection__choice {
     display: table;
     float: unset;
+    margin-right: 0!important;
+}
+.mce-tooltip {
+    display: none!important;
 }
 @media (max-width: 420px) {
     .w-xs-100 {
