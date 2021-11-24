@@ -28,8 +28,8 @@ class Attribute extends Model
         return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
-    public function getTitleAttribute(){
-        return $this->translation->name;
+    public function getNameAttribute(){
+        return optional($this->translation)->name;
     }
 
     public function getSlugAttribute(){

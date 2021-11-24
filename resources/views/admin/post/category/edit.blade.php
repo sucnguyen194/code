@@ -30,7 +30,7 @@
                     @endif
                 </div>
 
-                @include('admin.render.category_parent', ['selected' => $category->parent_id])
+                @include('admin.render.group', ['selected' => $category->parent_id])
 
                     <div class="form-group position-relative">
                         @include('admin.render.edit.media' , ['item' => $category])

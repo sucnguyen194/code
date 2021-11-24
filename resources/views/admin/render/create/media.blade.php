@@ -8,7 +8,7 @@
         <label class="form-label">{{__('lang.pic')}}</label>
         <div class="form-group">
             <div class="input-group">
-                <input name="data[image]" id="image_url" data-target="#image_src"  type="text" class="form-control" placeholder="http://">
+                <input name="data[image]" id="image_url" data-target="#image_src"  type="text" class="form-control image_url" placeholder="http://">
                 <span class="input-group-append">
                                  <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >{{__('lang.upload')}}...</label>
                             </span>

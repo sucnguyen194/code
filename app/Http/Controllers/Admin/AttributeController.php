@@ -23,16 +23,11 @@ class AttributeController extends Controller
     public function data(){
         $attributes = Attribute::query()->with('translation',function($q){
             $q->select('name','attribute_id');
-        })->whereHas('translation')
-            ->when(request()->search, function ($q, $keyword){
-                return $q->whereHas('translation',function ($q) use ($keyword){
-                    return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%');
-                });
-            });
+        });
 
         return datatables()->of($attributes)
             ->editColumn('name', function ($attribute){
-                return $attribute->translation->name ?? 'n/a';
+                return $attribute->name;
             })
             ->order(function($q){
                 $q->orderBy(\request()->input('sort','created_at'),\request()->input('order','desc'));

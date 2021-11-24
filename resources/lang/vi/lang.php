@@ -177,5 +177,11 @@
 
         //videos
         'note_url_video' => 'Coppy đường đẫn theo mẫu bên ảnh bên dưới',
+
+        //products
+        'code' => 'Code',
+        'price' => 'Giá',
+        'price_sale' => 'Giá khuyến mại',
+        'background' => 'Ảnh nền'
     ]
 ?>

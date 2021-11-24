@@ -20,7 +20,7 @@
                     @endforeach
                 </div>
 
-                @include('admin.render.category_parent')
+                @include('admin.render.group')
 
                 <div class="form-group position-relative">
                     @include('admin.render.create.media')

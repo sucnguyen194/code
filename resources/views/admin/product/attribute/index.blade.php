@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Phân loại sản phẩm @stop
+@section('title') {{__('lang.filter')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,11 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Phân loại sản phẩm</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.filter')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Phân loại sản phẩm</h4>
+                    <h4 class="page-title">{{__('lang.filter')}}</h4>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                     <div class="action-datatable text-right">
                         @can('product.create')
                         <a href="{{route('admin.attributes.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -52,13 +52,13 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true" data-visible="true">ID</th>
-                                <th data-formatter="sortFormatter" data-width="100">STT</th>
+                                <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
                                 <th data-field="name">
-                                    Tiêu đề
+                                    {{__('lang.title')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -107,7 +107,7 @@
             @endcan
 
                 @can('product.destroy')
-                html+='<a href="'+ '{{ route('admin.attributes.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+                html+='<a href="'+ '{{ route('admin.attributes.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
                 return html;
         }
