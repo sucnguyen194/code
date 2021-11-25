@@ -16,11 +16,10 @@
     <link href="{{asset('lib/assets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('lib/assets/libs/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('lib/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css')}}" rel="stylesheet" type="text/css" />
-    <script>
-        var DOMAIN = "{{asset('/')}}";
-    </script>
+
     <script type="text/javascript">
         var links = "{{route('home')}}";
+        var language = "{{session('lang')}}";
     </script>
 
     <!-- App css -->
@@ -502,7 +501,7 @@
     }
 </style>
 <script>
-    moment.locale('vi');
+    moment.locale('{{session('lang')}}');
     function defaultQueryParams(params){
         params.start = params.offset;
         params.length = params.limit;

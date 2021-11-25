@@ -203,7 +203,7 @@ $(document).ready(function(){
 })
 $(document).ready(function(){
     tinymce.init({
-        language : 'vi',
+        language : language,
         plugins: "wordcount textcolor image  link  anchor   charmap media   lists responsivefilemanager",
         toolbar: [
             'fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat | image',
@@ -254,7 +254,7 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
     tinymce.init({
-        language : 'vi',
+        language : language,
         plugins: "wordcount textcolor code preview image  link  anchor   charmap media   lists responsivefilemanager",
         toolbar: [
             'preview code | fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat',
@@ -306,7 +306,7 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
     tinymce.init({
-        language : 'vi',
+        language : language,
         plugins: "wordcount textcolor image link hr preview anchor code insertdatetime charmap media table print lists responsivefilemanager",
         toolbar: [
             'preview code | styleselect | bold italic underline strikethrough subscript superscript charmap | anchor link unlink image media | forecolor backcolor | cut copy paste | alignleft aligncenter alignright alignjustify | table | bullist numlist outdent indent | removeformat | undo redo | fontsizeselect | hr insertdatetime print | newdocument | responsivefilemanager',

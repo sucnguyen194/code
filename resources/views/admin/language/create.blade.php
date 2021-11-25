@@ -3,14 +3,14 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Danh sách ngôn ngữ hiện tại <span class="required">*</span></label>
+                    <label>{!! __('lang.list_language') !!} <span class="required">*</span></label>
                     @foreach($languages as $item)
                         <blockquote class="blockquote mb-0">
                             <footer class="blockquote-footer"><cite title="{{$item->name}} ({{$item->value}})" class="font-weight-bold">{{$item->name}} ({{$item->value}})</cite></footer>
@@ -18,47 +18,22 @@
                     @endforeach
                 </div>
                 <div class="form-group">
-                    <label>Tên ngôn ngữ <span class="required">*</span></label>
-                    <p>* tên ngôn ngữ phải khác nhau</p>
+                    <label>{!! __('lang.language') !!} <span class="required">*</span></label>
                     <input type="text" class="form-control" value="" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label>Giá trị <span class="required">*</span></label>
-                    <p>* Giới hạn tối đa 2 ký tự</p>
+                    <label>{!! __('lang.value') !!} <span class="required">*</span></label>
+                    <p class="font-13"><code>*</code> {{__('lang.max')}} 2 {{__('lang.characters')}} </p>
                     <input type="text" maxlength="2" value="" name="value" class="form-control" id="alloptions" />
                 </div>
 
                 <div class="form-group position-relative">
-                    <div class="media">
-                        <div class="thumbnail-container square" style="border: 1px dashed #ddd;">
-                            <div style="width: 100px; height: 100px; border: 1px solid #ddd;">
-                                <img src="" class="image_src d-none" id="image_src" width="100%" height="100%">
-                            </div>
-                        </div>
-                        <div class="media-body ml-3">
-                            <label class="form-label">Icon</label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input name="image" id="image_url" data-target="#image_src"  type="text" class="form-control" placeholder="http://">
-                                    <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >Upload..</label>
-                            </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('admin.render.create.media')
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
-                </button>
-
-                <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
-                </button>
+               @include('admin.render.modal')
             </div>
         </div>
     </form>
@@ -74,7 +49,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': 'API IMG chưa được cấu hình!', 'type': 'error'});
+            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
 
@@ -97,8 +72,11 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error)
-                console.error("Error:", error);
+                var obj  = {
+                    'message': '{{__('lang.error')}} {{__('lang.upload')}}: '+error,
+                    'type' :'error'
+                };
+                flash(obj);
             });
 
     });

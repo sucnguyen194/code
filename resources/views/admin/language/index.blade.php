@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Quản lý ngôn ngữ @stop
+@section('title') {!! __('lang.language') !!} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,11 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Quản lý ngôn ngữ</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{!! __('lang.language') !!}</a></li>
+                            <li class="breadcrumb-item active">{!! __('lang.language') !!}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Quản lý ngôn ngữ</h4>
+                    <h4 class="page-title">{!! __('lang.language') !!}</h4>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         <a href="{{route('admin.languages.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {!! __('lang.create') !!}</a>
                     </div>
                     <div id="custom-toolbar">
 
@@ -48,17 +48,17 @@
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-field="name">
-                                    Ngôn ngữ
+                                    {!! __('lang.language') !!}
                                 </th>
 
                                 <th data-field="value" >
-                                    Giá trị
+                                    {!! __('lang.value') !!}
                                 </th>
                                 <th data-field="status" data-formatter="statusFormatter"  data-width="200" data-sortable="true" data-visible="true">
-                                    Trạng thái
+                                    {!! __('lang.status') !!}
                                 </th>
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {!! __('lang.action') !!}
                                 </th>
 
                             </tr>
@@ -78,16 +78,16 @@
 
         function statusFormatter(value){
             if(value == 1){
-                return '<strong class="text-info"><span class="icon-button"><i class="pe-7s-star"></i></span> Mặc định</strong>';
+                return '<strong class="text-info"><span class="icon-button"><i class="pe-7s-star"></i></span> {{__('lang.default')}}</strong>';
             }
             return "";
         }
 
         function actionFormatter(value, row){
             let html = '<a href="'+ '{{ route('admin.languages.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
-            html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
 
-            html+='<a href="'+ '{{ route('admin.languages.active', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-info waves-effect waves-light" data-confirm="Xác nhận chuyển ngôn ngữ?" data-refresh="true" data-method="POST"><i class="fa fa-language"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.languages.active', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-info waves-effect waves-light" data-confirm="{{__('lang.confirm_change_language')}}" data-refresh="true" data-method="POST"><i class="fa fa-language"></i></a> ';
 
             return html;
         }
