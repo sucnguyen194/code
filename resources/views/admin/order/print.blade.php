@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.order')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,29 +16,28 @@
                         <div style="text-align:center">-----------------------------------</div>
                         <div
                             style="font-weight:bold;font-size:16px;text-align:center;text-transform: uppercase">
-                            Hóa đơn xuất bán
+                            {{__('lang.sales_invoice')}}
                         </div>
-                        <div class="CssPrintRow" style="padding: 2px 0;font-size: 13px;">Ngày giờ: {{date('d/m/Y H:i:s', time())}}
+                        <div class="CssPrintRow" style="padding: 2px 0;font-size: 13px;">{{__('lang.time')}}: {{date('d/m/Y H:i:s', time())}}
                         </div>
-                        <div class="CssPrintRow" style="padding: 2px 0;font-size: 13px;">Thu Ngân: Quản
-                            trị {{setting('site.name', 1)}}</div>
-                         <div class="CssPrintRow">Số phiếu: #XBA.2021.1084</div>
-                        <div class="CssPrintRow" style="padding: 2px 0 4px 0;font-size: 13px;">Khách hàng: {{$order->name}} <span>- {{$order->phone}}</span> <span>- {{$order->address}}</span>
+                        <div class="CssPrintRow" style="padding: 2px 0;font-size: 13px;">{{__('lang.cashier')}}: {{setting('site.name', 1)}}</div>
+                         <div class="CssPrintRow">{{__('lang.receipts')}}: #XBA.{{date('Y', time())}}.{{$order->id}}</div>
+                        <div class="CssPrintRow" style="padding: 2px 0 4px 0;font-size: 13px;">{{__('lang.customer')}}: {{$order->name}} <span>- {{$order->phone}}</span> <span>- {{$order->address}}</span>
                         </div>
                         <div class="CssBillDetail">
                             <table class="table table-bordered"
                                    style="width: 100%;font-size:12px;line-height: 18px;">
                                 <tbody>
                                 <tr>
-                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">Tên
+                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('lang.name')}}
                                     </th>
-                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">SL
-                                    </th>
-                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">
-                                        Đ.giá
+                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('lang.quantity')}}
                                     </th>
                                     <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">
-                                        T.tiền
+                                        {{__('lang.price')}}
+                                    </th>
+                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">
+                                        {{__('lang.total_money')}}
                                     </th>
                                 </tr>
 
@@ -60,8 +59,7 @@
                                 </tr>
                                 @endforeach
                                 <tr>
-                                    <td nowrap="" colspan="3" class="CssNoLine" style="font-weight: bold">Tổng
-                                        cộng
+                                    <td nowrap="" colspan="3" class="CssNoLine" style="font-weight: bold">{{__('lang.total_money')}}
                                     </td>
                                     <td nowrap="" class="CssNoLine" style="font-weight: bold">
                                         {{number_format($order->total)}}
@@ -69,28 +67,20 @@
                                 </tr>
 
                                 <tr>
-                                    <td class="CssNoLine" colspan="3" style="font-weight: bold">Phải trả:</td>
-                                    <td class="CssNoLine" style=" font-weight: bold">{{number_format($order->total)}}
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td class="CssNoLine" colspan="4"><span
-                                            style="font-style: italic; font-weight: bold">Bằng chữ:  <span class="read-total"></span> </span>
+                                            style="font-style: italic; font-weight: bold">{{__('lang.by_text')}}:  <span class="read-total"></span> </span>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="CssBillDetail" style="font-size: 12px">
-                            <strong>* Ghi chú:
+                            <strong>* {{__('lang.note')}}:
                                 <div style="padding-left: 15px"></div>
                             </strong>
                         </div>
-                        <div style="font-style:italic; margin-top:10px;text-align:center; font-size: 13px">Khách
-                            hàng vui lòng kiểm tra kĩ, hàng đã thanh toán, ra khỏi cửa hàng, cửa hàng không chịu trách
-                            nhiệm!
-                        </div>
-                        <div style="margin-top:10px;text-align:center; font-size: 13px">Xin cảm ơn Quý khách!
+
+                        <div style="margin-top:10px;text-align:center; font-size: 13px">{{__('lang.thank_customer')}}
                         </div>
                     </div>
                 </div>
@@ -98,12 +88,12 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
                 </button>
 
                 <button type="button" class="btn btn-purple waves-effect waves-light"
                         onclick="PrintElem('#detailPrintOrder')"><span class="icon-button"><i
-                            class="pe-7s-print"></i></span> In đơn hàng
+                            class="pe-7s-print"></i></span> {{__('lang.print_order')}}
                 </button>
             </div>
         </div>

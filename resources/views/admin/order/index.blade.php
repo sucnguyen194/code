@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Đơn hàng @stop
+@section('title') {{__('lang.order')}} @stop
 @section('content')
     <div class="container-fluid" id="orders-index">
         <!-- start page title -->
@@ -8,11 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Đơn hàng</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.order')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Đơn hàng</h4>
+                    <h4 class="page-title">{{__('lang.order')}}</h4>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
 
                             <div class="mr-2 mb-2" style="width: 200px">
                                 <input type="text" id="reportrange" name="date" value="{{request()->date}}"
-                                       placeholder="Từ ngày - đến ngày" class="form-control"/>
+                                       placeholder="{{__('lang.reportrange')}}" class="form-control"/>
                             </div>
 
                         </form>
@@ -52,27 +52,27 @@
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
                                 <th data-field="created_at">
-                                    Ngày tạo
+                                    {{__('lang.date_created')}}
                                 </th>
 
                                 <th data-field="name">
-                                    Người tạo
+                                    {{__('lang.user_created')}}
                                 </th>
 
                                 <th data-field="phone">
-                                    SĐT
+                                    {{__('lang.phone')}}
                                 </th>
 
                                 <th data-field="amount">
-                                    Số lượng
+                                    {{__('lang.quantity')}}
                                 </th>
 
                                 <th data-field="total" data-footer-formatter="sumFormatter" data-type="number" data-formatter="numberFormatter">
-                                    Tổng tiền
+                                    {{__('lang.total_money')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -143,7 +143,7 @@
 
                     let html = '<a href="' + '{{ route('admin.orders.print', ':id') }}'.replace(':id', row.id) + '" class="ajax-modal btn btn-purple waves-effect waves-light"><i class="pe-7s-print"></i></a> ';
                     @can('order.destroy')
-                    html += '<a href="' + '{{ route('admin.orders.destroy', ':id') }}'.replace(':id', row.id) + '" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+                    html += '<a href="' + '{{ route('admin.orders.destroy', ':id') }}'.replace(':id', row.id) + '" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
                     @endcan
                     return html;
                 }

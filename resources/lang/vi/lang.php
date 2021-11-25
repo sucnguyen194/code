@@ -12,6 +12,7 @@
         //confirm
         'confirm_destroy' => 'Xóa bản ghi?',
         'confirm' => 'Xác nhận',
+        'note' => 'Ghi chú',
 
         //admin action
         'logout' => 'Đăng xuất',
@@ -217,6 +218,18 @@
         'no_invoice' => 'Chưa có hoá đơn nào',
         'order_money' => 'Tiền đơn',
 
-
+        //orders
+        'reportrange' => 'Từ ngày - đến ngày',
+        'date_created' => 'Ngày tạo',
+        'user_created' => 'Người tạo',
+        'quantity' => 'Số lượng',
+        'total_money' => 'Tổng tiền',
+        //order print
+        'sales_invoice' => 'Hóa đơn xuất bán',
+        'cashier' => 'Thu ngân',
+        'receipts' => 'Số phiếu',
+        'by_type' => 'Bằng chữ',
+        'thank_customer' => 'Xin cảm ơn Quý khách!',
+        'print_order' => 'In đơn hàng'
     ]
 ?>
