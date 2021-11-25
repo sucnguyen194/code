@@ -23,7 +23,7 @@
                     <div class="action-datatable text-right">
                         @can('product.create')
                         <a href="{{route('admin.products.categories.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.category'))}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">

@@ -43,7 +43,7 @@ class Category extends Model
     }
 
     public function scopeOfType($q, $type){
-        return $q->whereType($type)->with('translation')->whereHas('translation')->public()->sort();
+        return $q->whereType($type)->with('translation')->public()->sort();
     }
 
     public function scopeSort($q){

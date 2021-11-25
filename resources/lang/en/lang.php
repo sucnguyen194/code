@@ -19,7 +19,7 @@ return [
     'login'                                  => 'Login',
     'password'                               => 'Password',
     'view'                                   => 'View',
-    'create'                                 => 'Add new',
+    'create'                                 => 'Add',
     'destroy'                                => 'Destroy',
     'edit'                                   => 'Edit',
     'detail'                                 => 'Detail',

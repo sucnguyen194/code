@@ -4,7 +4,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.tag')}}</span></h5>
                 <button type="button" class="close close-tag" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
             <div class="modal-body">
                 @include('admin.render.create.nav')
 
-                <div class="tab-content pt-0">
+                <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     <div class="form-group">
                         <select class="form-control" data-toggle="select2" name="data[type]" data-placeholder="{{__('lang.classify')}}">
                             <option value="">{{__('lang.classify')}}</option>
@@ -22,7 +22,7 @@
                         </select>
                     </div>
                     @foreach(languages() as $key => $language)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
+                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                             <div class="form-group">
                                 <label>{{__('lang.tag')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="{{$language->value}}"
@@ -39,14 +39,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal"
-                        aria-label="Close">
-                    <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
-                </button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
-                </button>
+                @include('admin.render.modal')
             </div>
         </div>
     </form>

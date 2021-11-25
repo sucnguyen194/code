@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.gallery'))}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,7 +11,7 @@
             <div class="modal-body">
                 @include('admin.render.create.nav')
 
-                <div class="tab-content">
+                <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     <div class="form-group position-relative box-action-image">
                         @include('admin.render.create.multiple_image')
                     </div>

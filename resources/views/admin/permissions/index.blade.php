@@ -24,7 +24,7 @@
                     @can('permission.create')
                     <div class="action-datatable text-right">
                         <a href="{{route('admin.permissions.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.permission'))}}</a>
                     </div>
                     @endcan
                     <div id="custom-toolbar">

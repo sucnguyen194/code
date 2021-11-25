@@ -27,7 +27,7 @@
             <form action="{{route('admin.settings')}}" method="post" id="form-update" class="ajax-form" enctype="multipart/form-data">
                 <div class="mt-3">
                     <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('lang.reset')}}</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span>{{__('lang.save')}}</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}</button>
                 </div>
                 @csrf
                 <div id="wizard-clickable" >

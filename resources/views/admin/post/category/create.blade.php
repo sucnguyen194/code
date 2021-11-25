@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.category')}}</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

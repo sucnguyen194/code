@@ -238,7 +238,7 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('blog.create')
                                     <li>
-                                        <a href="{{route('admin.posts.create')}}">{{__('lang.create')}}</a>
+                                        <a href="{{route('admin.posts.create')}}">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.post'))}}</a>
                                     </li>
                                 @endcan
                                 <li>
@@ -289,7 +289,7 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('product.create')
                                     <li>
-                                        <a href="{{route('admin.products.create')}}">{{__('lang.create')}}</a>
+                                        <a href="{{route('admin.products.create')}}">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</a>
                                     </li>
                                 @endcan
                                 <li>

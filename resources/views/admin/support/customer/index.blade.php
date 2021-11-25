@@ -24,7 +24,7 @@
                     <div class="action-datatable text-right">
                         @can('support.create')
                         <a href="{{route('admin.supports.customers.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} <span class="text-lowercase">{{__('lang.review')}}</span></a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">

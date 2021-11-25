@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.create')}}
+    {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}
 @stop
 @section('content')
     <div class="container-fluid">
@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item active">{{__('lang.create')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.create')}}</h4>
+                    <h4 class="page-title">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</h4>
                 </div>
             </div>
         </div>

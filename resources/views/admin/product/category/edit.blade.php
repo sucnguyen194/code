@@ -21,7 +21,7 @@
                     @endforeach
 
                     @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
+                        <div class="tab-pane  language-{{$language->value}}" id="language-{{$language->value}}">
                             @include('admin.render.create.title')
 
                             @include('admin.render.create.slug')

@@ -25,7 +25,7 @@
                     <div class="action-datatable text-right">
                         @can('photo.create')
                         <a href="{{route('admin.photos.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} <span class="text-lowercase">{{__('lang.image')}}</span></a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">

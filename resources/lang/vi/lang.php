@@ -19,7 +19,7 @@ return [
     'login'                                  => 'Đăng nhập',
     'password'                               => 'Mật khẩu',
     'view'                                   => 'Xem',
-    'create'                                 => 'Thêm mới',
+    'create'                                 => 'Thêm',
     'destroy'                                => 'Xóa',
     'edit'                                   => 'Chỉnh sửa',
     'detail'                                 => 'Chi tiêt',

@@ -10,30 +10,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                @if(setting('site.languages'))
-                    <ul class="nav nav-tabs tabs-bordered nav-justified pt-1 bg-white" style="margin-bottom: 20px">
+                @include('admin.render.edit.nav')
+                    <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                         @foreach($translations as $key => $translation)
-                            <li class="nav-item">
-                                <a href="#language-{{$translation->locale}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$key == 0 ? 'active' : null}}">
-                                    <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
-                                    <span class="d-none d-sm-block">{{$translation->language->name}}</span>
-                                </a>
-                            </li>
-                        @endforeach
-
-                        @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                            <li class="nav-item">
-                                <a href="#language-{{$language->value}}" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
-                                    <span class="d-none d-sm-block">{{$language->name}}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-                    <div class="tab-content pt-0">
-                        @foreach($translations as $key => $translation)
-                            <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
+                            <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                                 <div class="form-group">
                                     <label>{{__('lang.title')}}</label>
                                     <input type="text" class="form-control" name="translation[{{$key}}][name]" value="{{$translation->name}}" >
@@ -53,7 +33,7 @@
 
                             @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                                 <div class="tab-pane" id="language-{{$language->value}}">
-                                    <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
+                                    <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                                         <div class="form-group">
                                             <label>{{__('lang.title')}}</label>
                                             <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
@@ -135,14 +115,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
-                </button>
-
-                <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
-                </button>
+                @include('admin.render.modal')
             </div>
         </div>
     </form>

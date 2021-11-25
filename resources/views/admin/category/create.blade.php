@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.category')}}</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -94,22 +94,4 @@
             $(hidden).removeClass('d-none').show();
         }
     });
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('select').each(function() {
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                placeholder: $(this).data('placeholder'),
-            }).on('change', function(e){
-                var data = $(this).find('option:selected').text();
-                var text = data.replaceAll(/\xA0/g, "");
-                $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
-            });
-
-            var text = $(this).find('option:selected').text();
-            text = text.replaceAll(/\xA0/g, "");
-            $(this).closest('.form-group').find('.select2-selection__rendered').text(text);
-        });
-    })
 </script>

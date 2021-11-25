@@ -12,10 +12,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.posts.index')}}">{{__('lang.post')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.create')}}</li>
+                            <li class="breadcrumb-item active">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.post')}}</span></li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.create')}}</h4>
+                    <h4 class="page-title">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.post')}}</span></h4>
                 </div>
             </div>
         </div>

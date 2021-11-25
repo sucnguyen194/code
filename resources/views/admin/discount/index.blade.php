@@ -24,7 +24,7 @@
                 <div class="action-datatable text-right">
                     @can('discount.create')
                     <a href="{{route('admin.discounts.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                        <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
+                        <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}</a>
                     @endcan
                 </div>
                 <div id="custom-toolbar">

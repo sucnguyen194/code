@@ -10,31 +10,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                @if(setting('site.languages'))
-                    <ul class="nav nav-tabs tabs-bordered nav-justified pt-1 bg-white" style="margin-bottom: 20px">
-                        @foreach($translations as $key => $translation)
-                            <li class="nav-item">
-                                <a href="#language-{{$translation->locale}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$key == 0 ? 'active' : null}}">
-                                    <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
-                                    <span class="d-none d-sm-block">{{$translation->language->name}}</span>
-                                </a>
-                            </li>
-                        @endforeach
+                @include('admin.render.edit.nav')
 
-                        @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                            <li class="nav-item">
-                                <a href="#language-{{$language->value}}" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
-                                    <span class="d-none d-sm-block">{{$language->name}}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-
-                <div class="tab-content pt-0">
+                <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     @foreach($translations as $key => $translation)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
+                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                             <div class="form-group">
                                 <label for="name">{{__('lang.customer')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" name="translation[{{$key}}][name]" id="name" value="{{$translation->name}}">
@@ -59,7 +39,7 @@
                     @if(setting('site.languages'))
 
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                            <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
+                            <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                                 <div class="form-group">
                                     <label>{{__('lang.customer')}} <span class="required">*</span></label>
                                     <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" name="translation[{{$key}}][name]" >
@@ -83,24 +63,7 @@
                     @endif
 
                     <div class="form-group position-relative">
-                        <div class="media">
-                            <div class="thumbnail-container square" style="border: 1px dashed #ddd;">
-                                <div style="width: 100px; height: 100px; border: 1px solid #ddd;">
-                                    <img src="{{$customer->image}}" class="image_src {{!$customer->image ? "d-none" : ""}}" id="image_src" width="100%" height="100%">
-                                </div>
-                            </div>
-                            <div class="media-body ml-3">
-                                <label class="form-label">{{__('lang.image')}}</label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input name="data[image]" id="image_url" value="{{$customer->image}}" data-target="#image_src"  type="text" class="form-control" placeholder="http://">
-                                        <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >{{__('lang.upload')}}..</label>
-                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @include('admin.render.edit.media', ['item' => $customer])
                     </div>
                     <div class="form-group">
                         <div class="input-group">
@@ -140,14 +103,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
-                </button>
-
-                <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
-                </button>
+              @include('admin.render.modal')
             </div>
         </div>
     </form>

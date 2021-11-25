@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} {{__('lang.category')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -39,7 +39,7 @@
         </div>
     </form>
 </div>
-
+<script src="/lib/tinymce/tinymce.min.js"></script>
 <script src="/lib/js/cpanel.js"></script>
 <script type="text/javascript">
     $('.image-upload, .background-upload').on('change', function () {

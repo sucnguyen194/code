@@ -12,7 +12,7 @@
             <div class="modal-body">
                 @include('admin.render.edit.nav')
 
-                    <div class="tab-content">
+                    <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                                 @include('admin.render.edit.title')

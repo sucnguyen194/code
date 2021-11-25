@@ -3,28 +3,17 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.review')}}</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                @if(setting('site.languages'))
-                    <ul class="nav nav-tabs tabs-bordered nav-justified bg-white" style="margin-bottom: 20px">
-                        @foreach(languages() as $key => $language)
-                            <li class="nav-item">
-                                <a href="#language-{{$language->value}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$key == 0 ? 'active' : null}}">
-                                    <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
-                                    <span class="d-none d-sm-block">{{$language->name}}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-                <div class="tab-content pt-0">
+               @include('admin.render.create.nav')
+                <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     @foreach(languages() as $key => $language)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
+                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                             <div class="form-group">
                                 <label>{{__('lang.customer')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
@@ -46,24 +35,7 @@
                         <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
                     @endforeach
                     <div class="form-group position-relative">
-                        <div class="media">
-                            <div class="thumbnail-container square" style="border: 1px dashed #ddd;">
-                                <div style="width: 100px; height: 100px; border: 1px solid #ddd;">
-                                    <img src="" class="image_src d-none" id="image_src" width="100%" height="100%">
-                                </div>
-                            </div>
-                            <div class="media-body ml-3">
-                                <label class="form-label">{{__('lang.image')}}</label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input name="data[image]" id="image_url" data-target="#image_src"  type="text" class="form-control" placeholder="http://">
-                                        <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >{{__('lang.upload')}}...</label>
-                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @include('admin.render.create.media')
                     </div>
 
                     <div class="form-group">
@@ -106,14 +78,7 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" value="{{\App\Enums\SupportType::customer}}" name="data[type]">
-                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
-                </button>
-
-                <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
-                </button>
+              @include('admin.render.modal')
             </div>
         </div>
     </form>

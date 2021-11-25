@@ -43,7 +43,7 @@ class CategoryController extends Controller
 
         return datatables()->of($categories)
             ->editColumn('name', function ($category){
-                return $category->translation->name;
+                return $category->name;
             })
             ->editColumn('created_at', function ($category){
                 return $category->created_at->diffForHumans();

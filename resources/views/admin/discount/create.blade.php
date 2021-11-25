@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.create')}}
+    {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}
 @stop
 @section('content')
     <style>
@@ -24,10 +24,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('lang.discount')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.create')}}</li>
+                            <li class="breadcrumb-item active">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.create')}}</h4>
+                    <h4 class="page-title">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}</h4>
                 </div>
             </div>
         </div>

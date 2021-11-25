@@ -12,7 +12,7 @@
             </div>
             <div class="modal-body">
                 @include('admin.render.edit.nav')
-                <div class="tab-content pt-0">
+                <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     <div class="form-group position-relative box-action-image float-left w-100 clearfix">
                         @include('admin.render.edit.multiple_image', ['item' => $gallery])
                     </div>

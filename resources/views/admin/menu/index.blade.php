@@ -29,7 +29,7 @@
                     @can('menu.create')
                     <div class="action-datatable text-right mb-2">
                         <a href="{{route('admin.menus.create')}}" class="btn btn-primary waves-effect width-md waves-light ajax-modal">
-                            <span class="icon-button"><i class="fe-plus pr-1"></i></span> {{__('lang.create')}}</a>
+                            <span class="icon-button"><i class="fe-plus pr-1"></i></span> {{__('lang.create')}} <span class="text-lowercase">{{__('lang.menu')}}</span></a>
 
                     </div>
                     @endcan
