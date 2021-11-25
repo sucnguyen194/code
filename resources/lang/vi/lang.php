@@ -289,8 +289,13 @@
         'maintenance' => 'Bảo trì website',
         'note_maintenance' => 'Khi kích hoạt tính năng, website sẽ trong trạng thái <code>bảo trì</code>. Quản trị viên vẫn có thể review website bằng <code>mật khẩu</code> bảo mật.',
         'note_maintenance_password' => '(reivew khi website bảo trì)',
+
+        //sources
+        'source_code_editor' => 'Trình biên tập mã nguồn',
+        'source' => 'Mã nguồn',
+        'file_error' => 'Không tìm thấy đường dẫn file',
         //languages
-        'list_language' => 'Danh sách ngôn ngữ',
+//        'list_language' => 'Danh sách ngôn ngữ',
 
     ]
 ?>

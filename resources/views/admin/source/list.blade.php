@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-Trình biên tập mã nguồn
+{!! __('lang.source_code_editor') !!}
 @stop
 @section('content')
 
@@ -12,11 +12,11 @@ Trình biên tập mã nguồn
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                        <li class="breadcrumb-item active">Trình biên tập mã nguồn</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{!! __('lang.dashboard') !!}</a></li>
+                        <li class="breadcrumb-item active">{!! __('lang.source_code_editor') !!}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Trình biên tập mã nguồn</h4>
+                <h4 class="page-title">{!! __('lang.source_code_editor') !!}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@ Trình biên tập mã nguồn
     <div class="row">
         <div class="col-md-4">
             <div class="card-box">
-                <h4 class="header-title mb-3">Mã nguồn</h4>
+                <h4 class="header-title mb-3">{!! __('lang.source') !!}</h4>
                 <div id="">
                     <div class="list-group">
                         <ul class="pl-0">
@@ -46,7 +46,7 @@ Trình biên tập mã nguồn
                 <form id="put-content-file" class="loading-file" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="card-box">
-                        <h4 class="header-title mb-3">Trình biên tập mã nguồn: <span class="path_file"></span></h4>
+                        <h4 class="header-title mb-3">{!! __('lang.source_code_editor') !!}: <span class="path_file"></span></h4>
                         <div class="autohide-scroll view-source bg-listSource">
                             <div id="editor" class="views-source"></div>
                             <input class="hidden" name="dir" id="dir-file">
@@ -55,8 +55,7 @@ Trình biên tập mã nguồn
                         </div>
                     </div>
                     <div class="">
-                        <a href="{{route('admin.sources.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại</a>
-                        <button type="submit" class="btn btn-primary waves-effect width-md waves-light float-right" id="submit" name="send" value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại</button>
+                        @include('admin.render.button', ['route' => route('admin.sources.index')])
                     </div>
             </form>
 
@@ -191,10 +190,10 @@ Trình biên tập mã nguồn
                 url: url,
                 data: data,
                 success: function (response) {
-                    flash({'message':'Lưu file thành công', 'type':'success'});
+                    flash({'message':'{{__('lang.flash_update')}}', 'type':'success'});
                 },
                 error: function (response) {
-                    flash({'message':'Không tìm thấy đường dẫn file', 'type':'error'});
+                    flash({'message':'{{__('lang.file_error')}}', 'type':'error'});
                 }
             });
         })
