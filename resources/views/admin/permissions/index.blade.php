@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Permissions @stop
+@section('title') {{__('lang.permission')}} @stop
 @section('content')
     <div class="container-fluid">
 
@@ -9,11 +9,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Permissions</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.permission')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Permissions</h4>
+                    <h4 class="page-title">{{__('lang.permission')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     @can('permission.create')
                     <div class="action-datatable text-right">
                         <a href="{{route('admin.permissions.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
                     </div>
                     @endcan
                     <div id="custom-toolbar">
@@ -52,15 +52,15 @@
                             <tr>
 
                                 <th data-field="title">
-                                    Tên
+                                    {{__('lang.name')}}
                                 </th>
 
-                                <th data-field="name" >
-                                    Giá trị
-                                </th>
+{{--                                <th data-field="name" >--}}
+{{--                                    {{__('lang.value')}}--}}
+{{--                                </th>--}}
 
                                 <th data-formatter="actionFormatter" data-width="200"  data-switchable="false" data-force-hide="true">
-                                    Quản lý
+                                    {{__('lang.action')}}
                                 </th>
 
                             </tr>
@@ -98,7 +98,7 @@
             @endcan
 
             @can('permission.destroy')
-            html+='<a href="'+ '{{ route('admin.permissions.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.permissions.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

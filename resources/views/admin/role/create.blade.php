@@ -3,14 +3,14 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Chức vụ <span class="required">*</span></label>
+                    <label>{{__('lang.roll')}} <span class="required">*</span></label>
                     <input type="text" class="form-control" name="name" required>
                 </div>
                 <div class="row">
@@ -32,14 +32,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại
-                </button>
-
-                <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại
-                </button>
+                @include('admin.render.modal')
             </div>
         </div>
     </form>
