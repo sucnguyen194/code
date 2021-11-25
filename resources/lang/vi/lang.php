@@ -30,6 +30,8 @@
         'display' => 'Hiển thị',
         'highlights' => 'Nổi bật',
         'status' => 'Trạng thái',
+        'active' => 'Kích hoạt',
+        'public' => 'Xuất bản',
         'coppy' => 'Coppy',
         'select_image' => 'Chọn ảnh',
         'author' => 'Tác giả',
@@ -72,6 +74,9 @@
         'update_at' => 'Cập nhật lúc',
         'checked_at' => 'Duyệt lúc',
 
+        'time' => 'Thời gian',
+
+
         'classify' => 'Phân loại',
         'search' => 'Tìm kiếm',
         'no_data' => 'Không có dữ liệu',
@@ -85,6 +90,7 @@
         'note_seo' => 'Thiết lập các thẻ mô tả giúp khách hàng dễ dàng tìm thấy trang trên công cụ tìm kiếm như Google.',
         'max' => 'Tối đa',
         'limit' => 'Gới hạn',
+        'unlimit' => 'Không giới hạn',
         'characters' => 'Ký tự',
         //admin menu
 
@@ -182,6 +188,35 @@
         'code' => 'Code',
         'price' => 'Giá',
         'price_sale' => 'Giá khuyến mại',
-        'background' => 'Ảnh nền'
+        'background' => 'Ảnh nền',
+
+        //discounts
+        'start' => 'Bắt đầu',
+        'end' => 'Kết thúc',
+        'discount_name' => 'Tên chương trình',
+        'used' => 'Đã dùng',
+        'money_down' => 'Tiền giảm',
+        'value_down' => 'Giá trị giảm',
+        'view_history' => 'Xem lịch sử',
+        'existing_products' => 'Sản phẩm hiện có',
+        'selected_products' => 'Sản phẩm đã chọn',
+        'total_usage' => 'Tổng lần sử dụng',
+        'usage_per_person' => 'Lần sử dụng mỗi người',
+        'start_time' => 'Thời gian bắt đầu',
+        'end_time' => 'Thời gian kếy thúc',
+        'condition' => 'Điều kiện',
+        'minimum_purchase_quantity' => 'Số lượng mua tối thiểu',
+        'minimum_order_amount' => 'Số tiền đơn tối thiểu (VND)',
+        'customers' => 'Đối tượng khách hàng',
+        'all_customers' => 'Tất cả khách hàng',
+        'choose_customer' => 'Chọn khách hàng',
+        'value' => 'Giá trị',
+        'list_customers' => 'Danh sách khách hàng',
+        'selected_customers' => 'Khách hàng đã chọn',
+        'history_using_discount' => 'Lịch sử sử dụng giảm giá',
+        'no_invoice' => 'Chưa có hoá đơn nào',
+        'order_money' => 'Tiền đơn',
+
+
     ]
 ?>

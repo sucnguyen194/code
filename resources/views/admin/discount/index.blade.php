@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') Mã giảm giá @stop
+@section('title') {{__('lang.discount')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,12 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">Mã giảm giá</a></li>
-                            <li class="breadcrumb-item active">Thêm mới</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.discount')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Thêm mới</h4>
+                    <h4 class="page-title">{{__('lang.discount')}}</h4>
                 </div>
             </div>
         </div>
@@ -25,7 +24,7 @@
                 <div class="action-datatable text-right">
                     @can('discount.create')
                     <a href="{{route('admin.discounts.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                        <span class="icon-button"><i class="fe-plus"></i></span> Thêm mới</a>
+                        <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}}</a>
                     @endcan
                 </div>
                 <div id="custom-toolbar">
@@ -51,32 +50,32 @@
                         <tr>
                             <th data-field="id" data-sortable="true" data-switchable="false">ID</th>
                             <th data-field="name">
-                                Tên chương trình
+                                {{__('lang.discount_name')}}
                             </th>
                             <th data-field="code">
-                                CODE
+                                {{__('lang.code')}}
                             </th>
                             <th data-field="value" data-formatter="valueFormatter">
-                                Giá trị giảm
+                                {{__('lang.value_down')}}
                             </th>
                             <th data-field="start_at" data-formatter="shortDateTimeFormatter">
-                                Bắt đầu
+                                {{__('lang.start')}}
                             </th>
                             <th data-field="end_at" data-formatter="shortDateTimeFormatter">
-                                Kết thúc
+                                {{__('lang.end')}}
                             </th>
                             <th data-field="invoices_count" data-formatter="usedFormatter">
-                                Đã dùng
+                                {{__('lang.used')}}
                             </th>
                             <th data-field="discount" data-formatter="numberFormatter">
-                                Tiền giảm
+                                {{__('lang.money_down')}}
                             </th>
 
                             <th data-field="status" data-formatter="statusFormatter" data-visible="true">
-                                Trạng thái
+                                {{__('lang.status')}}
                             </th>
                             <th data-formatter="actionFormatter" data-force-hide="true">
-                                Quản lý
+                                {{__('lang.action')}}
                             </th>
 
                         </tr>
@@ -127,9 +126,9 @@
             @can('discount.edit')
 			html += '<a href="'+ '{{ route('admin.discounts.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
-        	html+='<a href="'+ '{{ route('admin.discounts.history', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-info waves-effect waves-light" title="Xem lịch sử"><i class="fe-file-text"></i></a> ';
+        	html+='<a href="'+ '{{ route('admin.discounts.history', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-info waves-effect waves-light" title="{{__('lang.view_history')}}"><i class="fe-file-text"></i></a> ';
             @can('discount.destroy')
-        	html+='<a href="'+ '{{ route('admin.discounts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="Xoá bản ghi?" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a>';
+        	html+='<a href="'+ '{{ route('admin.discounts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a>';
             @endcan
             html+='</div>';
         	return html;

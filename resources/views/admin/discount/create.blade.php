@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    Thêm mới
+    {{__('lang.create')}}
 @stop
 @section('content')
     <style>
@@ -22,12 +22,12 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">Mã giảm giá</a></li>
-                            <li class="breadcrumb-item active">Thêm mới</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('lang.discount')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.create')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Thêm mới</h4>
+                    <h4 class="page-title">{{__('lang.create')}}</h4>
                 </div>
             </div>
         </div>
@@ -41,17 +41,17 @@
                 <div class="card-body pb-2">
 
                     <div class="form-group">
-                        <label class="form-label">Tên chương trình <span class="required">*</span> </label>
+                        <label class="form-label">{{__('lang.discount_name')}} <span class="required">*</span> </label>
                         <input type="text" name="discount[name]" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Code giảm giá <span class="required">*</span></label>
+                        <label class="form-label">{{__('lang.code')}} <span class="required">*</span></label>
                         <input type="text" name="discount[code]" class="form-control" value="{{ Str::upper(Str::random(10)) }}" required>
                     </div>
 
                     <div class="form-group" style="max-width: 300px">
-                        <label class="form-label">Giá trị <span class="required">*</span></label>
+                        <label class="form-label">{{__('lang.value')}} <span class="required">*</span></label>
 
                         <div class="input-group discount">
                             <input type="number" name="discount[value]" step="0.01" min="0" class="form-control" required>
@@ -68,7 +68,7 @@
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">Sản phẩm</label>
+                    <label class="font-weight-bold mb-4">{{__('lang.product')}}</label>
                     <div class="form-group duallistbox-hidden-select">
                         <select class="custom-select duallistbox d-none" multiple name="products[]" size="10" required style="display: none">
                             @foreach($products as $product)
@@ -80,26 +80,26 @@
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">Giới hạn</label>
+                    <label class="font-weight-bold mb-4">{{__('lang.limit')}}</label>
 
                     <div class="form-group">
-                        <label class="form-label">Tổng lần sử dụng</label>
-                        <input type="number" name="discount[uses_total]" class="form-control" min="0" value="1" placeholder="Không giới hạn">
+                        <label class="form-label">{{__('lang.total_usage')}}</label>
+                        <input type="number" name="discount[uses_total]" class="form-control" min="0" value="1" placeholder="{{__('lang.unlimit')}}">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Lần sử dụng mỗi người</label>
-                        <input type="number" name="discount[uses_user]" class="form-control" min="0" value="1" placeholder="Không giới hạn">
+                        <label class="form-label">{{__('lang.usage_per_person')}}</label>
+                        <input type="number" name="discount[uses_user]" class="form-control" min="0" value="1" placeholder="{{__('lang.unlimit')}}">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="form-label">Thời gian bắt đầu <span class="required">*</span></label>
+                            <label class="form-label">{{__('lang.start_time')}} <span class="required">*</span></label>
                             <input type="text" name="discount[start_at]" class="form-control datetimepicker" value="{{ now()->format('d-m-Y 00:00:00') }}" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="form-label">Thời gian kết thúc</label>
-                            <input type="text" name="discount[end_at]" class="form-control datetimepicker" placeholder="Vĩnh viễn">
+                            <label class="form-label">{{__('lang.end_time')}}</label>
+                            <input type="text" name="discount[end_at]" class="form-control datetimepicker" placeholder="{{__('lang.unlimit')}}">
                         </div>
                     </div>
 
@@ -108,34 +108,34 @@
 
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">Điều kiện</label>
+                    <label class="font-weight-bold mb-4">{{__('lang.condition')}}</label>
 
                     <div class="form-group">
-                        <label class="form-label">Số lượng mua tối thiểu</label>
+                        <label class="form-label">{{__('lang.minimum_purchase_quantity')}}</label>
                         <input type="number" name="discount[minimum_quantity]" class="form-control" min="1" value="1" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Số tiền đơn tối thiểu (VND)</label>
+                        <label class="form-label">{{__('lang.minimum_order_amount')}}</label>
                         <input type="number" name="discount[minimum_amount]" class="form-control" min="0" value="1">
                     </div>
 
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">Đối tượng khách hàng</label>
+                    <label class="font-weight-bold mb-4">{{__('lang.customers')}}</label>
 
                     <div class="form-group">
                         <label class="custom-control custom-radio">
                             <input name="discount[user_selection]" type="radio" class="custom-control-input" value="all" checked>
-                            <span class="custom-control-label">Tất cả khách hàng</span>
+                            <span class="custom-control-label">{{__('lang.all_customers')}}</span>
                         </label>
                         <label class="custom-control custom-radio">
                             <input name="discount[user_selection]" type="radio" class="custom-control-input" value="users">
-                            <span class="custom-control-label">Chọn khách hàng:</span>
+                            <span class="custom-control-label">{{__('lang.choose_customer')}}</span>
                         </label>
 
-                        <select class="custom-select select2" id="users" data-allow-clear="true" data-placeholder="Chọn khách hàng" data-multiple="true" multiple name="users[]" size="6">
+                        <select class="custom-select select2" id="users" data-allow-clear="true" data-placeholder="{{__('lang.choose_customer')}}" data-multiple="true" multiple name="users[]" size="6">
                             @foreach($users as $users)
                                 <option value="{{ $users->id }}">#{{ $users->id }} {{ $users->name }}</option>
                             @endforeach
@@ -146,19 +146,19 @@
                 <hr class="m-0">
                 <div class="card-body pb-2">
                     <div class="form-group">
-                        <label class="form-label">Mô tả thêm</label>
+                        <label class="form-label">{{__('lang.description')}}</label>
                         <textarea class="form-control" name="discount[description]" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">
                         <div class="checkbox">
                             <input id="checkbox_status" type="checkbox" name="discount[status]" value="1" checked>
-                            <label for="checkbox_status" class="mb-0">Active</label>
+                            <label for="checkbox_status" class="mb-0">{{__('lang.active')}}</label>
                         </div>
 
                         <div class="checkbox d-none">
                             <input id="checkbox_public" type="checkbox" name="discount[public]" value="1">
-                            <label for="checkbox_public" class="mb-0">Public</label>
+                            <label for="checkbox_public" class="mb-0">{{__('lang.public')}}</label>
                         </div>
                     </div>
                 </div>
@@ -166,10 +166,8 @@
 
             </div>
 
-            <div class="text-right mt-3">
-                <a href="{{route('admin.discounts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> Quay lại</a>
-
-                <button type="submit" class="btn btn-primary float-right waves-effect width-md waves-light ml-2" name="send" value="save"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại</button>
+            <div class="mt-3">
+                @include('admin.render.button', ['route' => route('admin.discounts.index')])
             </div>
 
         </form>
@@ -187,8 +185,8 @@
         $(function() {
 
             $('.duallistbox').bootstrapDualListbox({
-                nonSelectedListLabel: 'Sản phẩm hiện có',
-                selectedListLabel: 'Sản phẩm đã chọn',
+                nonSelectedListLabel: '{{__('lang.existing_products')}}',
+                selectedListLabel: '{{__('lang.selected_products')}}',
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false,
                 helperSelectNamePostfix: false
