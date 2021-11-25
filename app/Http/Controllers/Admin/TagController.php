@@ -91,15 +91,9 @@ class TagController extends Controller
         return view('admin.tag.ajax_create');
     }
 
-    public function add(Request $request){
+    public function add(StoreTranslationRequest $request){
 
         $this->authorize('tag.create');
-
-        Validator::make($request->translation,[
-            '*.name' => 'required',
-            '*.locale' => 'required',
-            '*.slug' => 'required',
-        ])->validate();
 
         $request->validate([
             'data.type' => 'required',

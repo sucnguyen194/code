@@ -1,6 +1,6 @@
 <div class="d-flex mb-2">
     <label class="font-weight-bold">{{__('lang.optimization')}} {{__('lang.seo')}}</label>
-    <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo">{{__('lang.edit')}} {{__('lang.seo')}}</a>
+    <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo font-weight-medium">{{__('lang.edit')}} {{__('lang.seo')}}</a>
 </div>
 
 <p class="font-13">{{__('lang.note_seo')}}</p>

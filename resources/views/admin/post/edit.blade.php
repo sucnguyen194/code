@@ -28,7 +28,7 @@
                 @method('PATCH')
                 <div class="col-lg-9">
                     @include('admin.render.edit.nav')
-                    <div class="tab-content pt-0">
+                    <div class="tab-content {{setting('site.languages') ? "pt-0" : ""}}">
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane language-{{$translation->locale}} {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="card-box">
@@ -71,7 +71,7 @@
                         @include('admin.render.edit.status',['item' => $post])
                     </div>
 
-                    @include('admin.render.edit.category',['item' => $post])
+                    @include('admin.render.edit.category',['item' => $post ,'type' => \App\Enums\CategoryType::post])
 
                     <div class="card-box position-relative box-action-image">
                         @include('admin.render.edit.image',['item' => $post])

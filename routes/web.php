@@ -36,7 +36,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::resource('tags',TagController::class);
 
         //categories
-        Route::get('/categories/data',[App\Http\Controllers\Admin\CategoryController::class,'data'])->name('categories.data');
+        Route::post('/add/categories', [App\Http\Controllers\Admin\CategoryController::class,'add'])->name('categories.add');
+        Route::get('/data/categories',[App\Http\Controllers\Admin\CategoryController::class,'data'])->name('categories.data');
         Route::resource('categories',CategoryController::class);
 
         //pages

@@ -61,7 +61,23 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::ofType(request()->type)->get();
+
+        return view('admin.category.create', compact('categories'));
+    }
+
+    public function add(StoreTranslationRequest $request){
+        $category =  new Category();
+        $category->forceFill($request->data);
+        $category->save();
+
+        $category->translations()->createMany($request->translation);
+
+        $category->load(['translation' => function($q){
+            $q->select('id','category_id','name');
+        }]);
+
+        return  response()->json($category);
     }
 
     /**

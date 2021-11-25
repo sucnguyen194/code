@@ -1,6 +1,6 @@
 <label>{{__('lang.pic')}}</label>
-<div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:2.2rem;top:1.3rem">
-    <label class="item-input">
+<div class="position-absolute font-weight-normal text-primary" id="box-input"  style="right:1.5rem;top:1.4rem">
+    <label class="item-input font-weight-medium">
         <input type="file" id="image-upload" class="d-none image-upload" data-target="#image_url"> {{__('lang.select_image')}}
     </label>
 </div>

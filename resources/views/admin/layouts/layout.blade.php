@@ -921,11 +921,13 @@
         return false;
     });
 </script>
+
 <script type="text/javascript">
     // Ajax form
-    function ajaxtag(ele){
+    function ajaxselect(ele){
 
-        let select = $('.select-tag');
+        let selected = $(ele).data('selected');
+        let option = $(ele).data('option');
 
         $(ele).ajaxSubmit({
             headers: {
@@ -956,7 +958,9 @@
                     };
 
                     var newOption = new Option(data.text, data.id, true, true);
-                    $(select).append(newOption).trigger('change');
+                    var addOption = new Option(data.text, data.id, false, false);
+                    $(selected).append(newOption).trigger('change');
+                    $(option).append(addOption).trigger('change');
 
                     $('#ajax-modal').modal('hide');
                     flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
@@ -966,9 +970,9 @@
         });
         return false;
     }
-    $(document).on('submit','.ajax-tag',function(e){
+    $(document).on('submit','.ajax-select',function(e){
         e.preventDefault();
-        ajaxtag(this);
+        ajaxselect(this);
         return false;
     });
 </script>
@@ -1081,7 +1085,7 @@
         slug = slug.replace(/\@\-|\-\@|\@/gi, '');
         //In slug ra textbox có id “slug”
         document.getElementById(el.getAttribute('language')).value = slug;
-        document.getElementById(el.getAttribute('seo')).innerText = DOMAIN + slug + '.html';
+        document.getElementById(el.getAttribute('seo')).innerText = links + '/' + slug + '.html';
     }
 </script>
 

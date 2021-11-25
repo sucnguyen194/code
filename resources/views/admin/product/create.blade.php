@@ -28,7 +28,7 @@
                 <div class="col-lg-9">
                    @include('admin.render.create.nav')
 
-                        <div class="tab-content pt-0">
+                        <div class="tab-content {{setting('site.languages') ? "pt-0" : ""}}">
                             @foreach(languages() as $key => $language)
                                 <div class="tab-pane language-{{$language->value}} {{$key == 0 ? 'active' : null}}" >
                                     <div class="card-box">
@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group mb-0">
-                                                <label>{{__('lang.code_sale')}}</label>
+                                                <label>{{__('lang.price_sale')}}</label>
                                                 <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" value="0" min="0" id="price_sale">
                                                 <input type="number" class="form-control d-none" value="0" min="0" id="format-price-sale" name="data[price_sale]">
                                             </div>
@@ -142,7 +142,7 @@
                         @include('admin.render.create.status')
                     </div>
 
-                    @include('admin.render.create.category')
+                    @include('admin.render.create.category', ['type' => \App\Enums\ProductType::product])
 
                     <div class="card-box">
                         @include('admin.render.create.tag',['type' => \App\Enums\TagType::product])
