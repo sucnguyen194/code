@@ -77,6 +77,9 @@
 
         'time' => 'Thời gian',
 
+        'here' => 'Tại đây',
+        'home' => 'Trang chủ',
+        'related' => 'Liên quan',
 
         'classify' => 'Phân loại',
         'search' => 'Tìm kiếm',
@@ -230,6 +233,64 @@
         'receipts' => 'Số phiếu',
         'by_type' => 'Bằng chữ',
         'thank_customer' => 'Xin cảm ơn Quý khách!',
-        'print_order' => 'In đơn hàng'
+        'print_order' => 'In đơn hàng',
+
+        //settings
+        //setting - tab1
+        'website_information' => 'Thông tin Website',
+        'website_title' => 'Tiêu đề website',
+        'slogan' => 'Slogan',
+        'company_name' => 'Tên đơn vị',
+        'contact_details' => 'Chi tiết liên hệ',
+        'content_footer' => 'Nội dung chân trang',
+        'keyword' => 'Từ khóa',
+        'note_keyword' => '<code>*</code> Từ khóa được phân chia sau dấu phẩy <code>","</code>',
+        'size' => 'Kích thước',
+        'ratio' => 'Tỉ lệ',
+
+        //setting - tab2
+        'contact_info' => 'Thông tin liên hệ',
+        'note_contact_info' => 'Nhập email, hotline, ... Thông tin sẽ được hiển thị trên website để khách hàng có thể liên hệ với cửa hàng.',
+        'google_map' => 'Google Map',
+        'note_google_map' => 'Nhúng mã <code> &lt;/iframe&gt; </code> được cung cấp bởi Google map.',
+        'learn_more' => 'Tìm hiểu thêm',
+        'note_email' => '(* Địa chỉ nhận email từ khách hàng)',
+        'hotline' => 'Hotline',
+        'fax' => 'Fax',
+        'time_open' => 'Thời gian mở cửa',
+
+        //setting - tab3
+        'additional_code' => 'Mã bổ xung',
+        'pre_additional_code' => 'Mã bổ xung trước',
+        'note_head' => 'Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code> &lt;/head&gt; </code>. Hệ thống chấp nhận mã html, javascript, css',
+        'note_body' => 'Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code>  &lt;/body&gt;  </code>. Hệ thống chấp nhận mã html, javascript, css ',
+
+        //setting - tab4
+        'note_facebook' => 'Nhập url fanpage được cung cấp bởi Facebook.',
+        'note_youtube' => 'Nhập url channel được cung cấp bởi Youtube.',
+        'note_zalo' => 'Nhập số điện thoại đã đăng ký Zalo.',
+        'note_skype' => 'Nhập account đăng ký Skype.',
+        'note_twitter' => 'Nhập url được cung cấp bởi Twitter',
+        'note_instagram' => 'Nhập url được cung cấp bởi Instagram',
+        'note_linkedin' => 'Nhập url được cung cấp bởi Linkedin',
+        'note_pinterest' => 'Nhập url được cung cấp bởi Pinterest',
+
+        //setting - tab5
+        'note_google_analytics' => 'Nhập ID tài khoản GA được cung cấp bởi google',
+        'note_imgur' => 'Nhập Client ID được cung cấp bởi Imgur',
+        'note_facebook_app' => 'Nhập App ID, App Secret được cung cấp bởi facebook.',
+        'note_facebook_messages' => 'Ứng dụng chat trực tuyến từ facebook. Nhập App ID, App ID messages được cung cấp bởi facebook.',
+        'note_google_capcha' => 'Ứng dụng chống spam từ google. Thiết lập và nhập site key và secret key được cung cấp bởi google.',
+
+        //setting - tab6
+        'note_config_post' => 'Cấu hình kích thước hình ảnh <code> thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</code>',
+        'note_config_product' => 'Cấu hình kích thước hình ảnh <code> thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</code>',
+        'note_language' => 'Khi kích hoạt tính năng, website ở có thể tùy chọn nội dung với nhiều ngôn ngữ. Cấu hình ngôn ngữ',
+        'maintenance' => 'Bảo trì website',
+        'note_maintenance' => 'Khi kích hoạt tính năng, website sẽ trong trạng thái <code>bảo trì</code>. Quản trị viên vẫn có thể review website bằng <code>mật khẩu</code> bảo mật.',
+        'note_maintenance_password' => '(reivew khi website bảo trì)',
+        //languages
+        'list_language' => 'Danh sách ngôn ngữ',
+
     ]
 ?>

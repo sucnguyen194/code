@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    Cấu hình hệ thống
+    {{__('lang.system_configuration')}}
 @stop
 @section('content')
     <div class="container-fluid">
@@ -10,11 +10,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Cấu hình hệ thống</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('lang.system_configuration')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Cấu hình hệ thống</h4>
+                    <h4 class="page-title">{{__('lang.system_configuration')}}</h4>
                 </div>
             </div>
         </div>
@@ -26,13 +26,13 @@
         <div class="col-md-12">
             <form action="{{route('admin.settings')}}" method="post" id="form-update" class="ajax-form" enctype="multipart/form-data">
                 <div class="mt-3">
-                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> Reset</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại</button>
+                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('lang.reset')}}</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span>{{__('lang.save')}}</button>
                 </div>
                 @csrf
                 <div id="wizard-clickable" >
                     <fieldset title="1" class="p-0">
-                        <legend>Thông tin Website</legend>
+                        <legend>{{__('lang.website_information')}}</legend>
                         <div class="row mt-1">
                             <div class="col-md-8">
                                 @if(setting('site.languages'))
@@ -52,46 +52,41 @@
                                             <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
                                                 <div class="card-box">
                                                     <div class="form-group">
-                                                        <label for="name">Tiêu đề website <span class="required">*</span></label>
+                                                        <label for="name">{{__('lang.website_title')}} <span class="required">*</span></label>
                                                         <input type="text" class="form-control" name="data[site.name.{{$language->value}}]" id="name" value="{{setting('site.name.'.$language->value)}}" language="title_seo_{{$language->value}}" onkeyup="changeToTitleSeo(this)">
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="company">Tên đơn vị</label>
+                                                        <label for="company">{{__('lang.company_name')}}</label>
                                                         <input type="text" class="form-control" name="data[site.company.{{$language->value}}]" id="company" value="{{setting('site.company.'.$language->value)}}">
                                                     </div>
 
                                                     <div class="form-group mb-0">
-                                                        <label for="slogan">Slogan</label>
+                                                        <label for="slogan">{{__('lang.slogan')}}</label>
                                                         <input type="text" class="form-control" name="data[site.slogan.{{$language->value}}]" id="slogan" value="{{setting('site.slogan.'.$language->value)}}">
                                                     </div>
-
-{{--                                                    <div class="form-group mb-0">--}}
-{{--                                                        <label for="path">Website</label>--}}
-{{--                                                        <input type="text" class="form-control" placeholder="www.company.com" name="data[site.path]" id="path" value="{{setting('site.path.'.$language->value)}}">--}}
-{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="card-box">
                                                     <div class="form-group">
-                                                        <label for="address">Địa chỉ</label>
+                                                        <label for="address">{{__('lang.address')}}</label>
                                                         <textarea name="data[contact.address.{{$language->value}}]" id="address" cols="30" rows="5" class="form-control">{{setting('contact.address.'.$language->value)}}</textarea>
                                                     </div>
                                                     <div class="form-group mb-0">
-                                                        <label for="contact">Chi tiết liên hệ</label>
+                                                        <label for="contact">{{__('lang.contact_details')}}</label>
                                                         <textarea class="form-control summerdescription" id="summercontact" name="data[contact.detail.{{$language->value}}]">{!! setting('contact.detail.'.$language->value) !!}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="card-box">
-                                                    <label for="footer">Nội dung chân trang</label>
+                                                    <label for="footer">{{__('lang.content_footer')}}</label>
                                                     <textarea class="form-control summerdescription" id="summernote" name="data[site.footer.{{$language->value}}]">{!! setting('site.footer.'.$language->value) !!}</textarea>
                                                 </div>
                                                 <div class="card-box">
                                                     <div class="d-flex mb-2">
-                                                        <label class="font-weight-bold">Tối ưu SEO</label>
-                                                        <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo">Chỉnh sửa SEO</a>
+                                                        <label class="font-weight-bold">{{__('lang.optimization')}} {{__('lang.seo')}}</label>
+                                                        <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo">{{__('lang.edit')}} {{__('lang.seo')}}</a>
                                                     </div>
 
-                                                    <p class="font-13">Thiết lập các thẻ mô tả giúp khách hàng dễ dàng tìm thấy trang trên công cụ tìm kiếm như Google.</p>
+                                                    <p class="font-13">{{__('lang.note_seo')}}</p>
                                                     <div class="test-seo">
                                                         <div class="mb-1">
                                                             <a href="javascript:void(0)"  class="title-seo" id="title_seo_{{$language->value}}">{{setting('site.name.'.$language->value)}}</a>
@@ -106,13 +101,13 @@
                                                     <div class="change-seo" id="change-seo">
                                                         <hr>
                                                         <div class="form-group">
-                                                            <label>Mô tả trang</label>
-                                                            <p class="font-13">* Giới hạn tối đa 320 ký tự</p>
+                                                            <label>{{__('lang.description')}}</label>
+                                                            <p class="font-13"><code>*</code> {{__('lang.max')}} 320 {{__('lang.characters')}} </p>
                                                             <textarea  class="form-control" rows="3" name="data[site.description_seo.{{$language->value}}]" maxlength="320" id="alloptions" language="description_seo_{{$language->value}}" onkeyup="changeToDescriptionSeo(this)">{{setting('site.description_seo.'.$language->value)}}</textarea>
                                                         </div>
                                                         <div class="form-group mb-0">
-                                                            <label>Từ khóa</label>
-                                                            <p class="font-13">* Từ khóa được phân chia sau dấu phẩy <strong>","</strong></p>
+                                                            <label>{{__('lang.keyword')}}</label>
+                                                            <p class="font-13">{!! __('lang.note_keyword') !!}</p>
 
                                                             <input type="text" name="data[site.keyword_seo.{{$language->value}}]" value="{{setting('site.keyword_seo.'.$language->value)}}" class="form-control"  data-role="tagsinput"/>
                                                         </div>
@@ -128,17 +123,17 @@
                                     <label>Logo</label>
                                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.3rem">
                                         <label class="item-input">
-                                            <input type="file" id="logo-upload" name="logo" class="d-none logo-upload" data-target="#site_logo_url"> Chọn ảnh
+                                            <input type="file" id="logo-upload" name="logo" class="d-none logo-upload" data-target="#site_logo_url"> {{__('lang.select_image')}}
                                         </label>
                                     </div>
-                                    <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif</p>
+                                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
                                     <div class="dropzone p-2 text-center">
                                             <div class="dz-message text-center needsclick mb-1 {{!setting('site.logo') ? '' : 'd-none'}}" id="site_logo_hidden">
                                                 <label for="logo-upload" class="w-100 mb-0">
                                                     <div class="icon-dropzone pt-2">
                                                         <i class="h1 text-muted dripicons-cloud-upload"></i>
                                                     </div>
-                                                    <span class="text-muted font-13">Sử dụng nút <strong>Chọn ảnh</strong> để thêm ảnh</span>
+                                                    <span class="text-muted font-13">{!! __('lang.note_select_image') !!}</span>
                                                 </label>
                                             </div>
 
@@ -146,7 +141,7 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
-                                            <input type="text" name="data[site.logo]" placeholder="Đường dẫn ảnh" id="site_logo_url" value="{{setting('site.logo')}}" class="form-control logo-src" data-target="#site_logo_src" data-hidden="#site_logo_hidden">
+                                            <input type="text" name="data[site.logo]" placeholder="{{__('lang.slug')}}" id="site_logo_url" value="{{setting('site.logo')}}" class="form-control logo-src" data-target="#site_logo_src" data-hidden="#site_logo_hidden">
                                         </div>
                                     </div>
 
@@ -155,23 +150,23 @@
                                     <label>og:image</label>
                                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.3rem">
                                         <label class="item-input">
-                                            <input type="file" id="og-upload" name="logo" class="d-none og-upload" data-target="#site_og_url"> Chọn ảnh
+                                            <input type="file" id="og-upload" name="logo" class="d-none og-upload" data-target="#site_og_url"> {{__('lang.select_image')}}
                                         </label>
                                     </div>
-                                    <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif</p>
+                                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
                                     <div class="dropzone p-2 text-center">
                                         <div class="dz-message text-center needsclick mb-1 {{!setting('site.og_image') ? '' : 'd-none'}}" id="site_og_hidden">
                                             <label for="og-upload" class="w-100 mb-0">
                                                 <div class="icon-dropzone pt-2">
                                                     <i class="h1 text-muted dripicons-cloud-upload"></i>
                                                 </div>
-                                                <span class="text-muted font-13">Sử dụng nút <strong>Chọn ảnh</strong> để thêm ảnh</span>
+                                                <span class="text-muted font-13">{!! __('lang.note_select_image') !!}</span>
                                             </label>
                                         </div>
                                         <img src="{{setting('site.og_image')}}" class="rounded mb-1 {{setting('site.og_image') ? '' : 'd-none'}}" id="site_og_src">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
-                                            <input type="text" name="data[site.og_image]" placeholder="Đường dẫn ảnh" id="site_og_url" value="{{setting('site.og_image')}}" class="form-control og-src" data-target="#site_og_src" data-hidden="#site_og_hidden">
+                                            <input type="text" name="data[site.og_image]" placeholder="{{__('lang.slug')}}" id="site_og_url" value="{{setting('site.og_image')}}" class="form-control og-src" data-target="#site_og_src" data-hidden="#site_og_hidden">
                                         </div>
                                     </div>
 
@@ -180,23 +175,23 @@
                                     <label>Favicon</label>
                                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.3rem">
                                         <label class="item-input">
-                                            <input type="file" id="favicon-upload" name="logo" class="d-none favicon-upload" data-target="#site_favicon_url"> Chọn ảnh
+                                            <input type="file" id="favicon-upload" name="logo" class="d-none favicon-upload" data-target="#site_favicon_url"> {{__('lang.select_image')}}
                                         </label>
                                     </div>
-                                    <p class="font-13">* Định dạng ảnh jpg, jpeg, png, gif / Tỷ lệ 1:1 / Kích thước gợi ý 50x50 (px)</p>
+                                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}  / {{__('lang.ratio')}} 1:1 / {{__('lang.size')}} 50x50 (px)</p>
                                     <div class="dropzone p-2 text-center">
                                         <div class="dz-message text-center needsclick mb-1 {{!setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_hidden">
                                             <label for="favicon-upload" class="w-100 mb-0">
                                                 <div class="icon-dropzone pt-2">
                                                     <i class="h1 text-muted dripicons-cloud-upload"></i>
                                                 </div>
-                                                <span class="text-muted font-13">Sử dụng nút <strong>Chọn ảnh</strong> để thêm ảnh</span>
+                                                <span class="text-muted font-13">{!! __('lang.note_select_image') !!}</span>
                                             </label>
                                         </div>
                                         <img src="{{setting('site.favicon')}}" class="rounded mb-1 {{setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_src">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
-                                            <input type="text" name="data[site.favicon]" placeholder="Đường dẫn ảnh" id="site_favicon_url" value="{{setting('site.favicon')}}" class="form-control favicon-src" data-target="#site_favicon_src" data-hidden="#site_favicon_hidden">
+                                            <input type="text" name="data[site.favicon]" placeholder="{{__('lang.slug')}}" id="site_favicon_url" value="{{setting('site.favicon')}}" class="form-control favicon-src" data-target="#site_favicon_src" data-hidden="#site_favicon_hidden">
                                         </div>
                                     </div>
                                 </div>
@@ -204,36 +199,36 @@
                         </div>
                     </fieldset>
                     <fieldset title="2" class="p-0">
-                        <legend>Thông tin liên hệ</legend>
+                        <legend>{!! __('lang.contact_info') !!}</legend>
 
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Thông tin liên hệ</label>
-                                    <p>Nhập email, hotline, ... Thông tin sẽ được hiển thị trên website để khách hàng có thể liên hệ với cửa hàng.</p>
+                                    <label for="imgur_client_id">{!! __('lang.contact_info') !!}</label>
+                                    <p>{!! __('lang.note_contact_info') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group">
-                                        <label for="email">Email <code class="required">(* Địa chỉ nhận email từ khách hàng)</code></label>
+                                        <label for="email">{!! __('lang.email') !!} <code class="required">{!! __('lang.note_email') !!}</code></label>
                                         <input type="text" class="form-control" id="email" value="{{setting('contact.email')}}" name="data[contact.email]">
                                     </div>
                                     <div class="form-group">
-                                        <label for="hotline">Hotline</label>
+                                        <label for="hotline">{!! __('lang.hotline') !!}</label>
                                         <input type="tel" class="form-control" value="{{setting('contact.hotline')}}" id="hotline" name="data[contact.hotline]">
                                     </div>
                                     <div class="form-group ">
-                                        <label for="phone">Điện thoại</label>
+                                        <label for="phone">{!! __('lang.phone') !!}</label>
                                         <input type="tel" class="form-control" id="phone" value="{{setting('contact.phone')}}" name="data[contact.phone]">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="fax">Fax</label>
+                                        <label for="fax">{!! __('lang.fax') !!}</label>
                                         <input type="text" class="form-control" value="{{setting('contact.fax')}}" id="fax" name="data[contact.fax]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="time_open">Thời gian mở cửa</label>
+                                        <label for="time_open">{!! __('lang.time_open') !!}</label>
                                         <input type="text" class="form-control" value="{{setting('contact.time_open')}}" id="time_open" name="data[contact.time_open]">
                                     </div>
                                 </div>
@@ -243,14 +238,14 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Google map</label>
-                                    <p>Nhúng mã <code> &lt;/iframe&gt; </code> được cung cấp bởi Google map. <a href="https://www.google.com/maps/place/H%C3%A0+N%E1%BB%99i,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0227788,105.8194541,14z/data=!3m1!4b1!4m5!3m4!1s0x3135ab9bd9861ca1:0xe7887f7b72ca17a9!8m2!3d21.0277644!4d105.8341598?hl=vi-VN" target="_blank">Tìm hiểu thêm.</a> </p>
+                                    <label for="imgur_client_id">{!! __('lang.google_map') !!}</label>
+                                    <p>{!! __('lang.note_google_map') !!} <a href="https://www.google.com/maps/place/H%C3%A0+N%E1%BB%99i,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0227788,105.8194541,14z/data=!3m1!4b1!4m5!3m4!1s0x3135ab9bd9861ca1:0xe7887f7b72ca17a9!8m2!3d21.0277644!4d105.8341598?hl=vi-VN" target="_blank">{!! __('lang.learn_more') !!}.</a> </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="map">iFrame Google Map</label>
+                                        <label for="map">iFrame {!! __('lang.google_map') !!}</label>
                                         <textarea name="data[contact.map]" id="map" cols="30" rows="5" class="form-control">{!! setting('contact.map') !!}</textarea>
                                     </div>
                                 </div>
@@ -260,19 +255,19 @@
                         <hr class="border-primary">
                     </fieldset>
                     <fieldset title="3" class="p-0">
-                        <legend>Mã bổ xung</legend>
+                        <legend>{!! __('lang.additional_code') !!}</legend>
 
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Mã bổ xung trước  <code> &lt;/head&gt; </code></label>
-                                    <p>Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code> &lt;/head&gt; </code>. Hệ thống chấp nhận mã html, javascript, css </p>
+                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code> &lt;/head&gt; </code></label>
+                                    <p>{!! __('lang.note_head') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="remarketing_header">Mã bổ xung <code> &lt;/head&gt; </code></label>
+                                        <label for="remarketing_header">{!! __('lang.additional_code') !!} <code> &lt;/head&gt; </code></label>
                                         <textarea class="form-control" rows="12" name="data[site.remarketing_header]">{!! setting('site.remarketing_header')!!}</textarea>
                                     </div>
                                 </div>
@@ -283,14 +278,14 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Mã bổ xung trước  <code>  &lt;/body&gt;  </code></label>
-                                    <p>Toàn bộ nội dung sẽ được hiển thị  trước thẻ <code>  &lt;/body&gt;  </code>. Hệ thống chấp nhận mã html, javascript, css </p>
+                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code>  &lt;/body&gt;  </code></label>
+                                    <p>{!! __('lang.note_body') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="remarketing_footer">Mã bổ xung <code>  &lt;/body&gt;  </code></label>
+                                        <label for="remarketing_footer">{!! __('lang.additional_code') !!} <code>  &lt;/body&gt;  </code></label>
                                         <textarea class="form-control" rows="12" name="data[site.remarketing_footer]">{!! setting('site.remarketing_footer') !!}</textarea>
                                     </div>
                                 </div>
@@ -304,7 +299,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="facebook">Fanpage facebook</label>
-                                    <p>Nhập url fanpage được cung cấp bởi Facebook. </p>
+                                    <p>{!! __('lang.note_facebook') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -322,7 +317,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="youtube">Youtube channel</label>
-                                    <p>Nhập url channel được cung cấp bởi Youtube. </p>
+                                    <p>{!! __('lang.note_youtube') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -340,7 +335,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="zalo">Zalo</label>
-                                    <p>Nhập số điện thoại đã đăng ký Zalo. </p>
+                                    <p>{!! __('lang.note_zalo') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -358,7 +353,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="skype">Skype</label>
-                                    <p>Nhập account đăng ký Skype. </p>
+                                    <p>{!! __('lang.note_skype') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -376,7 +371,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="twitter">Twitter</label>
-                                    <p>Nhập url được cung cấp bởi Twitter </p>
+                                    <p>{!! __('lang.note_twitter') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -394,7 +389,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="instagram">Instagram</label>
-                                    <p>Nhập url được cung cấp bởi Instagram </p>
+                                    <p>{!! __('lang.note_instagram') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -412,7 +407,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="linkedin">Linkedin</label>
-                                    <p>Nhập url được cung cấp bởi Linkedin </p>
+                                    <p>{!! __('lang.note_linkedin') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -430,7 +425,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="pinterest">Pinterest</label>
-                                    <p>Nhập url được cung cấp bởi Pinterest </p>
+                                    <p>{!! __('lang.note_pinterest') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -452,7 +447,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label for="google_analytics_id">Google Analytics</label>
-                                        <p>Nhập ID tài khoản GA được cung cấp bởi google</p>
+                                        <p>{!! __('lang.note_google_analytics') !!}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -468,7 +463,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label for="imgur_client_id">Imgur</label>
-                                        <p>Nhập Client ID được cung cấp bởi Imgur</p>
+                                        <p>{!! __('lang.note_imgur') !!}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -484,7 +479,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label for="imgur_client_id">Facebook App</label>
-                                        <p>Nhập App ID, App Secret được cung cấp bởi facebook. <a href="https://developers.facebook.com/apps/" class="" target="_blank">Tìm hiểu thêm.</a> </p>
+                                        <p>{!! __('lang.note_facebook_app') !!} <a href="https://developers.facebook.com/apps/" class="" target="_blank">{!! __('lang.learn_more') !!}</a> </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -506,7 +501,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label for="imgur_client_id">Facebook Messages</label>
-                                        <p>Ứng dụng chat trực tuyến từ facebook. Nhập App ID, App ID messages được cung cấp bởi facebook.</p>
+                                        <p>{!! __('lang.note_facebook_messages') !!}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -527,7 +522,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label class="font-weight-semibold mb-4"> Google reCAPTCHA  <input type="checkbox" {{checked(setting('api.google_captcha'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.google_captcha]" data-size="small"/></label>
-                                        <p>Ứng dụng chống spam từ google. Thiết lập và nhập site key và secret key được cung cấp bởi google. <a href="https://www.google.com/recaptcha/lib/create" class="" target="_blank">Tìm hiểu thêm.</a></p>
+                                        <p>{!! __('lang.note_google_capcha') !!} <a href="https://www.google.com/recaptcha/lib/create" class="" target="_blank">{!! __('lang.learn_more') !!}</a></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -548,13 +543,13 @@
 
                     </fieldset>
                     <fieldset title="6" class="p-0">
-                        <legend>Cấu hình</legend>
+                        <legend>{!! __('lang.setting') !!}</legend>
                         @can('blog.view')
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Bài viết <code> (Blog, page, ...) </code></label>
-                                    <p>Cấu hình kích thước hình ảnh <code> thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</code> </p>
+                                    <label for="imgur_client_id">{!! __('lang.post') !!} <code> ({!! __('lang.post') !!}, {!! __('lang.page') !!}, ...) </code></label>
+                                    <p>{!! __('lang.note_config_post') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -570,15 +565,15 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Trang chủ</label>
+                                        <label>{!! __('lang.home') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.index')}}" name="data[site.post.index]">
                                     </div>
                                     <div class="form-group">
-                                        <label>Danh mục</label>
+                                        <label>{!! __('lang.category') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.category')}}" name="data[site.post.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>Tin liên quan</label>
+                                        <label>{!! __('lang.post') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.related')}}" name="data[site.post.related]">
                                     </div>
                                 </div>
@@ -591,8 +586,8 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">Sản phẩm <code> (sản phẩm, gallery, video,...) </code></label>
-                                    <p>Cấu hình kích thước hình ảnh <code> thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</code> </p>
+                                    <label for="imgur_client_id">{!! __('lang.product') !!} <code> ({!! __('lang.product') !!}, {!! __('lang.gallery') !!}, {!! __('lang.video') !!},...) </code></label>
+                                    <p>{!! __('lang.note_config_product') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -608,15 +603,15 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Trang chủ</label>
+                                        <label>{!! __('lang.home') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.index')}}" name="data[site.product.index]">
                                     </div>
                                     <div class="form-group">
-                                        <label>Danh mục</label>
+                                        <label>{!! __('lang.category') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.category')}}" name="data[site.product.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>Sản phẩm liên quan</label>
+                                        <label>{!! __('lang.post') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.related')}}" name="data[site.product.related]">
                                     </div>
                                 </div>
@@ -630,13 +625,13 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <input type="hidden" value="0" name="data[site.languages]">
-                                    <label class="font-weight-semibold"> Đa ngôn ngữ <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
-                                    <p class="mb-0">Khi kích hoạt tính năng, website ở có thể tùy chọn nội dung với nhiều ngôn ngữ. Cấu hình ngôn ngữ <a href="{{route('admin.languages.index')}}">tại đây </a> </p>
+                                    <label class="font-weight-semibold"> {!! __('lang.language') !!} <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
+                                    <p class="mb-0">{!! __('lang.note_language') !!} <a href="{{route('admin.languages.index')}}">{!! __('lang.here') !!} </a> </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
-                                    <label>Danh sách ngôn ngữ</label>
+                                    <label>{!! __('lang.list_language') !!}</label>
                                     @foreach(\App\Models\Language::oldest()->get() as $item)
                                         <blockquote class="blockquote mb-0">
                                             <footer class="blockquote-footer"><cite title="{{$item->name}} ({{$item->value}})" class="font-weight-bold">{{$item->name}} ({{$item->value}})</cite></footer>
@@ -651,18 +646,18 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <input type="hidden" value="0" name="data[site.maintenance]">
-                                    <label class="font-weight-semibold"> Bảo trì website <input type="checkbox" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size="small"/></label>
-                                    <p>Khi kích hoạt tính năng, website sẽ trong trạng thái <code>bảo trì</code>. Quản trị viên vẫn có thể review website bằng <code>mật khẩu</code> bảo mật. </p>
+                                    <label class="font-weight-semibold"> {!! __('lang.maintenance') !!} <input type="checkbox" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size="small"/></label>
+                                    <p>{!! __('lang.note_maintenance') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group">
-                                        <label for="password">Mật khẩu  <code>(reivew khi website bảo trì)</code></label>
+                                        <label for="password">{{__('lang.password')}}  <code>{{__('lang.note_maintenance_password')}}</code></label>
                                         <input type="text" class="form-control" value="{{setting('site.password')}}" id="password" name="data[site.password]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="note_maintenance">Ghi chú</label>
+                                        <label for="note_maintenance">{{__('lang.note')}}</label>
                                         <textarea type="text" class="form-control" id="note_maintenance" rows="4"  name="data[site.note.maintenance]">{{setting('site.note.maintenance')}}</textarea>
                                     </div>
                                 </div>
@@ -670,12 +665,12 @@
                         </div>
                         <hr class="border-primary">
                     </fieldset>
-                    <button type="submit" class="btn btn-primary stepy-finish"><span class="icon-button"><i class="fe-send"></i></span> Lưu lại</button>
+                    <button type="submit" class="btn btn-primary stepy-finish"><span class="icon-button"><i class="fe-send"></i></span> {{__('lang.save')}}</button>
                 </div>
 
                 <div class="">
-                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> Reset</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> Lưu lại</button>
+                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('lang.reset')}}</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}</button>
                 </div>
             </form>
         </div>
