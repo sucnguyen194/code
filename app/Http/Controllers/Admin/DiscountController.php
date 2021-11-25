@@ -84,7 +84,7 @@ class DiscountController extends Controller
         ])->validate();
 
         if ($discountData['value_type'] == 0 && $discountData['value'] > 100){
-            return flash('Giá trị giảm tối đa là 100%', 0);
+            return flash(__('lang.note_down_max'), 0);
         }
 
         $discount = Discount::create($discountData);
@@ -94,7 +94,8 @@ class DiscountController extends Controller
             $discount->users()->sync($request->users);
         }
 
-        return flash('Thêm thành công', 1, route('admin.discounts.index'));
+        return flash(__('lang.flash_update'), 1, route('admin.discounts.index'));
+
     }
 
     /**
@@ -147,7 +148,7 @@ class DiscountController extends Controller
         ])->validate();
 
         if ($discountData['value_type'] == 0 && $discountData['value'] > 100){
-            return flash('Giá trị giảm tối đa là 100%', 0);
+            return flash(__('lang.note_down_max'), 0);
         }
 
         $discount->fill($discountData);
@@ -160,7 +161,7 @@ class DiscountController extends Controller
         }
 
 
-        return flash('Cập nhật thành công', 1, route('admin.discounts.index'));
+        return flash(__('lang.flash_update'), 1, route('admin.discounts.index'));
     }
 
     /**
@@ -174,7 +175,7 @@ class DiscountController extends Controller
         $this->authorize('discount.destroy');
 
         $discount->delete();
-        return flash('Xoá thành công');
+        return flash(__('lang.flash_destroy'));
     }
 
     public function history(Discount $discount){

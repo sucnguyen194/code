@@ -94,7 +94,7 @@ class CategoryController extends Controller
 
         $category->translations()->createMany($request->translation);
 
-        return flash('Thêm mới thành công!');
+        return flash(__('lang.flash_create'));
     }
 
     /**
@@ -137,7 +137,7 @@ class CategoryController extends Controller
             $category->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return flash('Cập nhật thành công');
+        return flash(__('lang.flash_update'));
     }
 
     /**
@@ -151,6 +151,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return flash('Xóa danh mục thành công!');
+        return flash(__('lang.flash_destroy'));
     }
 }

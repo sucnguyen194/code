@@ -80,7 +80,7 @@ class AdminController extends Controller
             $admin->syncRoles($request->roles);
         }
 
-        return  flash('Thêm mới thành công!');
+        return  flash(__('lang.flash_create'));
     }
 
     /**
@@ -145,7 +145,7 @@ class AdminController extends Controller
             $admin->syncRoles($request->roles);
         }
 
-        return flash('Cập nhật thành công!');
+        return flash(__('lang.flash_update'));
     }
 
     /**
@@ -165,6 +165,6 @@ class AdminController extends Controller
             return flash('Lỗi',0);
 
         $admin->delete();
-        return flash('Xoá tài khoản thành công!');
+        return flash(__('lang.flash_destroy'));
     }
 }

@@ -47,7 +47,7 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         if(!$order)
-            return flash('Đơn hàng không tồn tại!',4);
+            return flash(__('lang.error'),0);
 
         return  view('admin.order.print',compact('order'));
     }
@@ -119,6 +119,6 @@ class OrderController extends Controller
         $this->authorize('order.destroy');
 
         $order->delete();
-        return flash('Xóa thành công!');
+        return flash(__('lang.flash_destroy'));
     }
 }

@@ -40,7 +40,7 @@ class ContactController extends Controller
 
         return datatables()->of($contacts)
             ->editColumn('note',function ($contact){
-                return $contact->note ? str_limit($contact->note,100) : "Khách hàng yêu cầu nhận thông báo";
+                return $contact->note ? str_limit($contact->note,100) : __('lang.customer_request_to_receive_infomation');
             })
             ->editColumn('updated_at',function ($contact){
                 if($contact->updated_at != $contact->created_at)
@@ -129,7 +129,7 @@ class ContactController extends Controller
 
         send_email('reply',$request->data,$contact->email);
 
-        return flash('Gửi phản hồi thành công!');
+        return flash(__('lang.flash_create'));
     }
 
     /**
@@ -145,6 +145,6 @@ class ContactController extends Controller
 
         $contact->delete();
 
-        return flash('Xóa thành công');
+        return flash(__('lang.flash_destroy'));
     }
 }

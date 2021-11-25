@@ -66,7 +66,7 @@ class UserController extends Controller
         $user->password = bcrypt($password);
         $user->save();
 
-        return flash('Thêm mới thành công!');
+        return flash(__('lang.flash_create'));
     }
 
     /**
@@ -120,7 +120,7 @@ class UserController extends Controller
         }
         $user->save();
 
-        return  flash('Cập nhật thành công!');
+        return  flash(__('lang.flash_update'));
     }
 
     /**
@@ -134,7 +134,7 @@ class UserController extends Controller
         $this->authorize('user.destroy');
 
         $user->delete();
-        return flash('Xóa thành công', 1);
+        return flash(__('lang.flash_destroy'), 1);
     }
 
 }

@@ -9,6 +9,7 @@ return [
     'are_you_sure'                           => 'Bạn có chắc không?',
     'note_upload_image'                      => 'Định dạng ảnh jpg, jpeg, png, gif',
     'error'                                  => 'Lỗi',
+    'value_already_exists'                   => 'Giá trị đã tồn tại',
     //confirm
     'confirm_destroy'                        => 'Xóa bản ghi?',
     'confirm'                                => 'Xác nhận',
@@ -155,6 +156,7 @@ return [
     'end_comment'                            => 'Bình luận cuối cùng',
     'commenter'                              => 'Người bình luận',
     'hidden_comment'                         => 'Bình luận đã bị ẩn',
+    'thank_comment'                          => 'Cám ơn bạn đã để lại bình luận!',
     //supports
     'staff'                                  => 'Nhân viên',
     //contacts
@@ -170,6 +172,7 @@ return [
     'price'                                  => 'Giá',
     'price_sale'                             => 'Giá khuyến mại',
     'background'                             => 'Ảnh nền',
+    'note_price'                             => 'Giá khuyến mại phải thấp hơn giá gốc',
     //discounts
     'start'                                  => 'Bắt đầu',
     'end'                                    => 'Kết thúc',
@@ -196,6 +199,7 @@ return [
     'history_using_discount'                 => 'Lịch sử sử dụng giảm giá',
     'no_invoice'                             => 'Chưa có hoá đơn nào',
     'order_money'                            => 'Tiền đơn',
+    'note_down_max'                          => 'Giá trị giảm tối đa là 100%',
     //orders
     'reportrange'                            => 'Từ ngày - đến ngày',
     'date_created'                           => 'Ngày tạo',
@@ -265,5 +269,8 @@ return [
     //languages
     'list_language'                          => 'Danh sách ngôn ngữ',
     'confirm_change_language'                => 'Xác nhận chuyển ngôn ngữ?',
+    'send_message_success'                   => 'Gửi thông tin thành công!',
+    'password_wrong'                         => 'Mật khẩu không chính xác!',
+    'login_success'                          => 'Đăng nhập thành công!',
 ]
 ?>

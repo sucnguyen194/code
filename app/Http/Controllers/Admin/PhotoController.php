@@ -77,7 +77,7 @@ class PhotoController extends Controller
         $images = $request->images;
 
         if(!$images)
-            return flash('Hình ảnh không được bỏ trống',3);
+            return flash(__('lang.select_image'),3);
 
         for ($i=0; $i < count($images); $i++){
             $photo = new Photo();
@@ -88,7 +88,7 @@ class PhotoController extends Controller
             $photo->save();
         }
 
-      return flash('Thêm mới thành công!');
+      return flash(__('lang.flash_create'));
     }
 
     /**
@@ -130,7 +130,7 @@ class PhotoController extends Controller
         $photo->admin_edit = auth()->id();
         $photo->save();
 
-        return flash('Cập nhật thành công');
+        return flash(__('lang.flash_update'));
     }
 
     /**
@@ -144,6 +144,6 @@ class PhotoController extends Controller
         $this->authorize('photo.destroy');
 
         $photo->delete();
-        return flash('Xóa thành công!');
+        return flash(__('lang.flash_destroy'));
     }
 }

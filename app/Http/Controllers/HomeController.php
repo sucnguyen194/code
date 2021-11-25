@@ -49,11 +49,11 @@ class HomeController extends Controller
         ]);
 
         if($request->password != setting('site.password'))
-            return flash('Mật khẩu không chính xác!', 0);
+            return flash(__('lang.password_wrong'), 0);
 
         session()->put('site.password', setting('site.password'));
 
-        return flash('Đăng nhập thành công!',1, session('url'));
+        return flash(__('lang.login_success'),1, session('url'));
     }
 
 

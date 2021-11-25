@@ -29,6 +29,6 @@ class SettingController extends Controller
             Setting::set($key,$value,$type);
         }
 
-     return  flash('Cập nhật thành công!');
+     return  flash(__('lang.flash_update'));
     }
 }

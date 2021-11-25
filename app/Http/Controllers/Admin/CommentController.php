@@ -121,7 +121,7 @@ class CommentController extends Controller
           Comment::find($request->reply)->update(['status' => ActiveDisable::active]);
         }
         $route = route('admin.comments.reply',[$comment->comment_type, $comment->comment_id]);
-        return  flash('Trả lời thành công!',1 , $route);
+        return  flash(__('lang.flash_create'),1 , $route);
     }
 
     /**
@@ -168,7 +168,8 @@ class CommentController extends Controller
                 'hidden' => ActiveDisable::disable
             ]);
         }
-        return flash('Cập nhật thành công!');
+
+       return flash(__('lang.flash_update'));
     }
 
     /**
@@ -183,7 +184,8 @@ class CommentController extends Controller
 
         Comment::query()->whereCommentId($id)->delete();
 
-        return flash('Xóa bình luận thành công!');
+        return   flash(__('lang.flash_destroy'));
+
     }
 
 

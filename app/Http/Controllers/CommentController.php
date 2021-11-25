@@ -49,7 +49,7 @@ class CommentController extends Controller
 
         $translation = Translation::whereSlug($request->slug)->first();
         if(!$translation)
-            return flash('Đã có lỗi xảy ra. Vui lòng thủ lại!',4);
+            return flash(__('lang.error'),0);
 
             $comment = new Comment();
             $comment->forceFill($request->data);
@@ -59,7 +59,7 @@ class CommentController extends Controller
            session()->put('name', $request->input('data.name'));
            session()->put('email', $request->input('data.email'));
 
-           return flash('Cám ơn bạn đã để lại bình luận!', 1, route('slug', $request->slug));
+           return flash(__('lang.thank_comment'), 1, route('slug', $request->slug));
     }
 
     /**

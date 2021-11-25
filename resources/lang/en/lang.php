@@ -9,6 +9,7 @@ return [
     'are_you_sure'                           => 'Are you sure?',
     'note_upload_image'                      => 'Image type jpg, jpeg, png, gif',
     'error'                                  => 'Error',
+    'value_already_exists'                   => 'Value already exists',
     //confirm
     'confirm_destroy'                        => 'Delete record?',
     'confirm'                                => 'Confirm',
@@ -155,6 +156,7 @@ return [
     'end_comment'                            => 'Last comment',
     'commenter'                              => 'Commenter',
     'hidden_comment'                         => 'Comment has been hidden',
+    'thank_comment'                          => 'Thank you for leaving a comment!',
     //supports
     'staff'                                  => 'Staff',
     //contacts
@@ -170,6 +172,7 @@ return [
     'price'                                  => 'Price',
     'price_sale'                             => 'Price sale',
     'background'                             => 'Background',
+    'note_price'                             => 'The promotional price must be lower than the original price',
     //discounts
     'start'                                  => 'Start',
     'end'                                    => 'End',
@@ -196,6 +199,7 @@ return [
     'history_using_discount'                 => 'History of using discount',
     'no_invoice'                             => 'No invoice yet',
     'order_money'                            => 'Order money',
+    'note_down_max'                          => 'Maximum reduction value is 100%',
     //orders
     'reportrange'                            => 'From day - to day',
     'date_created'                           => 'Date created',
@@ -265,5 +269,8 @@ return [
     //languages
     'list_language'                          => 'List languages',
     'confirm_change_language'                => 'Confirm language transfer?',
+    'send_message_success'                   => 'Send message successfully',
+    'password_wrong'                         => 'Incorrect password!',
+    'login_success'                          => 'Logged in successfully!',
 ]
 ?>

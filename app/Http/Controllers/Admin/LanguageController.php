@@ -68,7 +68,7 @@ class LanguageController extends Controller
             'value' => $request->value,
             'image' => $request->image,
         ]);
-        return flash('Thêm mới thành công');
+        return flash(__('lang.flash_create'));
     }
 
     /**
@@ -117,7 +117,7 @@ class LanguageController extends Controller
             'value' => $request->value,
             'image' => $request->image
         ]);
-        return flash('Cập nhật thành công');
+        return flash(__('lang.flash_update'));
     }
 
     /**
@@ -131,10 +131,10 @@ class LanguageController extends Controller
         $this->authorize('setting.language');
 
         if(Language::count() == 1)
-            return flash('Bạn không thể thực hiện hành động này!', 3 );
+            return flash(__('lang.error'), 3 );
 
         $language->delete();
-        return flash('Xóa bản ghi thành công!');
+        return flash(__('lang.flash_update'));
 
     }
 
@@ -151,7 +151,7 @@ class LanguageController extends Controller
         session()->put('lang', $language->value);
         App::setLocale($language->value);
 
-        return flash('Cập nhật thành công!' );
+        return flash(__('lang.flash_update'));
     }
 
     public function change($lang){
@@ -159,7 +159,7 @@ class LanguageController extends Controller
         $language = Language::whereValue($lang)->first();
 
         if(!$language)
-            return flash('Đã có lỗi xảy ra', 0);
+            return flash(__('lang.error'), 0);
 
         $languages = Language::whereNotIn('value',[$lang])->get();
         foreach ($languages as $item){
@@ -168,6 +168,6 @@ class LanguageController extends Controller
         $language->update(['status' => ActiveDisable::active]);
         session()->put('lang',$lang);
         App::setLocale($lang);
-        return flash('Cập nhật thành công!');
+        return flash(__('lang.flash_update'));
     }
 }

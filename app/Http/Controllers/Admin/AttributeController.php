@@ -63,7 +63,7 @@ class AttributeController extends Controller
         $attribute->save();
         $attribute->translations()->createMany($request->translation);
 
-        return flash('Thêm mới thành công!');
+        return flash(__('lang.flash_create'));
     }
 
     /**
@@ -113,7 +113,7 @@ class AttributeController extends Controller
             $attribute->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return flash('Thêm mới thành công!');
+        return flash(__('lang.flash_update'));
     }
 
     /**
@@ -126,7 +126,7 @@ class AttributeController extends Controller
     {
         $this->authorize('product.destroy');
         $attribute->delete();
-        return flash('Xóa thành công!');
+        return flash(__('lang.flash_destroy'));
     }
 
     public function render($id){

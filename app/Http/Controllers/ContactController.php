@@ -41,7 +41,7 @@ class ContactController extends Controller {
         if(setting('contact.email'))
 	    MailContact::dispatch($request->data)->onQueue('default');
 
-        return flash('Gửi thông tin thành công', 1);
+        return flash(__('lang.send_message_success'));
 	}
 
 }

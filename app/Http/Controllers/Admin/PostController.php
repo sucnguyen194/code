@@ -134,7 +134,7 @@ class PostController extends Controller
         $post->translations()->createMany($request->translation);
         $post->categories()->attach($request->category_id);
 
-        return flash('Thêm mới thành công', 1 , $post->route);
+        return flash(__('lang.flash_create'), 1 , $post->route);
     }
 
     /**
@@ -193,7 +193,7 @@ class PostController extends Controller
 
         $post->categories()->sync($request->category_id);
 
-        return flash('Cập nhật thành công!');
+        return flash(__('lang.flash_update'));
     }
 
     /**
@@ -208,6 +208,6 @@ class PostController extends Controller
         $this->authorize('blog.destroy');
 
         $post->delete();
-        return flash('Xóa thành công');
+        return flash(__('lang.flash_destroy'));
     }
 }

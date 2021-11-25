@@ -87,7 +87,7 @@ class SupportController extends Controller
 
         $support->translations()->createMany($request->translation);
 
-        return flash('Thêm mới thành công!');
+        return flash(__('lang.flash_create'));
     }
 
     /**
@@ -135,7 +135,7 @@ class SupportController extends Controller
             $support->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return flash('Cập nhật thành công!', 1);
+        return flash(__('lang.flash_update'), 1);
     }
 
     /**
@@ -150,7 +150,7 @@ class SupportController extends Controller
 
         $support->delete();
 
-        return flash('Xóa bản ghi thành công!');
+        return flash(__('lang.flash_destroy'));
     }
 
 }

@@ -66,7 +66,7 @@ class RoleController extends Controller
         ]);
         $role->syncPermissions($request->permissions);
 
-        return flash('Thêm mới thành công');
+        return flash(__('lang.flash_create'));
     }
 
     /**
@@ -106,7 +106,7 @@ class RoleController extends Controller
 
         $role->update(['name' => $request->name]);
         $role->syncPermissions($request->permissions);
-        return flash('Cập nhật thành công');
+        return flash(__('lang.flash_update'));
     }
 
     /**
@@ -120,9 +120,9 @@ class RoleController extends Controller
         if(auth()->id() > 1) $this->authorize('role.destroy');
 
         if ($role->users()->count() > 0)
-            return flash('Chức vụ đang có người dùng',0);
+            return flash(__('lang.error'),0);
 
         $role->delete();
-        return flash('Xoá thành công');
+        return flash(__('lang.flash_destroy'));
     }
 }

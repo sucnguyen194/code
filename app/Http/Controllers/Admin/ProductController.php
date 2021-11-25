@@ -130,7 +130,7 @@ class ProductController extends Controller
         $product->fill($request->data);
 
         if($request->input('data.price_sale') && $request->input('data.price_sale') > $request->input('data.price'))
-            return flash('Giá khuyến mại phải thấp hơn giá gốc',3);
+            return flash(__('lang.note_price'),3);
 
         if ($request->input('fields.0.name')){
             $fields = [];
@@ -161,7 +161,7 @@ class ProductController extends Controller
 
         $product->attributes()->attach($request->attribute);
 
-        return  flash('Thêm mới thành công', 1 , $product->route);
+        return  flash(__('lang.flash_create'), 1 , $product->route);
     }
 
     /**
@@ -208,7 +208,7 @@ class ProductController extends Controller
          || $this->authorize('gallery.edit');
 
         if($request->input('data.price_sale') && $request->input('data.price_sale') > $request->input('data.price'))
-            return flash('Giá khuyến mại phải thấp hơn giá gốc',3);
+            return flash(__('lang.note_price'),3);
 
         $product->forceFill($request->data);
 
@@ -247,7 +247,7 @@ class ProductController extends Controller
         $product->categories()->sync($request->category_id);
         $product->attributes()->sync($request->attribute);
 
-        return  flash('Cập nhật thành công!');
+        return  flash(__('lang.flash_update'));
     }
 
     /**
@@ -263,6 +263,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return flash('Xóa bản ghi thành công!');
+        return flash(__('lang.flash_destroy'));
     }
 }
