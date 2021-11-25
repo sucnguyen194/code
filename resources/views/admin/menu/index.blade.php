@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-   Menu
+    {{__('lang.menu')}}
 @stop
 @section('content')
 
@@ -13,10 +13,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.create')}}</li>
+                            <li class="breadcrumb-item active">{{__('lang.menu')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Menu</h4>
+                    <h4 class="page-title">{{__('lang.menu')}}</h4>
                 </div>
             </div>
         </div>

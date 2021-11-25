@@ -144,9 +144,9 @@ class LanguageController extends Controller
         $language = Language::findOrFail($id);
         $languages = Language::whereNotIn('id',[$id])->get();
         foreach ($languages as $item){
-            $item->update(['status' => 2]);
+            $item->update(['status' => ActiveDisable::disable]);
         }
-        $language->update(['status' => 1]);
+        $language->update(['status' => ActiveDisable::active]);
 
         session()->put('lang', $language->value);
         App::setLocale($language->value);

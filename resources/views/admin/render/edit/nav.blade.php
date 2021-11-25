@@ -1,5 +1,5 @@
 @if(setting('site.languages'))
-    <ul class="nav nav-tabs tabs-bordered nav-justified pt-1 bg-white">
+    <ul class="nav nav-tabs tabs-bordered nav-justified bg-white">
         @foreach($translations as $key => $translation)
             <li class="nav-item">
                 <a href=".language-{{$translation->locale}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$key == 0 ? 'active' : null}}">

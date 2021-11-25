@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ActiveDisable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -30,8 +31,10 @@ class Language extends Model
         });
 
         static::deleting(function($language){
-            if($language->status == 1){
-                $language = Language::whereStatus(0)->update(['status' => 1]);
+            if($language->status == ActiveDisable::active){
+                $language = Language::whereStatus(ActiveDisable::disable)->first();
+                $language->update(['status' => ActiveDisable::active]);
+
                 session()->put('lang', $language->value);
             }
         });

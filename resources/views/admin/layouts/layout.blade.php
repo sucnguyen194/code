@@ -249,21 +249,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="">
-                            <a href="javascript:void(0)">
+
+                        <li>
+                            <a href="{{route('admin.posts.pages.index')}}">
                                 <i class="pe-7s-wallet"></i>
                                 <span>{{__('lang.page')}}</span>
-                                <span class="menu-arrow"></span>
                             </a>
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="{{route('admin.posts.pages.create')}}">{{__('lang.create')}}</a>
-                                </li>
-                                <li>
-                                    <a href="{{route('admin.posts.pages.index')}}">{{__('lang.list_post')}}</a>
-                                </li>
-                            </ul>
                         </li>
+
                     @endcan
 
                     @can('gallery.view')

@@ -109,7 +109,7 @@ return [
     'tag'                                    => 'Tag',
     'category'                               => 'Category',
     'post'                                   => 'Post',
-    'list_post'                              => 'List Post',
+    'list_post'                              => 'List post',
     'category_post'                          => 'Category post',
     'transaction'                            => 'Transaction',
     'product'                                => 'Product',
