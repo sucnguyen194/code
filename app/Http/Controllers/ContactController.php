@@ -41,7 +41,7 @@ class ContactController extends Controller {
         if(setting('contact.email'))
 	    MailContact::dispatch($request->data)->onQueue('default');
 
-        return flash(__('lang.send_message_success'));
+        return flash(__('client.send_message_success'));
 	}
 
 }

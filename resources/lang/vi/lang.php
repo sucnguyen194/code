@@ -156,7 +156,6 @@ return [
     'end_comment'                            => 'Bình luận cuối cùng',
     'commenter'                              => 'Người bình luận',
     'hidden_comment'                         => 'Bình luận đã bị ẩn',
-    'thank_comment'                          => 'Cám ơn bạn đã để lại bình luận!',
     //supports
     'staff'                                  => 'Nhân viên',
     //contacts
@@ -269,8 +268,5 @@ return [
     //languages
     'list_language'                          => 'Danh sách ngôn ngữ',
     'confirm_change_language'                => 'Xác nhận chuyển ngôn ngữ?',
-    'send_message_success'                   => 'Gửi thông tin thành công!',
-    'password_wrong'                         => 'Mật khẩu không chính xác!',
-    'login_success'                          => 'Đăng nhập thành công!',
 ]
 ?>

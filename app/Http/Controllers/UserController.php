@@ -20,7 +20,7 @@ class UserController extends Controller {
 	    if(Auth::check())
             return view('User.profile');
 
-        return flash('Vui lòng đăng nhập trước khi kiểm tra thông tin',3,route('home'));
+        return flash(__('client.please_login'),3,route('home'));
 	}
 	public function update(Request $request){
 
@@ -33,7 +33,7 @@ class UserController extends Controller {
 		    $user = auth()->user();
 
 			if(User::where('email',$email)->whereNotIn('id',[$user->id])->count())
-                return flash('Email đã tồn tại',3);
+                return flash(__('client.email_already_exists'),3);
 
 			$user->forceFill($request->data);
 			$user->save();
@@ -60,7 +60,7 @@ class UserController extends Controller {
 //                ]);
 //
 //			}
-            return flash('Sửa thông tin thành công');
+            return flash(__('lang.flash_update'));
 			}
 	}
 }

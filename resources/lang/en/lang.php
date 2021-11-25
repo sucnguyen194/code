@@ -156,7 +156,6 @@ return [
     'end_comment'                            => 'Last comment',
     'commenter'                              => 'Commenter',
     'hidden_comment'                         => 'Comment has been hidden',
-    'thank_comment'                          => 'Thank you for leaving a comment!',
     //supports
     'staff'                                  => 'Staff',
     //contacts
@@ -269,8 +268,5 @@ return [
     //languages
     'list_language'                          => 'List languages',
     'confirm_change_language'                => 'Confirm language transfer?',
-    'send_message_success'                   => 'Send message successfully',
-    'password_wrong'                         => 'Incorrect password!',
-    'login_success'                          => 'Logged in successfully!',
 ]
 ?>

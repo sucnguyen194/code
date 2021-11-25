@@ -61,7 +61,7 @@ class LoginController extends Controller
         $user = $this->createUser($info,$provider);
         Auth::login($user, true);
 
-        return flash('Đăng nhập thành công!',1, route('home'));
+        return flash(__('client.login_success'),1, route('home'));
     }
 
     public function createUser($info,$provider){
