@@ -27,7 +27,7 @@ class ProductController extends Controller
 
         $categories = Category::query()->with('translation', function($q){
             $q->select('id','name','category_id');
-        })->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
+        })->whereType(CategoryType::product)->public()->latest()->get();
 
         $admins = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
@@ -47,7 +47,8 @@ class ProductController extends Controller
                 $q->select('name','slug','product_id');
             },'admin','comments' => function($q){
                 $q->select('id','comment_type','comment_id','rate');
-            }])->whereHas('translation')->whereType(request()->type)
+            }])
+            ->whereType(request()->type)
             ->when(request()->author,function($q, $author){
                 $q->where('admin_id',$author);
             })
@@ -105,8 +106,8 @@ class ProductController extends Controller
     {
         $this->authorize('product.create');
 
-        $categories = Category::with('translation')->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::with('translation')->whereHas('translation')->oldest('sort')->get();
+        $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
+        $attributes = Attribute::with('translation')->oldest('sort')->get();
         $tags = Tag::ofType(TagType::product)->get();
 
         return view('admin.product.create', compact('categories','attributes', 'tags'));
@@ -184,8 +185,8 @@ class ProductController extends Controller
     {
         $this->authorize('product.edit');
 
-        $categories = Category::with('translation')->whereHas('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::with('translation')->whereHas('translation')->oldest('sort')->get();
+        $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
+        $attributes = Attribute::with('translation')->oldest('sort')->get();
         $translations = $product->translations->load('language');
 
         $tags = Tag::ofType(TagType::product)->get();

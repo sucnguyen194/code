@@ -19,11 +19,11 @@ class Support extends Model
     protected $guarded = ['id'];
 
     public function translations(){
-        return $this->hasMany(Translation::class);
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class);
+        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
     public function admin(){
@@ -41,9 +41,16 @@ class Support extends Model
         }
     }
 
+    public function getNameAttribute(){
+        return optional($this->translation)->name;
+    }
+
+    public function getDescriptionAttribute(){
+        return optional($this->translation)->description;
+    }
 
     public function scopeOfType($q, $type){
-        return $q->with('translation')->whereHas('translation')->whereType($type)->public()->oldest('sort')->latest();
+        return $q->with('translation')->whereType($type)->public()->oldest('sort')->latest();
     }
 
     public function scopePublic($q){

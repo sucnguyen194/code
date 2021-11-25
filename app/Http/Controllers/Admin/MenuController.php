@@ -31,7 +31,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->whereHas('translation')->position()->sort()->get();
+        })->position()->sort()->get();
 
         return view('admin.menu.index', compact('menus'));
     }
@@ -45,7 +45,7 @@ class MenuController extends Controller
     {
         $this->authorize('menu.create');
 
-        $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})->whereHas('translation')->position()->sort()->get();
+        $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})->position()->sort()->get();
 
         return view('admin.menu.create', compact('menus'));
     }
@@ -70,7 +70,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->whereHas('translation')->position()->sort()->get();
+        })->position()->sort()->get();
 
         return  view('admin.render.menu', compact('menus'));
     }
@@ -97,7 +97,7 @@ class MenuController extends Controller
         $this->authorize('menu.edit');
 
         $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})
-            ->where('id','!=', $menu->id)->whereHas('translation')->position()->sort()->get();
+            ->where('id','!=', $menu->id)->position()->sort()->get();
         $translations = $menu->translations->load('language');
 
         return view('admin.menu.edit', compact('menus','menu','translations'));
@@ -145,7 +145,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->whereHas('translation')->position()->sort()->get();
+        })->position()->sort()->get();
 
         return  view('admin.render.menu', compact('menus'));
     }
@@ -157,7 +157,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
             $q->select('name','slug','menu_id');
-        })->whereHas('translation')->position()->sort()->get();
+        })->position()->sort()->get();
 
         return  view('admin.render.menu', compact('menus'));
     }

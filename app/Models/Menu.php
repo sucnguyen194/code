@@ -50,7 +50,7 @@ class Menu extends Model
     }
 
     public function getNameAttribute(){
-        return $this->translation->name;
+        return optional($this->translation)->name;
     }
 
     public static function boot(){

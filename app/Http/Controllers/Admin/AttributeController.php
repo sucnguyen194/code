@@ -43,7 +43,7 @@ class AttributeController extends Controller
     {
         $this->authorize('product.create');
 
-        $categories = Attribute::with('translation')->whereHas('translation')->whereCategoryId(0)->get();
+        $categories = Attribute::with('translation')->whereCategoryId(0)->get();
 
         return view('admin.product.attribute.create',compact('categories'));
     }
@@ -87,7 +87,7 @@ class AttributeController extends Controller
     {
         $this->authorize('product.edit');
 
-        $categories = Attribute::with('translation')->whereHas('translation')->where('id','!=',$attribute->id)->whereCategoryId(0)->get();
+        $categories = Attribute::with('translation')->where('id','!=',$attribute->id)->whereCategoryId(0)->get();
 
         $translations = $attribute->translations->load('language');
 

@@ -29,8 +29,7 @@ class SupportController extends Controller
         $this->authorize('support.view');
         $supports = Support::query()->with(['admin', 'translation' => function($q){
             $q->select('name','support_id');
-        }])->whereHas('translation')
-            ->when(\request()->type,function($q, $type){
+        }])->when(\request()->type,function($q, $type){
                 return $q->whereType($type);
             })
             ->when(request()->search, function ($q, $keyword){
@@ -46,7 +45,7 @@ class SupportController extends Controller
             })
             ->when(\request()->status,function($q, $status){
                 return $q->whereStatus($status);
-            })->withTranslation();
+            });
 
         return datatables()->of($supports)
             ->editColumn('name',function ($support){

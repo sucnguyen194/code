@@ -29,7 +29,7 @@ class PostController extends Controller
 
         $categories = Category::query()->with('translation',function($q){
             $q->select('id','name','category_id');
-        })->whereHas('translation')->whereType(CategoryType::post)->public()->latest()->get();
+        })->whereType(CategoryType::post)->public()->latest()->get();
 
         $authors = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
             $q->where('id','>', 1);
@@ -50,7 +50,7 @@ class PostController extends Controller
                 $q->select('name','slug','post_id');
             },'comments' => function($q){
                 $q->select('id','comment_type','comment_id','rate');
-            }])->whereHas('translation')
+            }])
             ->when(\request()->type,function ($q, $type){
                 return $q->whereType($type);
             })
@@ -110,7 +110,7 @@ class PostController extends Controller
 
         $categories = Category::query()->with('translation',function($q){
             $q->select('id','name','category_id');
-        })->whereHas('translation')->whereType(CategoryType::post)->public()->latest()->get();
+        })->whereType(CategoryType::post)->public()->latest()->get();
 
         $tags = Tag::ofType(TagType::post)->get();
 
@@ -159,7 +159,7 @@ class PostController extends Controller
 
         $categories = Category::query()->with('translation',function($q){
             $q->select('id','name','category_id');
-        })->whereHas('translation')->whereType(CategoryType::post)->public()->latest()->get();
+        })->whereType(CategoryType::post)->public()->latest()->get();
 
         $translations = $post->translations->load('language');
 

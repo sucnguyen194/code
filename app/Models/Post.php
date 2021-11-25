@@ -29,7 +29,7 @@ class Post extends Model
     }
 
     public function translations(){
-        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
     }
 
     public function translation(){
@@ -53,19 +53,19 @@ class Post extends Model
     }
 
     public function getSlugAttribute(){
-        return route('slug', $this->translation->slug);
+        return route('slug', optional($this->translation)->slug);
     }
 
     public function getTitleAttribute(){
-        return $this->translation->name;
+        return optional($this->translation)->name;
     }
 
     public function getDescriptionAttribute(){
-        return $this->translation->description;
+        return optional($this->translation)->description;
     }
 
     public function getContentAttribute(){
-        return $this->translation->content;
+        return optional($this->translation)->content;
     }
 
     public function getRouteAttribute(){

@@ -252,6 +252,8 @@
         }
 
         function titleFormatter(value, row){
+            if(!value)
+                return ;
             return '<a href="'+ '{{ route('slug', ':id') }}'.replace(':id',row.translation.slug) +'" class="font-weight-bold" target="_blank">'+ row.translation.name +'</a>';
         }
 

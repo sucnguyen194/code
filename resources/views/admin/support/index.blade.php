@@ -75,7 +75,7 @@
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
                                 <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
-                                <th data-field="name">
+                                <th data-field="name" data-formatter="titleFormatter">
                                     {{__('lang.staff')}}
                                 </th>
 
@@ -163,9 +163,11 @@
                 return html;
         }
 
-        {{--function titleFormatter(value, row){--}}
-        {{--    return '<a href="'+ '{{ route('admin.supports.edit', ':id') }}'.replace(':id',row.alias) +'" target="_blank">'+ value +'</a>';--}}
-        {{--}--}}
+        function titleFormatter(value, row){
+            if(!value)
+                return ;
+            return '<a href="#" target="_blank" class="font-weight-bold">'+ value +'</a>';
+        }
 
         function actionFormatter(value, row){
             let html = '';

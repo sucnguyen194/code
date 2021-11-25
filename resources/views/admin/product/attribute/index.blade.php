@@ -53,7 +53,7 @@
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true" data-visible="true">ID</th>
                                 <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
-                                <th data-field="name">
+                                <th data-field="name" data-formatter="titleFormatter">
                                     {{__('lang.title')}}
                                 </th>
 
@@ -98,6 +98,11 @@
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';
         }
 
+        function titleFormatter(value, row){
+            if(!value)
+                return ;
+            return '<a href="#" class="font-weight-bold" target="_blank">'+value +'</a>';
+        }
 
         function actionFormatter(value, row){
 
