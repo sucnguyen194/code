@@ -11,9 +11,9 @@
             <div class="modal-body">
                @include('admin.render.create.nav')
 
-                    <div class="tab-content">
+                    <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                         @foreach(languages() as $key => $language)
-                            <div class="tab-pane  {{!setting('site.languages') ? "pt-0" : ""}} language-{{$language->value}}" id="language-{{$language->value}}">
+                            <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                                 @include('admin.render.create.title')
                                 <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
                             </div>
