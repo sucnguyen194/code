@@ -449,6 +449,9 @@ ul.grid {
     width: auto!important;
     font-size: .8rem!important;
 }
+.dd-list .dd-item .dd-handle {
+    min-height: 54px;
+}
 .menu_action a {
     border:1px solid #fff;
 }
