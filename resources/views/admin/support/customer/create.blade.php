@@ -13,7 +13,7 @@
                @include('admin.render.create.nav')
                 <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     @foreach(languages() as $key => $language)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
+                        <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                             <div class="form-group">
                                 <label>{{__('lang.customer')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
@@ -193,15 +193,7 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        let editor = $('.summernote, .summerbody');
-
-        $(editor).each(function (index) {
-            let ele = $(this)[0];
-            let height = $(this).data('height');
-            editors(ele, height);
-        })
         $('select').each(function () {
-
             $(this).select2({
                 dropdownParent: $(this).parent(),
                 placeholder: $(this).data('placeholder'),

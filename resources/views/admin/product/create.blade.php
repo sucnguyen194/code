@@ -12,7 +12,7 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.create')}}</li>
+                            <li class="breadcrumb-item active">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</li>
                         </ol>
                     </div>
                     <h4 class="page-title">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</h4>
@@ -28,9 +28,9 @@
                 <div class="col-lg-9">
                    @include('admin.render.create.nav')
 
-                        <div class="tab-content {{setting('site.languages') ? "pt-0" : ""}}">
+                        <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
                             @foreach(languages() as $key => $language)
-                                <div class="tab-pane language-{{$language->value}} {{$key == 0 ? 'active' : null}}" >
+                                <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" >
                                     <div class="card-box">
                                         @include('admin.render.create.name')
                                         @include('admin.render.create.description')
@@ -129,7 +129,7 @@
                                 </div>
 
                                 @foreach(languages() as $key => $language)
-                                    <div class="tab-pane language-{{$language->value}} {{$key == 0 ? 'active' : null}}" >
+                                    <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" >
                                         <div class="card-box">
                                             @include('admin.render.create.seo')
                                         </div>

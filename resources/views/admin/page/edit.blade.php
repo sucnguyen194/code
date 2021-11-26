@@ -28,9 +28,9 @@
                 @method('PATCH')
                 <div class="col-lg-9">
                     @include('admin.render.edit.nav')
-                    <div class="tab-content pt-0">
+                    <div class="tab-content {{setting('site.languages') || !$page->translation ? "pt-0" : ""}}">
                         @foreach($translations as $key => $translation)
-                            <div class="tab-pane language-{{$translation->locale}} {{$key == 0 ? 'active' : null}}" id="language-{{$translation->locale}}">
+                            <div class="tab-pane language-{{$translation->locale}} {{$translation->locale == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="card-box">
                                     @include('admin.render.edit.title')
                                     @include('admin.render.edit.description')
@@ -44,10 +44,10 @@
                             </div>
                         @endforeach
 
-                        @if(setting('site.languages'))
+                        @if(setting('site.languages') || !$page->translation)
 
                             @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                                <div class="tab-pane language-{{$language->value}}" id="language-{{$language->value}}">
+                                <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                     <div class="card-box">
                                         @include('admin.render.create.title')
                                         @include('admin.render.create.description')

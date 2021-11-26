@@ -77,7 +77,7 @@ class PostController extends Controller
 
         return datatables()->of($posts)
             ->editColumn('title', function ($post){
-                return $post->translation->name;
+                return $post->title;
             })
             ->editColumn('comments', function ($post){
                 return $post->comments->whereNotNull('rate')->count();

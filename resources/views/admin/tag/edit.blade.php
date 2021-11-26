@@ -22,7 +22,7 @@
                         </select>
                     </div>
                     @foreach($translations as $key => $translation)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
+                        <div class="tab-pane  {{$translation->locale == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                             <div class="form-group">
                                 <label>{{__('lang.tag')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" name="translation[{{$key}}][name]" value="{{$translation->name}}" >
@@ -35,23 +35,21 @@
                         </div>
                     @endforeach
 
-                    @if(setting('site.languages'))
+
 
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                            <div class="tab-pane" id="language-{{$language->value}}">
-                                <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
-                                    <div class="form-group">
-                                        <label>{{__('lang.tag')}} <span class="required">*</span></label>
-                                        <input type="text" class="form-control" language="{{optional($language)->value}}" seo="{{optional($language)->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
-                                    </div>
-                                    @include('admin.render.create.description')
-                                    <div class="form-group">
-                                        @include('admin.render.create.seo')
-                                    </div>
+                            <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
+                                <div class="form-group">
+                                    <label>{{__('lang.tag')}} <span class="required">*</span></label>
+                                    <input type="text" class="form-control" language="{{optional($language)->value}}" seo="{{optional($language)->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
+                                </div>
+                                @include('admin.render.create.description')
+                                <div class="form-group">
+                                    @include('admin.render.create.seo')
                                 </div>
                             </div>
                         @endforeach
-                    @endif
+
                 </div>
             </div>
             <div class="modal-footer">

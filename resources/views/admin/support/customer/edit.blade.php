@@ -14,7 +14,7 @@
 
                 <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     @foreach($translations as $key => $translation)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
+                        <div class="tab-pane {{$translation->locale == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                             <div class="form-group">
                                 <label for="name">{{__('lang.customer')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" name="translation[{{$key}}][name]" id="name" value="{{$translation->name}}">
@@ -36,10 +36,10 @@
                         </div>
                     @endforeach
 
-                    @if(setting('site.languages'))
+                    @if(setting('site.languages') || !$customer->translation)
 
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                            <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
+                            <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                                 <div class="form-group">
                                     <label>{{__('lang.customer')}} <span class="required">*</span></label>
                                     <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" name="translation[{{$key}}][name]" >

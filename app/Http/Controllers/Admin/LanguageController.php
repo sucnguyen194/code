@@ -168,6 +168,7 @@ class LanguageController extends Controller
         $language->update(['status' => ActiveDisable::active]);
         session()->put('lang',$lang);
         App::setLocale($lang);
+
         return flash(__('lang.flash_update'));
     }
 }

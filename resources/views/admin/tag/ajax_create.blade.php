@@ -13,7 +13,7 @@
 
                 <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     @foreach(languages() as $key => $language)
-                        <div class="tab-pane {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}-tag">
+                        <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}-tag">
                             <div class="form-group">
                                 <label>{{__('lang.tag')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="tag_{{$language->value}}"

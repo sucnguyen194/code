@@ -14,16 +14,16 @@
 
                     <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                         @foreach($translations as $key => $translation)
-                            <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
+                            <div class="tab-pane  {{$translation->locale == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                                 @include('admin.render.edit.title')
                                 @include('admin.render.edit.slug')
                             </div>
                         @endforeach
 
-                        @if(setting('site.languages'))
+                        @if(setting('site.languages') || !$video->translation)
 
                             @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                                <div class="tab-pane" id="language-{{$language->value}}">
+                                <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                     <div class="tab-pane language-{{$language->value}}" id="language-{{$language->value}}">
                                         @include('admin.render.create.title')
                                         @include('admin.render.create.slug')

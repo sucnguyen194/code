@@ -22,7 +22,7 @@
                         </select>
                     </div>
                     @foreach(languages() as $key => $language)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
+                        <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                             <div class="form-group">
                                 <label>{{__('lang.tag')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="{{$language->value}}"

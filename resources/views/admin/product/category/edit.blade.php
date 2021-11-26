@@ -11,17 +11,19 @@
             </div>
             <div class="modal-body">
                 @include('admin.render.edit.nav')
-                <div class="tab-content">
+                <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     @foreach($translations as $key => $translation)
-                        <div class="tab-pane  {{$key == 0 ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
+                        <div class="tab-pane  {{$translation->locale == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                             @include('admin.render.edit.title')
                             @include('admin.render.edit.slug')
                             @include('admin.render.edit.description')
                         </div>
                     @endforeach
 
+                   @if(setting('site.languages') || !$category->translation)
+
                     @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                        <div class="tab-pane  language-{{$language->value}}" id="language-{{$language->value}}">
+                        <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                             @include('admin.render.create.title')
 
                             @include('admin.render.create.slug')
@@ -29,6 +31,8 @@
                             @include('admin.render.create.description')
                         </div>
                     @endforeach
+
+                    @endif
                 </div>
 
                 @include('admin.render.group')

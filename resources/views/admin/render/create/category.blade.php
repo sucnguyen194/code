@@ -1,6 +1,6 @@
 <div class="card-box">
     <div class="form-group select-category mb-0">
-        <label>{{__('lang.category')}} {{__('lang.main')}}</label>
+        <label>{{__('lang.category')}} {{\Illuminate\Support\Str::lower(__('lang.main'))}}</label>
         <a href="{{route('admin.categories.create',['type' => $type, 'selected' => '.category-main', 'option' => '.category-sub'])}}" class="edit-seo ajax-modal font-weight-medium">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.category')}}</span></a>
         <select class="form-control category-main" data-toggle="select2" name="data[category_id]">
             <option value="0">-----</option>
