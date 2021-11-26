@@ -138,21 +138,6 @@ class LanguageController extends Controller
 
     }
 
-    public function active($id){
-        $this->authorize('setting.language');
-
-        $language = Language::findOrFail($id);
-        $languages = Language::whereNotIn('id',[$id])->get();
-        foreach ($languages as $item){
-            $item->update(['status' => ActiveDisable::disable]);
-        }
-        $language->update(['status' => ActiveDisable::active]);
-
-        session()->put('lang', $language->value);
-        App::setLocale($language->value);
-
-        return flash(__('lang.flash_update'));
-    }
 
     public function change($lang){
         $this->authorize('setting.language');
