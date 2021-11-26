@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card-box">
-                <h4 class="header-title mb-3">{!! __('lang.source') !!}</h4>
+                <h4 class="header-title mb-3">{!! __('lang.source_code') !!}</h4>
                 <div id="">
                     <div class="list-group">
                         <ul class="pl-0">

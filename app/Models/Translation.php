@@ -60,7 +60,7 @@ class Translation extends Model
     }
 
     public function scopeOfSlug($q, $slug){
-        return $q->whereSlug($slug)->whereNull(['menu_id','tags_id']);
+        return $q->whereSlug($slug)->whereNull(['menu_id','tag_id']);
     }
 
     protected static function boot()

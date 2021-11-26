@@ -41,6 +41,8 @@ return [
     'to'                                     => 'Đến',
     'from'                                   => 'từ',
     'default'                                => 'Mặc đinh',
+    'number_turns'                           => 'Số lượt',
+    'top'                                    => 'Top',
     //admin title
     'name'                                   => 'Tên',
     'fullname'                               => 'Họ & tên',
@@ -127,6 +129,8 @@ return [
     'edit_website'                           => 'Sửa webíte',
     'language'                               => 'Ngôn ngữ',
     //dashboard
+    'statistics'                             => 'Thống kê',
+    'access'                                 => 'Truy cập',
     'chart_by_month'                         => 'Biểu đồ theo tháng',
     'monthly_revenue'                        => 'Doanh thu tháng',
     'monthly_profit'                         => 'Lợi nhuận tháng',
@@ -140,6 +144,7 @@ return [
     'error_share_facebook'                   => 'Tool sửa lỗi share facebook',
     'error_share_zalo'                       => 'Tool sửa lỗi share zalo',
     'tool_note'                              => 'Click vào tool cần sửa lỗi -> past đường dẫn của bài viết vào thanh công cụ của tool',
+    'source'                                 => 'Nguồn',
     //admins
     //admin create
     'note_select_many_role'                  => '1 tài khoản có thể có nhiều phân quyền',
@@ -263,7 +268,7 @@ return [
     'note_maintenance_password'              => '(reivew khi website bảo trì)',
     //sources
     'source_code_editor'                     => 'Trình biên tập mã nguồn',
-    'source'                                 => 'Mã nguồn',
+    'source_code'                            => 'Mã nguồn',
     'file_error'                             => 'Không tìm thấy đường dẫn file',
     //languages
     'list_language'                          => 'Danh sách ngôn ngữ',

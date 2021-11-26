@@ -53,6 +53,9 @@ class Post extends Model
     }
 
     public function getSlugAttribute(){
+        if(!$this->translation)
+            return '#';
+
         return route('slug', optional($this->translation)->slug);
     }
 

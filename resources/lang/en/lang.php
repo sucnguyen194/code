@@ -41,6 +41,8 @@ return [
     'to'                                     => 'To',
     'from'                                   => 'From',
     'default'                                => 'Default',
+    'number_turns'                           => 'Number of turns',
+    'top'                                    => 'Top',
     //admin title
     'name'                                   => 'Name',
     'fullname'                               => 'Full name',
@@ -127,6 +129,8 @@ return [
     'edit_website'                           => 'Edit webíte',
     'language'                               => 'Language',
     //dashboard
+    'statistics'                             => 'Statistics',
+    'access'                                 => 'Access',
     'chart_by_month'                         => 'Chart by month',
     'monthly_revenue'                        => 'Monthly revenue',
     'monthly_profit'                         => 'Monthly profit',
@@ -140,6 +144,7 @@ return [
     'error_share_facebook'                   => 'Tool to fix facebook share error',
     'error_share_zalo'                       => 'Tool to fix error sharing zalo',
     'tool_note'                              => 'Click on the tool to fix the error -> paste the article link into the tool toolbar',
+    'source'                                 => 'Source',
     //admins
     //admin create
     'note_select_many_role'                  => 'One account can have many permissions',
@@ -263,7 +268,7 @@ return [
     'note_maintenance_password'              => '(review when website maintenance)',
     //sources
     'source_code_editor'                     => 'Source Code Editor',
-    'source'                                 => 'Source code',
+    'source_code'                                 => 'Source code',
     'file_error'                             => 'File path not found',
     //languages
     'list_language'                          => 'List languages',

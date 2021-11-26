@@ -73,8 +73,8 @@ class Product extends Model
     }
 
     public function getSlugAttribute(){
-        if(optional($this->translation)->slug)
-            return route('home');
+        if($this->translation)
+            return '#';
 
         return route('slug', $this->translation->slug);
     }
