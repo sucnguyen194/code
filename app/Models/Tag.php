@@ -34,7 +34,7 @@ class Tag extends Model
         if(!$this->translation)
             return '#';
 
-        return route('slug', $this->translation->slug);
+        return route('tag.show', $this->translation->slug);
     }
 
     public function getDescriptionAttribute(){
