@@ -39,7 +39,7 @@
                                 <ul class="nav nav-tabs tabs-bordered nav-justified pt-1 bg-white">
                                     @foreach(languages() as $key => $language)
                                         <li class="nav-item">
-                                            <a href="#language-{{$language->value}}" data-toggle="tab" aria-expanded="false" class="nav-link  {{$key == 0 ? 'active' : null}}">
+                                            <a href="#language-{{$language->value}}" data-toggle="tab" aria-expanded="false" class="nav-link  {{$language->value == session('lang') ? 'active' : null}}">
                                                 <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
                                                 <span class="d-none d-sm-block">{{$language->name}}</span>
                                             </a>
@@ -49,7 +49,7 @@
                                 @endif
                                 <div class="tab-content pt-0">
                                         @foreach(languages() as $key => $language)
-                                            <div class="tab-pane  {{$key == 0 ? 'active' : null}}" id="language-{{$language->value}}">
+                                            <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                                 <div class="card-box">
                                                     <div class="form-group">
                                                         <label for="name">{{__('lang.website_title')}} <span class="required">*</span></label>
