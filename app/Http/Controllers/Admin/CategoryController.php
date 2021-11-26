@@ -45,6 +45,9 @@ class CategoryController extends Controller
             ->editColumn('name', function ($category){
                 return $category->name;
             })
+            ->editColumn('slug', function ($category){
+                return $category->slug;
+            })
             ->editColumn('created_at', function ($category){
                 return $category->created_at->diffForHumans();
             })

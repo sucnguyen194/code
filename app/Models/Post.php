@@ -60,6 +60,9 @@ class Post extends Model
     }
 
     public function getTitleAttribute(){
+        if(!$this->translation && $this->translations)
+            return $this->translations[0]->name;
+
         return optional($this->translation)->name;
     }
 

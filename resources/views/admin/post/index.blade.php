@@ -194,36 +194,32 @@
         }
 
         function categoryFormatter(value, row){
-            let route = "";
+            var html ="";
 
             if(row.category){
-                let slug = value.translation.slug;
-                route += '{{route('slug',':slug')}}'.replace(':slug', slug);
+                let name  = row.category.translation ? row.category.translation.name : "#" +row.category.id;
+                let route = '{{route('admin.posts.categories.edit', ':id')}}'.replace(':id', row.category.id);
+                html += '<a class="w-100 font-weight-bold ajax-modal" href="'+route+'" target="_blank">'+name+'</a> ';
+                let categories = row.categories;
+
+                if($(categories).length > 0){
+                    html += '<hr style="margin: 4px 0; border-top: 1px solid #e2e2e2">';
+                    categories.map(function (val){
+                        if(value.id != val.id){
+                            let _name = val.translation ? val.translation.name : "#" + val.id;
+                            let _route = '{{route('admin.posts.categories.edit', ':id')}}'.replace(':id', val.id);
+                            html  +=  '<a href="'+_route+'" class="small badge badge-light-primary ajax-modal" target="_blank">'+ _name + '</a> ';
+                        }
+                    }).join(' ');
+                }
             }
-            let html = value ? '<a class="w-100 font-weight-bold" href="'+route+'" target="_blank">'+value.translation.name+'</a> ' : '';
-            let categories = row.categories;
-
-            if($(categories).length > 0){
-                html += '<hr style="margin: 4px 0; border-top: 1px solid #e2e2e2">';
-                categories.map(function (val){
-                    let _route = "";
-
-                    if(value.id != val.id){
-                        let _slug = val.translation.slug;
-                        _route += '{{route('slug',':slug')}}'.replace(':slug', _slug);
-
-                        html  +=  '<a href="'+_route+'" class="small badge badge-light-primary" target="_blank">'+ val.translation.name + '</a> ';
-                    }
-                }).join(' ');
-            }
-
             return html;
         }
 
         function titleFormatter(value, row){
             if(!value)
                 return ;
-            return '<a href="'+ '{{ route('slug', ':id') }}'.replace(':id',row.translation.slug) +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
+            return '<a href="'+ row.slug +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
         }
 
         function actionFormatter(value, row){

@@ -24,11 +24,17 @@ class Tag extends Model
     }
 
     public function getNameAttribute(){
+        if(!$this->translation && $this->translations)
+            return $this->translations[0]->name;
+
         return optional($this->translation)->name;
     }
 
     public function getSlugAttribute(){
-        return optional($this->translation)->slug;
+        if(!$this->translation)
+            return '#';
+
+        return route('slug', $this->translation->slug);
     }
 
     public function getDescriptionAttribute(){

@@ -3,8 +3,8 @@
 <p class="font-13"><code>*</code> {{__('lang.select_multiple')}} {{__('lang.tag')}}</p>
 <select class="form-control select-tag select2-multiple" data-toggle="select2" multiple="multiple" name="tag[]" data-placeholder="add tags">
     @foreach($tags as $tag)
-        @if($item->translation)
-            <option value="{{$tag->id}}" {{selected($tag->id, optional($item->translation->tags->pluck('id'))->toArray())}}>{{$tag->name}}</option>
+        @if($item->translations)
+            <option value="{{$tag->id}}" {{selected($tag->id, optional($item->translations[0]->tags->pluck('id'))->toArray())}}>{{$tag->name}}</option>
         @else
             <option value="{{$tag->id}}">{{$tag->name}}</option>
         @endif

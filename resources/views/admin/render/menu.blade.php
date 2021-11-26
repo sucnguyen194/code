@@ -1,7 +1,7 @@
 
 @foreach($menus->where('parent_id', 0) as $items)
     <li class="dd-item" data-id="{{$items->id}}">
-        <div class="dd-handle">{{$items->translation->name}}</div>
+        <div class="dd-handle">{{$items->name}}</div>
         <div class="menu_action">
             @can('menu.edit')
                 <a href="{{route('admin.menus.edit',$items)}}" title="{{__('lang.edit')}}"

@@ -160,7 +160,7 @@
             if(!value)
                 return;
 
-            return '<a href="'+ '{{ route('tag.show', ':slug') }}'.replace(':slug',row.translation.slug) +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
+            return '<a href="'+ row.slug +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
         }
 
         function actionFormatter(value, row){

@@ -49,7 +49,7 @@ class SupportController extends Controller
 
         return datatables()->of($supports)
             ->editColumn('name',function ($support){
-                return $support->translation->name;
+                return $support->name;
             })
             ->editColumn('created_at',function ($support){
                 return $support->created_at->diffForHumans();

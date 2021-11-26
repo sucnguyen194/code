@@ -58,12 +58,15 @@ class Category extends Model
         $q->whereStatus(ActiveDisable::active);
     }
     public function getNameAttribute(){
+        if(!$this->translation && $this->translations)
+            return $this->translations[0]->name;
+
         return optional($this->translation)->name;
     }
 
     public function getSlugAttribute(){
-        if(optional($this->translation)->slug)
-            return route('home');
+        if(!$this->translation)
+            return '#';
 
         return route('slug', $this->translation->slug);
     }

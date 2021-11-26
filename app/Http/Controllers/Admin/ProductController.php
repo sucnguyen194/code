@@ -72,11 +72,16 @@ class ProductController extends Controller
 
         return datatables()->of($products)
             ->editColumn('name',function($product){
-                return $product->translation->name;
+                return $product->name;
             })
             ->editColumn('thumb',function($product){
                 return $product->thumb;
             })
+
+            ->editColumn('slug',function($product){
+                return $product->slug;
+            })
+
             ->editColumn('image',function($product){
                 return $product->images;
             })

@@ -79,6 +79,9 @@ class PostController extends Controller
             ->editColumn('title', function ($post){
                 return $post->title;
             })
+            ->editColumn('slug', function ($post){
+                return $post->slug;
+            })
             ->editColumn('comments', function ($post){
                 return $post->comments->whereNotNull('rate')->count();
             })

@@ -32,7 +32,6 @@
                         @if(setting('site.languages') || !$menu->translation)
 
                             @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                                <div class="tab-pane" id="language-{{$language->value}}">
                                     <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                                         <div class="form-group">
                                             <label>{{__('lang.title')}}</label>
@@ -47,7 +46,6 @@
                                             <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
                                         </div>
                                     </div>
-                                </div>
                             @endforeach
                         @endif
 

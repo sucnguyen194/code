@@ -50,6 +50,9 @@ class Menu extends Model
     }
 
     public function getNameAttribute(){
+        if(!$this->translation && $this->translations)
+            return $this->translations[0]->name;
+
         return optional($this->translation)->name;
     }
 
