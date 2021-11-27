@@ -85,7 +85,7 @@
         </div>
         <!-- end row -->
     </div>
-    <input type="hidden" class="type" value="{{\App\Enums\ProductType::product}}">
+  
 @endsection
 
 @section('scripts')
