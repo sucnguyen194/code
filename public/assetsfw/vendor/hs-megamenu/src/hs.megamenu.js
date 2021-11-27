@@ -1,5 +1,5 @@
 ﻿/*
- * HS Mega Menu - jQuery Plugin
+ * HS Mega MenuPosition - jQuery Plugin
  * @version: 1.0.0 (Sun, 26 Feb 2017)
  * @requires: jQuery v1.6 or later
  * @author: HtmlStream

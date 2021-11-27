@@ -29,7 +29,7 @@ class Vistor
         $vistor = \App\Models\Vistor::whereRefererDomain($ref)->whereRefererIp($ip)->first();
 
         if($vistor){
-            if($vistor->updated_at <= $vistor->updated_at->subMinutes(15)){
+            if($vistor->updated_at->addMinutes(15) <= now()){
                 $vistor->increment('referer_count');
                 $vistor->save();
             }

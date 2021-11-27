@@ -64,7 +64,7 @@
                                                                                    href="/"><i
                                             class="fa fa-home g-color-main-5"></i></a></li>
                                 @php
-                                    $menus = \App\Models\Menu::ofPosition(\App\Enums\Menu::top)->get();
+                                    $menus = \App\Models\Menu::ofPosition(\App\Enums\MenuPosition::top)->get();
                                 @endphp
 
                                 @foreach($menus->where('parent_id', 0) as $menu)

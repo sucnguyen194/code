@@ -37,7 +37,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'support.edit', 'title' => 'Edit support','parent_id' => $support->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'support.destroy', 'title' => 'Destroy support','parent_id' => $support->id,'guard_name' => 'admin']);
 
-        $menu = Permission::create(['name' => 'menu', 'title' => 'Menu','parent_id' => 0,'guard_name' => 'admin']);
+        $menu = Permission::create(['name' => 'menu', 'title' => 'MenuPosition','parent_id' => 0,'guard_name' => 'admin']);
         Permission::create(['name' => 'menu.view', 'title' => 'View menu','parent_id' => $menu->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'menu.create', 'title' => 'Create menu','parent_id' => $menu->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'menu.edit', 'title' => 'Edit menu','parent_id' => $menu->id,'guard_name' => 'admin']);

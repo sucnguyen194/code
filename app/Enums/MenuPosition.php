@@ -9,7 +9,7 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class Menu extends Enum
+final class MenuPosition extends Enum
 {
     const top =   'top';
     const left =   'left';
