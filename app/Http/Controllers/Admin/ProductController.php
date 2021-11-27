@@ -48,7 +48,6 @@ class ProductController extends Controller
             },'admin','comments' => function($q){
                 $q->select('id','comment_type','comment_id','rate');
             }])
-            ->whereType(request()->type)
             ->when(request()->author,function($q, $author){
                 $q->where('admin_id',$author);
             })
@@ -127,9 +126,7 @@ class ProductController extends Controller
     public function store(StoreTranslationRequest $request)
     {
 
-       $this->authorize('product.create')
-       || $this->authorize('video.create')
-       || $this->authorize('gallery.create');
+       $this->authorize('product.create');
 
         $product = new Product;
         $product->fill($request->data);
@@ -153,10 +150,6 @@ class ProductController extends Controller
             endforeach;
 
             $product->photo = $photos;
-        }
-
-        if($request->input('data.video')){
-            $product->video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
         }
 
         $product->save();
@@ -208,9 +201,7 @@ class ProductController extends Controller
      */
     public function update(UpdateTranslationRequest $request, Product $product)
     {
-         $this->authorize('product.edit')
-         || $this->authorize('video.edit')
-         || $this->authorize('gallery.edit');
+         $this->authorize('product.edit');
 
         if($request->input('data.price_sale') && $request->input('data.price_sale') > $request->input('data.price'))
             return flash(__('lang.note_price'),3);
@@ -236,9 +227,6 @@ class ProductController extends Controller
             $product->photo = $photos;
         }
 
-        if($request->input('data.video')){
-            $product->video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
-        }
         $product->admin_edit = Auth::id();
         $product->status = $request->status ? ActiveDisable::active : ActiveDisable::disable;
         $product->public = $request->public ? ActiveDisable::active : ActiveDisable::disable;

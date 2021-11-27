@@ -17,7 +17,7 @@ class Attribute extends Model
     protected $guarded = [];
 
     public function translations(){
-        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
+        return $this->hasMany(AttributeTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());;
     }
 
     public function parents(){
@@ -25,21 +25,18 @@ class Attribute extends Model
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
+        return $this->hasOne(AttributeTranslation::class)->whereLocale(session('lang'));
     }
 
     public function getNameAttribute(){
-        if(!$this->translation && $this->translations)
-            return $this->translations[0]->name;
-
         return optional($this->translation)->name;
     }
 
     public function getSlugAttribute(){
-        if(!$this->title)
+        if(!$this->name)
             return;
 
-        $name = $this->title;
+        $name = $this->name;
 
         $slug = request()->fullUrl().'?attr='.$name;
 
@@ -53,12 +50,12 @@ class Attribute extends Model
     }
 
     public function getRemoveSlugAttribute(){
-        $slug = Str::replace($this->title, '', request()->attr);
+        $slug = Str::replace($this->name, '', request()->attr);
 
-        if(Str::contains(request()->attr ,$this->title.','))
-            $slug = Str::replace($this->title.',', '', request()->attr);
+        if(Str::contains(request()->attr ,$this->name.','))
+            $slug = Str::replace($this->name.',', '', request()->attr);
 
-        if(Str::contains(request()->attr ,','.$this->title))
+        if(Str::contains(request()->attr ,','.$this->name))
             $slug = Str::replace(','.$this->title, '', request()->attr);
 
         return request()->url().'?attr='.$slug;

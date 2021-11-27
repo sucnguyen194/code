@@ -150,8 +150,6 @@
                 </div>
 
                 <div class="col-lg-12">
-                    <input type="hidden" value="{{\App\Enums\ProductType::product}}" name="data[type]">
-
                     @include('admin.render.button', ['route' => route('admin.products.index') ])
                 </div>
             </div>

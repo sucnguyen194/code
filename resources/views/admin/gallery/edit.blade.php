@@ -1,6 +1,6 @@
 
 <div class="modal-dialog modal-lg" style="max-width: 800px!important" role="document">
-    <form action="{{route('admin.products.update',$gallery)}}" method="post" class="ajax-form" enctype="multipart/form-data">
+    <form action="{{route('admin.posts.update',$gallery)}}" method="post" class="ajax-form" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="modal-content">
@@ -27,7 +27,6 @@
                         </div>
                     @endforeach
 
-
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                             <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                 <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$language->value}}">
@@ -46,7 +45,6 @@
                 <div class="d-none">
                     @include('admin.render.edit.status', ['item' => $gallery])
                 </div>
-                <input type="hidden" name="data[type]" value="{{\App\Enums\ProductType::gallery}}">
                 @include('admin.render.modal')
             </div>
         </div>

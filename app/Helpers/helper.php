@@ -2,6 +2,13 @@
 
 use App\Models\Setting;
 
+if(!function_exists('menus')){
+    function menus($position){
+        $menus = \App\Models\Menu::ofPosition($position)->get();
+
+        return $menus;
+    }
+}
 
 if(!function_exists('languages')){
     function languages(){

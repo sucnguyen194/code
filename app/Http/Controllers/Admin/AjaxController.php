@@ -7,6 +7,7 @@ use App\Enums\PhotoType;
 use App\Enums\PostType;
 use App\Enums\ProductType;
 use App\Enums\SupportType;
+use App\Enums\TagType;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use App\Models\Category;
@@ -20,7 +21,7 @@ class AjaxController extends Controller {
 
     public function getSystem($type){
         switch ($type){
-            case ProductType::product:
+            case TagType::product:
                 $data = Product::find(request()->id);
                 break;
             case CategoryType::category:

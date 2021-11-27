@@ -104,7 +104,7 @@ return [
     'customer_reviews'                       => 'Customer reviews',
     'support_team'                           => 'Support team',
     'message'                                => 'Messages',
-    'menu'                                   => 'MenuPosition',
+    'menu'                                   => 'Menu',
     'image'                                  => 'Photo',
     'pic'                                    => 'Avata',
     'comment'                                => 'Comment',
@@ -153,7 +153,7 @@ return [
     'quick_add'                              => 'Quick add',
     'quick_add_note'                         => '* Below are the <code>product categories, articles, pages... Click on the category name, article...</code> will be added directly to the menu.',
     'menu_list'                              => 'List menu',
-    'menu_list_note'                         => '* MenuPosition list depending on <code>"position"</code> displayed at current time <code>(top, bottom, left,right,home).</code>',
+    'menu_list_note'                         => '* Menu list depending on <code>"position"</code> displayed at current time <code>(top, bottom, left,right,home).</code>',
     //photos
     'note_select_image'                      => 'Use the <strong class="text-primary">Select image</strong> button to add an image',
     'note_select_multiple_image'             => 'Can upload <strong class="text-primary">Multiple</strong> images',

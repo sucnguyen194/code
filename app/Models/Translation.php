@@ -24,10 +24,6 @@ class Translation extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
-    }
-
     public function post(){
        return $this->belongsTo(Post::class);
     }
@@ -42,6 +38,10 @@ class Translation extends Model
 
     public function language(){
         return $this->belongsTo(Language::class,'locale','value');
+    }
+
+    public function getCategoryIdAttribute(){
+        return $this->item->category->id ?? 0;
     }
 
     public function getItemAttribute(){
@@ -60,7 +60,7 @@ class Translation extends Model
     }
 
     public function scopeOfSlug($q, $slug){
-        return $q->whereSlug($slug)->whereNull(['menu_id','tag_id']);
+        return $q->whereSlug($slug);
     }
 
     protected static function boot()
@@ -69,19 +69,11 @@ class Translation extends Model
 
          static::saving(function($translation){
 
-             if($translation->menu_id
-                 || $translation->photo_id
-                 || $translation->support_id
-                 || $translation->attribute_id) return;
-
              $translation->title_seo = $translation->title_seo ?? $translation->name;
              $translation->description_seo = $translation->description_seo ?? $translation->name;
 
          });
 
-         static::saved(function($translation){
-             $translation->tags()->sync(request()->tag);
-         });
 
     }
 }

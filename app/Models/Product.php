@@ -54,6 +54,10 @@ class Product extends Model
         return  $this->belongsTo(Admin::class);
     }
 
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function getImagesAttribute(){
         $image = $this->image;
         if($this->photo)
@@ -80,8 +84,6 @@ class Product extends Model
     }
 
     public function getNameAttribute(){
-        if(!$this->translation && $this->translations)
-            return $this->translations[0]->name;
 
         return optional($this->translation)->name;
     }
@@ -123,8 +125,8 @@ class Product extends Model
         return $q->take(6);
     }
 
-    public function scopeOfType($q, $type){
-        return $q->whereType($type)->with('translation')->whereHas('translation')->public();
+    public function scopeOfTranslation($q){
+        return $q->with('translation')->public();
     }
 
     public function scopeSort($q){
@@ -144,6 +146,10 @@ class Product extends Model
 
         static::saving(function($product){
             $product->admin_id = $product->admin_id ?? Auth::id();
+        });
+
+        static::saved(function($product){
+            $product->tags()->sync(request()->tag);
         });
 
         static::deleting(function($product){

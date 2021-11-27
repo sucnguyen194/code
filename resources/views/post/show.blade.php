@@ -42,7 +42,7 @@
                 <div class="u-label g-bg-primary u-label--lg g-px-15 g-py-8 g-mr-10 g-mb-15">
                     Các tin khác
                 </div>
-                @foreach(\App\Models\Post::ofType(\App\Enums\PostType::post)->ofCategory($translation->item->category->id)->ofTake(\App\Enums\TakeItem::replated)->where('id','!=',$translation->item->id)->latest()->get() as $item)
+                @foreach(\App\Models\Post::ofType(\App\Enums\PostType::post)->ofCategory($translation->category_id)->ofTake(\App\Enums\TakeItem::replated)->where('id','!=',$translation->item->id)->latest()->get() as $item)
                 <div class="d-flex g-mb-10">
                     <div class="g-mr-10">
               <span class="g-color-icon-footer">

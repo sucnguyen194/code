@@ -223,7 +223,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach(\App\Models\Product::ofType(\App\Enums\ProductType::product)->where('view', '>',0)->latest('view')->take(50)->get() as  $key=>$product)
+                                @foreach(\App\Models\Product::ofTranslation()->where('view', '>',0)->latest('view')->take(50)->get() as  $key=>$product)
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td><a href="{{$product->slug}}" target="_blank" class="font-weight-bold">{{$product->name}}</a> </td>

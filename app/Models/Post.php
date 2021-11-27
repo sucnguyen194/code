@@ -21,7 +21,7 @@ class Post extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'tags' => 'array'
+        'photo' => 'array'
     ];
 
     public function comments(){
@@ -60,8 +60,6 @@ class Post extends Model
     }
 
     public function getTitleAttribute(){
-        if(!$this->translation && $this->translations)
-            return $this->translations[0]->name;
 
         return optional($this->translation)->name;
     }
@@ -75,13 +73,12 @@ class Post extends Model
     }
 
     public function getRouteAttribute(){
-        switch ($this->type){
-            case PostType::page:
-                return route('admin.posts.pages.index');
-                break;
-            case PostType::post:
-                return route('admin.posts.index');
-        }
+        if($this->type == PostType::page)
+            return route('admin.posts.pages.index');
+        if($this->type == PostType::post)
+            return route('admin.posts.pages.index');
+
+        return ;
     }
 
     public function scopeOfCategory($q, $category){
@@ -129,6 +126,10 @@ class Post extends Model
 
         static::saving(function($post){
             $post->admin_id = $post->admin_id ?? Auth::id();
+        });
+
+        static::saved(function($post){
+            $post->tags()->sync(request()->tag);
         });
 
         static::deleting(function($post){

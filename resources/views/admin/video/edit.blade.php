@@ -1,5 +1,5 @@
 <div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.products.update',$video)}}" method="post" class="ajax-form" enctype="multipart/form-data">
+    <form action="{{route('admin.posts.update',$video)}}" method="post" class="ajax-form" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="modal-content">
@@ -31,7 +31,6 @@
                                 </div>
                             @endforeach
                         @endif
-
 
                             <div class="form-group">
                                 <label>{{__('lang.slug')}} {{__('lang.video')}} Youtube <span class="required">*</span></label>

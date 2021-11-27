@@ -1,5 +1,5 @@
 <div class="modal-dialog modal-lg" style="max-width: 800px!important" role="document">
-    <form action="{{route('admin.products.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
+    <form action="{{route('admin.posts.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="hidden" name="data[type]" value="{{\App\Enums\ProductType::gallery}}">
+                <input type="hidden" name="data[type]" value="{{\App\Enums\PostType::gallery}}">
                 @include('admin.render.modal')
             </div>
         </div>

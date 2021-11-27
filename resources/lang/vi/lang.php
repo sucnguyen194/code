@@ -104,7 +104,7 @@ return [
     'customer_reviews'                       => 'Ý kiến khách hàng',
     'support_team'                           => 'Đội ngũ hỗ trợ',
     'message'                                => 'Tin nhắn',
-    'menu'                                   => 'MenuPosition',
+    'menu'                                   => 'Menu',
     'image'                                  => 'Hình ảnh',
     'pic'                                    => 'Ảnh đại diện',
     'comment'                                => 'Bình luận',

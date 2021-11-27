@@ -23,7 +23,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('gallery.create')
-                        <a href="{{route('admin.products.galleries.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
+                        <a href="{{route('admin.posts.galleries.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
                             <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.gallery'))}}</a>
                         @endcan
                     </div>
@@ -60,7 +60,7 @@
                     <div class="table-bootstrap">
                         <table class="table table-bordered table-hover bs-table"
                                data-toolbar="#custom-toolbar"
-                               data-url="{{ route('admin.products.data',['type' => \App\Enums\ProductType::gallery]) }}"
+                               data-url="{{ route('admin.posts.data',['type' => \App\Enums\PostType::gallery]) }}"
                                data-side-pagination="server"
                                data-pagination="true"
                                data-search="true"
@@ -111,7 +111,7 @@
         </div>
         <!-- end row -->
     </div>
-    <input type="hidden" class="type" value="{{\App\Enums\ProductType::product}}">
+    <input type="hidden" class="type" value="{{\App\Enums\PostType::post}}">
 @endsection
 
 @section('scripts')
@@ -192,11 +192,11 @@
         function actionFormatter(value, row){
             let html = '';
             @can('gallery.edit')
-            html = '<a href="'+ '{{ route('admin.products.galleries.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            html = '<a href="'+ '{{ route('admin.posts.galleries.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
 
             @can('gallery.destroy')
-            html+='<a href="'+ '{{ route('admin.products.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.posts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
 
             return html;

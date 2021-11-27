@@ -16,17 +16,14 @@ class Tag extends Model
     protected $guarded = [];
 
     public function translations(){
-        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
+        return $this->hasMany(TagTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
+        return $this->hasOne(TagTranslation::class)->whereLocale(session('lang'));
     }
 
     public function getNameAttribute(){
-        if(!$this->translation && $this->translations)
-            return $this->translations[0]->name;
-
         return optional($this->translation)->name;
     }
 

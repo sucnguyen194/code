@@ -20,12 +20,11 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->integer('amount')->default(0);
             $table->string('code')->nullable();
-            $table->string('video')->nullable();
+            $table->longText('photo')->nullable();
             $table->integer('category_id')->default(0);
             $table->integer('admin_id');
             $table->integer('admin_edit')->nullable();
             $table->integer('view')->default(0);
-            $table->string('type')->nullable();
             $table->integer('public')->default(1);
             $table->integer('status')->default(2);
             $table->integer('sort')->default(0);

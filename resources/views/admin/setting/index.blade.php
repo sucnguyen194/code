@@ -544,11 +544,11 @@
                     </fieldset>
                     <fieldset title="6" class="p-0">
                         <legend>{!! __('lang.setting') !!}</legend>
-                        @can('blog.view')
+                        @canany(['blog.view','video.view','gallery.view'])
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.post') !!} <code> ({!! __('lang.post') !!}, {!! __('lang.page') !!}, ...) </code></label>
+                                    <label for="imgur_client_id">{!! __('lang.post') !!} <code> ({!! __('lang.post') !!}, {!! __('lang.page') !!}, {!! __('lang.gallery') !!}, {!! __('lang.video') !!} ...) </code></label>
                                     <p>{!! __('lang.note_config_post') !!} </p>
                                 </div>
                             </div>
@@ -582,11 +582,11 @@
                         <hr class="border-primary">
                         @endcan
 
-                        @canany(['product.view','video.view','gallery.view'])
+                        @can('product.view')
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.product') !!} <code> ({!! __('lang.product') !!}, {!! __('lang.gallery') !!}, {!! __('lang.video') !!},...) </code></label>
+                                    <label for="imgur_client_id">{!! __('lang.product') !!} </label>
                                     <p>{!! __('lang.note_config_product') !!} </p>
                                 </div>
                             </div>

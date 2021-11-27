@@ -1,5 +1,5 @@
 <div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.products.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
+    <form action="{{route('admin.posts.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">
@@ -31,7 +31,7 @@
                 <div class="form-group position-relative">
                     @include('admin.render.create.media')
                 </div>
-                    <input name="data[type]" type="hidden" value="{{\App\Enums\ProductType::video}}">
+                    <input name="data[type]" type="hidden" value="{{\App\Enums\PostType::video}}">
             </div>
             <div class="modal-footer">
                 @include('admin.render.modal')

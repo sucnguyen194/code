@@ -128,10 +128,25 @@ class PostController extends Controller
      */
     public function store(StoreTranslationRequest $request)
     {
-        $this->authorize('blog.create');
+        $this->authorize('blog.create')
+        || $this->authorize('video.create')
+        || $this->authorize('gallery.create');;
 
         $post = new Post();
         $post->forceFill($request->data);
+
+        if($request->input('data.video')){
+            $post->video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+        }
+        if($request->photos){
+            $photos = [];
+            foreach ($request->photos as $photo):
+                $photos[] = $photo;
+            endforeach;
+
+            $post->photo = $photos;
+        }
+
         $post->save();
 
         $post->translations()->createMany($request->translation);
@@ -181,9 +196,24 @@ class PostController extends Controller
      */
     public function update(UpdateTranslationRequest $request, Post $post)
     {
-        $this->authorize('blog.edit');
+        $this->authorize('blog.edit')
+        || $this->authorize('video.edit')
+        || $this->authorize('gallery.edit'); ;
 
         $post->forceFill($request->data);
+
+        if($request->input('data.video')){
+            $post->video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+        }
+        if($request->photos){
+            $photos = [];
+            foreach ($request->photos as $photo):
+                $photos[] = $photo;
+            endforeach;
+
+            $post->photo = $photos;
+        }
+
         $post->admin_edit = Auth::id();
         $post->status = $request->status ? ActiveDisable::active : ActiveDisable::disable;
         $post->public = $request->public ? ActiveDisable::active : ActiveDisable::disable;

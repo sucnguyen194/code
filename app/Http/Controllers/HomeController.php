@@ -33,8 +33,6 @@ class HomeController extends Controller
      */
     public function index(Request  $request)
     {
-        $ref = $request->headers->get('referer');
-        var_dump($ref);
         if(setting('site.maintenance')){
             if(!session()->has('site.password') && setting('site.password')){
                 session()->put('url', request()->url());

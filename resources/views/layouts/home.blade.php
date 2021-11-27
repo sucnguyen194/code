@@ -144,7 +144,7 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                @foreach(\App\Models\Product::OfType(\App\Enums\ProductType::product)->OfTake(\App\Enums\TakeItem::index)->public()->latest()->get() as $product)
+                @foreach(\App\Models\Product::OfTake(\App\Enums\TakeItem::index)->public()->latest()->get() as $product)
                     <div class="col-lg-3 col-md-4 col-6">
                         @include('include.product',['item' => $product])
                     </div>
@@ -162,7 +162,7 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                @foreach(\App\Models\Product::OfType(\App\Enums\ProductType::product)->OfTake(\App\Enums\TakeItem::index)->status()->sort()->get() as $product)
+                @foreach(\App\Models\Product::OfTake(\App\Enums\TakeItem::index)->status()->sort()->get() as $product)
                 <div class="col-lg-3 col-md-4 col-6">
                     @include('include.product',['item' => $product])
                 </div>

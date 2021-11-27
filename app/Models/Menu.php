@@ -16,11 +16,11 @@ class Menu extends Model
     protected $guarded = ['id'];
 
     public function translations(){
-        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
+        return $this->hasMany(MenuTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());;
     }
 
     public function translation(){
-        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
+        return $this->hasOne(MenuTranslation::class)->whereLocale(session('lang'));
     }
 
     public function parents(){
@@ -35,23 +35,20 @@ class Menu extends Model
     }
 
     public function scopeOfPosition($q, $position){
-        return $q->with('translation')->whereHas('translation')->wherePosition($position)->sort();
+        return $q->with(['translation', 'parents'])->whereParentId(0)->wherePosition($position)->sort();
     }
 
     public function getSlugAttribute(){
-        $menu = $this->translation;
-
         if($this->path)
             return $this->path;
-        if($menu->slug)
-            return route('slug',$menu->slug);
 
-        return route('home');
+        if(!$this->translation)
+            return '#';
+
+        return route('slug', optional($this->translation)->slug);
     }
 
     public function getNameAttribute(){
-        if(!$this->translation && $this->translations)
-            return $this->translations[0]->name;
 
         return optional($this->translation)->name;
     }
@@ -62,7 +59,6 @@ class Menu extends Model
         self::deleting(function($menu){
             if($menu->parents())
                 $menu->parents()->update(['parent_id' => 0]);
-
         });
     }
 }

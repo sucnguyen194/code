@@ -261,7 +261,7 @@
 
                     @can('gallery.view')
                         <li>
-                            <a href="{{route('admin.products.galleries.index')}}">
+                            <a href="{{route('admin.posts.galleries.index')}}">
                                 <i class="pe-7s-albums"></i>
                                 <span>{{__('lang.gallery')}}</span>
                             </a>
@@ -269,7 +269,7 @@
                     @endcan
                     @can('video.view')
                         <li>
-                            <a href="{{route('admin.products.videos.index')}}">
+                            <a href="{{route('admin.posts.videos.index')}}">
                                 <i class="pe-7s-video"></i>
                                 <span>{{__('lang.video')}}</span>
                             </a>

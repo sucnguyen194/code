@@ -66,7 +66,7 @@
                     <div class="table-bootstrap">
                         <table class="table table-bordered table-hover bs-table"
                                data-toolbar="#custom-toolbar"
-                               data-url="{{ route('admin.products.data',['type' => \App\Enums\ProductType::product]) }}"
+                               data-url="{{ route('admin.products.data') }}"
                                data-side-pagination="server"
                                data-pagination="true"
                                data-search="true"
@@ -124,7 +124,7 @@
         </div>
         <!-- end row -->
     </div>
-    <input type="hidden" class="type" value="{{\App\Enums\ProductType::product}}">
+    <input type="hidden" class="type" value="{{\App\Enums\TagType::product}}">
     <div id="viewImage" class="modal fade" tabindex="-1" aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">

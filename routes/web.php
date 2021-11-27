@@ -40,6 +40,10 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::get('/data/categories',[App\Http\Controllers\Admin\CategoryController::class,'data'])->name('categories.data');
         Route::resource('categories',CategoryController::class);
 
+        //videos
+        Route::resource('/posts/videos',VideoController::class,['as' => 'posts']);
+        //galeries
+        Route::resource('/posts/galleries',GalleryController::class,['as' => 'posts']);
         //pages
         Route::resource('/posts/pages',PageController::class,['as' => 'posts']);
         //posts categories
@@ -52,10 +56,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         //products categories
         Route::resource('/products/categories',ProductCategoryController::class,['as' => 'products']);
 
-        //videos
-        Route::resource('/products/videos',VideoController::class,['as' => 'products']);
-        //galeries
-        Route::resource('/products/galleries',GalleryController::class,['as' => 'products']);
         //products
 
         Route::get('data/products',[App\Http\Controllers\Admin\ProductController::class,'data'])->name('products.data');

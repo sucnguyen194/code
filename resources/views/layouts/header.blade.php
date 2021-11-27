@@ -63,21 +63,19 @@
                                 <li class="nav-item g-mx-10--lg g-font-size-22"><a class="nav-link p-0"
                                                                                    href="/"><i
                                             class="fa fa-home g-color-main-5"></i></a></li>
-                                @php
-                                    $menus = \App\Models\Menu::ofPosition(\App\Enums\MenuPosition::top)->get();
-                                @endphp
 
-                                @foreach($menus->where('parent_id', 0) as $menu)
-                                <li class='nav-item {{$menus->where('parent_id', $menu->id)->count() ? "hs-has-sub-menu" : ""}} g-mx-20--lg'><a id='nav-link-1060'
+
+                                @foreach(menus(\App\Enums\MenuPosition::top) as $menu)
+                                <li class='nav-item {{$menu->parents->count() ? "hs-has-sub-menu" : ""}} g-mx-20--lg'><a id='nav-link-1060'
                                                                                     aria-haspopup='true'
                                                                                     aria-expanded='false'
                                                                                     aria-controls='nav-submenu-1060'
                                                                                     class='nav-link p-0'
                                                                                     href="{{$menu->slug}}">{{$menu->name}}</a>
-                                    @if($menus->where('parent_id', $menu->id)->count())
+                                    @if($menu->parents->count())
                                     <ul class='g-brd-top-footer hs-sub-menu g-bg-primary list-unstyled g-text-transform-none g-min-width-200 g-mt-6 g-mt-10--lg--scrolling'
                                         id='nav-submenu-1060' aria-labelledby='nav-link-1060'>
-                                        @foreach($menus->where('parent_id', $menu->id) as $sub)
+                                        @foreach($menu->parents as $sub)
                                         <li class='dropdown-item nav-item g-font-weight-600'><a
                                                 class='nav-link g-py-10'
                                                 href="{{$sub->slug}}">{{$sub->name}}</a></li>
