@@ -60,7 +60,7 @@ class DiscountController extends Controller
     {
         $this->authorize('discount.create');
 
-        $products = Product::select('id')->with('translation')->whereType(ProductType::product)->whereHas('translation')->latest()->public()->get();
+        $products = Product::select('id')->with('translation')->whereHas('translation')->latest()->public()->get();
 
         $users = User::select('id', 'name')->get();
         return view('admin.discount.create', compact('products', 'users'));
@@ -121,7 +121,7 @@ class DiscountController extends Controller
 
         $discount->load(['products'=> function($q){ $q->select('id')->with('translation')->whereHas('translation'); }]);
 
-        $products = Product::select('id')->with('translation')->whereType(ProductType::product)->whereHas('translation')->latest()->public()->get();
+        $products = Product::select('id')->with('translation')->whereHas('translation')->latest()->public()->get();
 
         $users = User::select('id', 'name')->get();
         return view('admin.discount.edit', compact('discount', 'products', 'users'));
