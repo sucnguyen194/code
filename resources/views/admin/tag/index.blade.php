@@ -85,7 +85,7 @@
         </div>
         <!-- end row -->
     </div>
-  
+
 @endsection
 
 @section('scripts')
@@ -125,7 +125,7 @@
                 status = "checked";
             }
 
-            @can('gallery.edit')
+            @can('tag.edit')
              html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
             html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__("lang.display")}}</label>';
@@ -138,7 +138,7 @@
 
             @endcan
 
-            @cannot('gallery.edit')
+            @cannot('tag.edit')
 
             html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';
