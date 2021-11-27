@@ -142,7 +142,7 @@
                         @include('admin.render.create.status')
                     </div>
 
-                    @include('admin.render.create.category', ['type' => \App\Enums\ProductType::product])
+                    @include('admin.render.create.category', ['type' => \App\Enums\CategoryType::product])
 
                     <div class="card-box">
                         @include('admin.render.create.tag',['type' => \App\Enums\TagType::product])
