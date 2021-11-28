@@ -47,7 +47,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         //pages
         Route::resource('/posts/pages',PageController::class,['as' => 'posts']);
         //posts categories
-
         Route::resource('/posts/categories',PostCategoryController::class,['as' => 'posts']);
 
         Route::get('/data/posts/',[App\Http\Controllers\Admin\PostController::class,'data'])->name('posts.data');

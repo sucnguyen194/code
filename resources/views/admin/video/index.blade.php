@@ -77,16 +77,16 @@
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-formatter="sortFormatter" data-width="150">{{__('lang.sort')}}</th>
                                 <th data-field="image" data-formatter="imageFormatter" data-width="100">{{__('lang.image')}}</th>
-                                <th data-field="name" data-formatter="titleFormatter">
+                                <th data-field="title" data-formatter="titleFormatter">
                                     {{__('lang.title')}}
                                 </th>
                                 <th data-field="video" data-formatter="videoFormatter">
                                     {{__('lang.video')}}
                                 </th>
                                 @can('comment.view')
-                                    <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
-                                        {{__('lang.review')}}
-                                    </th>
+{{--                                    <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">--}}
+{{--                                        {{__('lang.review')}}--}}
+{{--                                    </th>--}}
                                 @endcan
 
                                 <th data-field="admin.name" data-width="150">

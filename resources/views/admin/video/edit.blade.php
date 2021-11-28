@@ -16,32 +16,25 @@
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane  {{$translation->locale == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                                 @include('admin.render.edit.title')
-                                @include('admin.render.edit.slug')
+                                <div class="d-none">
+                                    @include('admin.render.edit.slug')
+                                </div>
                             </div>
                         @endforeach
-
-                        @if(setting('site.languages') || !$video->translation)
 
                             @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                                 <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                     <div class="tab-pane language-{{$language->value}}" id="language-{{$language->value}}">
                                         @include('admin.render.create.title')
-                                        @include('admin.render.create.slug')
                                     </div>
                                 </div>
                             @endforeach
-                        @endif
 
                             <div class="form-group">
                                 <label>{{__('lang.slug')}} {{__('lang.video')}} Youtube <span class="required">*</span></label>
                                 <p class="font-13"><code>*</code> {{__('lang.note_url_video')}}</p>
                                 <p><img src="{{asset('lib/images/note_upload_video.png')}}" class="w-auto"></p>
                                 <input class="form-control" value="https://www.youtube.com/watch?v={{$video->video}}" name="data[video]" required>
-
-                            </div>
-
-                            <div class="form-group position-relative">
-                                @include('admin.render.edit.media', ['item' => $video])
                             </div>
                     </div>
 
@@ -55,70 +48,3 @@
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-    $('#image-upload').on('change', function () {
-        let file = $(this).prop('files')[0];
-        if (!file)
-            return false;
-
-        let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
-
-        if(!imgur_client_id)
-            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
-
-        let target = $(this).data('target');
-
-        let formData = new FormData();
-        formData.append('image', file);
-        $('.loading').fadeIn();
-
-        fetch(
-            "https://api.imgur.com/3/image",
-            {
-                method: "POST",
-                body: formData,
-                "headers": {
-                    "Authorization": "Client-ID "+ imgur_client_id
-                },
-            }
-        )
-            .then(response => response.json())
-            .then(result => {
-                $(target).val(result.data.link).trigger('change');
-                $('.loading').fadeOut();
-            })
-            .catch(error => {
-                var obj  = {
-                    'message': '{{__("lang.error")}} {{__("lang.upload")}}: '+error,
-                    'type' :'error'
-                };
-            });
-
-    });
-
-    $('#image_url').on('change', function (){
-        let target = $(this).data('target');
-        let  hidden = $(this).data('hidden');
-        if ($(this).val()){
-            $(target).removeClass('d-none').attr('src', $(this).val()).show();
-            $(hidden).hide();
-        }else{
-            $(target).hide();
-            $(hidden).removeClass('d-none').show();
-        }
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('select').each(function () {
-
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                placeholder: $(this).data('placeholder'),
-            });
-        });
-    })
-
-</script>

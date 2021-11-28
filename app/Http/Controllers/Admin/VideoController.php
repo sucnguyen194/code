@@ -1,9 +1,8 @@
 <?php namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Models\Product;
+use App\Models\Post;
 
 class VideoController extends Controller {
 
@@ -24,7 +23,7 @@ class VideoController extends Controller {
         return view('admin.video.create');
     }
 
-	public function edit(Product $video){
+	public function edit(Post $video){
       $this->authorize('video.edit');
 
         $translations = $video->translations->load('language');

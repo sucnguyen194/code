@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Models\Product;
+use App\Models\Post;
 
 class GalleryController extends Controller
 {
@@ -59,7 +59,7 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $gallery)
+    public function edit(Post $gallery)
     {
         $this->authorize('gallery.edit');
 

@@ -136,7 +136,9 @@ class PostController extends Controller
         $post->forceFill($request->data);
 
         if($request->input('data.video')){
-            $post->video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+            $video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+            $post->video = $video;
+            $post->image = 'https://img.youtube.com/vi/'.$video.'/maxresdefault.jpg';
         }
         if($request->photos){
             $photos = [];
@@ -203,7 +205,9 @@ class PostController extends Controller
         $post->forceFill($request->data);
 
         if($request->input('data.video')){
-            $post->video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+            $video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+            $post->video = $video;
+            $post->image = 'https://img.youtube.com/vi/'.$video.'/maxresdefault.jpg';
         }
         if($request->photos){
             $photos = [];
