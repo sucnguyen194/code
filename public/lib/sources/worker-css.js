@@ -1970,7 +1970,7 @@ var Colors = {
     inactivecaptiontext :"Color of text in an inactive caption.",
     infobackground      :"Background color for tooltip controls.",
     infotext            :"Text color for tooltip controls.",
-    menu                :"MenuPosition background.",
+    menu                :"Menu background.",
     menutext            :"Text in menus.",
     scrollbar           :"Scroll bar gray area.",
     threeddarkshadow    :"The color of the darker (generally outer) of the two borders away from the light source for 3-D elements that appear 3-D due to two concentric layers of surrounding border.",

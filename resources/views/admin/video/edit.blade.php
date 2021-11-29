@@ -26,6 +26,9 @@
                                 <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                     <div class="tab-pane language-{{$language->value}}" id="language-{{$language->value}}">
                                         @include('admin.render.create.title')
+                                        <div class="d-none">
+                                            @include('admin.render.create.slug')
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach

@@ -185,7 +185,7 @@
                                 @foreach(\App\Models\Vistor::selectRaw('SUM(referer_count) as count, referer_domain')->groupByRaw('referer_domain')->latest('count')->get() as $key => $visitor)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td><a href="{{$visitor->referer_domain}}" target="_blank" class="font-weight-bold">{{$visitor->referer_domain}}</a> </td>
+                                        <td><a href="{{$visitor->referer_domain}}" target="_blank" title="{{$visitor->referer_domain}}" class="font-weight-bold">{{\Illuminate\Support\Str::limit($visitor->referer_domain, 60)}}</a> </td>
                                         <td>{{$visitor->count}}</td>
                                     </tr>
                                  @endforeach

@@ -20,12 +20,13 @@ class Vistor
         if(empty($request->headers->get('referer')))
             return $next($request);
 
-        $ref = $request->headers->get('referer');
+        $ip = $request->ip();
+        $ref = parse_url($request->headers->get('referer'), PHP_URL_HOST);
+        $host = $request->getHost();
 
-        if(strpos($ref, $request->getHost()) == true)
+        if(substr($ref, 0 - strlen($host)) == $host)
             return $next($request);
 
-        $ip = $request->ip();
         $vistor = \App\Models\Vistor::whereRefererDomain($ref)->whereRefererIp($ip)->first();
 
         if($vistor){
@@ -34,7 +35,7 @@ class Vistor
                 $vistor->save();
             }
         }else{
-            $vistor = new  \App\Models\Vistor();
+            $vistor = new \App\Models\Vistor();
             $vistor->referer_domain = $ref;
             $vistor->referer_ip = $ip;
             $vistor->save();

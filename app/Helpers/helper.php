@@ -10,6 +10,36 @@ if(!function_exists('menus')){
     }
 }
 
+if(!function_exists('categories')){
+    function categories($type){
+       $categories = \App\Models\Category::ofType($type)->get();
+
+       return $categories;
+    }
+}
+
+if(!function_exists('posts')){
+    function posts($type, $category = null){
+        $posts = \App\Models\Post::ofType($type)->get();
+
+        if($category)
+            $posts->ofCategory($category);
+
+        return $posts;
+    }
+}
+
+if(!function_exists('products')){
+    function products($type, $category = null){
+        $products = \App\Models\Product::ofType($type)->get();
+
+        if($category)
+            $products->ofCategory($category);
+
+        return $products;
+    }
+}
+
 if(!function_exists('languages')){
     function languages(){
         return session('language');
