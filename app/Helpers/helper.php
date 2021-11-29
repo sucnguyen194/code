@@ -30,8 +30,8 @@ if(!function_exists('posts')){
 }
 
 if(!function_exists('products')){
-    function products($type, $category = null){
-        $products = \App\Models\Product::ofType($type)->get();
+    function products($category = null){
+        $products = \App\Models\Product::ofTranslation()->get();
 
         if($category)
             $products->ofCategory($category);
