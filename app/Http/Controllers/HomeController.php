@@ -115,7 +115,7 @@ class HomeController extends Controller
                 switch ($translation->category->type) {
                     case (CategoryType::product):
 
-                        $products = Product::with(['category','admin','categories', 'translation'])->whereType(ProductType::product)->where('category_id',$translation->category->id)
+                        $products = Product::with(['category','admin','categories', 'translation'])->where('category_id',$translation->category->id)
                             ->whereHas('translation')->orwhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                             })->when(request()->attr, function ($q){
