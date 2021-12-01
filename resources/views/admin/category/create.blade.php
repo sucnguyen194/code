@@ -9,10 +9,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                @include('admin.render.create.nav')
+                @if(setting('site.languages'))
+                    <ul class="nav nav-tabs tabs-bordered nav-justified bg-white">
+                        @foreach(languages() as $key => $language)
+                            <li class="nav-item">
+                                <a href=".language-{{$language->value}}-category" data-toggle="tab" aria-expanded="false" class="nav-link {{$language->value == session('lang') ? 'active' : null}}">
+                                    <span class="d-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
+                                    <span class="d-none d-sm-block">{{$language->name}}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+
                 <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     @foreach(languages() as $key => $language)
-                        <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
+                        <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}-category" id="language-{{$language->value}}-category">
                             <div class="form-group">
                             <label>{{__('lang.title')}} <span class="required">*</span></label>
                             <input type="text" class="form-control" language="category_{{$language->value}}"

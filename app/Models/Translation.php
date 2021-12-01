@@ -40,7 +40,7 @@ class Translation extends Model
         return $this->belongsTo(Language::class,'locale','value');
     }
 
-    public function getCategoryIdAttribute(){
+    public function getItemCategoryAttribute(){
         return $this->item->category->id ?? 0;
     }
 

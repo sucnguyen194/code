@@ -70,6 +70,7 @@ class CategoryController extends Controller
     }
 
     public function add(StoreTranslationRequest $request){
+
         $category =  new Category();
         $category->forceFill($request->data);
         $category->save();

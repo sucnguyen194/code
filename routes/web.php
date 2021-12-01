@@ -125,7 +125,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
     });
 });
 
-
 Route::get('auth/{provider}/login','Auth\LoginController@redirect')->name('login.social');
 Route::get('{provider}/callback','Auth\LoginController@callback')->name('login.social.callback');
 
