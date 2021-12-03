@@ -89,7 +89,13 @@ class HomeController extends Controller
                     case (PostType::post):
                         return view('post.show', compact('translation'));
                         break;
+                    case (PostType::video):
+                        return view('post.video.show', compact('translation'));
+                        break;
 
+                    case (PostType::gallery):
+                        return view('post.gallery.show', compact('translation'));
+                        break;
                     default;
                         return view('post.page', compact('translation'));
                 }
@@ -97,26 +103,15 @@ class HomeController extends Controller
 
             case ($translation->product):
                 $this->setView($translation->product);
+                return view('product.show', compact('translation'));
 
-                switch ($translation->product->type) {
-                    case (ProductType::product):
-                        return view('product.show', compact('translation'));
-                        break;
-                    case (ProductType::video):
-                        return view('product.video.show', compact('translation'));
-                        break;
-                    default:
-                        return view('product.gallery.show', compact('translation'));
-                        break;
-                }
-                break;
             case ($translation->category):
 
                 switch ($translation->category->type) {
                     case (CategoryType::product):
 
                         $products = Product::with(['category','admin','categories', 'translation'])->where('category_id',$translation->category->id)
-                            ->whereHas('translation')->orwhereHas('categories',function($q) use ($translation) {
+                            ->whereHas('translation')->orWhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                             })->when(request()->attr, function ($q){
                                 $q->whereHas('attributes', function ($q) {
@@ -131,7 +126,7 @@ class HomeController extends Controller
                         break;
                     case (CategoryType::post):
 
-                        $posts = Post::with(['category','admin','categories', 'translation'])->whereType(PostType::post)->whereHas('translation')->where('category_id',$translation->category->id)->orwhereHas('categories',function($q) use ($translation) {
+                        $posts = Post::with(['category','admin','categories', 'translation'])->whereType(PostType::post)->whereHas('translation')->where('category_id',$translation->category->id)->orWhereHas('categories',function($q) use ($translation) {
                             $q->where('category_id',$translation->category->id);
                         })                        ->public()->latest()->paginate(setting('site.post.category') ?? 12);
 
@@ -147,7 +142,7 @@ class HomeController extends Controller
         if(session('view') != $translation->id)
             return;
 
-            $translation->view = $translation->view + 1;
+            $translation->increment('view');
             $translation->timestamps = false;
             $translation->save();
 

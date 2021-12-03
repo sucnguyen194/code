@@ -1,10 +1,14 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\Menu;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Product;
 
 if(!function_exists('menus')){
     function menus($position){
-        $menus = \App\Models\Menu::ofPosition($position)->get();
+        $menus = Menu::ofPosition($position)->get();
 
         return $menus;
     }
@@ -12,7 +16,7 @@ if(!function_exists('menus')){
 
 if(!function_exists('categories')){
     function categories($type){
-       $categories = \App\Models\Category::ofType($type)->get();
+       $categories = Category::ofType($type)->get();
 
        return $categories;
     }
@@ -20,7 +24,7 @@ if(!function_exists('categories')){
 
 if(!function_exists('posts')){
     function posts($type, $category = null){
-        $posts = \App\Models\Post::ofType($type)->get();
+        $posts = Post::ofType($type)->get();
 
         if($category)
             $posts->ofCategory($category);
@@ -31,7 +35,7 @@ if(!function_exists('posts')){
 
 if(!function_exists('products')){
     function products($category = null){
-        $products = \App\Models\Product::ofTranslation()->get();
+        $products = Product::ofTranslation()->get();
 
         if($category)
             $products->ofCategory($category);
