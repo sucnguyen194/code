@@ -96,16 +96,6 @@ class Product extends Model
         return optional($this->translation)->content;
     }
 
-    public function getRouteAttribute(){
-        switch ($this->type){
-            case ProductType::product:
-                return route('admin.products.index');
-                break;
-            default:
-                return;
-        }
-    }
-
     public function scopeOfCategory($q, $category){
         return $q->whereCategoryId($category)->orWhere(function($q) use ($category){
             $q->whereHas('categories',function($q) use ($category){

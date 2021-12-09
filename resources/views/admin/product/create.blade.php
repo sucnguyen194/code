@@ -25,7 +25,7 @@
         <form method="post" action="{{route('admin.products.store')}}" class="ajax-form" enctype="multipart/form-data">
             <div class="row">
                 @csrf
-                <div class="col-lg-9">
+                <div class="col-xl-9 col-lg-8 col-md-8">
                    @include('admin.render.create.nav')
 
                         <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
@@ -137,7 +137,7 @@
                                 @endforeach
                         </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-4">
                     <div class="card-box">
                         @include('admin.render.create.status')
                     </div>

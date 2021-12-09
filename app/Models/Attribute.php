@@ -28,7 +28,7 @@ class Attribute extends Model
         return $this->hasOne(AttributeTranslation::class)->whereLocale(session('lang'));
     }
 
-    public function getNameAttribute(){
+    public function getTitleAttribute(){
         return optional($this->translation)->name;
     }
 

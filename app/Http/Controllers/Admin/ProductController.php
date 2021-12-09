@@ -159,7 +159,7 @@ class ProductController extends Controller
 
         $product->attributes()->attach($request->attribute);
 
-        return  flash(__('lang.flash_create'), 1 , $product->route);
+        return  flash(__('lang.flash_create'), 1 , route('admin.products.index'));
     }
 
     /**
