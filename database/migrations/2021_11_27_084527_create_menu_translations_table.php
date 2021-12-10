@@ -19,7 +19,6 @@ class CreateMenuTranslationsTable extends Migration
             $table->string('locale');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
-            $table->timestamps();
         });
     }
 

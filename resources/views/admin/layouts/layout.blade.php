@@ -861,7 +861,7 @@
 
         $(ele).ajaxSubmit({
             headers: {
-                "X-CSRF-Token": $('meta[name=_token]').attr('content')
+                "X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')
             },
             beforeSubmit:function(formData, jqForm, options){
                 $(ele).find('[type=submit]').attr('disabled', true);

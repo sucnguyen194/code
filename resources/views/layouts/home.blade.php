@@ -65,82 +65,14 @@
             </div>
         </div>
     </section>
-{{--    <section class="g-py-30 text-center">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-12 text-center u-heading-v2-5--bottom g-brd-primary g-mb-10">--}}
-{{--                    <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-22 g-color-primary g-mb-0">--}}
-{{--                        Về chúng tôi</h2>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="row">--}}
 
-
-{{--                <div class="col-lg-4 col-md-4 u-bg-overlay g-bg-img-hero g-bg-main-1 g-color-white text-center g-pa-20">--}}
-{{--                    <div class="u-bg-overlay__inner">--}}
-{{--                        <img class="d-inline-block img-fluid mb-4 g-my-25"--}}
-{{--                             src="Upload/News/tamloi-2020-04-08-23-11-08-1.png" alt=""/>--}}
-{{--                        <h3 class="h5 text-uppercase g-font-weight-600 g-mb-15">Giá trị cốt lõi</h3>--}}
-{{--                        <p>--}}
-{{--                        <p class="g-mb-5">Trung thực &amp; ch&iacute;nh trực</p>--}}
-
-{{--                        <p class="g-mb-5">Chăm chỉ &amp; li&ecirc;n tục trau dồi bản th&acirc;n</p>--}}
-
-{{--                        <p class="g-mb-5">Chuy&ecirc;n nghiệp trong mọi h&agrave;nh xử</p>--}}
-
-{{--                        <p class="g-mb-5">Khuyến kh&iacute;ch s&aacute;ng tạo &amp; năng lực c&aacute;--}}
-{{--                            nh&acirc;n</p>--}}
-
-{{--                        <p class="g-mb-10">Lợi nhuận xuất ph&aacute;t từ những lợi &iacute;ch hướng tới cộng--}}
-{{--                            đồng</p></p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-
-{{--                <div class="col-lg-4 col-md-4 u-bg-overlay g-bg-img-hero g-bg-main-2 g-color-white text-center g-pa-20">--}}
-{{--                    <div class="u-bg-overlay__inner">--}}
-{{--                        <img class="d-inline-block img-fluid mb-4 g-my-25"--}}
-{{--                             src="Upload/News/tamloi-2020-04-08-23-11-50-1.png" alt=""/>--}}
-{{--                        <h3 class="h5 text-uppercase g-font-weight-600 g-mb-15">Tầm nhìn</h3>--}}
-{{--                        <p>--}}
-{{--                        <p class="g-mb-5">Kiến tạo vị thế l&agrave; một doanh nghiệp sản xuất &amp; cung ứng những--}}
-{{--                            sản phẩm - giải ph&aacute;p dịch vụ trong ng&agrave;nh thức ăn chăn nu&ocirc;i Top 1--}}
-{{--                            Việt Nam</p>--}}
-
-{{--                        <p class="g-mb-10">Đơn vị thương hiệu l&agrave; doanh nghiệp mạnh - uy t&iacute;n trong--}}
-{{--                            &amp; ngo&agrave;i nước, phụng sự x&atilde; hội v&igrave; một cộng đồng n&ocirc;ng--}}
-{{--                            nghiệp Việt Nam thịnh vượng</p></p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-
-{{--                <div class="col-lg-4 col-md-4 u-bg-overlay g-bg-img-hero g-bg-main-3 g-color-white text-center g-pa-20">--}}
-{{--                    <div class="u-bg-overlay__inner">--}}
-{{--                        <img class="d-inline-block img-fluid mb-4 g-my-25"--}}
-{{--                             src="Upload/News/tamloi-2020-04-08-23-12-35-1.png" alt=""/>--}}
-{{--                        <h3 class="h5 text-uppercase g-font-weight-600 g-mb-15">Sứ mệnh</h3>--}}
-{{--                        <p>--}}
-{{--                        <p class="g-mb-5">Trở th&agrave;nh nh&agrave; sản xuất Top 1 Việt Nam về sản lượng - dẫn đầu--}}
-{{--                            về chất lượng tr&ecirc;n nền tảng thương hiệu văn h&oacute;a</p>--}}
-
-{{--                        <p class="g-mb-5">Kiến tạo năng lực đầy đủ &amp; to&agrave;n diện hoạt động chuỗi gi&aacute;--}}
-{{--                            trị n&ocirc;ng nghiệp Việt Nam, kết nối &amp; hội nhập c&ugrave;ng khu vực</p>--}}
-
-{{--                        <p class="g-mb-10">Th&uacute;c đẩy việc thay đổi tư duy trong lĩnh vực sản xuất thức ăn chăn--}}
-{{--                            nu&ocirc;i tại Việt Nam - bền vững - khoa học - kinh tế</p></p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+    @foreach(\App\Models\Category::with('translation')->whereType(\App\Enums\CategoryType::product)->public()->status()->oldest('sort')->latest()->get() as $category)
     <section class="g-py-20 text-center">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center u-heading-v2-5--bottom g-brd-primary g-mb-20">
                     <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-22 g-color-primary g-mb-0">
-                        Sản mới mới</h2>
+                      <a href="{{route($category->slug)}}" title="{{$category->name}}">{{$category->name}}</a>  </h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -152,7 +84,7 @@
             </div>
         </div>
     </section>
-
+    @endforeach
     <section class="g-py-20 text-center">
         <div class="container">
             <div class="row">
