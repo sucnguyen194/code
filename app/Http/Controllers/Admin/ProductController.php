@@ -131,7 +131,7 @@ class ProductController extends Controller
         $product = new Product;
         $product->fill($request->data);
 
-        if($request->input('data.price_sale') && $request->input('data.price_sale') > $request->input('data.price'))
+        if($request->input('data.price_sale') > 0 && $request->input('data.price_sale') > $request->input('data.price'))
             return flash(__('lang.note_price'),3);
 
         if ($request->input('fields.0.name')){

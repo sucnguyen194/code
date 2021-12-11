@@ -15,8 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('price')->default(0);
-            $table->integer('price_sale')->default(0);
+            $table->decimal('price', 16, 2)->default(0);
+            $table->decimal('price_sale', 16, 2)->default(0);
             $table->string('image')->nullable();
             $table->integer('amount')->default(0);
             $table->string('code')->nullable();
@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->integer('public')->default(1);
             $table->integer('status')->default(2);
             $table->integer('sort')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

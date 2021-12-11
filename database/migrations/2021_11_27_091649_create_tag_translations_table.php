@@ -20,8 +20,8 @@ class CreateTagTranslationsTable extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->longText('description')->nullable();
-            $table->string('title_seo')->nullable();
-            $table->string('description_seo')->nullable();
+            $table->longText('title_seo')->nullable();
+            $table->longText('description_seo')->nullable();
         });
     }
 

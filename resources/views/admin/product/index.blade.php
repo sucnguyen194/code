@@ -256,9 +256,9 @@
         function priceFormatter(value,row){
 
             if(row.price_sale > 0 && row.price_sale < value){
-                return number_format(row.price_sale) + ' <small>('+number_format(value)+')</small>';
+                return numberFormatter(row.price_sale) + ' <small>('+numberFormatter(value)+')</small>';
             }else{
-                return number_format(value);
+                return numberFormatter(value);
             }
         }
 

@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->integer('status')->default(0);
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

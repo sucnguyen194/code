@@ -50,14 +50,14 @@
                                             <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
                                                 <label>{{__('lang.price')}}</label>
                                                 <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" min="0" value="0" id="price">
-                                                <input type="number" class="form-control d-none" min="0" value="0" id="format-price" name="data[price]">
+                                                <input type="text" class="form-control d-none" min="0" value="0" id="format-price" name="data[price]">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group mb-0">
                                                 <label>{{__('lang.price_sale')}}</label>
                                                 <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" value="0" min="0" id="price_sale">
-                                                <input type="number" class="form-control d-none" value="0" min="0" id="format-price-sale" name="data[price_sale]">
+                                                <input type="text" class="form-control d-none" value="0" min="0" id="format-price-sale" name="data[price_sale]">
                                             </div>
                                         </div>
                                     </div>
@@ -197,15 +197,22 @@
 
         $(price).on('keyup',function (){
             let value = $(this).val();
-            value = value.replaceAll(',','');
+            if(value > 99)
+                value = value.replace(/^0+/, '');
+
             $(this).val(number_format(value))
+            value = value.replaceAll(',','');
+            console.log(value);
             $(format_price).val(value);
         })
 
         $(sale).on('keyup',function (){
             let value = $(this).val();
-            value = value.replaceAll(',','');
+            if(value > 99)
+                value = value.replace(/^0+/, '');
+
             $(this).val(number_format(value))
+            value = value.replaceAll(',','');
             $(format_price_sale).val(value);
         })
 

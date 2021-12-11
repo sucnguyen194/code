@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use App\Enums\ActiveDisable;
-use App\Enums\ProductType;
 use App\Enums\TakeItem;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends Model
 {
-    use LogsActivity;
+    use LogsActivity, SoftDeletes;
 
     protected static $logUnguarded = true;
     protected static $submitEmptyLogs = false;

@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->integer('status')->default(2);
             $table->integer('public')->default(1);
             $table->integer('sort')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

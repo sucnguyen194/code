@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -11,7 +12,7 @@ use Yadahan\AuthenticationLog\AuthenticationLogable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable,AuthenticationLogable, HasRoles, LogsActivity;
+    use HasFactory, Notifiable,AuthenticationLogable, HasRoles, LogsActivity, SoftDeletes;
 
     protected static $logUnguarded = true;
     protected static $submitEmptyLogs = false;
