@@ -24,23 +24,23 @@ if(!function_exists('categories')){
 
 if(!function_exists('posts')){
     function posts($type, $category = null){
-        $posts = Post::ofType($type)->get();
+        $posts = Post::ofType($type);
 
         if($category)
             $posts->ofCategory($category);
 
-        return $posts;
+        return $posts->get();
     }
 }
 
 if(!function_exists('products')){
     function products($category = null){
-        $products = Product::ofTranslation()->get();
+        $products = Product::ofTranslation();
 
         if($category)
             $products->ofCategory($category);
 
-        return $products;
+        return $products->get();
     }
 }
 

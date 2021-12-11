@@ -111,7 +111,7 @@ class HomeController extends Controller
                 switch ($translation->category->type) {
                     case (CategoryType::product):
 
-                        $products = Product::with(['category','admin','categories', 'translation'])
+                        $products = Product::with(['category','admin'])
                             ->when(request()->attr, function ($q){
                                 $q->whereHas('attributes', function ($q) {
                                     $q->whereHas('translations', function($q) {
@@ -126,7 +126,7 @@ class HomeController extends Controller
                         return view('product.category', compact('translation','products'));
                         break;
                     case (CategoryType::post):
-                        $posts = Post::with(['category','admin','categories', 'translation'])->ofType(PostType::post)->ofCategory($translation->item_category)->latest()->paginate(setting('site.post.category') ?? 12);
+                        $posts = Post::with(['category','admin'])->ofType(PostType::post)->ofCategory($translation->item_category)->latest()->paginate(setting('site.post.category') ?? 12);
 
                         return view('post.category', compact('translation','posts'));
                         break;
