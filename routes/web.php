@@ -169,6 +169,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('hom
 Route::post('maintenance',[App\Http\Controllers\HomeController::class,'maintenance'])->name('maintenance');
 Route::get('{slug}.html', [App\Http\Controllers\HomeController::class,'translation'])->name('slug');
 
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapXmlController::class, 'generate']);
 Auth::routes();
 
 Route::fallback(function(){
