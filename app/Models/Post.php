@@ -76,7 +76,7 @@ class Post extends Model
         if($this->type == PostType::page)
             return route('admin.posts.pages.index');
         if($this->type == PostType::post)
-            return route('admin.posts.pages.index');
+            return route('admin.posts.index');
 
         return ;
     }

@@ -29,7 +29,7 @@
                     @include('admin.render.create.nav')
                         <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
                             @foreach(languages() as $key => $language)
-                                <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
+                                <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" >
                                     <div class="card-box">
                                         @include('admin.render.create.title')
                                         @include('admin.render.create.description')

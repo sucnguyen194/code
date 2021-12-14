@@ -29,7 +29,7 @@
                 @method('PUT')
                 <div class="col-lg-9">
                     @include('admin.render.edit.nav')
-                        <div class="tab-content {{setting('site.languages') || !$product->translation ? "pt-0" : ""}}">
+                    <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane language-{{$translation->locale}} {{$translation->locale == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="card-box">
@@ -41,7 +41,7 @@
                         @endforeach
 
                             @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
-                                <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
+                                <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                     <div class="card-box">
                                         @include('admin.render.create.name')
                                         @include('admin.render.create.description')
