@@ -167,7 +167,15 @@
                             </a>
                         </li>
                     @endcan
-                    @canany(['contact.view','support.view'])
+                    @can('contact.view')
+                        <li>
+                            <a href="{{route('admin.contacts.index')}}">
+                                <i class="pe-7s-mail"></i>
+                                <span>{{__('lang.message')}}</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @canany('support.view')
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-micro"></i>
@@ -184,11 +192,7 @@
                                     <a href="{{route('admin.supports.index')}}">{{__('lang.support_team')}}</a>
                                 </li>
                                 @endcan
-                                    @can('contact.view')
-                                <li>
-                                    <a href="{{route('admin.contacts.index')}}">{{__('lang.message')}}</a>
-                                </li>
-                                @endcan
+
                             </ul>
                         </li>
                     @endcan
