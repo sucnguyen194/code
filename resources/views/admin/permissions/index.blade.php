@@ -78,7 +78,7 @@
 @section('scripts')
     <script>
         $(document).on('post-body.bs.table', function() {
-            var columns = $table.bootstrapTable('getOptions').columns
+            var columns = $table.bootstrapTable('getOptions').columns;
 
             if (columns && columns[0][1].visible) {
 

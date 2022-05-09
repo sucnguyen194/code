@@ -27,7 +27,7 @@ class Vistor
         if(substr($ref, 0 - strlen($host)) == $host)
             return $next($request);
 
-        $vistor = \App\Models\Vistor::whereRefererDomain($ref)->whereRefererIp($ip)->first();
+        $vistor = \App\Models\Visitor::whereRefererDomain($ref)->whereRefererIp($ip)->first();
 
         if($vistor){
             if($vistor->updated_at->addMinutes(15) <= now()){
@@ -35,7 +35,7 @@ class Vistor
                 $vistor->save();
             }
         }else{
-            $vistor = new \App\Models\Vistor();
+            $vistor = new \App\Models\Visitor();
             $vistor->referer_domain = $ref;
             $vistor->referer_ip = $ip;
             $vistor->save();

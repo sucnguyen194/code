@@ -18,9 +18,9 @@ snippet def\n\
 # export directive\n\
 snippet exp\n\
 	-export([${1:function}/${2:arity}]).\n\
-# include directive\n\
+# partials directive\n\
 snippet inc\n\
-	-include(\"${1:file}\").${2}\n\
+	-partials(\"${1:file}\").${2}\n\
 # behavior directive\n\
 snippet beh\n\
 	-behaviour(${1:behaviour}).${2}\n\
@@ -54,7 +54,7 @@ snippet rec\n\
 snippet todo\n\
 	%% TODO: ${1}\n\
 ## Snippets below (starting with '%') are in EDoc format.\n\
-## See http://www.erlang.org/doc/apps/edoc/chapter.html#id56887 for more details\n\
+## See http://www.erlang.org/doc/apps/edoc/chapter.html#56887 for more details\n\
 # doc comment\n\
 snippet %d\n\
 	%% @doc ${1}\n\
@@ -171,4 +171,3 @@ exports.scope = "erlang";
                         }
                     });
                 })();
-            

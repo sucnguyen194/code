@@ -32,7 +32,7 @@
                             <li class="folder-name">
                                 <a href="javascript:void(0)" id="open-folder" class="open-folder text-primary" data-path="folder_public"><i class="icon-img"><img src="https://s2d142.cloudnetwork.vn:8443/cp/theme/icons/16/plesk/file-folder.png?377a0415c8e86b629f04f2de969b6dc7"> </i> public</a>
                                 <ul class="parent-folder" id="folder_public">
-                                    {{scan_full_dir('assets')}}
+                                    {{scan_full_dir('../public')}}
                                 </ul>
                             </li>
                             {{scan_full_dir('../resources')}}
@@ -91,7 +91,7 @@
             }else{
                 result.slideDown();
             }
-        })
+        });
 
         $(document).on('click','#open-sub-folder',function(){
             var path = $(this).attr('data-path');
@@ -102,7 +102,7 @@
                 result.slideDown();
             }
 
-        })
+        });
         $(document).on("click", "#show-file", function () {
             var white_list = ['html', 'ctp', 'txt', 'xml', 'css', 'js','php'];
             var ext = $(this).attr('data-ext');
@@ -118,9 +118,7 @@
 
                 var editor = ace.edit("editor");
                 var url = '{{route('admin.ajax.load.sources')}}';
-                // editor.setOptions({
-                //   enableBasicAutocompletion: true
-                // });
+
                 if(typeof ext != "undefined" && ext.length > 0){
                     switch(ext) {
                         case 'css':

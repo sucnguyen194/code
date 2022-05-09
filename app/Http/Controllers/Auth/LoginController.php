@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\SocialiteProvider;
 use App\Http\Controllers\Controller;
 use App\Models\SocialIdentity;
 use App\Models\User;
@@ -9,6 +10,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\FacebookProvider;
+use Laravel\Socialite\Two\GoogleProvider;
 
 class LoginController extends Controller
 {
@@ -30,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -45,18 +48,26 @@ class LoginController extends Controller
 
     public function redirect($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        if( ($provider === SocialiteProvider::google && !setting('api.login_google'))
+            || ($provider === SocialiteProvider::facebook && !setting('api.login_facebook'))
+            || ! $this->isProviderAllowed($provider) )
+
+            return  flash("{$provider} is not currently supported", 0);
+
+        try {
+            return $this->getProvider($provider)->redirect();
+        } catch (\Exception $e) {
+            return  flash($e->getMessage(), 0);
+        }
     }
 
     public function callback($provider)
     {
         try {
-            $info = Socialite::driver($provider)->user();
+            $info = $this->getProvider($provider)->user();
         } catch (\Exception $e) {
-            return redirect()->route('home');
+            return  flash($e->getMessage(), 0);
         }
-//        if(!$info->getEmail())
-//            return redirect()->route('user.register')->withErrors(['message' => 'Tài khoản chưa có email. Vui lòng đăng ký tại đây!']);
 
         $user = $this->createUser($info,$provider);
         Auth::login($user, true);
@@ -77,7 +88,7 @@ class LoginController extends Controller
             $user = User::whereEmail($email)->first();
             if(!$user){
                 $user = new User();
-                $user = $user->forceFill(
+                $user->forceFill(
                     [
                         'email' => $email,
                         'name' => $info->getName(),
@@ -95,5 +106,35 @@ class LoginController extends Controller
 
             return $user;
         }
+    }
+
+    public function isProviderAllowed($provider)
+    {
+        return in_array($provider, SocialiteProvider::getValues());
+    }
+
+    public function getProvider($driver){
+
+        if($driver == SocialiteProvider::facebook){
+            $config = [
+                'client_id' => setting('api.facebook_app_id'),
+                'client_secret' => setting('api.facebook_app_secret'),
+                'redirect' =>  route('login.social.callback',SocialiteProvider::facebook)
+            ];
+            $provider = Socialite::buildProvider(
+                FacebookProvider::class, $config
+            );
+        }else if($driver == SocialiteProvider::google){
+            $config = [
+                'client_id' => setting('api.google_app_id'),
+                'client_secret' => setting('api.google_app_secret'),
+                'redirect' =>  route('login.social.callback',SocialiteProvider::google)
+            ];
+            $provider = Socialite::buildProvider(
+                GoogleProvider::class, $config
+            );
+
+        }
+        return $provider;
     }
 }

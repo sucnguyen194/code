@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class CommentMap extends Enum
 {
-    const products  =   'products';
-    const posts     =   'posts';
+    const products  =   1;
+    const posts     =   2;
 }

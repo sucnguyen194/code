@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.page')}} #ID{{$page->id}}
+    {{__('lang.page')}} #{{$page->id}}
 @stop
 @section('content')
     <div class="container-fluid">
@@ -12,10 +12,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.posts.pages.index')}}">{{__('lang.page')}}</a></li>
-                            <li class="breadcrumb-item">#ID{{$page->id}}</li>
+                            <li class="breadcrumb-item">#{{$page->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.page')}} #ID{{$page->id}}</h4>
+                    <h4 class="page-title">{{__('lang.page')}} #{{$page->id}}</h4>
                 </div>
             </div>
         </div>
@@ -28,13 +28,12 @@
                 @method('PATCH')
                 <div class="col-lg-9">
                     @include('admin.render.edit.nav')
-                    <div class="tab-content {{setting('site.languages') || !$page->translation ? "pt-0" : ""}}">
+                    <div class="tab-content pt-0">
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane language-{{$translation->locale}} {{$translation->locale == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="card-box">
                                     @include('admin.render.edit.title')
                                     @include('admin.render.edit.description')
-                                    @include('admin.render.edit.content')
                                 </div>
 
                                 <div class="card-box">
@@ -51,7 +50,6 @@
                                     <div class="card-box">
                                         @include('admin.render.create.title')
                                         @include('admin.render.create.description')
-                                        @include('admin.render.create.content')
                                     </div>
 
                                     <div class="card-box">
@@ -66,16 +64,13 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="card-box">
-                        @include('admin.render.edit.status', ['item' => $page])
+                        @include('admin.render.edit.status',['item' => $page])
                     </div>
-
                     <div class="card-box position-relative box-action-image">
                         @include('admin.render.edit.image', ['item' => $page])
                     </div>
 
-                    <div class="card-box">
-                        @include('admin.render.edit.tag',['item' => $page, 'type' => \App\Enums\TagType::post])
-                    </div>
+                    @include('admin.render.edit.tag',['item' => $page, 'type' => \App\Enums\TagType::post])
 
                 </div>
 

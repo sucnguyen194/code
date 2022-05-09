@@ -31,6 +31,14 @@ class Admin extends Authenticatable
     ];
 
     public function getGravatarAttribute(){
-        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email ?? $this->account)).'.jpg?s=200&d=identicon';
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=identicon';
+    }
+
+    public static function boot(){
+        parent::boot();
+
+        static::deleting(function($admin){
+            $admin->email = $admin->email.'.'.now();
+        });
     }
 }

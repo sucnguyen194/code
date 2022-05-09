@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.category_post')}} #ID{{$category->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.category_post')}} #{{$category->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,6 +15,7 @@
                     @foreach($translations as $key => $translation)
                         <div class="tab-pane  {{$translation->locale == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                           @include('admin.render.edit.title')
+                            @include('admin.render.edit.description')
                           @include('admin.render.edit.slug')
                         </div>
                     @endforeach
@@ -24,6 +25,7 @@
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                             <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                                 @include('admin.render.create.title')
+                                @include('admin.render.create.description')
                                 @include('admin.render.create.slug')
                             </div>
                         @endforeach
@@ -42,7 +44,8 @@
         </div>
     </form>
 </div>
-
+<script src="/lib/tinymce/tinymce.min.js"></script>
+<script src="/lib/js/cpanel.js"></script>
 <script type="text/javascript">
     $('#image-upload').on('change', function () {
         let file = $(this).prop('files')[0];
@@ -58,7 +61,7 @@
 
         let formData = new FormData();
         formData.append('image', file);
-        $('.loading').fadeIn()
+        $('.loading').fadeIn();
         fetch(
             "https://api.imgur.com/3/image",
             {

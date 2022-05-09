@@ -94,7 +94,7 @@
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
             })
-        })
+        });
         function commentFormatter(value, row){
             let html = value + ' / ' + row.rating + ' <i class="fa fa-star text-warning" aria-hidden="true"></i> ';
             return html;

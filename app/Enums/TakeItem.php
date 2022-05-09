@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class TakeItem extends Enum
 {
-    const index =   'index';
-    const category =   'category';
-    const replated =  'related';
+    const index =   1;
+    const category =   2;
+    const replated = 3;
 }

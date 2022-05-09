@@ -58,6 +58,7 @@ class CommentController extends Controller
 
            session()->put('name', $request->input('data.name'));
            session()->put('email', $request->input('data.email'));
+           session()->put('website', $request->input('data.url'));
 
            return flash(__('client.thank_comment'), 1, route('slug', $request->slug));
     }

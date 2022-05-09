@@ -1,114 +1,51 @@
 @extends('layouts.layout')
 @section('title') {{trans('lang.contact')}} @stop
 @section('content')
+    <main id="main-wrap">
+        <div class="page-child-wrap contact-page">
 
-<script src='https://www.google.com/recaptcha/api.js'></script>
-<!-------------------------->
-<!-----------SOURCSE----------->
-<!-------------------------->
-<main class="main-site">
-    <div class="art-breadcrumbs">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="breadcrumbs-content">
-                        <div class="image-box breadcrumb-image"> <img src="/frontend/images/bg-contacts-breadcrumb_1.jpg" alt="Breadcrumb"> </div>
-                        <div class="title-box title-breadcrumb">
-                            <h1 class="title">Liên hệ</h1>
-                            <h2 style="display: none" class="title">Liên hệ</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="breadcrumbs-content">
-                        <div class="content-box content-breadcrumb">
-                            <ul class="breadcrumb-box mt-3">
-                                <li> <a href="/" title="Trang chủ">Trang chủ</a> </li>
-                                <li> <span>Liên hệ</span> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--breadcrumbs-->
-    <div class="page-site contacts-site">
-        <div class="main-container">
-            <article class="art-banners art-contacts">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="title-box title-banner title-contacts">
-                                <h1 class="title"><span>Liên hệ với chúng tôi</span></h1>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            <div class="art-map">
-                                <div class="map-box">
-                                    {!! setting()->map !!}
-                                </div>
-                            </div>
-                            <div class="address-box">
-                                <ul>
-                                    <li>
-                                        <h4>{{setting()->company}}</h4>
-                                    </li>
-                                    <li> <i class="fas fa-map-marker-alt icon"></i> <span>{{setting()->address}}</span> </li>
-                                    <li class="li">
-                                        <div> <i class="fas fa-phone-alt icon"></i> <span>{{setting()->hotline}}</</span> </div>
-                                        <div> <i class="fal fa-print icon"></i> <span>{{setting()->fax}}</</span> </div>
-                                    </li>
-                                    <li> <i class="fas fa-envelope icon"></i> <span>{{setting()->email}}</</span> </li>
+            <div class="all">
+                <div class="all1170">
+                    <div class="page-title">
+                        <h1 class="tt-txt">Liên hệ</h1>
+                        <br><div class="breadcrumb">
+                            <div class="container">
+                                <ul class="breadcrumb-nav">
+                                    <li><a href="/">Trang chủ</a></li>/
+                                    <li class="a">Liên hệ</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            <div class="contacts-box">
-                                <div class="title-box title-contacts">
-                                    <h3 class="title"><span>Gửi phản hồi cho chúng tôi</span></h3>
-                                </div>
-                                <div class="contacts-content">
-                                    <form class="contacts-form" method="post" action="{{route('send.contact')}}">
-                                        @csrf
-                                        <div class="form-content">
-                                            <div class="form-group">
-                                                <!-- <i class="fas fa-user icon"></i> -->
-                                                <input class="form-control" type="text" name="data[name]" required placeholder="Họ và tên">
-                                                <span class="fr-error" id="error_name"></span> </div>
-                                            <div class="form-group">
-                                                <!-- <i class="fas fa-envelope icon"></i> -->
-                                                <input class="form-control" type="email" name="data[email]" required placeholder="Email">
-                                                <span class="fr-error" id="error_email"></span> </div>
-                                            <div class="form-group">
-                                                <!-- <i class="fas fa-phone-alt icon"></i> -->
-                                                <input class="form-control" type="tel" name="data[phone]" required placeholder="Số điện thoại">
-                                                <span class="fr-error" id="error_phone"></span> </div>
-                                            <div class="form-group">
-                                                <!-- <i class="fas fa-phone-alt icon"></i> -->
-                                                <textarea class="form-control" type="text" name="data[note]" placeholder="Nội dung" rows="9"></textarea>
-                                                <span class="fr-error" id="error_content"></span> </div>
-                                            <div class="form-group">
-                                                <div class="button">
-                                                    <button class="btn btn-submit" type="submit">Gửi</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-            </article>
+                    <div class="contact-if-map">
+                        {!! setting('contact.map') !!}
+                    </div>
+                    <div class="contact-info-box">
+                        <h2 class="boxtt">{{setting('site.company', true)}}</h2>
+                        <ul class="contact-info-ul">
+                            <li><span class="prefix"><img loading="lazy" class="alignnone size-full wp-image-18" src="/client/uploads/2019/09/icon-map.png" alt="" width="24" height="24"></span>
+                                <div class="text">
+                                    {!! nl2br(setting('contact.address', true) )  !!}
+                                </div>
+                            </li>
+                            <li><span class="prefix"><img loading="lazy" class="alignnone size-full wp-image-19" src="/client/uploads/2019/09/icon-phone.png" alt="" width="19" height="19"></span>
+                                <div class="text">Hotline:&nbsp;<a class="hl-txt" style="box-sizing: border-box; padding: 0px; margin: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Muli, sans-serif; vertical-align: baseline; color: #0d257b; text-decoration-line: none; text-align: center;" href="tel:{{setting('contact.hotline')}}">{{setting('contact.hotline')}}</a></div>
+                            </li>
+                            <li><span class="prefix"><img loading="lazy" class="alignnone size-full wp-image-14" src="/client/uploads/2019/09/icon-envelope.png" alt="" width="17" height="14"></span>
+                                <div class="text">Email: <a href="mailto:info@lychee.biz.vn">{{setting('contact.email')}}</a></div>
+                            </li>
+                            <li><span class="prefix"><img loading="lazy" class="alignnone size-full wp-image-15" src="/client/uploads/2019/09/icon-facebook.png" alt="" width="13" height="24"></span>
+                                <div class="text">facebook: <a href="{{setting('social.facebook')}}" target="_blank" rel="noopener noreferrer">{{setting('social.facebook')}}</a></div>
+                            </li>
+                            <li><span class="prefix"><img loading="lazy" class="alignnone size-full wp-image-17" src="/client/uploads/2019/09/icon-instagram.png" alt="" width="22" height="22"></span>
+                                <div class="text">Instagram: {{setting('social.instagram')}}</div>
+                            </li>
+                        </ul>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</main>
-<!-------------------------->
-<!-----------SOURCSE----------->
-<!-------------------------->
-
+    </main>
+{{--<script src='https://www.google.com/recaptcha/api.js'></script>--}}
 @stop

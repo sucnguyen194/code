@@ -1,111 +1,104 @@
 @extends('layouts.layout')
-@section('title') Đăng ký @stop
+@section('title') Sign Up @stop
 @section('content')
-    <main class="main-site">
-        <div class="art-breadcrumbs">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="breadcrumbs-content">
-                            <div class="image-box breadcrumb-image"> <img src="/frontend/images/bg-breadcrumb_1.jpg" alt="Breadcrumb"> </div>
-                            <div class="title-box title-breadcrumb">
-                                <h1 class="title">Đăng ký</h1>
-                                <h2 style="display: none" class="title">Đăng ký</h2>
+    <section class="account-section ptb-80 bg-overlay-white bg_img" data-background="/client/images/frontend/breadcrumbs/60d7134ad0d271624707914.jpg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="account-form-area">
+                        @if(setting('site.logo'))
+                            <div class="account-logo-area text-center">
+                                <div class="account-logo">
+                                    <a href="/"><img src="{{setting('site.logo')}}" alt="logo"></a>
+                                </div>
                             </div>
+                        @endif
+                        <div class="account-header text-center">
+                            <h3 class="title">Create your account</h3>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="breadcrumbs-content">
-                            <div class="content-box content-breadcrumb">
-                                <ul class="breadcrumb-box mt-3">
-                                    <li> <a href="/" title="Trang chủ">Trang chủ</a> </li>
-                                    <li> <span>Đăng ký</span> </li>
-                                </ul>
+                        <form class="account-form" action="{{route('register')}}" method="POST" >
+                            @csrf
+                            <div class="row ml-b-20">
+                                <div class="col-lg-6 form-group">
+                                    <label for="fullname">Full Name*</label>
+                                    <input type="text" class="form-control form--control @error('name') is-invalid @enderror" name="name" value="{{old('name')}}" required="" placeholder="Full name">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-6 form-group">
+                                    <label id="email">Email address*</label>
+                                    <input type="email" class="form-control form--control checkUser @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required="" placeholder="Email address">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-lg-6 form-group">
+                                    <label id="country">Address</label>
+                                    <input type="text" class="form-control form--control @error('address') is-invalid @enderror" name="address" value="{{old('address')}}" placeholder="Address">
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="mobile">Mobile</label>
+                                    <div class="input-group country-code">
+
+                                        <input type="text" name="phone" id="mobile" value="{{old('phone')}}" class="form-control form--control  @error('phone') is-invalid @enderror" placeholder="Your Phone Number">
+                                    </div>
+                                    @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-lg-6 form-group hover-input-popup">
+                                    <label for="password">Password*</label>
+                                    <input type="password" class="form-control form--control @error('password') is-invalid @enderror" id="password" name="password" required="" placeholder="Enter password">
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-6 form-group">
+                                    <label>Confirm Password*</label>
+                                    <input type="password" class="form-control form--control" name="password_confirmation" required="" placeholder="Enter confirm password">
+                                </div>
+
+
+                                <div class="col-lg-12 form-group">
+                                </div>
+
+
+
+                                <div class="col-lg-12 form-group text-center">
+                                    <button type="submit" class="submit-btn w-100">Register Now</button>
+                                </div>
+
+                                <div class="col-lg-12 text-center">
+                                    <div class="account-item mt-10">
+                                        <label>Already Have An Account? <a href="{{route('login')}}" class="text--base">Sign In</a></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!--breadcrumbs-->
-        <div class="page-site blogs-site">
-            <div class="main-container">
-                <article class="art-blogs">
-                    <div class="container">
-                        <div class="row">
-                            <div class="offset-xl-3 offset-lg-3 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                <form method="POST" action="{{ route('register') }}">
-                                    @csrf
-
-                                    <div class="form-group row">
-                                        <label for="name" class="col-md-4 col-form-label text-md-right">Họ và tên</label>
-
-                                        <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                            @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                            @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="password" class="col-md-4 col-form-label text-md-right">Mật khẩu</label>
-
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                            @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Xác nhận mật khẩu</label>
-
-                                        <div class="col-md-6">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-0">
-                                        <div class="col-md-6 offset-md-4 text-right">
-                                            <button type="submit" class="btn btn-primary text-white">
-                                                Đăng ký
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </article>
-                <!-- art-blogs -->
-            </div>
-        </div>
-    </main>
+    </section>
 @endsection

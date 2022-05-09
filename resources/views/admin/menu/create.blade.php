@@ -94,20 +94,9 @@
                 <div class="form-group">
                     <label>{{__('lang.position')}}</label>
                     <select id="position" class="form-control" data-toggle="select2" name="data[position]">
-                        <option value="top" {{selected(session('menu_position'),'top')}} class="form-control">MENU TOP
-                        </option>
-                        <option value="home" {{selected(session('menu_position'),'home')}} class="form-control">MENU
-                            HOME
-                        </option>
-                        <option value="left" {{selected(session('menu_position'),'left')}} class="form-control">MEN
-                            LEFT
-                        </option>
-                        <option value="right" {{selected(session('menu_position'),'right')}} class="form-control">MENU
-                            RIGHT
-                        </option>
-                        <option value="bottom" {{selected(session('menu_position'),'bottom')}} class="form-control">MENU
-                            BOTTOM
-                        </option>
+                        @foreach(\App\Enums\MenuPosition::getInstances() as $menu)
+                            <option value="{{$menu->value}}" {{selected(session('menu_position'),$menu->value)}} class="form-control">MENU {{\Illuminate\Support\Str::upper($menu->description) }}</option>
+                        @endforeach
                     </select>
                     <textarea id="nestable-output" name="menuval" style="display: none;"></textarea>
                 </div>
@@ -134,7 +123,7 @@
 
         let formData = new FormData();
         formData.append('image', file);
-        $('.loading').fadeIn()
+        $('.loading').fadeIn();
         fetch(
             "https://api.imgur.com/3/image",
             {
@@ -151,8 +140,7 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: ' + error)
-                console.error("Error:", error);
+                alert('Lỗi upload: ' + error);
             });
 
     });
@@ -202,7 +190,7 @@
                 html = html.replaceAll('&nbsp;', "");
                 $(value).html(html);
             })
-        })
+        });
         var li = $('li.select2-selection__choice');
 
         $.each(li, function (index, value) {

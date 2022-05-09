@@ -12,7 +12,7 @@ ace.define("ace/mode/crystal_highlight_rules",["require","exports","module","ace
 
         var keywords = (
             "if|end|else|elsif|unless|case|when|break|while|next|until|def|return|class|new|getter|setter|property|lib"
-            + "|fun|do|struct|private|protected|public|module|super|abstract|include|extend|begin|enum|raise|yield|with"
+            + "|fun|do|struct|private|protected|public|module|super|abstract|partials|extend|begin|enum|raise|yield|with"
             + "|alias|rescue|ensure|macro|uninitialized|union|type|require"
         );
 
@@ -639,4 +639,3 @@ exports.Mode = Mode;
                         }
                     });
                 })();
-            

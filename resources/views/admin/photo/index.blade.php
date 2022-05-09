@@ -34,7 +34,7 @@
                                 <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="{{__('lang.display')}}">
                                     <option value="">{{__('lang.display')}}</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
-                                        <option value="{{$public->value}}"> {{$public->description}}</option>
+                                        <option value="{{$public->key}}"> {{$public->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,7 +43,7 @@
                                 <select class="form-control" data-toggle="select2" name="position" data-allow-clear="true" data-placeholder="{{__('lang.position')}}">
                                     <option value="">{{__('lang.position')}}</option>
                                     @foreach(\App\Enums\Position::getInstances() as $item)
-                                        <option value="{{$item->key}}">{{$item->description}}</option>
+                                        <option value="{{$item->value}}">{{$item->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -140,18 +140,18 @@
             var image = $(this).data('image');
             navigator.clipboard.writeText(image);
             flash({'message': '{{__("lang.coppy_success")}}', 'type': 'success'});
-        })
+        });
         $(document).on('click','.view-image',function(){
             let image = $(this).data('image');
             $('#viewImage').modal('show');
             $('.showImage').attr('src', image);
-        })
+        });
 
         $(document).ready(function(){
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
             })
-        })
+        });
 
         function sortFormatter(value, row) {
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';
@@ -195,7 +195,7 @@
             @endcan
 
             if(row.image)
-              html +='<a href="javascript:void(0)" class="btn btn-purple coppy-image waves-effect waves-light tooltip-hover" title="{{__('lang.coppy')}} {{__('lang.image')}}" data-image="'+row.image+'">{{__('lang.coppy')}}</a>';
+              html +='<a href="javascript:void(0)" class="btn btn-facebook  coppy-image waves-effect waves-light tooltip-hover" title="{{__('lang.coppy')}} {{__('lang.image')}}" data-image="'+row.image+'"><i class="fe-copy"></i></a>';
 
             return html;
         }

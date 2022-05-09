@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ActiveDisable;
 use App\Enums\AliasType;
+use App\Enums\PostType;
 use App\Enums\SystemType;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -17,6 +18,8 @@ class Category extends Model
     protected static $logOnlyDirty = true;
 
     protected $guarded = ['id'];
+
+    protected $with = ['translation'];
 
     public function translations(){
         return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
@@ -43,7 +46,7 @@ class Category extends Model
     }
 
     public function scopeOfType($q, $type){
-        return $q->whereType($type)->with('translation')->public()->sort();
+        return $q->whereType($type)->public()->sort();
     }
 
     public function scopeSort($q){

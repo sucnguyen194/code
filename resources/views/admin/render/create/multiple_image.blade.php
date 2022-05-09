@@ -1,5 +1,5 @@
 <label>{{__('lang.image')}}</label>
-<div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:0;top:0">
+<div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.5rem">
     <label class="item-input font-weight-medium mb-0">
         <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> {{__('lang.select_image')}}
     </label>

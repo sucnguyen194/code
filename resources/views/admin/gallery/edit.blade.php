@@ -5,7 +5,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.gallery')}} #ID{{$gallery->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.gallery')}} #{{$gallery->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -145,7 +145,6 @@
                         'type' :'error'
                     };
                     flash(obj);
-                    //console.error("Error:", error);
                 });
         }
 
@@ -160,7 +159,7 @@
             $(slider).addClass('d-none').removeClass('d-inline-block');
             $(remove).removeClass('d-none').show();
         }
-    })
+    });
     $(document).on('change','#slider-input',function(){
 
         let parent = $(this).parent().parent().parent().parent();

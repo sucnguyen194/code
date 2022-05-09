@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.message')}} #ID{{$contact->id}}
+    {{__('lang.messenger')}} #{{$contact->id}}
 @stop
 @section('content')
 
@@ -12,8 +12,8 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.contacts.index')}}">{{__('lang.message')}}</a></li>
-                            <li class="breadcrumb-item active">#ID {{$contact->id}}</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.contacts.index')}}">{{__('lang.messenger')}}</a></li>
+                            <li class="breadcrumb-item active"># {{$contact->id}}</li>
                         </ol>
                     </div>
                     <h4 class="page-title"><strong>{{__('lang.viewed')}}</strong></h4>

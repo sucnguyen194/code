@@ -78,6 +78,10 @@
                                                 </div>
                                                 <div class="card-box">
                                                     <label for="footer">{{__('lang.content_footer')}}</label>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="data[site.footer_title.{{$language->value}}]" value="{{setting('site.footer_title.'.$language->value)}}" placeholder="{{__('lang.title')}}">
+                                                    </div>
+
                                                     <textarea class="form-control summerdescription" id="summernote" name="data[site.footer.{{$language->value}}]">{!! setting('site.footer.'.$language->value) !!}</textarea>
                                                 </div>
                                                 <div class="card-box">
@@ -105,7 +109,7 @@
                                                             <p class="font-13"><code>*</code> {{__('lang.max')}} 320 {{__('lang.characters')}} </p>
                                                             <textarea  class="form-control" rows="3" name="data[site.description_seo.{{$language->value}}]" maxlength="320" id="alloptions" language="description_seo_{{$language->value}}" onkeyup="changeToDescriptionSeo(this)">{{setting('site.description_seo.'.$language->value)}}</textarea>
                                                         </div>
-                                                        <div class="form-group mb-0">
+                                                        <div class="form-group example mb-0">
                                                             <label>{{__('lang.keyword')}}</label>
                                                             <p class="font-13">{!! __('lang.note_keyword') !!}</p>
 
@@ -117,7 +121,42 @@
                                         @endforeach
 
                                 </div>
+
+                                <div class="card-box">
+                                    <label>Thông kê</label>
+
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="data[site.v1.title]" value="{{setting('site.v1.title')}}">
+                                            </div>
+                                            <input type="number" class="form-control" name="data[site.v1.int]" value="{{setting('site.v1.title')}}">
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="data[site.v2.title]" value="{{setting('site.v2.title')}}">
+                                            </div>
+                                            <input type="number" class="form-control" name="data[site.v2.int]" value="{{setting('site.v2.title')}}">
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="data[site.v3.title]" value="{{setting('site.v3.title')}}">
+                                            </div>
+                                            <input type="number" class="form-control" name="data[site.v3.int]" value="{{setting('site.v3.title')}}">
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="data[site.v4.title]" value="{{setting('site.v4.title')}}">
+                                            </div>
+                                            <input type="number" class="form-control" name="data[site.v4.int]" value="{{setting('site.v4.title')}}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="col-md-4">
                                 <div class="card-box position-relative box-action-image">
                                     <label>Logo</label>
@@ -255,45 +294,6 @@
                         <hr class="border-primary">
                     </fieldset>
                     <fieldset title="3" class="p-0">
-                        <legend>{!! __('lang.additional_code') !!}</legend>
-
-                        <div class="row mt-1">
-                            <div class="col-lg-5">
-                                <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code> &lt;/head&gt; </code></label>
-                                    <p>{!! __('lang.note_head') !!} </p>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="card-box mb-0">
-                                    <div class="form-group mb-0">
-                                        <label for="remarketing_header">{!! __('lang.additional_code') !!} <code> &lt;/head&gt; </code></label>
-                                        <textarea class="form-control" rows="12" name="data[site.remarketing_header]">{!! setting('site.remarketing_header')!!}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="border-primary">
-
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code>  &lt;/body&gt;  </code></label>
-                                    <p>{!! __('lang.note_body') !!}</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="card-box mb-0">
-                                    <div class="form-group mb-0">
-                                        <label for="remarketing_footer">{!! __('lang.additional_code') !!} <code>  &lt;/body&gt;  </code></label>
-                                        <textarea class="form-control" rows="12" name="data[site.remarketing_footer]">{!! setting('site.remarketing_footer') !!}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="border-primary">
-                    </fieldset>
-                    <fieldset title="4" class="p-0">
                         <legend>Liên kết</legend>
                         <div class="row mt-1">
                             <div class="col-lg-5">
@@ -325,6 +325,24 @@
                                     <div class="form-group mb-0">
                                         <label for="youtube">Youtube</label>
                                         <input type="text" class="form-control" value="{{setting('social.youtube')}}" id="youtube" name="data[social.youtube]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="google">Google+</label>
+                                    <p>{!! __('lang.note_google') !!}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="google">Google+</label>
+                                        <input type="text" class="form-control" value="{{setting('social.google')}}" id="youtube" name="data[social.google]">
                                     </div>
                                 </div>
                             </div>
@@ -440,6 +458,46 @@
                         <hr class="border-primary">
 
                     </fieldset>
+                    <fieldset title="4" class="p-0">
+                        <legend>{!! __('lang.additional_code') !!}</legend>
+
+                        <div class="row mt-1">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code> &lt;/head&gt; </code></label>
+                                    <p>{!! __('lang.note_head') !!} </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="remarketing_header">{!! __('lang.additional_code') !!} <code> &lt;/head&gt; </code></label>
+                                        <textarea class="form-control" rows="12" name="data[site.remarketing_header]">{!! setting('site.remarketing_header')!!}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code>  &lt;/body&gt;  </code></label>
+                                    <p>{!! __('lang.note_body') !!}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card-box mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="remarketing_footer">{!! __('lang.additional_code') !!} <code>  &lt;/body&gt;  </code></label>
+                                        <textarea class="form-control" rows="12" name="data[site.remarketing_footer]">{!! setting('site.remarketing_footer') !!}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+                    </fieldset>
+
                     <fieldset title="5" class="p-0">
                         <legend>API</legend>
                         <div class="mt-1">
@@ -462,36 +520,26 @@
                             <div class="row">
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
-                                        <label for="imgur_client_id">Imgur</label>
-                                        <p>{!! __('lang.note_imgur') !!}</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="card-box mb-0">
-                                        <label for="imgur_client_id">Imgur client ID <code>[ 6ac7b24eeb97e2f ]</code></label>
-                                        <input type="text" class="form-control" value="{{setting('api.imgur_client_id')}}" id="facebook_app_secret" name="data[api.imgur_client_id]">
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="border-primary">
+                                        <input type="hidden" value="0" name="data[api.login_facebook]">
+                                        <label for="login_facebook">Login With Facebook</label>
+                                        <p>
+                                            <input type="checkbox" id="login_facebook" {{checked(setting('api.login_facebook'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.login_facebook]" data-size=""/>
+                                        </p>
 
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="card-box mb-0 bg-transparent">
-                                        <label for="imgur_client_id">Facebook App</label>
                                         <p>{!! __('lang.note_facebook_app') !!} <a href="https://developers.facebook.com/apps/" class="" target="_blank">{!! __('lang.learn_more') !!}</a> </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="card-box mb-0">
                                         <div class="form-group">
-                                            <label for="facebook_app_ip">App ID  </label>
-                                            <input type="text" class="form-control" value="{{setting('api.facebook_app_ip')}}" id="facebook_app_ip" name="data[api.facebook_app_ip]">
+                                            <label for="facebook_app_id">App ID  </label>
+                                            <input type="text" class="form-control" value="{{setting('api.facebook_app_id')}}" id="facebook_app_id" name="data[api.facebook_app_id]">
                                         </div>
-                                        <div class="form-group mb-0">
+                                        <div class="form-group">
                                             <label for="facebook_app_secret">App Secret</label>
                                             <input type="text" class="form-control" value="{{setting('api.facebook_app_secret')}}" id="facebook_app_secret" name="data[api.facebook_app_secret]">
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -500,41 +548,89 @@
                             <div class="row">
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
-                                        <label for="imgur_client_id">Facebook Messages</label>
-                                        <p>{!! __('lang.note_facebook_messages') !!}</p>
+                                        <input type="hidden" value="0" name="data[api.login_google]">
+                                        <label for="login_google">Login With Google</label>
+                                        <p>
+                                            <input type="checkbox" id="login_google" {{checked(setting('api.login_google'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.login_google]" data-size=""/>
+                                        </p>
+
+                                        <p>{!! __('lang.note_google_app') !!} <a href="https://console.cloud.google.com/projectcreate" class="" target="_blank">{!! __('lang.learn_more') !!}</a> </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="card-box mb-0">
                                         <div class="form-group">
-                                            <label for="facebook_app_ip">App ID </label>
-                                            <input type="text" class="form-control" value="{{setting('api.chat_message_id')}}" id="chat_message_id" name="data[api.chat_message_id]">
+                                            <label for="google_app_ip">App ID  </label>
+                                            <input type="text" class="form-control" value="{{setting('api.google_app_id')}}" id="facebook_app_ip" name="data[api.google_app_id]">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="google_app_secret">App Secret</label>
+                                            <input type="text" class="form-control" value="{{setting('api.google_app_secret')}}" id="google_app_secret" name="data[api.google_app_secret]">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="border-primary">
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card-box mb-0 bg-transparent">
+                                        <label for="imgur_client_id">Facebook Messenger</label>
+                                        <p>{!! __('lang.note_messenger') !!}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card-box mb-0">
+                                        <div class="form-group">
+                                            <label for="messenger_id">App ID </label>
+                                            <input type="text" class="form-control" value="{{setting('api.messenger_id')}}" id="messenger_id" name="data[api.messenger_id]">
                                         </div>
                                         <div class="form-group mb-0">
-                                            <label for="chat_message_text">App ID messages</label>
-                                            <input type="text" class="form-control" value="{{setting('api.chat_message_text')}}" id="chat_message_text" name="data[api.chat_message_text]">
+                                            <label for="messenger_text">Messenger Text</label>
+                                            <input type="text" class="form-control" value="{{setting('api.messenger_text')}}" id="messenger_text" name="data[api.messenger_text]">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr class="border-primary">
+{{--                            <div class="row">--}}
+{{--                                <div class="col-lg-5">--}}
+{{--                                    <div class="card-box mb-0 bg-transparent">--}}
+{{--                                        <input type="hidden" value="0" name="data[api.google_captcha]">--}}
+{{--                                        <label for="google_captcha"> Google reCAPTCHA </label>--}}
+{{--                                        <p>--}}
+{{--                                            <input type="checkbox" id="google_captcha" {{checked(setting('api.google_captcha'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.google_captcha]" data-size=""/>--}}
+{{--                                        </p>--}}
+{{--                                        <p>{!! __('lang.note_google_capcha') !!} <a href="https://www.google.com/recaptcha/admin/create" class="" target="_blank">{!! __('lang.learn_more') !!}</a></p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-lg-7">--}}
+{{--                                    <div class="card-box mb-0">--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="re_captcha_key">Site Key  </label>--}}
+{{--                                            <input type="text" class="form-control" value="{{setting('api.re_captcha_key')}}" id="re_captcha_key" name="data[api.re_captcha_key]">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-group mb-0">--}}
+{{--                                            <label for="re_captcha_secret">Secret Key</label>--}}
+{{--                                            <input type="text" class="form-control" value="{{setting('api.re_captcha_secret')}}" id="re_captcha_secret" name="data[api.re_captcha_secret]">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <hr class="border-primary">--}}
+
                             <div class="row">
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
-                                        <label class="font-weight-semibold mb-4"> Google reCAPTCHA  <input type="checkbox" {{checked(setting('api.google_captcha'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.google_captcha]" data-size="small"/></label>
-                                        <p>{!! __('lang.note_google_capcha') !!} <a href="https://www.google.com/recaptcha/lib/create" class="" target="_blank">{!! __('lang.learn_more') !!}</a></p>
+                                        <label for="imgur_client_id">Imgur</label>
+                                        <p>{!! __('lang.note_imgur') !!}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="card-box mb-0">
-                                        <div class="form-group">
-                                            <label for="re_captcha_key">Site key  </label>
-                                            <input type="text" class="form-control" value="{{setting('api.re_captcha_key')}}" id="re_captcha_key" name="data[api.re_captcha_key]">
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <label for="re_captcha_secret">Secret key</label>
-                                            <input type="text" class="form-control" value="{{setting('api.re_captcha_secret')}}" id="re_captcha_secret" name="data[api.re_captcha_secret]">
-                                        </div>
+                                        <label for="imgur_client_id">Imgur Client ID <code>[ 6ac7b24eeb97e2f ]</code></label>
+                                        <input type="text" class="form-control" value="{{setting('api.imgur_client_id') ?? '6ac7b24eeb97e2f'}}" id="facebook_app_secret" name="data[api.imgur_client_id]">
                                     </div>
                                 </div>
                             </div>
@@ -611,7 +707,7 @@
                                         <input id="touchspin" type="text" value="{{setting('site.product.category')}}" name="data[site.product.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>{!! __('lang.post') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
+                                        <label>{!! __('lang.product') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.related')}}" name="data[site.product.related]">
                                     </div>
                                 </div>
@@ -625,7 +721,11 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <input type="hidden" value="0" name="data[site.languages]">
-                                    <label class="font-weight-semibold"> {!! __('lang.language') !!} <input type="checkbox" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size="small"/></label>
+
+                                    <label for="site_languages"> {!! __('lang.language') !!} </label>
+                                    <p>
+                                    <input type="checkbox" id="site_languages" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size=""/>
+                                    </p>
                                     <p class="mb-0">{!! __('lang.note_language') !!} <a href="{{route('admin.languages.index')}}">{!! __('lang.here') !!} </a> </p>
                                 </div>
                             </div>
@@ -646,7 +746,8 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <input type="hidden" value="0" name="data[site.maintenance]">
-                                    <label class="font-weight-semibold"> {!! __('lang.maintenance') !!} <input type="checkbox" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size="small"/></label>
+                                    <label for="maintenance"> {!! __('lang.maintenance') !!} </label>
+                                    <p><input type="checkbox" id="maintenance" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size=""/></p>
                                     <p>{!! __('lang.note_maintenance') !!} </p>
                                 </div>
                             </div>

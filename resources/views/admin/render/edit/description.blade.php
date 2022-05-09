@@ -1,4 +1,4 @@
 <div class="form-group">
     <label>{{__('lang.description')}}</label>
-    <textarea class="form-control summerdescription" data-height="200" id="summernote" name="translation[{{$key}}][description]">{!! $translation->description !!}</textarea>
+    <textarea class="form-control summerdescription" rows="7" data-height="200" id="summernote" name="translation[{{$key}}][description]">{!! $translation->description !!}</textarea>
 </div>

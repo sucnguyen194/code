@@ -55,7 +55,7 @@
 
         let formData = new FormData();
         formData.append('image', file);
-        $('.loading').fadeIn()
+        $('.loading').fadeIn();
         fetch(
             "https://api.imgur.com/3/image",
             {

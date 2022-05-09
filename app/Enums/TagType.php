@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class TagType extends Enum
 {
-    const product =   'product';
-    const post =   'post';
+    const product =  1;
+    const post =   2;
 }

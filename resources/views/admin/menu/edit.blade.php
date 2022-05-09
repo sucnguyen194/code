@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.menu')}} #ID{{$menu->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.menu')}} #{{$menu->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label>{{__('lang.slug')}}</label>
                                     <div class="d-flex form-control">
-                                        <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$translation->locale}}" value="{{$translation->slug}}" language="{{$translation->locale}}" seo="{{$translation->language->name}}" onkeyup="ChangeToSlug(this);"name="translation[{{$key}}][slug]">
+                                        <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$translation->locale}}" value="{{$translation->slug}}" language="{{$translation->locale}}" seo="{{$translation->language->name}}" name="translation[{{$key}}][slug]">
                                         <span>.html</span>
                                     </div>
                                     <input type="hidden" name="translation[{{$key}}][locale]" value="{{$translation->locale}}">
@@ -101,12 +101,11 @@
                             </div>
                             <div class="form-group">
                                 <label>{{__('lang.position')}}</label>
+
                                 <select id="position" class="form-control" data-toggle="select2" name="data[position]">
-                                    <option value="top" {{selected($menu->position,'top')}} class="form-control">MENU TOP</option>
-                                    <option value="home" {{selected($menu->position,'home')}} class="form-control">MENU HOME</option>
-                                    <option value="left" {{selected($menu->position,'left')}} class="form-control">MEN LEFT</option>
-                                    <option value="right" {{selected($menu->position,'right')}} class="form-control">MENU RIGHT</option>
-                                    <option value="bottom" {{selected($menu->position,'bottom')}} class="form-control">MENU BOTTOM</option>
+                                    @foreach(\App\Enums\MenuPosition::getInstances() as $item)
+                                        <option value="{{$item->value}}" {{selected($item->value,$menu->value)}} class="form-control">MENU {{\Illuminate\Support\Str::upper($item->description) }}</option>
+                                    @endforeach
                                 </select>
                                 <textarea id="nestable-output" name="menuval" style="display: none;"></textarea>
                             </div>
@@ -151,8 +150,7 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error)
-                console.error("Error:", error);
+                alert('Lỗi upload: '+error);
             });
 
     });
@@ -202,7 +200,7 @@
                 html = html.replaceAll('&nbsp;', "");
                 $(value).html(html);
             })
-        })
+        });
         var li = $('li.select2-selection__choice');
 
         $.each(li, function (index, value) {

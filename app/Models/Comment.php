@@ -32,15 +32,15 @@ class Comment extends Model
         if(!$this->rate)
             return;
         $max = 5;
-        $html = null;
+        $rate = null;
         for($i = 0; $i < $this->rate; $i++ ){
-            $html .= '<i class="fa fa-star text-warning" aria-hidden="true"></i>';
+            $rate .= '<i class="fa fa-star text-warning" aria-hidden="true"></i>';
         }
 
         for ($i =0 ; $i < $max - $this->rate; $i++){
-            $html .= '<i class="fa fa-star-o" aria-hidden="true"></i>';
+            $rate .= '<i class="fa fa-star-o" aria-hidden="true"></i>';
         }
-        return $html;
+        return $rate;
     }
 
     public function scopeWithPostTitle($q){

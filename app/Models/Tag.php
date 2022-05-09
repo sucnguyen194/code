@@ -15,6 +15,8 @@ class Tag extends Model
 
     protected $guarded = [];
 
+    protected $with = ['translation'];
+
     public function translations(){
         return $this->hasMany(TagTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());
     }

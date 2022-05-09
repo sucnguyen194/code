@@ -141,6 +141,21 @@
       <path value="$PROJECT_DIR$/vendor/mustangostang/spyc" />
       <path value="$PROJECT_DIR$/vendor/jaybizzle/crawler-detect" />
       <path value="$PROJECT_DIR$/vendor/unisharp/laravel-filemanager" />
+      <path value="$PROJECT_DIR$/vendor/voku/simple_html_dom" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-utf8" />
+      <path value="$PROJECT_DIR$/vendor/mrclay/props-dic" />
+      <path value="$PROJECT_DIR$/vendor/mrclay/minify" />
+      <path value="$PROJECT_DIR$/vendor/mrclay/jsmin-php" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/tubalmartin/cssmin" />
+      <path value="$PROJECT_DIR$/vendor/intervention/httpauth" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/marcusschwarz/lesserphp" />
+      <path value="$PROJECT_DIR$/vendor/htmlmin/htmlmin" />
+      <path value="$PROJECT_DIR$/vendor/pimple/pimple" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

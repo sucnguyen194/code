@@ -1,121 +1,186 @@
 <?php namespace App\Http\Controllers;
-use App\Enums\Activation;
-use App\Jobs\OrderSend;
-use App\Models\Discount;
+
+use App\Enums\OrderStatus;
+use App\Enums\PaymentType;
+use App\Models\NlCheckout;
 use App\Models\Order;
-use DB,Cart,Mail;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class OrderController extends Controller {
+class OrderController extends Controller
+{
 
-	public function index(){
+    public function index()
+    {
 
-	    $orders = Order::whereUserId(auth()->id())->latest()->paginate(20);
+        $orders = Order::whereUserId(auth()->id())->latest()->paginate(20);
 
-		return view('Order.shoppingcart',compact('orders'));
-	}
-	public function checkout(){
-	    $cart = Cart::content();
-		return view('Order.checkout',compact('cart'));
-	}
+        return view('order.index', compact('orders'));
+    }
+
+    public function cart()
+    {
+
+        $orders = auth()->user()->orders->load('product');
+
+        return view('order.cart', compact('orders'));
+    }
+
+    public function checkout(Request $request, $id)
+    {
+
+        $order = Order::with('product')->whereStatus(OrderStatus::pending)->find($id);
+
+        if (!$order)
+            return flash('Invalid order', 0, route('order.cart'));
+
+        return view('order.checkout', compact('order'));
+    }
 
 
-//    public function store(Request $request){
-//
-//        $order = new Order();
-//        $order->forceFill($request->data);
-//        $order->user_id = auth()->id() ?? 0;
-//        $order->content = json_encode(Cart::content());
-//        $order->total = Cart::subtotal(0);
-//        $order->save();
-//
-//       // OrderSend::dispatch($order)->onQueue('default');
-//
-//        return flash('Đặt hàng thành công! Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất!');
-//    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'price'      => 'required|numeric|min:1',
+            'product_id' => 'required|numeric|min:1',
+            'amount'     => 'required|numeric|min:1'
+        ]);
 
-    public function store(Request $request){
+        $product_id = $request->product_id;
+
+        if (!Product::find($product_id))
+            return flash('Product does not exist', 0);
 
         $order = new Order();
-        $order->forceFill($request->data);
-        $order->user_id = auth()->id() ?? 1;
-        $order->total = Cart::subtotal(0);
-        $order->content = json_encode(Cart::content());
+
+        $order->product_id = $product_id;
+        $order->user_id = auth()->id();
+        $order->rate = setting('checkout.rate');
+        $order->usd = $request->price;
+        $order->amount = $request->amount;
+        $order->vnd = $order->usd * $order->rate;
+        $order->status = OrderStatus::pending;
+
         $order->save();
 
-        OrderSend::dispatch($order)->onQueue('default');
-        Cart::destroy();
-        return flash('Đặt hàng thành công! Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất!');
-    }
-	public function destroy(){
-		Cart::destroy();
-		return redirect(url());
-	}
-	public function remove($rowid){
-		Cart::remove($rowid);
-		return redirect()->back();
-	}
+        //OrderSend::dispatch($order)->onQueue('default');
 
-//	public function discount(Request  $request){
-//        //Coupon
-//        $discount_value = null;
-//        if ($request->coupon){
-//            $discount = Discount::where('code', $request->coupon)->first();
-//
-//            if (!$discount || $discount->status != Activation::true()){
-//                return flash('Mã giảm giá không đúng',0);
-//            }
-//
-//            if ( ($discount->start_at && $discount->start_at->isFuture()) || ($discount->end_at && $discount->end_at->isPast())){
-//                return flash('Mã đã hết hạn hoặc chưa thể sử dụng', 0);
-//            }
-//
-//            if ($discount->minimum_quantity && $order->quantity < $discount->minimum_quantity){
-//                return flash('Yêu cầu số lượng tối thiểu: '.$discount->minimum_quantity, 0);
-//            }
-//
-//            if ($discount->minimum_amount && ($order->quantity * $order->price) < $discount->minimum_amount){
-//                return flash('Yêu cầu số tiền tối thiểu: '.number($discount->minimum_amount), 0);
-//            }
-//
-//            if ($discount->user_selection == 'users'){
-//                if (!$discount->users()->where('user_id', auth()->id())->count()){
-//                    return flash('Mã giảm giá không dành cho bạn', 0);
-//                }
-//            }
-//
-//            //Check dịch vụ
-//            if (!$discount->services()->where('id', $order->product->service->id)->exists()){
-//                return flash('Mã giảm giá không áp dụng cho dịch vụ này', 0);
-//            }
-//
-//            //check số lần sử dụng
-//            if ($discount->uses_total){
-//                if ( $discount->invoices()->count() >= $discount->uses_total)
-//                    return flash('Mã giảm giá đã được sử dụng hết', 0);
-//            }
-//
-//            if ($discount->uses_user){
-//                if ($discount->invoices()->where('user_id', $order->user_id)->count() >= $discount->uses_user){
-//                    return flash('Mã giảm giá này chỉ được áp dụng '.$discount->uses_user.' lần cho mỗi tài khoản', 0);
-//                }
-//            }
-//
-//
-//            if ($discount->value_type){
-//                $discount_value = $discount->value;
-//            }else{
-//                $discount_value = $order->sub_total * $discount->value/100;
-//            }
-//
-//            $order->voucher = $request->coupon;
-//
-//            $order->total = ($order->quantity * $order->price) - $discount_value;
-//            $order->total = $order->total < 0 ? 0 : $order->total;
-//
-//            flash('Áp dụng mã giảm giá thành công', 1);
-//        }else{
-//            $order->voucher = null;
-//        }
-//    }
+        return flash('Order success', 1, route('order.checkout', $order->id));
+    }
+
+    public function payment(Request $request, $id)
+    {
+        $order = Order::find($id);
+
+        if (!$order)
+            return flash('Order not found', 0);
+
+        define('ALTERNATE_PHRASE_HASH', setting('checkout.hash_check'));
+
+        $string =
+            $request->input('PAYMENT_ID') . ':' . $request->input('PAYEE_ACCOUNT') . ':' .
+            $request->input('PAYMENT_AMOUNT') . ':' . $request->input('PAYMENT_UNITS') . ':' .
+            $request->input('PAYMENT_BATCH_NUM') . ':' .
+            $request->input('PAYER_ACCOUNT') . ':' . ALTERNATE_PHRASE_HASH . ':' .
+            $request->input('TIMESTAMPGMT');
+
+        $hash = strtoupper(md5($string));
+
+        if ($hash === $_POST['V2_HASH']) { // processing payment if only hash is valid
+
+            if ($request->input('PAYMENT_AMOUNT') == $order->usd && $request->input('PAYEE_ACCOUNT') == setting('checkout.payee_account') && $request->input('PAYMENT_UNITS') == setting('checkout.payee_units')) {
+
+                $order->payment_type = PaymentType::PerfectMoney;
+                $order->status = OrderStatus::completed;
+                $order->save();
+
+                return redirect()->route('order.cart');
+            } else {
+                $order->payment_type = PaymentType::PerfectMoney;
+                $order->save();
+                return flash('Payment failed! ', 0, route('order.checkout', $id));
+            }
+        } else {
+
+            $payment_type = $request->payment_type;
+
+            if (!in_array($payment_type, PaymentType::getValues()))
+                return flash('Payment type not found', 0);
+
+            if ($payment_type === PaymentType::Vietcombank && !setting('checkout.vcb'))
+                return flash('Payment type not found', 0);
+
+            if ($payment_type === PaymentType::NganLuong && !setting('checkout.nl]'))
+                return flash('Payment type not found', 0);
+
+            if ($payment_type === PaymentType::PerfectMoney && !setting('checkout.pm]'))
+                return flash('Payment type not found', 0);
+
+
+            if ($payment_type == PaymentType::NganLuong) {
+                $nl = new NlCheckout();
+                return $nl->checkout($order);
+
+            } elseif ($payment_type == PaymentType::PerfectMoney) {
+
+            } else {
+                $order->payment_type = PaymentType::Vietcombank;
+                $order->payment_code = Str::random($id);
+                $order->status = OrderStatus::confirming;
+                $order->save();
+
+                return flash('Order has been sent!', 1, route('order.cart'));
+            }
+
+        }
+
+    }
+
+
+    public function vcbSuccess()
+    {
+
+    }
+
+    public function nlSuccess(Request $request)
+    {
+
+        if ($request->payment_id) {
+            // Lấy các tham số để chuyển sang Ngânlượng thanh toán:
+
+            $transaction_info = $request->transaction_info;
+            $order_code = $request->order_code;
+            $price = $request->price;
+            $payment_id = $request->payment_id;
+            $payment_type = $request->payment_type;
+            $error_text = $request->error_text;
+            $secure_code = $request->secure_code;
+            //Khai báo đối tượng của lớp NL_Checkout
+            $nl = new NlCheckout();
+
+            $nl->merchant_site_code = setting('checkout.nl_merchant_id');
+            $nl->secure_pass = setting('checkout.nl_merchant_pass');
+            //Tạo link thanh toán đến nganluong.vn
+            $checkpay = $nl->verifyPaymentUrl($transaction_info, $order_code, $price, $payment_id, $payment_type, $error_text, $secure_code);
+
+
+            $order = Order::wherePaymentCode($order_code)->first();
+
+            if ($checkpay && $order) {
+                $response = 'Payment success';
+                // bạn viết code vào đây để cung cấp sản phẩm cho người mua
+                $order->status = OrderStatus::completed;
+            } else {
+                $response = 'Payment failed! Order not found!';
+                $order->status = OrderStatus::error;
+            }
+
+            $order->note = $error_text;
+            $order->save();
+
+            return view('order.nl_success', compact('response', 'order'));
+        }
+
+    }
 }

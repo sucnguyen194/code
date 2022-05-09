@@ -78,7 +78,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'order.destroy', 'title' => 'Destroy order','parent_id' => $order->id,'guard_name' => 'admin']);
 
         $admin = Permission::create(['name' => 'admin', 'title' => 'Admin','parent_id' => 0,'guard_name' => 'admin']);
-        Permission::create(['name' => 'admin.view', 'title' => 'View quản trị','parent_id' => $admin->id,'guard_name' => 'admin']);
+        Permission::create(['name' => 'admin.view', 'title' => 'View admin','parent_id' => $admin->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'admin.create', 'title' => 'Create admin','parent_id' => $admin->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'admin.edit', 'title' => 'Edit admin','parent_id' => $admin->id,'guard_name' => 'admin']);
         Permission::create(['name' => 'admin.destroy', 'title' => 'Destroy admin','parent_id' => $admin->id,'guard_name' => 'admin']);

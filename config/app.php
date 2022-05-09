@@ -180,6 +180,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
 
         Yajra\Datatables\DatatablesServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
     ],
 
     /*
@@ -237,6 +239,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
     ],
 
 ];

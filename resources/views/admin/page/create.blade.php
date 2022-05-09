@@ -34,7 +34,6 @@
                                 <div class="card-box">
                                     @include('admin.render.create.title')
                                     @include('admin.render.create.description')
-                                    @include('admin.render.create.content')
                                 </div>
 
                                 <div class="card-box">
@@ -49,13 +48,10 @@
                     <div class="card-box">
                         @include('admin.render.create.status')
                     </div>
-
                     <div class="card-box position-relative box-action-image">
                         @include('admin.render.create.image')
                     </div>
-                    <div class="card-box">
-                        @include('admin.render.create.tag',['type' => \App\Enums\TagType::post])
-                    </div>
+                    @include('admin.render.create.tag',['type' => \App\Enums\TagType::post])
                 </div>
 
                 <div class="col-lg-12">

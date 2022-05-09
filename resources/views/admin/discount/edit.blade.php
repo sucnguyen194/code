@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.discount')}} #ID{{$discount->id}}
+    {{__('lang.discount')}} #{{$discount->id}}
 @stop
 @section('content')
     <style>
@@ -24,10 +24,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('lang.discount')}}</a></li>
-                            <li class="breadcrumb-item active">#ID{{$discount->id}}</li>
+                            <li class="breadcrumb-item active">#{{$discount->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.discount')}} #ID{{$discount->id}}</h4>
+                    <h4 class="page-title">{{__('lang.discount')}} #{{$discount->id}}</h4>
                 </div>
             </div>
         </div>
@@ -209,7 +209,7 @@
                     $('#users').attr('disabled', false);
                     $('#users').attr('required', true);
                 }
-            })
+            });
 
             $('input[name="discount[user_selection]"').trigger('change');
         });

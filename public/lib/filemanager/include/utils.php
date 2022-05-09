@@ -63,7 +63,7 @@ if ( ! function_exists('trans'))
 			$languages = include 'lang/languages.php';
 		}
 
-		// add lang file to session for easy include
+		// add lang file to session for easy partials
 		$_SESSION['RF']['language'] = $lang;
 	}
 	else
@@ -365,9 +365,9 @@ function rename_folder($old_path, $name, $ftp = null, $config = null)
 function ftp_con($config){
 	if(isset($config['ftp_host']) && $config['ftp_host']){
 		// *** Include the class
-		include('include/FtpClient.php');
-		include('include/FtpException.php');
-		include('include/FtpWrapper.php');
+		include('partials/FtpClient.php');
+		include('partials/FtpException.php');
+		include('partials/FtpWrapper.php');
 
 		$ftp = new \FtpClient\FtpClient();
 		try{
@@ -617,7 +617,7 @@ function check_files_extensions_on_path($path, $ext)
 
 
 /**
-* Check file extension 
+* Check file extension
 *
 * @param  string  $extension
 * @param  array   $config
@@ -872,12 +872,12 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
 		$K64 = 65536; // number of bytes in 64K
 		$memory_usage = memory_get_usage();
 		if(ini_get('memory_limit') > 0 ){
-			
+
 			$mem = ini_get('memory_limit');
 			$memory_limit = 0;
 			if (strpos($mem, 'M') !== false) $memory_limit = abs(intval(str_replace(array('M'), '', $mem) * 1024 * 1024));
 			if (strpos($mem, 'G') !== false) $memory_limit = abs(intval(str_replace(array('G'), '', $mem) * 1024 * 1024 * 1024));
-			
+
 			$image_properties = getimagesize($img);
 			$image_width = $image_properties[0];
 			$image_height = $image_properties[1];

@@ -1,36 +1,39 @@
 <?php namespace App\Http\Controllers;
 
 use App\Enums\ActiveDisable;
-use App\Models\Category;
+
 use App\Models\Language;
 use App\Models\Product;
-use Illuminate\Support\Facades\App;
+use Cart;
+
 
 class AjaxController extends Controller {
 
-    public function create($id, $qty = 1, $options = null){
-        $product = Product::findOrFail($id);
-        $weight = $request->weight ?? 0;
-        $slug = route('alias',$product->alias);
-        $image = asset($product->image);
-        $price = $product->price_sale > 0 ? $product->price_sale : $product->price;
-        $price_old = $product->price_sale > 0 ? $product->price : $product->price_sale;
+    public function create($id, $qty = 1, $price = 0){
+        $product = Product::find($id);
 
-        $options = is_null($options) || $options == "null" ? null : $options;
+        if(!$product)
+            return flash('Error',0);
+
+//        $price = $product->price_sale > 0 ? $product->price_sale : $product->price;
+//        $price_old = $product->price_sale > 0 ? $product->price : $product->price_sale;
+
+//        $options = is_null($options) || $options == "null" ? null : $options;
 
         Cart::add([
             'id'=>$product->id,
             'name'=>$product->name,
             'price'=> $price,
-            'weight'=> $weight,
+            'weight'=> 0,
             'qty'=>$qty,
             'options'=>[
-                'price_old' => $price_old,
-                'image'=> $image,
-                'slug'=> $slug,
-                'category_id'=> optional($product->category->id),
-                'category_name'=> optional($product->category->name),
-                'attributes' => $options
+//                'price_old' => $price_old,
+                'rate' => setting('checkout.rate'),
+                'image'=> $product->image,
+                'slug'=> $product->slug,
+                'category_id'=> optional($product->category)->id,
+                'category_name'=> optional($product->category)->name,
+//                'attributes' => $options
             ]
         ]);
 

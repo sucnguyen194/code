@@ -157,11 +157,10 @@
                                 <div class="form-group">
                                     <label><strong class="text-uppercase">{{__('lang.position')}}</strong></label>
                                     <select class="form-control position" data-toggle="select2">
-                                        <option value="top" {{selected(session('menu_position'),'top')}} class="form-control">MENU TOP</option>
-                                        <option value="home" {{selected(session('menu_position'),'home')}} class="form-control">MENU HOME</option>
-                                        <option value="left" {{selected(session('menu_position'),'left')}} class="form-control">MEN LEFT</option>
-                                        <option value="right" {{selected(session('menu_position'),'right')}} class="form-control">MENU RIGHT</option>
-                                        <option value="bottom" {{selected(session('menu_position'),'bottom')}} class="form-control">MENU BOTTOM</option>
+                                        @foreach(\App\Enums\MenuPosition::getInstances() as $menu)
+                                        <option value="{{$menu->value}}" {{selected(session('menu_position'),$menu->value)}} class="form-control">MENU {{\Illuminate\Support\Str::upper($menu->description) }}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
 
@@ -234,7 +233,7 @@
 @section('scripts')
 
     <script type="text/javascript">
-        // Ajax form
+
         function ajaxformmenu(ele){
             var html = document.getElementById('result_data');
 
@@ -311,13 +310,12 @@
                 method: method,
                 url: url,
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                // dataType: 'json'
             }).done(function( result ) {
                 let html = document.getElementById('result_data');
                 let  success = {
                     'message' : '{{__("lang.flash_destroy")}}',
                     'type' : 'success'
-                }
+                };
                 $(html).html(result);
                 if($(html).children().length == 0){
                     $(html).hide();
@@ -343,13 +341,13 @@
         }
 
         $(document).on('post-body.bs.table.', function() {
-            var columns = $table.bootstrapTable('getOptions').columns
+            var columns = $table.bootstrapTable('getOptions').columns;
 
             if (columns && columns[0][0].visible) {
                 $table.treegrid({
                     treeColumn: 0,
                     onChange: function() {
-                        $table.bootstrapTable('resetView')
+                        $table.bootstrapTable('resetView');
                     }
                 })
             }
@@ -377,7 +375,7 @@
                         flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
                     }
                 })
-            })
+            });
             @endcan
 
             @can('menu.edit')
@@ -409,18 +407,18 @@
                 var list   = e.length ? e : $(e.target),
                     output = list.data('output');
                 if (window.JSON) {
-                    output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                    output.val(window.JSON.stringify(list.nestable('serialize')));
                 } else {
                     output.val('JSON browser support required for this demo.');
                 }
             };
-            // activate Nestable for list 1
+
             $('#nestable').nestable({
                 group: 1,
                 maxDepth:10
             })
                 .on('change', updateOutput);
-            // output initial serialised data
+
             updateOutput($('#nestable').data('output', $('#nestable-output')));
 
             $('#nestable').change(function(){

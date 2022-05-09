@@ -10,9 +10,12 @@ use App\Http\Requests\UpdateTranslationRequest;
 use App\Models\Admin;
 use App\Models\Attribute;
 use App\Models\Category;
+use App\Models\Filter;
+use App\Models\ItemAttribute;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -82,7 +85,7 @@ class ProductController extends Controller
             })
 
             ->editColumn('image',function($product){
-                return $product->images;
+                return $product->image;
             })
             ->editColumn('comments', function ($product){
                 return $product->comments->whereNotNull('rate')->count();
@@ -111,10 +114,10 @@ class ProductController extends Controller
         $this->authorize('product.create');
 
         $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::with('translation')->oldest('sort')->get();
+        $filters = Filter::with('translation')->oldest('sort')->get();
         $tags = Tag::ofType(TagType::product)->get();
 
-        return view('admin.product.create', compact('categories','attributes', 'tags'));
+        return view('admin.product.create', compact('categories','filters', 'tags'));
     }
 
     /**
@@ -156,8 +159,24 @@ class ProductController extends Controller
 
         $product->translations()->createMany($request->translation);
         $product->categories()->attach($request->category_id);
+        //$product->filters()->attach($request->filter);
 
-        $product->attributes()->attach($request->attribute);
+      //  $product->settAttributeProduct();
+
+//        if($request->attribute)
+//            $product->attributes()->createMany($request->attribute);
+
+//        $attributes = $product->attributes;
+//
+//        if($attributes[0]['name'])
+//            $attribute_before =  Str::of(request()->attribute_before)->explode(',');
+//
+//        foreach ($attribute_before as $key => $value){
+//            $item = new ItemAttribute();
+//            $item->name = $value;
+//            $item->attribute_id = $attributes[0]['id'];
+//
+//        }
 
         return  flash(__('lang.flash_create'), 1 , route('admin.products.index'));
     }
@@ -184,12 +203,12 @@ class ProductController extends Controller
         $this->authorize('product.edit');
 
         $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $attributes = Attribute::with('translation')->oldest('sort')->get();
+        $filters = Filter::with('translation')->oldest('sort')->get();
         $translations = $product->translations->load('language');
 
         $tags = Tag::ofType(TagType::product)->get();
 
-        return view('admin.product.edit',compact('product','categories','attributes','translations','tags'));
+        return view('admin.product.edit',compact('product','categories','filters','translations','tags'));
     }
 
     /**
@@ -238,7 +257,8 @@ class ProductController extends Controller
         endforeach;
 
         $product->categories()->sync($request->category_id);
-        $product->attributes()->sync($request->attribute);
+        //$product->attributes()->sync($request->attribute);
+        $product->filters()->sync($request->filter);
 
         return  flash(__('lang.flash_update'));
     }

@@ -19,6 +19,7 @@ class CreateSupportTranslationsTable extends Migration
             $table->string('locale');
             $table->string('name')->nullable();
             $table->string('job')->nullable();
+            $table->longText('description')->nullable();
         });
     }
 

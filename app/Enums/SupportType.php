@@ -11,6 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class SupportType extends Enum
 {
-    const support =   'support';
-    const customer =   'customer';
+    const support =   1;
+    const customer =   2;
+    const question =  3;
 }

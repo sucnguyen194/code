@@ -192,7 +192,7 @@
     // The following adds converters from iframe to text, json, html, xml
     // and script.
     // Please note that the Content-Type for JSON responses has to be text/plain
-    // or text/html, if the browser doesn't include application/json in the
+    // or text/html, if the browser doesn't partials application/json in the
     // Accept header, else IE will show a download dialog.
     // The Content-Type for XML responses on the other hand has to be always
     // application/xml or text/xml, so IE properly parses the XML response.

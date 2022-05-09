@@ -11,11 +11,11 @@ use BenSampo\Enum\Enum;
  */
 final class Upload extends Enum
 {
-    const logo =   'logo';
-    const background =   'background';
-    const favicon = 'favicon';
-    const image = 'image';
-    const thumbnail = 'thumb';
-    const og_image = 'og_image';
-    const avata = 'avata';
+    const logo =   1;
+    const background =   2;
+    const favicon = 3;
+    const image = 4;
+    const thumbnail = 5;
+    const og_image = 6;
+    const avatar = 7;
 }

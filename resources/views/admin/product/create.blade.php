@@ -3,6 +3,7 @@
     {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}
 @stop
 @section('content')
+{{--    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>--}}
     <div class="container-fluid">
         <!-- start page title -->
         <div class="row">
@@ -25,10 +26,10 @@
         <form method="post" action="{{route('admin.products.store')}}" class="ajax-form" enctype="multipart/form-data">
             <div class="row">
                 @csrf
-                <div class="col-xl-9 col-lg-8 col-md-8">
+                <div class="col-xl-9 col-lg-9 col-md-8">
                    @include('admin.render.create.nav')
 
-                        <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
+                        <div class="tab-content pt-0">
                             @foreach(languages() as $key => $language)
                                 <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" >
                                     <div class="card-box">
@@ -38,44 +39,122 @@
                                     </div>
                                 </div>
                             @endforeach
+
                                 <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
-                                                <label>{{__('lang.code')}}</label>
-                                                <input type="text" class="form-control" value="{{\Illuminate\Support\Str::upper(\Illuminate\Support\Str::random(7))}}" id="code" name="data[code]">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
-                                                <label>{{__('lang.price')}}</label>
-                                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" min="0" value="0" id="price">
-                                                <input type="text" class="form-control d-none" min="0" value="0" id="format-price" name="data[price]">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group mb-0">
-                                                <label>{{__('lang.price_sale')}}</label>
-                                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" value="0" min="0" id="price_sale">
-                                                <input type="text" class="form-control d-none" value="0" min="0" id="format-price-sale" name="data[price_sale]">
-                                            </div>
-                                        </div>
+                                    <label class="form-label">Gói dịch vụ</label>
+                                    <div class="table-responsive">
+                                        <table class="table product-options text-center" data-dynamicrows>
+                                            <thead>
+                                            <tr>
+                                                <th>Tên dịch vụ <span class="required">*</span></th>
+                                                <th>Giá ($)</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                <td>
+                                                    <input type="text" name="fields[0][name]" class="form-control" value="" required>
+                                                </td>
+
+
+                                                <td>
+                                                    <input type="price" step="0.1" name="fields[0][price]" class="form-control" value="0.00">
+                                                </td>
+
+                                                <td>
+                                                    <i class="fa fa-minus" data-remove></i>
+                                                    <i class="fa fa-arrows" data-move></i>
+                                                    <i class="fa fa-plus" data-add></i>
+
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                @if($attributes->count())
+
+                                <div class="card-box position-relative box-action-image">
+                                    @include('admin.render.create.multiple_image')
+                                </div>
+
+{{--                                <div class="card-box pb-1 clearfix">--}}
+{{--                                    <label>Thông tin bán hàng</label>--}}
+{{--                                    <hr class="mt-0 border-primary">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="col-xl-12">Thuộc tính 1</label>--}}
+{{--                                        <div class="col-xl-12">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-xl-3">--}}
+{{--                                                    <input type="text" name="attribute[0][name]" placeholder="Nhập tên thuộc tính, ví dụ: màu sắc, kích thước v.v" class="form-control" required>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-xl-9 attribute_before">--}}
+{{--                                                    <input type="text" placeholder="Phân loại thuộc tính, ví dụ: Trắng, đỏ v.v" data-role="tagsinput" name="attribute_before" class="form-control">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="col-xl-12">Thuộc tính 2</label>--}}
+{{--                                        <div class="col-xl-12">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-xl-3">--}}
+{{--                                                    <input type="text" name="attribute[1][name]" placeholder="Nhập tên thuộc tính, ví dụ: Size, v.v" class="form-control w-100" required>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-xl-9 attribute_after">--}}
+{{--                                                    <input type="text" placeholder="Phân loại thuộc tính. Ví dụ: S, M, v.v" data-role="tagsinput" name="attribute_after" class="form-control w-100">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <hr class="mt-0 border-primary">--}}
+
+{{--                                    <div class="attributes-view">--}}
+{{--                                        <div class="attribute-item" v-if="attribute_after.length == 0" v-for="(key,attribute) in attribute_before">--}}
+{{--                                            @{{ key }}--}}
+{{--                                            <div class="d-flex">--}}
+{{--                                                <div class="col m-auto pl-0 table-break-word pl-lg-4"><label class="main-content">@{{ attribute }}</label></div>--}}
+{{--                                                <div class="col-auto text-right m-auto">--}}
+
+{{--                                                    <label class="main-content"><input type="text" name="item[]" class="form-control" min="0" placeholder="Item" v-bind:value="attribute" readonly></label>--}}
+{{--                                                    <label class="main-content"><input type="number" name="price[]" class="form-control" min="0" placeholder="Giá"></label>--}}
+{{--                                                    <label class="sub-content"><input type="number" name="quantity[]" class="form-control" min="0" placeholder="Số lượng"></label>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <hr class="mt-0 border-light">--}}
+{{--                                        </div>--}}
+
+{{--                                        <div class="attribute-item" v-if="attribute_after.length > 0" v-for="before in attribute_before">--}}
+{{--                                            <div class="d-flex" v-for="after in attribute_after">--}}
+{{--                                                <div class="col m-auto pl-0 table-break-word pl-lg-4"><label class="main-content">@{{ before }} / @{{ after }}</label></div>--}}
+{{--                                                <div class="col-auto text-right m-auto">--}}
+{{--                                                    <label class="main-content"><input type="text" name="group[]" class="form-control" min="0" placeholder="Nhóm" v-bind:value="before" readonly></label>--}}
+{{--                                                    <label class="main-content"><input type="text" name="item[]" class="form-control" min="0" placeholder="Item" v-bind:value="after" readonly></label>--}}
+{{--                                                    <label class="main-content"><input type="number" name="price[]" class="form-control" min="0" placeholder="Giá"></label>--}}
+{{--                                                    <label class="sub-content"><input type="number" name="quantity[]" class="form-control" min="0" placeholder="Số lượng"></label>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <hr class="mt-0 border-light">--}}
+{{--                                        </div>--}}
+
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                @if($filters->count())
                                     <div class="card-box pb-1 clearfix">
                                         <label>{{__('lang.filter')}}</label>
 
                                         <div class="row">
-                                            @foreach($attributes->where('category_id',0) as $attribute)
+                                            @foreach($filters->where('parent_id',0) as $filter)
                                                 <div class="col-lg-4 form-group">
                                                     <div class="border h-100 p-2">
-                                                        <label>{{$attribute->translation->name}}</label>
+                                                        <label>{{$filter->name}}</label>
                                                         <hr class="mt-0 border-primary">
-                                                        @foreach($attributes->where('category_id', $attribute->id) as $parent)
+                                                        @foreach($filters->where('parent_id', $filter->id) as $parent)
                                                             <div class="checkbox">
-                                                                <input id="checkbox_attibute_{{$parent->id}}" type="checkbox" name="attribute[]" value="{{$parent->id}}">
-                                                                <label for="checkbox_attibute_{{$parent->id}}" class="{{$loop->last ? "mb-0" : ""}}">{{$parent->title}}</label>
+                                                                <input id="checkbox_attibute_{{$parent->id}}" type="checkbox" name="filter[]" value="{{$parent->id}}">
+                                                                <label for="checkbox_attibute_{{$parent->id}}" class="{{$loop->last ? "mb-0" : ""}}">{{$parent->name}}</label>
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -86,49 +165,7 @@
                                     </div>
                                 @endif
 
-{{--                                <div class="card-box">--}}
-{{--                                    <label>Thuộc tính sản phẩm</label>--}}
-{{--                                    <table data-dynamicrows class="table table-bordered table-striped mb-0">--}}
-{{--                                        <thead>--}}
-{{--                                        <tr>--}}
-{{--                                            <th>Màu mắc</th>--}}
-{{--                                            <th>Size</th>--}}
-{{--                                            <th>Hành động</th>--}}
-{{--                                        </tr>--}}
-{{--                                        </thead>--}}
-{{--                                        <tbody>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <input type="text" name="fields[0][color]" class="form-control">--}}
-
-{{--                                            </td>--}}
-{{--                                            <td>--}}
-{{--                                                <input type="text" name="fields[0][size]" class="form-control">--}}
-
-{{--                                            </td>--}}
-
-{{--                                            <td>--}}
-{{--                                                <i class="fas fa-minus" data-remove></i>--}}
-{{--                                                <i class="fas fa-arrows-alt" data-move></i>--}}
-{{--                                                <i class="fas fa-plus" data-add></i>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </div>--}}
-
-                                <div class="card-box position-relative box-action-image">
-                                    @include('admin.render.create.multiple_image')
-
-                                    <style>
-                                        .box-action-image #box-input{
-                                            right:1.5rem!important;
-                                            top:1.5rem!important;
-                                        }
-                                    </style>
-                                </div>
-
-                                @foreach(languages() as $key => $language)
+                            @foreach(languages() as $key => $language)
                                     <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" >
                                         <div class="card-box">
                                             @include('admin.render.create.seo')
@@ -141,12 +178,8 @@
                     <div class="card-box">
                         @include('admin.render.create.status')
                     </div>
-
                     @include('admin.render.create.category', ['type' => \App\Enums\CategoryType::product])
-
-                    <div class="card-box">
-                        @include('admin.render.create.tag',['type' => \App\Enums\TagType::product])
-                    </div>
+                    @include('admin.render.create.tag',['type' => \App\Enums\TagType::product])
                 </div>
 
                 <div class="col-lg-12">
@@ -172,21 +205,79 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+{{--<style>--}}
+{{--    .bootstrap-tagsinput input {--}}
+{{--        width: 100%!important;--}}
+{{--    }--}}
+{{--    .bootstrap-tagsinput {--}}
+{{--        min-height: 36px!important;--}}
+{{--    }--}}
+{{--</style>--}}
 
 @stop
 
 @section('scripts')
+{{--    <script type="text/javascript">--}}
+{{--        var app = new Vue({--}}
+{{--            el: '#vue-app',--}}
+{{--            mounted:function(){--}}
+{{--                $('.attribute_before input').on('change', function(event) {--}}
+{{--                    var $element = $(event.target);--}}
+
+{{--                    if (!$element.data('tagsinput'))--}}
+{{--                        return;--}}
+
+{{--                    var val = $element.tagsinput('items');--}}
+{{--                    if (val === null)--}}
+{{--                        val = null;--}}
+
+{{--                    app.attribute_before = val;--}}
+{{--                }).trigger('change');--}}
+
+{{--                $('.attribute_after input').on('change', function(event) {--}}
+{{--                    var $element = $(event.target);--}}
+
+{{--                    if (!$element.data('tagsinput'))--}}
+{{--                        return;--}}
+
+{{--                    var val = $element.tagsinput('items');--}}
+{{--                    if (val === null)--}}
+{{--                        val = null;--}}
+
+{{--                    app.attribute_after = val;--}}
+{{--                }).trigger('change');--}}
+{{--            },--}}
+{{--            data:{--}}
+{{--                attribute_before: [],--}}
+{{--                attribute_after: []--}}
+{{--            },--}}
+{{--            watch:{--}}
+
+{{--            }--}}
+{{--        })--}}
+{{--    </script>--}}
     <script>
         $(document).on('click','.view-image',function(){
             let image = $(this).attr('data-image');
             $('#viewImage').modal('show');
             $('.showImage').attr('src', image);
-        })
+        });
         $('[data-toggle="tab"]').on('click',function(e){
             e.preventDefault();
             let pane = $(this).attr('href');
 
             $('.tab-pane').removeClass('active').hide();
+            $(pane).addClass('active').show();
+        });
+
+        $('[data-toggle="custom"]').on('click',function(e){
+            e.preventDefault();
+            let pane = $(this).attr('href');
+
+            $('[data-toggle="custom"]').removeClass('active');
+            $(this).addClass('active');
+
+            $('.tab-custom').removeClass('active').hide();
             $(pane).addClass('active').show();
         });
 
@@ -200,18 +291,18 @@
             if(value > 99)
                 value = value.replace(/^0+/, '');
 
-            $(this).val(number_format(value))
+            $(this).val(number_format(value));
             value = value.replaceAll(',','');
-            console.log(value);
+
             $(format_price).val(value);
-        })
+        });
 
         $(sale).on('keyup',function (){
             let value = $(this).val();
             if(value > 99)
                 value = value.replace(/^0+/, '');
 
-            $(this).val(number_format(value))
+            $(this).val(number_format(value));
             value = value.replaceAll(',','');
             $(format_price_sale).val(value);
         })

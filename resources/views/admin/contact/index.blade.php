@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.message')}} @stop
+@section('title') {{__('lang.messenger')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.message')}}</li>
+                            <li class="breadcrumb-item active">{{__('lang.messenger')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.message')}}</h4>
+                    <h4 class="page-title">{{__('lang.messenger')}}</h4>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
             })
-        })
+        });
 
         function sortFormatter(value, row) {
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';

@@ -114,7 +114,7 @@
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
             })
-        })
+        });
 
         function sortFormatter(value, row) {
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';

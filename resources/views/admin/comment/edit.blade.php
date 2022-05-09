@@ -13,7 +13,7 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.comments.list',$type)}}">{{__('lang.comment')}}</a></li>
-                            <li class="breadcrumb-item">#ID{{$reply->id}}</li>
+                            <li class="breadcrumb-item">#{{$reply->id}}</li>
                         </ol>
                     </div>
                     <h4 class="page-title"> <a href="{{route('slug',$reply->translation->slug)}}" target="_blank">#{{$reply->translation->name}}</a></h4>
@@ -55,7 +55,7 @@
                         <div class="item-comment-top mb-3">
                             <div class="row">
                                 <div class="col-md-1 item-avatar text-center">
-                                    <img src="{{$comment->avatar}}" alt="" class="rounded-circle img-thumbnail">
+                                    <span class="font-24 font-weight-bold border d-block w-100 h-100" style="line-height: 76px;">{{user_avatar($comment->name)}}</span>
                                 </div>
                                 <div class="col-md-11">
                                     <div class="item-name">
@@ -120,8 +120,8 @@
                             <div class="sub-comment mb-3 ml-5">
                                 <div class="item-comment-top mb-3">
                                     <div class="row">
-                                        <div class="col-md-1 item-avatar">
-                                            <img src="{{$sub->avatar}}" alt="" class="rounded-circle img-thumbnail">
+                                        <div class="col-md-1 item-avatar text-center">
+                                            <span class="font-24 font-weight-bold border d-block w-100 h-100" style="line-height: 76px;">{{user_avatar($sub->name)}}</span>
                                         </div>
                                         <div class="col-md-11">
                                             <div class="item-name">
@@ -180,8 +180,8 @@
                                     <div class="sub-comment mb-3 ml-5">
                                         <div class="item-comment-top mb-3">
                                             <div class="row">
-                                                <div class="col-md-1 item-avatar">
-                                                   <img src="{{$sub_sub->avatar}}" alt="" class="rounded-circle img-thumbnail">
+                                                <div class="col-md-1 item-avatar text-center">
+                                                    <span class="font-24 font-weight-bold border d-block w-100 h-100" style="line-height: 76px;">{{user_avatar($sub_sub->name)}}</span>
                                                 </div>
                                                 <div class="col-md-11">
                                                     <div class="item-name">

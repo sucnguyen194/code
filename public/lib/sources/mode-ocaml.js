@@ -8,7 +8,7 @@ var OcamlHighlightRules = function() {
 
     var keywords = (
         "and|as|assert|begin|class|constraint|do|done|downto|else|end|"  +
-        "exception|external|for|fun|function|functor|if|in|include|"     +
+        "exception|external|for|fun|function|functor|if|in|partials|"     +
         "inherit|initializer|lazy|let|match|method|module|mutable|new|"  +
         "object|of|open|or|private|rec|sig|struct|then|to|try|type|val|" +
         "virtual|when|while|with"
@@ -357,7 +357,7 @@ var Range = require("../range").Range;
 var Mode = function() {
     this.HighlightRules = OcamlHighlightRules;
     this.$behaviour = this.$defaultBehaviour;
-    
+
     this.$outdent   = new MatchingBraceOutdent();
 };
 oop.inherits(Mode, TextMode);
@@ -418,4 +418,3 @@ exports.Mode = Mode;
                         }
                     });
                 })();
-            

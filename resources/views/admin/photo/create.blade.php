@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label>{{__('lang.position')}}</label>
-                    <select data-toggle="select2" name="data[position]" class="form-control">
+                    <select name="data[position]" class="form-control">
                         <option value="Nomal">----</option>
                         @foreach(\App\Enums\Position::getInstances() as $item)
                             <option value="{{$item->value}}">{{$item->description}}</option>
@@ -172,7 +172,7 @@
             $(slider).addClass('d-none').removeClass('d-inline-block');
             $(remove).removeClass('d-none').show();
         }
-    })
+    });
     $(document).on('change','#slider-input',function(){
 
         let parent = $(this).parent().parent().parent().parent();

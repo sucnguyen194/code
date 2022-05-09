@@ -11,7 +11,8 @@ use BenSampo\Enum\Enum;
  */
 final class CategoryType extends Enum
 {
-    const category = 'category';
-    const post =  'post';
-    const product =  'product';
+    const category = 1;
+    const post = 2;
+    const product = 3;
+    const recruitment = 4;
 }

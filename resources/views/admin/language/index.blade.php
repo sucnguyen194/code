@@ -57,7 +57,7 @@
                                 <th data-field="status" data-formatter="statusFormatter"  data-width="200" data-sortable="true" data-visible="true">
                                     {!! __('lang.status') !!}
                                 </th>
-                                <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
+                                <th data-formatter="actionFormatter" data-width="300" data-switchable="false" data-force-hide="true">
                                     {!! __('lang.action') !!}
                                 </th>
 
@@ -84,10 +84,16 @@
         }
 
         function actionFormatter(value, row){
-            let html = '<a href="'+ '{{ route('admin.languages.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
-            html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
 
-            html+='<a href="'+ '{{ route('admin.languages.change', ':value') }}'.replace(':value',row.value) +'" class="ajax-link btn btn-info waves-effect waves-light" data-confirm="{{__('lang.confirm_change_language')}}" data-refresh="true" data-method="GET"><i class="fa fa-language"></i></a> ';
+            let html = '<a href="'+ '{{ route('admin.languages.translate', ':lang') }}'.replace(':lang',row.value) +'" title="Translate" class="btn btn-success waves-effect waves-light tooltip-hover"><i class="fe-code"></i></a> ';
+
+            html += '<a href="'+ '{{ route('admin.languages.edit', ':id') }}'.replace(':id',row.id) +'" title="Edit" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a> ';
+
+            html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="Delete" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+
+            if(row.status != 1) {
+                html+='<a href="'+ '{{ route('admin.languages.change', ':value') }}'.replace(':value',row.value) +'" class="ajax-link btn btn-info waves-effect waves-light" title="Active" id="tooltip-hover"  data-confirm="{{__('lang.confirm_change_language')}}" data-refresh="true" data-method="GET"><i class="fa fa-language"></i></a> ';
+            }
 
             return html;
         }

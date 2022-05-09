@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Psy\Util\Str;
 use Session,Schema,DB,Artisan,Mail;
@@ -63,4 +64,26 @@ class UserController extends Controller {
             return flash(__('lang.flash_update'));
 			}
 	}
+
+	public function password(){
+        $user = auth()->user();
+        return view('user.password', compact('user'));
+    }
+
+    public function updatePassword(Request  $request){
+        $request->validate([
+            'password' => 'required|string|min:6|confirmed'
+        ]);
+
+        $user = auth()->user();
+        if ($user->password && !Hash::check($request->old_password, $user->password)){
+            return flash('Mật khẩu hiện tại không đúng', 0);
+        }
+
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return flash('Đổi mật khẩu thành công');
+    }
 }

@@ -1,52 +1,33 @@
 <?php
 
 use App\Models\Setting;
-use App\Models\Menu;
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\Product;
+use Illuminate\Support\Str;
 
-if(!function_exists('menus')){
-    function menus($position){
-        $menus = Menu::ofPosition($position)->get();
+if(!function_exists('show_item')){
+    function showing_item($default = 0, $max = 0){
 
-        return $menus;
-    }
-}
+        if($max === 0)
+            return '0 of 0';
 
-if(!function_exists('categories')){
-    function categories($type){
-       $categories = Category::ofType($type)->get();
+        $from = 1;
 
-       return $categories;
-    }
-}
+        $paginate = request('page');
 
-if(!function_exists('posts')){
-    function posts($type, $category = null){
-        $posts = Post::ofType($type);
+        if($paginate && $paginate > 1)
+            $from = $default * $paginate;
 
-        if($category)
-            $posts->ofCategory($category);
+        if($max < $from){
+            $from = $max;
+        }
 
-        return $posts->get();
-    }
-}
+        return $from. ' of ' .$max;
 
-if(!function_exists('products')){
-    function products($category = null){
-        $products = Product::ofTranslation();
-
-        if($category)
-            $products->ofCategory($category);
-
-        return $products->get();
     }
 }
 
 if(!function_exists('languages')){
     function languages(){
-        return session('language');
+        return session('languages');
     }
 }
 
@@ -76,19 +57,29 @@ if(!function_exists('resize_image')){
     }
 }
 
+if(!function_exists('user_avatar')){
+    function user_avatar($name){
+        $str_after = Str::afterLast($name,' ');
+        $str_before = Str::afterLast(Str::replaceLast(' ','',Str::beforeLast($name, $str_after)),' ');
+        $avatar = Str::substr($str_before,0,1).Str::substr($str_after,0,1);
+        return Str::upper($avatar);
+    }
+}
+
 if (! function_exists('setting')) {
 
-    function setting($key=null, $config =null,  $default = null)
+    function setting($key=null, $language = false,  $default = null)
     {
         if (is_null($key)) {
             return new Setting();
         }
-        if($config)
-            $key = $key.'.'.session('lang');
 
         if (is_array($key)) {
             return Setting::set($key[0], $key[1]);
         }
+
+        if($language)
+            $key = $key.'.'. session('lang');
 
         $value = Setting::get($key);
 
@@ -96,19 +87,20 @@ if (! function_exists('setting')) {
     }
 }
 
-if (! function_exists('nav_active')) {
+if (! function_exists('menu_active')) {
 
-    function nav_active($segment, $class='active')
+    function menu_active($slug, $class='active')
     {
-        //  $segment = str_replace(['index','create'],['*'],$segment);
-        $path = request()->path();
-        return $path == $segment.'.html' ? $class : "";
+        if($slug === request()->url() || $slug === request()->path())
+            return $class;
+
+        return false;
     }
 }
 
-if (! function_exists('nav_actives')) {
+if (! function_exists('nav_active')) {
 
-    function nav_actives($segment, $class='active')
+    function nav_active($segment, $class='active')
     {
         return request()->is($segment) ? $class : '';
     }
@@ -204,10 +196,10 @@ if(!function_exists('scan_full_dir')){
         $dir_content_list = scandir($dir);
         foreach($dir_content_list as $k=>$value){
             $path = $dir.$icon[0].$value;
-            $arr = ['.','..','Admin','Auth','Console','Events','Commands','Services','Handlers','Exceptions','Providers','Middleware', 'Requests','Kernel.php','route.php','fonts','font','font-awesome',];
+            $arr = ['.','..','Admin','Auth','Console','Events','Commands','Services','Handlers','Exceptions','Providers','Middleware', 'Requests','Kernel.php','route.php','fonts','font','font-awesome','index.php','web.config','.htaccess'];
             if(in_array($value,$arr))  {continue;}
-            $explode = explode('.',$value);
-            $replace = str_replace(array('/','.'),array('_',''), $dir);
+            $explode = Str::after($value, '.');
+            $replace = Str::replace(array('/','.'),array('_',''), $dir);
             $ext = 'php';
             $event = null;
             $pic = "https://s2d142.cloudnetwork.vn:8443/cp/theme/icons/16/plesk/file-image.png?1327e17a096bce2f49ad2f66f4abdaf6";
@@ -215,60 +207,56 @@ if(!function_exists('scan_full_dir')){
             $script = "https://s2d142.cloudnetwork.vn:8443/cp/theme/icons/16/plesk/file-webscript.png?b2aff14c14b05cccbb316c37d48fb591";
             $privat = "https://s2d142.cloudnetwork.vn:8443/cp/theme/icons/16/plesk/file-private.png?b3e618929415e17caa82f8d04d2aa689";;
 
-            if(in_array('html',$explode) && $child){
+            if(Str::contains($value, '.html')){
                 $ext = "html";
                 $folder = $script;
                 $event = "id='show-file'";
             }
-            if(in_array('css',$explode) && $child){
+            if(Str::contains($value, '.css')){
                 $ext = "css";
                 $folder = $script;
                 $event = "id='show-file'";
             }
-            if(in_array('scss',$explode) && $child){
+            if(Str::contains($value, '.css')){
                 $ext = "css";
                 $folder = $script;
                 $event = "id='show-file'";
             }
-            if(in_array('php',$explode) && $child){
+            if(Str::contains($value, '.php')){
                 $ext = "php";
                 $folder = $script;
                 $event = "id='show-file'";
             }
-            if(in_array('js',$explode) && $child){
+            if(Str::contains($value, '.js')){
                 $ext = "js";
                 $folder = $script;
                 $event = "id='show-file'";
             }
-            if(in_array('jpg',$explode) && $child){
+            if(Str::contains($value, '.jpg')){
                 $ext = "image";
                 $folder = $pic;
             }
-            if(in_array('jpeg',$explode) && $child){
+            if(Str::contains($value, '.jpeg')){
                 $ext = "image";
                 $folder = $pic;
             }
-            if(in_array('png',$explode) && $child){
+            if(Str::contains($value, '.png')){
                 $ext = "image";
                 $folder = $pic;
             }
-            if(in_array('svg',$explode) && $child){
+            if(Str::contains($value, '.svg')){
                 $ext = "image";
                 $folder = $pic;
             }
-            if(in_array('gif',$explode) && $child){
+            if(Str::contains($value, '.gif')){
                 $ext = "image";
                 $folder = $pic;
             }
-            if(in_array('ico',$explode) && $child){
+            if(Str::contains($value, '.ico')){
                 $ext = "image";
                 $folder = $pic;
             }
 
-            if(in_array('htaccess',$explode) && $child){
-                $ext = "htaccess";
-                $folder = $privat;
-            }
 
             // check if we have file
             if(is_file($path)) {

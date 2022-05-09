@@ -13,7 +13,9 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Translation;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class PostController extends Controller
@@ -93,6 +95,11 @@ class PostController extends Controller
             ->editColumn('image', function ($post){
                 return $post->thumb;
             })
+            ->editColumn('deadline', function ($post){
+                if(!$post->deadline)
+                    return null;
+                return Carbon::parse($post->deadline)->format('d/m/Y');
+            })
             ->editColumn('created_at', function ($post){
                 return $post->created_at->diffForHumans();
             })
@@ -136,7 +143,7 @@ class PostController extends Controller
         $post->forceFill($request->data);
 
         if($request->input('data.video')){
-            $video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+            $video = Str::afterLast(Str::beforeLast($request->input('data.video'),'&'),'v=');
             $post->video = $video;
             $post->image = 'https://img.youtube.com/vi/'.$video.'/maxresdefault.jpg';
         }
@@ -205,10 +212,11 @@ class PostController extends Controller
         $post->forceFill($request->data);
 
         if($request->input('data.video')){
-            $video = str_replace('https://www.youtube.com/watch?v=','',$request->input('data.video'));
+            $video = Str::afterLast(Str::beforeLast($request->input('data.video'),'&'),'v=');
             $post->video = $video;
             $post->image = 'https://img.youtube.com/vi/'.$video.'/maxresdefault.jpg';
         }
+
         if($request->photos){
             $photos = [];
             foreach ($request->photos as $photo):

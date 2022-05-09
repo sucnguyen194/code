@@ -1,121 +1,37 @@
 @extends('layouts.layout')
-@section('title') {{$translation->title_seo}} @stop
-@section('url') {{route('slug',$translation->slug)}} @stop
-@section('site_name') {{$translation->title_seo}} @stop
-@section('description') {{$translation->description_seo}} @stop
-@section('keywords') {{$translation->keyword_seo}} @stop
-@section('image') {{$translation->post->image}} @stop
+@section('title') {{$post->translation->title_seo}} @stop
+@section('url') {{$post->slug}} @stop
+@section('site_name') {{$post->translation->title_seo}} @stop
+@section('description') {{$post->translation->description_seo}} @stop
+@section('keywords') {{$post->translation->keyword_seo}} @stop
+@section('image') {{$post->image}} @stop
 @section('content')
-<!-------------------------->
-<!-----------SOURCSE----------->
-<!-------------------------->
-<section  class="g-py-50">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-12">
-                <h3 class="h2 g-font-weight-300 g-mb-20 g-color-primary">
-                    {{$translation->name}}
-                </h3>
-                <h6 class='g-font-size-12 g-mb-5'><i class='icon-clock align-middle g-mr-5'></i>{{$translation->item->created_at->format('d/m/Y')}}</h6>
 
-                <div class="entry-content">
-                    {!! $translation->content !!}
-                </div>
+    @if($post->translation->slug == 'gioi-thieu')
+        @include('ladipage.about')
+    @elseif($post->translation->slug == 'lien-ket-hop-tac')
+        @include('ladipage.partner')
 
-            {{--            <div class="col-lg-3 col-md-5 col-12">--}}
-            {{--                <div class="card g-brd-none g-mb-30">--}}
-            {{--                    <!-- Links -->--}}
-            {{--                    <div class="card-body g-pa-0 g-bg-primary">--}}
-            {{--                        <div class="media g-pb-5 g-bg-white">--}}
-            {{--                            <div class="d-flex align-self-center mr-4">--}}
-            {{--                      <span class="d-block g-color-primary g-font-size-30">--}}
-            {{--                        <i class="icon-social-youtube"></i>--}}
-            {{--                      </span>--}}
-            {{--                            </div>--}}
-            {{--                            <div class="media-body align-self-center">--}}
-            {{--                                <h3 class="mb-0 g-color-gray-dark-v2">VIDEO</h3>--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                        <article class="u-block-hover">--}}
-            {{--                            <div class="g-z-index-2 g-pa-15">--}}
-            {{--                                <div class="embed-responsive embed-responsive-16by9 g-mb-10">--}}
-            {{--                                    <iframe src='http://www.youtube.com/embed/dFP4LgwVhxc' allowfullscreen='' width='100%' frameborder='0'></iframe>--}}
-            {{--                                </div>--}}
-            {{--                                <h3 class="h6 g-font-weight-700 g-color-white">Sản phẩm từ công ty cổ phần thức ăn chăn nuôi Tiền Trung</h3>--}}
-            {{--                                <p class="g-color-white g-ma-0">Đây là các sản phẩm trực tiếp của trang trại đang sử dụng, phù hợp từ lợn con đến lợn thịt</p>--}}
-            {{--                            </div>--}}
-            {{--                        </article>--}}
-            {{--                    </div>--}}
-            {{--                    <!-- End Links -->--}}
-            {{--                </div>--}}
+    @elseif($post->translation->slug == 've-chung-toi')
+        @include('ladipage.aboutUs')
 
-            {{--                <div class="card g-brd-none">--}}
-            {{--                    <!-- Links -->--}}
-            {{--                    <div class="card-body g-pa-0 g-bg-main-4">--}}
-            {{--                        <div class="media g-pb-5 g-bg-white">--}}
-            {{--                            <div class="d-flex align-self-center mr-4">--}}
-            {{--                      <span class="d-block g-color-main-5 g-font-size-30">--}}
-            {{--                        <i class="icon-media-014 u-line-icon-pro"></i>--}}
-            {{--                      </span>--}}
-            {{--                            </div>--}}
-            {{--                            <div class="media-body align-self-center">--}}
-            {{--                                <h3 class="mb-0 g-color-gray-dark-v2">THƯ VIỆN ẢNH</h3>--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                        <article class="u-block-hover">--}}
-            {{--                            <div class="g-z-index-2 g-pa-15">--}}
-            {{--                                <div id="carousel-08-1" class="js-carousel text-center g-mb-15" data-infinite="true" data-arrows-classes="u-arrow-v1 g-absolute-centered--y g-width-35 g-height-40 g-font-size-18 g-color-gray g-bg-white g-mt-minus-10" data-arrow-left-classes="fa fa-angle-left g-left-0" data-arrow-right-classes="fa fa-angle-right g-right-0" data-nav-for="#carousel-08-2">--}}
-            {{--                                    <div class="js-slide">--}}
-            {{--                                        <a class='js-fancybox d-block g-pos-rel image-wrapper169' href='javascript:;' data-fancybox='lightbox-gallery--08-1' data-src='/Upload/Gallery/tamloi-2020-04-15-09-56-15-.jpg' data-caption='Gà Mía Sơn Tây - Mã mào, chân cẳng đỏ hây hây' data-animate-in='bounceInDown' data-animate-out='bounceOutDown' data-speed='1000' data-overlay-blur-bg='true'><img class='img-fluid w-100' src='../Upload/Gallery/tamloi-2020-04-15-09-56-15-.jpg' alt=''/><span class='u-bg-overlay__inner h6 g-font-weight-700 g-color-white g-pos-abs g-left-20 g-bottom-10'>Gà Mía Sơn Tây - Mã mào, chân cẳng đỏ hây hây</span></a>--}}
-            {{--                                    </div>--}}
+    @elseif($post->translation->slug == 'cau-hoi-thuong-gap')
+        @include('ladipage.quession')
 
-            {{--                                    <div class="js-slide">--}}
-            {{--                                        <a class="js-fancybox d-block g-pos-rel image-wrapper169" href="javascript:;" data-fancybox="lightbox-gallery--08-1" data-src="/Upload/Gallery/tamloi-2020-04-15-10-05-17-.jpg" data-caption="" data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000" data-overlay-blur-bg="true">--}}
-            {{--                                            <img class="img-fluid w-100" src="../Upload/Gallery/tamloi-2020-04-15-10-05-17-.jpg" alt="" />--}}
-            {{--                                        </a>--}}
-            {{--                                    </div>--}}
+    @elseif($post->translation->slug == 'cham-soc-suc-khoe')
+        @include('ladipage.choise_v1')
 
-            {{--                                    <div class="js-slide">--}}
-            {{--                                        <a class="js-fancybox d-block g-pos-rel image-wrapper169" href="javascript:;" data-fancybox="lightbox-gallery--08-1" data-src="/Upload/Gallery/tamloi-2020-04-15-10-11-01-.jpg" data-caption="" data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000" data-overlay-blur-bg="true">--}}
-            {{--                                            <img class="img-fluid w-100" src="../Upload/Gallery/tamloi-2020-04-15-10-11-01-.jpg" alt="" />--}}
-            {{--                                        </a>--}}
-            {{--                                    </div>--}}
+    @elseif($post->translation->slug == 'dau-tu-hieu-qua')
+        @include('ladipage.choise_v2')
 
-            {{--                                    <div class="js-slide">--}}
-            {{--                                        <a class="js-fancybox d-block g-pos-rel image-wrapper169" href="javascript:;" data-fancybox="lightbox-gallery--08-1" data-src="/Upload/Gallery/tamloi-2020-04-15-10-11-13-.jpg" data-caption="" data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000" data-overlay-blur-bg="true">--}}
-            {{--                                            <img class="img-fluid w-100" src="../Upload/Gallery/tamloi-2020-04-15-10-11-13-.jpg" alt="" />--}}
-            {{--                                        </a>--}}
-            {{--                                    </div>--}}
+    @elseif($post->translation->slug == 'tich-luy-tuong-lai')
+        @include('ladipage.choise_v3')
 
-            {{--                                </div>--}}
-            {{--                                <div id="carousel-08-2" class="js-carousel text-center g-mx-minus-10 u-carousel-v3" data-infinite="true" data-center-mode="true" data-slides-show="4" data-is-thumbs="true" data-nav-for="#carousel-08-1">--}}
-            {{--                                    <div class="js-slide g-px-10">--}}
-            {{--                                        <img class='img-fluid w-100' src='../Upload/Gallery/tamloi-2020-04-15-09-56-15-.jpg' alt=''/>--}}
-            {{--                                    </div>--}}
+    @elseif($post->translation->slug == 'an-nhan-tuoi-gia')
+        @include('ladipage.choise_v4')
 
-            {{--                                    <div class="js-slide g-px-10">--}}
-            {{--                                        <img class="img-fluid w-100" src="../Upload/Gallery/tamloi-2020-04-15-10-05-17-.jpg" alt="" />--}}
-            {{--                                    </div>--}}
+    @elseif($post->translation->slug == 'dac-quyen')
+        @include('ladipage.power')
 
-            {{--                                    <div class="js-slide g-px-10">--}}
-            {{--                                        <img class="img-fluid w-100" src="../Upload/Gallery/tamloi-2020-04-15-10-11-01-.jpg" alt="" />--}}
-            {{--                                    </div>--}}
-
-            {{--                                    <div class="js-slide g-px-10">--}}
-            {{--                                        <img class="img-fluid w-100" src="../Upload/Gallery/tamloi-2020-04-15-10-11-13-.jpg" alt="" />--}}
-            {{--                                    </div>--}}
-
-
-            {{--                                </div>--}}
-            {{--                            </div>--}}
-            {{--                        </article>--}}
-            {{--                    </div>--}}
-            {{--                    <!-- End Links -->--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
-        </div>
-</section>
-<!-------------------------->
-<!-----------SOURCSE----------->
-<!-------------------------->
+    @endif
 @stop

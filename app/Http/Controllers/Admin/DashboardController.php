@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Post;
+use App\Models\Product;
 use App\Models\User;
+use App\Models\Visitor;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 
@@ -140,6 +143,18 @@ class DashboardController extends Controller {
 
             $data['per_order'] = $per_order;
             $data['today'] = $today;
+
+
+            $data['products'] = Product::ofTranslation()->where('view', '>',0)->latest('view')->take(50)->get();
+            $data['posts'] = Post::with('translation')->where('view', '!=' ,0)->latest('view')->take(50)->get();
+
+            $visitors = Visitor::selectRaw('SUM(referer_count) as count, referer_domain')->groupByRaw('referer_domain')->oldest('referer_domain')->get();
+
+            $data['referer_domain'] = $visitors->pluck('referer_domain')->toArray();
+
+            $data['referer_count'] = $visitors->pluck('count')->toArray();
+
+            $data['sum_count'] = $visitors->sum('count');
 
 	        return view('admin.dashboard.dashboard', $data);
 	}

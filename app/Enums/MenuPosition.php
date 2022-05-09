@@ -11,8 +11,9 @@ use BenSampo\Enum\Enum;
  */
 final class MenuPosition extends Enum
 {
-    const top =   'top';
-    const left =   'left';
-    const right = 'right';
-    const bottom = 'bottom';
+    const top = 1;
+    const home = 2;
+    const left = 3;
+    const right = 4;
+    const bottom = 5;
 }

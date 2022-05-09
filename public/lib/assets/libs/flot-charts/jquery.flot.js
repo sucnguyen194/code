@@ -82,7 +82,7 @@ Licensed under the MIT license.
 				if (window.G_vmlCanvasManager) {
 					element = window.G_vmlCanvasManager.initElement(element);
 				} else {
-					throw new Error("Canvas is not available. If you're using IE with a fall-back such as Excanvas, then there's either a mistake in your conditional include, or the page has no DOCTYPE and is rendering in Quirks Mode.");
+					throw new Error("Canvas is not available. If you're using IE with a fall-back such as Excanvas, then there's either a mistake in your conditional partials, or the page has no DOCTYPE and is rendering in Quirks Mode.");
 				}
 			}
 		}
@@ -2010,7 +2010,7 @@ Licensed under the MIT license.
                             ctx.lineTo(xrange.to + subPixel, yrange.to);
                         } else {
                             ctx.moveTo(xrange.from, yrange.to + subPixel);
-                            ctx.lineTo(xrange.to, yrange.to + subPixel);                            
+                            ctx.lineTo(xrange.to, yrange.to + subPixel);
                         }
                         ctx.stroke();
                     } else {
@@ -2525,9 +2525,9 @@ Licensed under the MIT license.
                 radius = series.points.radius,
                 symbol = series.points.symbol;
 
-            // If the user sets the line width to 0, we change it to a very 
+            // If the user sets the line width to 0, we change it to a very
             // small value. A line width of 0 seems to force the default of 1.
-            // Doing the conditional here allows the shadow setting to still be 
+            // Doing the conditional here allows the shadow setting to still be
             // optional even with a lineWidth of 0.
 
             if( lw == 0 )

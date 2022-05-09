@@ -141,7 +141,7 @@ snippet mod module .. ClassMethods .. end\n\
 \n\
 		def self.included(receiver)\n\
 			receiver.extend         ClassMethods\n\
-			receiver.send :include, InstanceMethods\n\
+			receiver.send :partials, InstanceMethods\n\
 		end\n\
 	end\n\
 # attr_reader\n\
@@ -157,16 +157,16 @@ snippet atp\n\
 	attr_protected :${1:attr_names}\n\
 snippet ata\n\
 	attr_accessible :${1:attr_names}\n\
-# include Enumerable\n\
+# partials Enumerable\n\
 snippet Enum\n\
-	include Enumerable\n\
+	partials Enumerable\n\
 \n\
 	def each(&block)\n\
 		${1}\n\
 	end\n\
-# include Comparable\n\
+# partials Comparable\n\
 snippet Comp\n\
-	include Comparable\n\
+	partials Comparable\n\
 \n\
 	def <=>(other)\n\
 		${1}\n\
@@ -939,4 +939,3 @@ exports.scope = "ruby";
                         }
                     });
                 })();
-            

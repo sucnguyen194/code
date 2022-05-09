@@ -1,5 +1,13 @@
 <?php
 return [
+    'question'                                  => 'Câu hỏi',
+    'questions'                                  => 'Câu hỏi thường gặp',
+    'result'                                  => 'Câu trả lời',
+    'total'                                  => 'Tổng',
+    'browser'                                => 'Trình duyệt',
+    'recruitment'                            => 'Tuyển dụng ',
+    'deadline'                               => 'Hạn nộp hồ sơ',
+    'template'                               => 'Giao diện',
     //admin flash
     'flash_create'                           => 'Thêm bản ghi thành công!',
     'flash_update'                           => 'Cập nhật bản ghi thành công!',
@@ -87,6 +95,7 @@ return [
     'main'                                   => 'chính',
     'sub'                                    => 'phụ',
     'select'                                 => 'Chọn',
+    'color'                                  => 'Màu sắc',
     //seo
     'optimization'                           => 'Tối ưu',
     'note_seo'                               => 'Thiết lập các thẻ mô tả giúp khách hàng dễ dàng tìm thấy trang trên công cụ tìm kiếm như Google.',
@@ -103,7 +112,7 @@ return [
     'support'                                => 'Hỗ trợ',
     'customer_reviews'                       => 'Ý kiến khách hàng',
     'support_team'                           => 'Đội ngũ hỗ trợ',
-    'message'                                => 'Tin nhắn',
+    'messenger'                                => 'Tin nhắn',
     'menu'                                   => 'Menu',
     'image'                                  => 'Hình ảnh',
     'pic'                                    => 'Ảnh đại diện',
@@ -247,6 +256,7 @@ return [
     //setting - tab4
     'note_facebook'                          => 'Nhập url fanpage được cung cấp bởi Facebook.',
     'note_youtube'                           => 'Nhập url channel được cung cấp bởi Youtube.',
+    'note_google'                            => 'Nhập url google plus được cung cấp bởi Google.',
     'note_zalo'                              => 'Nhập số điện thoại đã đăng ký Zalo.',
     'note_skype'                             => 'Nhập account đăng ký Skype.',
     'note_twitter'                           => 'Nhập url được cung cấp bởi Twitter',
@@ -256,8 +266,9 @@ return [
     //setting - tab5
     'note_google_analytics'                  => 'Nhập ID tài khoản GA được cung cấp bởi google',
     'note_imgur'                             => 'Nhập Client ID được cung cấp bởi Imgur',
-    'note_facebook_app'                      => 'Nhập App ID, App Secret được cung cấp bởi facebook.',
-    'note_facebook_messages'                 => 'Ứng dụng chat trực tuyến từ facebook. Nhập App ID, App ID messages được cung cấp bởi facebook.',
+    'note_facebook_app'                      => 'Nhập App ID, App Secret, Url Redirect được cung cấp bởi Facebook.',
+    'note_google_app'                        => 'Nhập App ID, App Secret, Url Redirect được cung cấp bởi Google.',
+    'note_messenger'                 => 'Ứng dụng chat trực tuyến từ facebook. Nhập App ID, Messenger Text được cung cấp bởi facebook.',
     'note_google_capcha'                     => 'Ứng dụng chống spam từ google. Thiết lập và nhập site key và secret key được cung cấp bởi google.',
     //setting - tab6
     'note_config_post'                       => 'Cấu hình kích thước hình ảnh <code> thumbnail, số lượng bài viết hiển thị tại trang chủ, danh mục, tin liên quan ...</code>',
@@ -273,5 +284,7 @@ return [
     //languages
     'list_language'                          => 'Danh sách ngôn ngữ',
     'confirm_change_language'                => 'Xác nhận chuyển ngôn ngữ?',
+    //attributes
+    'attribute'                              => 'Thuộc tính'
 ]
 ?>

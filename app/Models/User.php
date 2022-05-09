@@ -51,6 +51,10 @@ class User extends Authenticatable
         return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email ?? $this->account)).'.jpg?s=200&d=identicon';
     }
 
+    public function orders(){
+        return $this->hasMany(Order::class)->latest();
+    }
+
     public function identities()
     {
         return $this->hasMany(SocialIdentity::class);
@@ -59,5 +63,8 @@ class User extends Authenticatable
     public static function boot(){
         parent::boot();
 
+        static::deleting(function($user){
+            $user->email = $user->email.'.'.now();
+        });
     }
 }

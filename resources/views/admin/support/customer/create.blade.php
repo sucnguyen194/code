@@ -119,9 +119,6 @@
                 {title: "Div", format: "div"},
                 {title: "Pre", format: "pre"}
             ],
-            // content_css: [
-            //     '/public/css/app.css'
-            // ],
             link_class_list: [
                 {title: 'Geen', value: ''}
             ],
@@ -173,8 +170,7 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error)
-                console.error("Error:", error);
+                alert('Lỗi upload: '+error);
             });
 
     });

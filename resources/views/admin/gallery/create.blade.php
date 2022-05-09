@@ -129,7 +129,7 @@
                             'type' :'error'
                         };
                      flash(obj);
-                    //console.error("Error:", error);
+
                 });
         }
 
@@ -144,7 +144,7 @@
             $(slider).addClass('d-none').removeClass('d-inline-block');
             $(remove).removeClass('d-none').show();
         }
-    })
+    });
     $(document).on('change','#slider-input',function(){
 
         let parent = $(this).parent().parent().parent().parent();

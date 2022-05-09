@@ -27,7 +27,7 @@
                 @csrf
                 <div class="col-lg-9">
                     @include('admin.render.create.nav')
-                        <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
+                        <div class="tab-content pt-0">
                             @foreach(languages() as $key => $language)
                                 <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" >
                                     <div class="card-box">
@@ -52,9 +52,9 @@
                     <div class="card-box position-relative box-action-image">
                         @include('admin.render.create.image')
                     </div>
-                    <div class="card-box">
-                        @include('admin.render.create.tag',['type' => \App\Enums\TagType::post])
-                    </div>
+
+                    @include('admin.render.create.tag',['type' => \App\Enums\TagType::post])
+
                 </div>
 
                 <div class="col-lg-12">

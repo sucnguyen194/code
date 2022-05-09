@@ -11,5 +11,5 @@ use BenSampo\Enum\Enum;
  */
 final class PhotoType extends Enum
 {
-    const photo =   'photo';
+    const photo =   1;
 }

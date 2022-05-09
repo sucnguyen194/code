@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.product')}} #ID{{$product->id}}
+    {{__('lang.product')}} #{{$product->id}}
 @stop
 @section('content')
 
@@ -13,10 +13,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a></li>
-                            <li class="breadcrumb-item active">#ID{{$product->id}}</li>
+                            <li class="breadcrumb-item active">#{{$product->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.product')}} #ID{{$product->id}}</h4>
+                    <h4 class="page-title">{{__('lang.product')}} #{{$product->id}}</h4>
                 </div>
             </div>
         </div>
@@ -27,9 +27,9 @@
             <div class="row">
                 @csrf
                 @method('PUT')
-                <div class="col-lg-9">
+                <div class="col-xl-9 col-lg-9 col-md-8">
                     @include('admin.render.edit.nav')
-                    <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
+                    <div class="tab-content pt-0">
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane language-{{$translation->locale}} {{$translation->locale == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="card-box">
@@ -51,54 +51,65 @@
                             @endforeach
 
                         </div>
-                        <div class="card-box">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
-                                        <label>{{__('lang.code')}}</label>
-                                        <input type="text" class="form-control" value="{{$product->code}}" id="code" name="data[code]">
-                                    </div>
-                                </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
-                                        <label>{{__('lang.price')}}</label>
-                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" min="0" value="{{number_format($product->price)}}" id="price">
-                                        <input type="text" class="form-control d-none" min="0" value="{{$product->price}}" id="format-price" name="data[price]">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group mb-0">
-                                        <label>{{__('lang.price_sale')}}</label>
-                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" value="{{number_format($product->price_sale)}}" min="0" id="price_sale">
-                                        <input type="text" class="form-control d-none" value="{{$product->price_sale}}" min="0" id="format-price-sale" name="data[price_sale]">
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="card-box">
+                        <label class="form-label">Gói dịch vụ</label>
+                        <div class="table-responsive">
+                            <table class="table product-options text-center" data-dynamicrows>
+                                <thead>
+                                <tr>
+                                    <th>Tên dịch vụ <span class="required">*</span></th>
+                                    <th>Giá ($)</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if($product->options)
+                                    @foreach($product->options as $key=>$option)
+                                <tr>
+                                    <td>
+                                        <input type="text" name="fields[{{$key}}][name]" class="form-control" value="{{$option['name']}}" required>
+                                    </td>
+
+
+                                    <td>
+                                        <input type="price" step="0.1" name="fields[{{$key}}][price]" class="form-control" value="{{$option['price'] ?? '0.00'}}">
+                                    </td>
+
+                                    <td>
+                                        <i class="fa fa-minus" data-remove></i>
+                                        <i class="fa fa-arrows" data-move></i>
+                                        <i class="fa fa-plus" data-add></i>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+
+                                @else
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="fields[0][name]" class="form-control" value="" required>
+                                        </td>
+
+
+                                        <td>
+                                            <input type="price" step="0.1" name="fields[0][price]" class="form-control" value="0.00">
+                                        </td>
+
+                                        <td>
+                                            <i class="fa fa-minus" data-remove></i>
+                                            <i class="fa fa-arrows" data-move></i>
+                                            <i class="fa fa-plus" data-add></i>
+
+                                        </td>
+                                    </tr>
+                                @endif
+
+
+                                </tbody>
+                            </table>
                         </div>
-                        @if($attributes->count())
-                            <div class="card-box pb-1 clearfix">
-                                <label>{{__('lang.filter')}}</label>
-
-                                <div class="row">
-                                    @foreach($attributes->where('category_id',0) as $attribute)
-                                        <div class="col-lg-4 form-group">
-                                            <div class="border h-100 p-2">
-                                                <label>{{$attribute->translation->name}}</label>
-                                                <hr class="mt-0 border-primary">
-                                                @foreach($attributes->where('category_id', $attribute->id) as $parent)
-                                                    <div class="checkbox">
-                                                        <input id="checkbox_attibute_{{$parent->id}}" type="checkbox" name="attribute[]" value="{{$parent->id}}" {{checked($parent->id, $product->attributes->pluck('id')->toArray())}}>
-                                                        <label for="checkbox_attibute_{{$parent->id}}" class="{{$loop->last ? "mb-0" : ""}}">{{$parent->title}}</label>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                            </div>
-                        @endif
+                    </div>
 
                     <div class="card-box position-relative box-action-image float-left w-100">
                         @include('admin.render.edit.multiple_image', ['item' => $product])
@@ -109,6 +120,32 @@
                             }
                         </style>
                     </div>
+
+                        @if($filters->count())
+                            <div class="card-box pb-1 clearfix">
+                                <label>{{__('lang.filter')}}</label>
+
+                                <div class="row">
+                                    @foreach($filters->where('parent_id',0) as $filter)
+                                        <div class="col-lg-4 form-group">
+                                            <div class="border h-100 p-2">
+                                                <label>{{$filter->name}}</label>
+                                                <hr class="mt-0 border-primary">
+                                                @foreach($filters->where('parent_id', $filter->id) as $parent)
+                                                    <div class="checkbox">
+                                                        <input id="checkbox_attibute_{{$parent->id}}" type="checkbox" name="filter[]" value="{{$parent->id}}" {{checked($parent->id, $product->filters->pluck('id')->toArray())}}>
+                                                        <label for="checkbox_attibute_{{$parent->id}}" class="{{$loop->last ? "mb-0" : ""}}">{{$parent->name}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                            </div>
+                        @endif
+
+
                     <div class="tab-content pt-0 float-left w-100">
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane language-{{$translation->locale}} {{$translation->locale == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
@@ -171,12 +208,9 @@
                     <div class="card-box">
                         @include('admin.render.edit.status', ['item' => $product])
                     </div>
-
                     @include('admin.render.edit.category', ['item' => $product, 'type' => \App\Enums\CategoryType::product])
-
-                    <div class="card-box">
-                        @include('admin.render.edit.tag', ['item' => $product, 'type' => \App\Enums\TagType::product])
-                    </div>
+                    
+                    @include('admin.render.edit.tag', ['item' => $product, 'type' => \App\Enums\TagType::product])
                 </div>
 
                 <div class="col-lg-12">
@@ -207,12 +241,23 @@
         $(document).on('click','.view-image',function(){
             let image = $(this).attr('data-image');
             $('.showImage').attr('src', image);
-        })
+        });
         $('[data-toggle="tab"]').on('click',function(e){
             e.preventDefault();
             let pane = $(this).attr('href');
 
             $('.tab-pane').removeClass('active').hide();
+            $(pane).addClass('active').show();
+        });
+
+        $('[data-toggle="custom"]').on('click',function(e){
+            e.preventDefault();
+            let pane = $(this).attr('href');
+
+            $('[data-toggle="custom"]').removeClass('active');
+            $(this).addClass('active');
+
+            $('.tab-custom').removeClass('active').hide();
             $(pane).addClass('active').show();
         });
 
@@ -226,18 +271,19 @@
             if(value > 99)
                 value = value.replace(/^0+/, '');
 
-            $(this).val(number_format(value))
+            $(this).val(number_format(value));
             value = value.replaceAll(',','');
-            console.log(value);
+
             $(format_price).val(value);
-        })
+            console.log($(format_price).val());
+        });
 
         $(sale).on('keyup',function (){
             let value = $(this).val();
             if(value > 99)
                 value = value.replace(/^0+/, '');
 
-            $(this).val(number_format(value))
+            $(this).val(number_format(value));
             value = value.replaceAll(',','');
             $(format_price_sale).val(value);
         })

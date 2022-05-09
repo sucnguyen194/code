@@ -106,11 +106,11 @@
                 $(document).ready(function () {
                     $("select").on('change', function () {
                         $table.bootstrapTable('refresh');
-                    })
+                    });
                     $('input[name=date]').on('change',function(){
                         $table.bootstrapTable('refresh');
                     })
-                })
+                });
 
                 function statusFormatter(value, row) {
 

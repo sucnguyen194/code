@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.post')}} #ID{{$post->id}}
+    {{__('lang.post')}} #{{$post->id}}
 @stop
 @section('content')
     <div class="container-fluid">
@@ -12,10 +12,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.posts.index')}}">{{__('lang.post')}}</a></li>
-                            <li class="breadcrumb-item">#ID{{$post->id}}</li>
+                            <li class="breadcrumb-item">#{{$post->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.post')}} #ID{{$post->id}}</h4>
+                    <h4 class="page-title">{{__('lang.post')}} #{{$post->id}}</h4>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 @method('PATCH')
                 <div class="col-lg-9">
                     @include('admin.render.edit.nav')
-                    <div class="tab-content {{setting('site.languages') || languages()->count() == 1 ? "pt-0" : ""}}">
+                    <div class="tab-content pt-0">
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane language-{{$translation->locale}} {{$translation->locale == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="card-box">
@@ -72,9 +72,7 @@
                         @include('admin.render.edit.image',['item' => $post])
                     </div>
 
-                    <div class="card-box">
-                        @include('admin.render.edit.tag',['item' => $post, 'type' => \App\Enums\TagType::post])
-                    </div>
+                    @include('admin.render.edit.tag',['item' => $post, 'type' => \App\Enums\TagType::post])
 
                 </div>
 

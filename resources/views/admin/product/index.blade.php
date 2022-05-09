@@ -89,12 +89,12 @@
                                 <th data-field="category" data-formatter="categoryFormatter">
                                     {{__('lang.category')}}
                                 </th>
-                                <th data-field="code">
-                                    {{__('lang.code')}}
-                                </th>
+{{--                                <th data-field="code">--}}
+{{--                                    {{__('lang.code')}}--}}
+{{--                                </th>--}}
 
                                 <th data-field="price" data-formatter="priceFormatter">
-                                    {{__('lang.price')}}
+                                    Gói dịch vụ
                                 </th>
                                 @can('comment.view')
                                     <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
@@ -154,14 +154,14 @@
         $(document).ready(function(){
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
-            })
+            });
 
             $(document).on('click','.view-image',function(){
                 let image = $(this).data('image');
                 $('#viewImage').modal('show');
                 $('.showImage').attr('src', image);
             })
-        })
+        });
         function commentFormatter(value, row){
             let html = value + ' / ' + row.rating + ' <i class="fa fa-star text-warning" aria-hidden="true"></i> ';
             return html;
@@ -253,13 +253,27 @@
             return '<a href="'+ row.slug +'" class="font-weight-bold" target="_blank">'+ value +'</a>';
         }
 
+        // function priceFormatter(value,row){
+        //
+        //     if(row.price_sale > 0 && row.price_sale < value){
+        //         return row.price_sale + ' <small>('+value+')</small>';
+        //     }else{
+        //         return value;
+        //     }
+        // }
         function priceFormatter(value,row){
+            let options = row.options;
 
-            if(row.price_sale > 0 && row.price_sale < value){
-                return numberFormatter(row.price_sale) + ' <small>('+numberFormatter(value)+')</small>';
-            }else{
-                return numberFormatter(value);
+            let option = '';
+            if(options){
+
+                $(options).each(function(index, value){
+
+                    option += '<div>' + value.name + ' <strong>[ ' + value.price + ']</strong><div>';
+                });
             }
+
+            return option;
         }
 
         function actionFormatter(value, row){

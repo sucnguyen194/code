@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->decimal('price', 16, 2)->default(0);
             $table->decimal('price_sale', 16, 2)->default(0);
-            $table->string('image')->nullable();
             $table->integer('amount')->default(0);
             $table->string('code')->nullable();
             $table->longText('photo')->nullable();

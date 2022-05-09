@@ -11,7 +11,9 @@ use BenSampo\Enum\Enum;
  */
 final class Position extends Enum
 {
-    const Slider =   'Slider';
-    const Banner =   'Banner';
-    const Logo =   'Logo';
+    const Slider = 1;
+    const Banner = 2;
+    const Logo = 3;
+    const Partner = 4;
+    const Idol = 5;
 }

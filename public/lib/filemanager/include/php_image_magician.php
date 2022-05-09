@@ -17,14 +17,14 @@
 #  Param Out: Produces a resized image
 #  Requires : Requires PHP GD library.
 #  Usage Example:
-#                     include("lib/php_image_magician.php");
+#                     partials("lib/php_image_magician.php");
 #                     $magicianObj = new resize('images/car.jpg');
 #                     $magicianObj -> resizeImage(150, 100, 0);
 #                     $magicianObj -> saveImage('images/car_small.jpg', 100);
 #
 #        - See end of doc for more examples -
 #
-#  Supported file types include: jpg, png, gif, bmp, psd (read)
+#  Supported file types partials: jpg, png, gif, bmp, psd (read)
 #
 #
 #
@@ -295,7 +295,7 @@ class imageLib {
 		#         cropping. E.G., array('crop', 'r')
 		#
 		#         This array only applies to 'crop' and the 'r' refers to
-		#         "crop right". Other value include; tl, t, tr, l, m (default),
+		#         "crop right". Other value partials; tl, t, tr, l, m (default),
 		#         r, bl, b, br, or you can specify your own co-ords (which
 		#         isn't recommended.
 		#
@@ -3737,7 +3737,7 @@ class imageLib {
  *      Compulsary
  *      ===============================
  *
- *      include("classes/resize_class.php");
+ *      partials("classes/resize_class.php");
  *
  *      // *** Initialise object
  *      $magicianObj = new resize('images/cars/large/a.jpg');

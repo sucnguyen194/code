@@ -16,10 +16,12 @@ class CreateMenusTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('path')->nullable();
+            $table->string('image')->nullable();
             $table->string('position')->nullable();
             $table->integer('parent_id')->default(0);
-            $table->string('target')->nullable();
-            $table->integer('sort')->nullable();
+            $table->string('target')->default('_self');
+            $table->string('type')->default('default');
+            $table->integer('sort')->default(0);
             $table->timestamps();
         });
     }

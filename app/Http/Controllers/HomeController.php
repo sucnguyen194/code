@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActiveDisable;
 use App\Enums\CategoryType;
+use App\Enums\PhotoType;
+use App\Enums\Position;
 use App\Enums\PostType;
-use App\Enums\ProductType;
+use App\Enums\SupportType;
 use App\Enums\TakeItem;
-use App\Models\Attribute;
+use App\Models\Admin;
+use App\Models\Category;
+use App\Models\Filter;
+use App\Models\Map;
+use App\Models\Photo;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Support;
 use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use BrowserDetect;
-
+use Illuminate\Support\Str;
+use voku\helper\HtmlDomParser;
 
 class HomeController extends Controller
 {
@@ -32,6 +40,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
         if(setting('site.maintenance')){
@@ -41,7 +50,18 @@ class HomeController extends Controller
             }
         }
 
-        return view('layouts.home');
+       $data['sliders'] = Photo::ofPosition(Position::Slider)->get();
+       $data['partners'] = Photo::ofPosition(Position::Partner)->get();
+       $data['idols'] = Photo::ofPosition(Position::Idol)->get();
+//       $data['posts']  = Post::ofType(PostType::post)->with(['categories','admin','category'])->withCount('comments')->ofTake(TakeItem::index)->status()->get();
+
+       $data['categoris'] = Category::with(['posts' => function($q){
+           $q->sort();
+       }])->ofType(CategoryType::post)->status()->get();
+
+       $data['fixed'] = true;
+
+        return view('layouts.home', $data);
     }
 
     public function maintenance(Request $request){
@@ -84,66 +104,98 @@ class HomeController extends Controller
 
         switch (true) {
             case ($translation->post):
+
                 $this->setView($translation->post);
+
+                $post = $translation->post;
 
                 switch ($translation->post->type) {
                     case (PostType::post):
-                        return view('post.show', compact('translation'));
+
+                        $related = Post::with(['categories','admin'])
+                            ->where('id','!=', $post->id)
+                            ->ofCategory(optional($post->category)->id)
+                            ->ofTake(TakeItem::replated)->get();
+
+                        return view('post.show', compact('post','related'));
                         break;
                     case (PostType::video):
-                        return view('post.video.show', compact('translation'));
+                        return view('post.video.show', compact('post'));
                         break;
 
                     case (PostType::gallery):
-                        return view('post.gallery.show', compact('translation'));
+                        return view('post.gallery.show', compact('post'));
                         break;
-                    default;
-                        return view('post.page', compact('translation'));
+
+                        default;
+                        return view('post.page', compact('post'));
                 }
                 break;
 
             case ($translation->product):
                 $this->setView($translation->product);
-                return view('product.show', compact('translation'));
+                $product = $translation->product;
+
+                $related = Product::with(['categories' ,'admin','translation'])
+                    ->where('id','!=', $product->id)
+                    ->ofCategory(optional($product->category)->id)
+                    ->ofTake(TakeItem::replated)->get();
+
+                return view('product.show', compact('product', 'related'));
 
             case ($translation->category):
 
-                switch ($translation->category->type) {
+                $category = $translation->category;
+
+                switch ($category->type) {
                     case (CategoryType::product):
 
                         $products = Product::with(['category','admin'])
-                            ->when(request()->attr, function ($q){
-                                $q->whereHas('attributes', function ($q) {
+                            ->when(request()->filters, function ($q){
+                                $q->whereHas('filters', function ($q) {
                                     $q->whereHas('translations', function($q) {
-                                        $q->whereIn('name', explode(',', request()->attr));
+                                        $q->whereIn('name', collect(\request()->filters));
                                     });
                                 });
                             })
                             ->ofTranslation()
-                            ->ofCategory($translation->item_category)
-                            ->latest()->paginate(setting('site.product.category') ?? 20);
+                            ->ofCategory($category->id)
+                            ->latest()->paginate(setting('site.product.category') ?? 12);
 
-                        return view('product.category', compact('translation','products'));
+                        return view('product.category', compact('category','products'));
                         break;
                     case (CategoryType::post):
-                        $posts = Post::with(['category','admin'])->ofType(PostType::post)->ofCategory($translation->item_category)->latest()->paginate(setting('site.post.category') ?? 12);
+                        $posts = Post::with(['category','admin'])
+                            ->ofType(PostType::post)
+                            ->ofCategory($category->id)
+                            ->latest()
+                            ->paginate(setting('site.post.category') ?? 12);
 
-                        return view('post.category', compact('translation','posts'));
+                        return view('post.category', compact('category','posts'));
                         break;
                 }
                 break;
         }
     }
 
+    public function author($id){
+        $author = Admin::find($id);
+
+            if(!$author)
+                return redirect()->back()->withInput();
+
+        $posts = auth()->post->latest()->paginate(setting('site.post.category') || 12);
+
+        return view('post.author',compact('posts','author'));
+    }
+
     public function setView($translation){
 
-        if(session('view') != $translation->id)
+        if(session('view') === $translation->id)
             return;
 
             $translation->increment('view');
-            $translation->timestamps = false;
             $translation->save();
-
             session()->put('view', $translation->id);
     }
 }

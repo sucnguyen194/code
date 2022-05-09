@@ -11,8 +11,9 @@ use BenSampo\Enum\Enum;
  */
 final class PostType extends Enum
 {
-    const post = "post";
-    const page = "page";
-    const video = "video";
-    const gallery = "gallery";
+    const post = 1;
+    const page = 2;
+    const video = 3;
+    const gallery = 4;
+    const recruitment = 5;
 }

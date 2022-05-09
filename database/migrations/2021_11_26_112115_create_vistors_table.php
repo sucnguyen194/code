@@ -13,7 +13,7 @@ class CreateVistorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vistors', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
             $table->id();
             $table->string('referer_ip')->nullable();
             $table->string('referer_domain')->nullable();

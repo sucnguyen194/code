@@ -4,13 +4,7 @@
 @section('site_name') {{$translation->title_seo}} @stop
 @section('description') {{$translation->description_seo}} @stop
 @section('keywords') {{$translation->keyword_seo}} @stop
-@section('image') {{$translation->product->image}} @stop
+@section('image') {{$translation->item->image}} @stop
 @section('content')
-<!-------------------------->
-<!-----------SOURCSE----------->
-<!-------------------------->
-@include('include.comment')
-<!-------------------------->
-<!-----------SOURCSE----------->
-<!-------------------------->
+
 @stop

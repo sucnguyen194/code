@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Enums\ActiveDisable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Translation extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory, LogsActivity, SoftDeletes;
 
     protected static $logUnguarded = true;
     protected static $submitEmptyLogs = false;
@@ -38,10 +39,6 @@ class Translation extends Model
 
     public function language(){
         return $this->belongsTo(Language::class,'locale','value');
-    }
-
-    public function getItemCategoryAttribute(){
-        return $this->item->category->id ?? 0;
     }
 
     public function getItemAttribute(){

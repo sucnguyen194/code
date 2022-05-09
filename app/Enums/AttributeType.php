@@ -11,5 +11,5 @@ use BenSampo\Enum\Enum;
  */
 final class AttributeType extends Enum
 {
-    const attribute =   'attribute';
+    const attribute =   1;
 }

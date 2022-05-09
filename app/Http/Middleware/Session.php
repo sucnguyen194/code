@@ -25,12 +25,12 @@ class Session
             session()->put('lang',$value);
         }
 
-        if(setting('site.languages')){
-            $languages = Language::oldest('status')->get();
+        if(!setting('site.languages')){
+            $languages = Language::take(1)->oldest('status')->get();
         }else{
-            $languages = Language::oldest('status')->take(1)->get();
+            $languages = Language::all();
         }
-        session()->put('language', $languages);
+        session()->put('languages', $languages);
 
         return $next($request);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\Position;
 use App\Http\Controllers\Controller;
 use App\Models\Photo;
 use Illuminate\Http\Request;
@@ -42,6 +43,9 @@ class PhotoController extends Controller
 
             ->editColumn('thumbnail', function ($photo){
                 return $photo->thumb;
+            })
+            ->editColumn('position', function ($photo){
+                return Position::getDescription((int) $photo->position);
             })
             ->editColumn('created_at', function ($photo){
                 return $photo->created_at->diffForHumans();

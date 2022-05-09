@@ -40,12 +40,15 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::get('/data/categories',[App\Http\Controllers\Admin\CategoryController::class,'data'])->name('categories.data');
         Route::resource('categories',CategoryController::class);
 
+        Route::resource('/recruitments/categories',RecruitmentCategoryController::class,['as' => 'recruitments']);
+        Route::resource('/recruitments',RecruitmentController::class);
+
         //videos
-        Route::resource('/posts/videos',VideoController::class,['as' => 'posts']);
+        Route::resource('/videos',VideoController::class,['as' => 'posts']);
         //galeries
-        Route::resource('/posts/galleries',GalleryController::class,['as' => 'posts']);
+        Route::resource('/galleries',GalleryController::class,['as' => 'posts']);
         //pages
-        Route::resource('/posts/pages',PageController::class,['as' => 'posts']);
+        Route::resource('/pages',PageController::class,['as' => 'posts']);
         //posts categories
         Route::resource('/posts/categories',PostCategoryController::class,['as' => 'posts']);
 
@@ -64,9 +67,12 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::get('discounts/{discount}/history', [App\Http\Controllers\Admin\DiscountController::class,'history'])->name('discounts.history');
         Route::resource('discounts',DiscountController::class);
 
-        Route::get('attributes/{id}/render',[App\Http\Controllers\Admin\AttributeController::class,'render'])->name('attributes.render');
+//        Route::get('attributes/{id}/render',[App\Http\Controllers\Admin\AttributeController::class,'render'])->name('attributes.render');
         Route::get('data/attributes',[App\Http\Controllers\Admin\AttributeController::class,'data'])->name('attributes.data');
         Route::resource('attributes',AttributeController::class);
+
+        Route::get('data/filters',[App\Http\Controllers\Admin\FilterController::class,'data'])->name('filters.data');
+        Route::resource('filters',FilterController::class);
 
         //Photos
         Route::get('data/photos',[App\Http\Controllers\Admin\PhotoController::class,'data'])->name('photos.data');
@@ -79,7 +85,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::resource('menus',MenuController::class);
 
         //supports
-        Route::resource('/supports/customers',CustomerController::class,['as' => 'supports']);
+        Route::resource('/questions', QuestionController::class,['as' => 'supports']);
+        Route::resource('/customers',CustomerController::class,['as' => 'supports']);
         Route::get('data/supports',[App\Http\Controllers\Admin\SupportController::class,'data'])->name('supports.data');
         Route::resource('supports',SupportController::class);
 
@@ -104,8 +111,20 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
         Route::resource('sources',SourceController::class);
 
         //languages
-        Route::get('change/{lang}/languages', [App\Http\Controllers\Admin\LanguageController::class,'change'])->name('languages.change');
-        Route::post('active/{id}/languages',[App\Http\Controllers\Admin\LanguageController::class,'active'])->name('languages.active');
+        Route::get('languages/{lang}/change', [App\Http\Controllers\Admin\LanguageController::class,'change'])->name('languages.change');
+        Route::post('languages/{id}/active',[App\Http\Controllers\Admin\LanguageController::class,'active'])->name('languages.active');
+        Route::get('languages/{id}/translate',[App\Http\Controllers\Admin\LanguageController::class,'translate'])->name('languages.translate');
+
+        Route::get('languages/translate/edit',[App\Http\Controllers\Admin\LanguageController::class,'editTranslate'])->name('languages.edit.translate');
+
+        Route::get('languages/translate/delete',[App\Http\Controllers\Admin\LanguageController::class,'deleteTranslate'])->name('languages.delete.translate');
+
+        Route::post('languages/translate/{lang}/update',[App\Http\Controllers\Admin\LanguageController::class,'updateTranslate'])->name('languages.update.translate');
+
+        Route::get('languages/translate/import', [App\Http\Controllers\Admin\LanguageController::class,'import'])->name('languages.import.translate');
+
+        Route::post('languages/translate/import', [App\Http\Controllers\Admin\LanguageController::class,'importTranslate']);
+
         Route::get('data/languages',[App\Http\Controllers\Admin\LanguageController::class,'data'])->name('languages.data');
 
         Route::resource('languages', LanguageController::class);
@@ -125,6 +144,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'],fun
     });
 });
 
+Auth::routes();
+
 Route::get('auth/{provider}/login','Auth\LoginController@redirect')->name('login.social');
 Route::get('{provider}/callback','Auth\LoginController@callback')->name('login.social.callback');
 
@@ -132,20 +153,40 @@ Route::group(['namespace' => 'User'], function(){
     Route::get('login',  [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login',  [App\Http\Controllers\Auth\LoginController::class, 'login']);
     Route::get('forget',  [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('forget');
-    Route::middleware('auth:web')->group(function(){
+    Route::group([ 'middleware' => 'auth', 'as' => 'user.'], function(){
         Route::get('profile',[App\Http\Controllers\UserController::class,'profile'])->name('profile');
         Route::post('profile',[App\Http\Controllers\UserController::class,'update']);
+
+        Route::get('/change/password',[App\Http\Controllers\UserController::class,'password'])->name('password');
+        Route::post('/change/password',[App\Http\Controllers\UserController::class,'updatePassword'])->name('password.update');
     });
 });
 
-Route::group(['as' => 'orders.'], function () {
-    Route::get('orders', [App\Http\Controllers\OrderController::class,'index'])->name('index');
-    Route::get('checkout', [App\Http\Controllers\OrderController::class,'checkout'])->name('checkout');
-    Route::post('checkout',[App\Http\Controllers\OrderController::class,'store']);
-    Route::get('orders/destroy', [App\Http\Controllers\OrderController::class,'destroy']);
-    Route::get('orders/{rowid}/remove',[App\Http\Controllers\OrderController::class,'remove'] );
 
-    Route::post('store',[App\Http\Controllers\OrderController::class,'store'])->middleware('auth')->name('store');
+
+Route::group(['as' => 'order.', 'prefix' => 'order'], function () {
+    Route::post('/checkout/{id}/callback',[App\Http\Controllers\OrderController::class,'pmCallback'])->name('pm.callback');
+
+    Route::middleware('auth')->group(function(){
+        Route::post('/store',[App\Http\Controllers\OrderController::class,'store'])->name('store');
+
+        Route::get('/cart', [App\Http\Controllers\OrderController::class,'cart'])->name('cart');
+
+//        Route::get('orders', [App\Http\Controllers\OrderController::class,'index'])->name('index');
+
+        Route::get('/{id}/checkout', [App\Http\Controllers\OrderController::class,'checkout'])->name('checkout');
+        Route::post('/{id}/checkout', [App\Http\Controllers\OrderController::class,'payment']);
+
+        Route::get('orders/destroy', [App\Http\Controllers\OrderController::class,'destroy']);
+        Route::get('orders/{rowid}/remove',[App\Http\Controllers\OrderController::class,'remove'] );
+
+
+        Route::get('/checkout/vcb/success', [App\Http\Controllers\OrderController::class,'vcbSuccess'])->name('vcb.success');
+        Route::get('/checkout/nl/success', [App\Http\Controllers\OrderController::class,'nlSuccess'])->name('nl.success');
+
+
+    });
+
 });
 Route::group(['prefix' => 'ajax','as' => 'ajax.'], function () {
     Route::get('order/{id}/{qty}/{options}/create', [App\Http\Controllers\AjaxController::class,'create'])->name('order.create');
@@ -156,8 +197,8 @@ Route::group(['prefix' => 'ajax','as' => 'ajax.'], function () {
 
 Route::get('change/{lang}/languages', [App\Http\Controllers\AjaxController::class,'change'])->name('languages.change');
 
-//Route::get('lien-he.html', [App\Http\Controllers\ContactController::class,'index']);
-//Route::get('contact.html', [App\Http\Controllers\ContactController::class,'index'])->name('contact.index');
+Route::get('lien-he', [App\Http\Controllers\ContactController::class,'index']);
+Route::get('contact', [App\Http\Controllers\ContactController::class,'index'])->name('contact.index');
 Route::post('contact', [App\Http\Controllers\ContactController::class,'store'])->name('send.contact');
 
 Route::get('tag/{alias}',[App\Http\Controllers\SearchController::class,'tag'])->name('tag.show');
@@ -165,12 +206,15 @@ Route::get('search', [App\Http\Controllers\SearchController::class,'search'])->n
 
 Route::resource('comments',CommentController::class);
 
-Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('home');
+Route::get('/map',[App\Http\Controllers\HomeController::class,'map'])->name('map');
+
 Route::post('maintenance',[App\Http\Controllers\HomeController::class,'maintenance'])->name('maintenance');
-Route::get('{slug}.html', [App\Http\Controllers\HomeController::class,'translation'])->name('slug');
+Route::get('/posts/{id}/author', [App\Http\Controllers\HomeController::class,'author'])->name('post.author');
 
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapXmlController::class, 'generate']);
-Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('home');
+Route::get('{slug}', [App\Http\Controllers\HomeController::class,'translation'])->name('slug');
 
 Route::fallback(function(){
     return abort(404);

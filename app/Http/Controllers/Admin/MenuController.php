@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\CategoryType;
+use App\Enums\MenuPosition;
 use App\Enums\PostType;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -15,9 +16,8 @@ class MenuController extends Controller
 
     public function __construct()
     {
-        if(!session()->has('menu_position')){
-            session()->put('menu_position','top');
-        }
+        if(!session()->has('menu_position'))
+            session(['menu_position' => MenuPosition::top]);
     }
 
     /**
@@ -66,9 +66,9 @@ class MenuController extends Controller
         $menu->update(['sort' => $menu->id]);
         $menu->translations()->createMany($request->translation);
 
-        session()->put('menu_position', $menu->position);
+        session(['menu_position' =>  $menu->position]);
 
-        $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
+        $menus = Menu::query()->select('id','parent_id','position')->with('translation', function($q){
             $q->select('name','slug','menu_id');
         })->position()->sort()->get();
 
@@ -98,6 +98,7 @@ class MenuController extends Controller
 
         $menus = Menu::query()->with('translation', function ($q) { $q->select('name','slug','menu_id');})
             ->where('id','!=', $menu->id)->position()->sort()->get();
+
         $translations = $menu->translations->load('language');
 
         return view('admin.menu.edit', compact('menus','menu','translations'));

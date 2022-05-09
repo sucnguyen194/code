@@ -113,7 +113,7 @@
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
             })
-        })
+        });
 
         function sortFormatter(value, row) {
             return '<input style="width: 80px" type="number" min="0" class="form-control" name="sort" data-id="'+row.id+'" value="'+row.sort+'">';
@@ -133,7 +133,7 @@
                 status = "checked";
             }
 
-            @can('contact.edit')
+            @can('support.edit')
                 html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
             html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('lang.display')}}</label>';
@@ -146,7 +146,7 @@
 
             @endcan
 
-                @cannot('contact.edit')
+                @cannot('support.edit')
 
                 html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';

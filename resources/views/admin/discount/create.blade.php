@@ -201,7 +201,7 @@
                     $('#users').attr('disabled', false);
                     $('#users').attr('required', true);
                 }
-            })
+            });
 
             $('input[name="discount[user_selection]"').trigger('change');
         });

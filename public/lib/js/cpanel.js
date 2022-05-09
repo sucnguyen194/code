@@ -14,156 +14,32 @@ function nl2br (str, replaceMode, isXhtml) {
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, replaceStr);
 }
 
-var ChuSo =new Array(" không"," một"," hai"," ba"," bốn"," năm"," sáu"," bảy"," tám"," chín");
-var Tien =new Array( "", " nghìn", " triệu", " tỷ", " nghìn tỷ", " triệu tỷ");
-
-function DocSo3ChuSo(baso)
-{
-    var tram;
-    var chuc;
-    var donvi;
-    var KetQua="";
-    tram=parseInt(baso/100);
-    chuc=parseInt((baso%100)/10);
-    donvi=baso%10;
-    if(tram==0 && chuc==0 && donvi==0) return "";
-    if(tram!=0)
-    {
-        KetQua += ChuSo[tram] + " trăm";
-        if ((chuc == 0) && (donvi != 0)) KetQua += " linh";
-    }
-    if ((chuc != 0) && (chuc != 1))
-    {
-        KetQua += ChuSo[chuc] + " mươi";
-        if ((chuc == 0) && (donvi != 0)) KetQua = KetQua + " linh";
-    }
-    if (chuc == 1) KetQua += " mười";
-    switch (donvi)
-    {
-        case 1:
-            if ((chuc != 0) && (chuc != 1))
-            {
-                KetQua += " mốt ";
-            }
-            else
-            {
-                KetQua += ChuSo[donvi];
-            }
-            break;
-        case 5:
-            if (chuc == 0)
-            {
-                KetQua += ChuSo[donvi];
-            }
-            else
-            {
-                KetQua += " lăm ";
-            }
-            break;
-        default:
-            if (donvi != 0)
-            {
-                KetQua += ChuSo[donvi];
-            }
-            break;
-    }
-    return KetQua;
+function toogleMenuQuick() {
+    $(".menuquick .lst").hasClass("hide") ? ($(".menuquick .lst").removeClass("hide"), $(".menuquick label").removeClass("tg")) : ($(".menuquick .lst").addClass("hide"), $(".menuquick label").addClass("tg"))
 }
 
-function DocTienBangChu(SoTien)
-{
-    var lan=0;
-    var i=0;
-    var so=0;
-    var KetQua="";
-    var tmp="";
-    var ViTri = new Array();
-    if(SoTien<0) return "Số tiền âm !";
-    if(SoTien==0) return "Không đồng !";
-    if(SoTien>0)
-    {
-        so=SoTien;
-    }
-    else
-    {
-        so = -SoTien;
-    }
-    if (SoTien > 8999999999999999)
-    {
-        //SoTien = 0;
-        return "Số quá lớn!";
-    }
-    ViTri[5] = Math.floor(so / 1000000000000000);
-    if(isNaN(ViTri[5]))
-        ViTri[5] = "0";
-    so = so - parseFloat(ViTri[5].toString()) * 1000000000000000;
-    ViTri[4] = Math.floor(so / 1000000000000);
-    if(isNaN(ViTri[4]))
-        ViTri[4] = "0";
-    so = so - parseFloat(ViTri[4].toString()) * 1000000000000;
-    ViTri[3] = Math.floor(so / 1000000000);
-    if(isNaN(ViTri[3]))
-        ViTri[3] = "0";
-    so = so - parseFloat(ViTri[3].toString()) * 1000000000;
-    ViTri[2] = parseInt(so / 1000000);
-    if(isNaN(ViTri[2]))
-        ViTri[2] = "0";
-    ViTri[1] = parseInt((so % 1000000) / 1000);
-    if(isNaN(ViTri[1]))
-        ViTri[1] = "0";
-    ViTri[0] = parseInt(so % 1000);
-    if(isNaN(ViTri[0]))
-        ViTri[0] = "0";
-    if (ViTri[5] > 0)
-    {
-        lan = 5;
-    }
-    else if (ViTri[4] > 0)
-    {
-        lan = 4;
-    }
-    else if (ViTri[3] > 0)
-    {
-        lan = 3;
-    }
-    else if (ViTri[2] > 0)
-    {
-        lan = 2;
-    }
-    else if (ViTri[1] > 0)
-    {
-        lan = 1;
-    }
-    else
-    {
-        lan = 0;
-    }
-    for (i = lan; i >= 0; i--)
-    {
-        tmp = DocSo3ChuSo(ViTri[i]);
-        KetQua += tmp;
-        if (ViTri[i] > 0) KetQua += Tien[i];
-        if ((i > 0) && (tmp.length > 0)) KetQua += ' ';//&& (!string.IsNullOrEmpty(tmp))
-    }
-    if (KetQua.substring(KetQua.length - 1) == ' ')
-    {
-        KetQua = KetQua.substring(0, KetQua.length - 1);
-    }
-    KetQua = KetQua.substring(1,2).toUpperCase()+ KetQua.substring(2);
-    return KetQua + ' đồng';//.substring(0, 1);//.toUpperCase();// + KetQua.substring(1);
+function genMenuDetail() {
+    var n, t, i;
+    $(".body-contents").length > 0 && $(".body-contents>h3").length > 1 && (n = "<div class='menuquick'>", n += "<label onclick='toogleMenuQuick()'>Xem nhanh<\/label>", t = 1, i = 1, n += "<ul class='lst'>", $(".body-contents").children().each(function () {
+        var f = $(this).parent().attr("class"), u, r;
+        f !== "infor" && ($(this).is("h3") || $(this).is("h4")) && (u = $(this).text(), $(this).is("h3") ? ($(this).prop("id", "hmenuid" + t), n += "<a href='#hmenuid" + t + "'>" + u + "<\/a>", t += 1) : (r = u, r.startsWith("-") && (r = r.replace("-", "").trim()), $(this).prop("id", "subhmenuid" + i), n += '<li class="SubQuickMenu"><a  href=\'#subhmenuid' + i + "'>" + r + "<\/a><\/li>", i += 1))
+    }), n += "<\/ul>", n += "<\/div>", n += '<div class="list-faq list-scroll">', n += '<div class="middle">', n += '<div class="btn-faq sticky">', n += '<span class="stickyname">Xem nhanh<\/span>', n += '<span class="stickytitle"><\/span>', n += '<b class="collapse"><\/b>', n += "<\/div>", n += "<div class='list-item-fast-view'>", n += "<div class='lst-fast-view'>", t = 1, i = 1, $(".body-contents").children().each(function () {
+        var u = $(this).parent().attr("class"), r;
+        u !== "infor" && ($(this).is("h3") || $(this).is("h4")) && (r = $(this).text(), $(this).is("h3") ? (n += "<a href='#hmenuid" + t + "' data-id='#hmenuid" + t + "' data-name='" + r + "'>" + r + "<\/a>", t += 1) : (n += "<a href='#subhmenuid" + i + "'>" + r + "<\/a>", i += 1))
+    }), n += "<\/div>", n += "<\/div>", n += "<\/div>", $(".body-contents h2").first().after(n))
 }
-function PrintElem(elem)
-{
-    Popup(jQuery(elem).html());
+
+function printInvoice(invoice) {
+    var printContents = document.getElementById(invoice).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
 }
-function Popup(data)
-{
-    var mywindow = window.open('height=800,width=1200');
-    mywindow.document.write(data);
-    mywindow.print();
-    mywindow.close();
-    return true;
-}
+
 function number_format(int){
     if(int > 999 || int < - 999){
         return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -173,7 +49,6 @@ function number_format(int){
 }
 
 function flash(obj){
-
 
     if(obj.hasOwnProperty('errors')){
         $.each( obj.errors, function( key, value ) {
@@ -193,166 +68,110 @@ function flash(obj){
 
 }
 
-var box = $('.change-seo');
-
 function changeSeo(){
     $('.change-seo').slideToggle();
 }
+
 $(document).ready(function(){
+
+    genMenuDetail();
+
     $('.change-seo').hide();
-})
-$(document).ready(function(){
-    tinymce.init({
-        language : language,
-        plugins: "wordcount textcolor image  link  anchor   charmap media   lists responsivefilemanager",
-        toolbar: [
-            'fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat | image',
 
-        ],
-        height : "350",
-        menubar: true,
-        wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
-        wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
-        textcolor_cols: 6,
-        textcolor_map: [
-            'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
-            'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
-            'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
-        ],
-        textcolor_rows: 5,
-        fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
-        style_formats: [
-            {title: "Header 1", format: "h1"},
-            {title: "Header 2", format: "h2"},
-            {title: "Header 3", format: "h3"},
-            {title: "Header 4", format: "h4"},
-            {title: "Header 5", format: "h5"},
-            {title: "Header 6", format: "h6"},
-            {title: "Paragraph", format: "p"},
-            {title: "Blockquote", format: "blockquote"},
-            {title: "Div", format: "div"},
-            {title: "Pre", format: "pre"}
-        ],
-        // content_css: [
-        //     '/public/css/app.css'
-        // ],
-        link_class_list: [
-            {title: 'Geen', value: ''}
-        ],
-        table_class_list: [
-            {title: 'Tabel', value: 'table'},
-            {title: 'Table Style', value: 'table-style'}
-        ],
-        relative_urls: false,
-        selector: ".tag_description",
-        image_advtab: true,
-        filemanager_title: "Filemanager",
-        external_filemanager_path: links+"/lib/filemanager/",
-        external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
-    });
+    if($('.summerdescription').length){
+        tinymce.init({
+            language : language,
+            plugins: "wordcount textcolor code preview image  link  anchor   charmap media  lists responsivefilemanager",
+            toolbar: [
+                'preview code | fontsizeselect | fontselect  | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat',
+            ],
 
+            height : "150",
+            menubar: true,
+            wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
+            wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
+            textcolor_cols: 6,
+            textcolor_map: [
+                'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
+                'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
+                'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
+            ],
+            textcolor_rows: 5,
+            fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
+            style_formats: [
+                {title: "Header 1", format: "h1"},
+                {title: "Header 2", format: "h2"},
+                {title: "Header 3", format: "h3"},
+                {title: "Header 4", format: "h4"},
+                {title: "Header 5", format: "h5"},
+                {title: "Header 6", format: "h6"},
+                {title: "Paragraph", format: "p"},
+                {title: "Blockquote", format: "blockquote"},
+                {title: "Div", format: "div"},
+                {title: "Pre", format: "pre"}
+            ],
+            link_class_list: [
+                {title: 'Geen', value: ''}
+            ],
+            table_class_list: [
+                {title: 'Tabel', value: 'table'},
+                {title: 'Table Style', value: 'table-style'}
+            ],
+            relative_urls: false,
+            selector: ".summerdescription",
+            image_advtab: true,
+            filemanager_title: "Filemanager",
+            external_filemanager_path: links+"/lib/filemanager/",
+            external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
+        });
+    }
 });
 $(document).ready(function(){
-    tinymce.init({
-        language : language,
-        plugins: "wordcount textcolor code preview image  link  anchor   charmap media   lists responsivefilemanager",
-        toolbar: [
-            'preview code | fontsizeselect | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify | removeformat',
+    if($('.summernote').length){
+        tinymce.init({
+            language : language,
+            plugins: "wordcount textcolor image link hr preview anchor code insertdatetime charmap media table print lists responsivefilemanager",
+            toolbar: [
+                'preview code | styleselect | fontselect  | bold italic underline strikethrough subscript superscript charmap | anchor link unlink image media | forecolor backcolor | cut copy paste | alignleft aligncenter alignright alignjustify | table | bullist numlist outdent indent | removeformat | undo redo | fontsizeselect | hr insertdatetime print | newdocument | responsivefilemanager',
+            ],
+            height : "500",
+            menubar: true,
+            wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
+            wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
+            textcolor_cols: 6,
+            textcolor_map: [
+                'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
+                'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
+                'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
+            ],
+            textcolor_rows: 5,
+            fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
+            style_formats: [
+                {title: "Header 1", format: "h1"},
+                {title: "Header 2", format: "h2"},
+                {title: "Header 3", format: "h3"},
+                {title: "Header 4", format: "h4"},
+                {title: "Header 5", format: "h5"},
+                {title: "Header 6", format: "h6"},
+                {title: "Paragraph", format: "p"},
+                {title: "Blockquote", format: "blockquote"},
+                {title: "Div", format: "div"},
+                {title: "Pre", format: "pre"}
+            ],
+            link_class_list: [
+                {title: 'Geen', value: ''}
+            ],
+            table_class_list: [
+                {title: 'Tabel', value: 'table'},
+                {title: 'Table Style', value: 'table-style'}
+            ],
 
-        ],
-
-        height : "150",
-        menubar: true,
-        wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
-        wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
-        textcolor_cols: 6,
-        textcolor_map: [
-            'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
-            'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
-            'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
-        ],
-        textcolor_rows: 5,
-        fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
-        style_formats: [
-            {title: "Header 1", format: "h1"},
-            {title: "Header 2", format: "h2"},
-            {title: "Header 3", format: "h3"},
-            {title: "Header 4", format: "h4"},
-            {title: "Header 5", format: "h5"},
-            {title: "Header 6", format: "h6"},
-            {title: "Paragraph", format: "p"},
-            {title: "Blockquote", format: "blockquote"},
-            {title: "Div", format: "div"},
-            {title: "Pre", format: "pre"}
-        ],
-        // content_css: [
-        //     '/public/css/app.css'
-        // ],
-        link_class_list: [
-            {title: 'Geen', value: ''}
-        ],
-        table_class_list: [
-            {title: 'Tabel', value: 'table'},
-            {title: 'Table Style', value: 'table-style'}
-        ],
-        relative_urls: false,
-        selector: ".summerdescription",
-        image_advtab: true,
-        filemanager_title: "Filemanager",
-        external_filemanager_path: links+"/lib/filemanager/",
-        external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
-    });
-
-});
-$(document).ready(function(){
-    tinymce.init({
-        language : language,
-        plugins: "wordcount textcolor image link hr preview anchor code insertdatetime charmap media table print lists responsivefilemanager",
-        toolbar: [
-            'preview code | styleselect | bold italic underline strikethrough subscript superscript charmap | anchor link unlink image media | forecolor backcolor | cut copy paste | alignleft aligncenter alignright alignjustify | table | bullist numlist outdent indent | removeformat | undo redo | fontsizeselect | hr insertdatetime print | newdocument | responsivefilemanager',
-        ],
-        height : "500",
-        menubar: true,
-        wordcount_countregex: /[\w\u2019\x27\-\u00C0-\u1FFF]+/g,
-        wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g,
-        textcolor_cols: 6,
-        textcolor_map: [
-            'FFF', 'White', 'CCC', 'Light gray', '999', 'Gray2', '666', 'Gray3', '333', 'Dark gray', '000', 'Black',
-            'F00', 'Red', '00F', 'Blue', '0F0', 'Green', 'F90', 'Orange', 'FF0', 'Yellow', '0FF', 'Cyan',
-            'F0F', 'Magento', '930', 'Burnt orange', '330', 'Dark olive', '030', 'Dark green', '036', 'Dark azure'
-        ],
-        textcolor_rows: 5,
-        fontsize_formats: "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 22px 24px 26px 28px 30px 35px 40px 45px 50px",
-        style_formats: [
-            {title: "Header 1", format: "h1"},
-            {title: "Header 2", format: "h2"},
-            {title: "Header 3", format: "h3"},
-            {title: "Header 4", format: "h4"},
-            {title: "Header 5", format: "h5"},
-            {title: "Header 6", format: "h6"},
-            {title: "Paragraph", format: "p"},
-            {title: "Blockquote", format: "blockquote"},
-            {title: "Div", format: "div"},
-            {title: "Pre", format: "pre"}
-        ],
-        // content_css: [
-        //     '/public/css/app.css'
-        // ],
-
-        link_class_list: [
-            {title: 'Geen', value: ''}
-        ],
-        table_class_list: [
-            {title: 'Tabel', value: 'table'},
-            {title: 'Table Style', value: 'table-style'}
-        ],
-
-        relative_urls: false,
-        selector: ".summernote",
-        image_advtab: true,
-        filemanager_title: "Filemanager",
-        external_filemanager_path: links+"/lib/filemanager/",
-        external_plugins: {"filemanager": links+"/lib/filemanager/plugin.min.js"}
-    });
-
+            relative_urls: false,
+            selector: ".summernote",
+            image_advtab: true,
+            filemanager_title: "Filemanager",
+            external_filemanager_path: links + "/lib/filemanager/",
+            external_plugins: {"filemanager": links + "/lib/filemanager/plugin.min.js"}
+        });
+    }
 });

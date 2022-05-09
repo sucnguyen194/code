@@ -8,6 +8,7 @@ use App\Enums\TakeItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Post extends Model
@@ -23,6 +24,10 @@ class Post extends Model
     protected $casts = [
         'photo' => 'array'
     ];
+
+    protected $with = ['translation','comments','tags'];
+
+    protected $withCount = ['comments','tags'];
 
     public function comments(){
         return $this->morphMany(Comment::class,'comment');
@@ -77,6 +82,8 @@ class Post extends Model
             return route('admin.posts.pages.index');
         if($this->type == PostType::post)
             return route('admin.posts.index');
+        if($this->type == PostType::recruitment)
+            return route('admin.recruitments.index');
 
         return ;
     }
@@ -90,7 +97,7 @@ class Post extends Model
     }
 
     public function scopeOfType($q, $type){
-        return $q->whereType($type)->with('translation')->whereHas('translation')->public();
+        return $q->whereType($type)->public()->sort();
     }
 
     public function scopeOfTake($q, $take){
@@ -134,6 +141,7 @@ class Post extends Model
 
         static::deleting(function($post){
            $post->comments()->delete();
+           $post->translations()->update(['deleted_at' => now()]);
         });
     }
 }

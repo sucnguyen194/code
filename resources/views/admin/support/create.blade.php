@@ -26,9 +26,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group" style="max-width: 770px">
-                                    <label for="description">{{__('lang.review')}}</label>
-                                    <textarea class="form-control summernote" id="summernote" data-height="200"
-                                              name="translation[{{$key}}][description]"></textarea>
+                                    <label for="description">Link bài viết</label>
+                                    <input type="text" class="form-control" name="translation[{{$key}}][description]">
                                 </div>
                             </div>
                             <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
@@ -125,9 +124,6 @@
                 {title: "Div", format: "div"},
                 {title: "Pre", format: "pre"}
             ],
-            // content_css: [
-            //     '/public/css/app.css'
-            // ],
             link_class_list: [
                 {title: 'Geen', value: ''}
             ],
@@ -179,8 +175,7 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error)
-                console.error("Error:", error);
+                alert('Lỗi upload: '+error);
             });
 
     });

@@ -78,7 +78,7 @@
                     'type' :'error'
                 };
                 flash(obj);
-                console.error("Error:", error);
+
             });
 
     });

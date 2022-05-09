@@ -103,10 +103,10 @@
             $("select").on('change', function(){
                 $table.bootstrapTable('refresh');
             })
-        })
+        });
 
         $(document).on('post-body.bs.table', function() {
-            var columns = $table.bootstrapTable('getOptions').columns
+            var columns = $table.bootstrapTable('getOptions').columns;
             console.log(columns[0][1]);
             if (columns && columns[0][1].visible) {
 

@@ -28,6 +28,7 @@ class CreateTranslations extends Migration
             $table->longText('title_seo')->nullable();
             $table->longText('description_seo')->nullable();
             $table->json('option')->nullable();
+            $table->softDeletes();
         });
     }
 

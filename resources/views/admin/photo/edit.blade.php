@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}} #ID{{$photo->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}} #{{$photo->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -31,6 +31,10 @@
                 <div class="form-group">
                     <label>{{__('lang.title')}}</label>
                     <input type="text" value="{{$photo->name}}" name="data[name]" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>{{__('lang.description')}}</label>
+                    <textarea class="form-control" name="data[description]" row="4">{!! $photo->description !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>{{__('lang.slug')}}</label>
@@ -112,12 +116,12 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error)
-                console.error("Error:", error);
+                alert('Lỗi upload: '+error);
             });
 
     });
-
+</script>
+<script type="text/javascript">
     $('#image_url').on('change', function (){
         let target = $(this).data('target');
         let  hidden = $(this).data('hidden');
@@ -138,7 +142,8 @@
             let ele = $(this)[0];
             let height = $(this).data('height');
             editors(ele, height);
-        })
+        });
+
         $('select').each(function () {
 
             $(this).select2({

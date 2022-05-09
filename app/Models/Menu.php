@@ -15,6 +15,8 @@ class Menu extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['translation'];
+
     public function translations(){
         return $this->hasMany(MenuTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());;
     }
@@ -27,7 +29,7 @@ class Menu extends Model
         return $this->hasMany(Menu::class,'parent_id');
     }
     public function scopePosition($q){
-        $q->wherePosition(session()->get('menu_position'));
+        $q->wherePosition(session('menu_position'));
     }
 
     public function scopeSort($q){
@@ -35,7 +37,7 @@ class Menu extends Model
     }
 
     public function scopeOfPosition($q, $position){
-        return $q->with(['translation', 'parents'])->whereParentId(0)->wherePosition($position)->sort();
+        return $q->with('parents')->whereParentId(0)->wherePosition($position)->sort();
     }
 
     public function getSlugAttribute(){
@@ -43,6 +45,9 @@ class Menu extends Model
             return $this->path;
 
         if(!$this->translation)
+            return '#';
+
+        if(!$this->translation->slug)
             return '#';
 
         return route('slug', optional($this->translation)->slug);

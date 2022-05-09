@@ -89,7 +89,7 @@ snippet SS\n\
 \n\
 # the following are old ones\n\
 snippet inc\n\
-	include '${1:file}';${2}\n\
+	partials '${1:file}';${2}\n\
 snippet inc1\n\
 	include_once '${1:file}';${2}\n\
 snippet req\n\
@@ -394,4 +394,3 @@ exports.scope = "php";
                         }
                     });
                 })();
-            

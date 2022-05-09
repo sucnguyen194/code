@@ -84,7 +84,7 @@
     <!-- end row -->
         <div class="row">
             @can('order.view')
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card-box">
                         <h4 class="header-title">{{__('lang.chart_by_month')}}</h4>
 
@@ -142,240 +142,240 @@
                 </div>
             @endcan
 
-            @can('order.view')
                 <div class="col-lg-6">
-                    @endcan
+                    <div class="card-box col-browser">
+                        <h4 class="header-title mb-4 pb-3">{{__('lang.statistics')}} {{\Illuminate\Support\Str::upper(__('lang.browser'))}}</h4>
+                        <div class="text-center">
 
-                    @cannot('order.view')
-                        <div class="col-lg-12">
-                            @endcannot
-                            <div class="card-box">
-                                <h4 class="header-title mb-4">{{__('lang.statistics')}}</h4>
+                            <div class="mb-3">
+                                <h3 class="mb-2"><span data-plugin="counterup">{{$sum_count}}</span></h3>
+                                <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('lang.total')}} {{__('lang.number_turns')}}</p>
 
-                                <ul class="nav nav-tabs tabs-bordered nav-justified">
-                                    <li class="nav-item">
-                                        <a href="#visitor" data-toggle="tab" aria-expanded="false"
-                                           class="nav-link active">
-                                            <span class="d-block d-sm-none">{{__('lang.access')}}</span>
-                                            <span class="d-none d-sm-block">{{__('lang.access')}}</span>
-                                        </a>
-                                    </li>
-                                    @can('product.view')
-                                        <li class="nav-item">
-                                            <a href="#top-product" data-toggle="tab" aria-expanded="false"
-                                               class="nav-link">
-                                                <span class="d-block d-sm-none">{{__('lang.product')}}</span>
-                                                <span class="d-none d-sm-block">{{__('lang.top')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</span>
-                                            </a>
-                                        </li>
-                                    @endcan
-
-                                    @can('blog.view')
-                                        <li class="nav-item">
-                                            <a href="#top-post" data-toggle="tab" aria-expanded="false"
-                                               class="nav-link">
-                                                <span class="d-block d-sm-none">{{__('lang.post')}}</span>
-                                                <span class="d-none d-sm-block">{{__('lang.top')}} {{\Illuminate\Support\Str::lower(__('lang.post'))}}</span>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                </ul>
-                                <div class="tab-content h-100">
-                                    <div class="tab-pane active" id="visitor" style="height: 334px">
-                                        <table class="table table-bordered table-hover bs-table"
-                                               data-side-pagination="server"
-                                               data-page-size="5"
-                                               data-pagination="true"
-                                               data-search="false"
-                                               data-show-refresh="false"
-                                               data-show-columns="false"
-                                               data-show-export="false"
-                                               data-search-on-enter-key="false"
-                                               data-show-search-button="false"
-                                               data-sort-name="created_at"
-                                               data-sort-order="desc"
-                                               data-filename="visitors"
-                                               data-cookie="true"
-                                               data-cookie-id-table="visitors"
-                                        >
-                                            <thead>
-                                            <tr>
-                                                <th data-width="100" data-sortable="true">#</th>
-                                                <th>
-                                                    {{__('lang.source')}}
-                                                </th>
-
-                                                <th data-field="admin.name">
-                                                    {{__('lang.number_turns')}}
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach(\App\Models\Vistor::selectRaw('SUM(referer_count) as count, referer_domain')->groupByRaw('referer_domain')->latest('count')->get() as $key => $visitor)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <td><a href="{{$visitor->referer_domain}}" target="_blank"
-                                                           title="{{$visitor->referer_domain}}"
-                                                           class="font-weight-bold">{{\Illuminate\Support\Str::limit($visitor->referer_domain, 60)}}</a>
-                                                    </td>
-                                                    <td>{{$visitor->count}}</td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    @can('product.view')
-                                        <div class="tab-pane" id="top-product" style="height: 334px">
-                                            <table class="table table-bordered table-hover bs-table"
-                                                   data-side-pagination="server"
-                                                   data-pagination="true"
-                                                   data-page-size="5"
-                                                   data-search="false"
-                                                   data-show-refresh="false"
-                                                   data-show-columns="false"
-                                                   data-show-export="false"
-                                                   data-search-on-enter-key="false"
-                                                   data-show-search-button="false"
-                                                   data-sort-name="view"
-                                                   data-sort-order="desc"
-                                                   data-filename="products_most"
-                                                   data-cookie="true"
-                                                   data-cookie-id-table="products_most"
-                                            >
-                                                <thead>
-                                                <tr>
-                                                    <th data-width="100" data-sortable="true">#</th>
-                                                    <th>
-                                                        {{__('lang.product')}}
-                                                    </th>
-
-                                                    <th data-field="view" data-width="150">
-                                                        {{__('lang.number_turns')}}
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach(\App\Models\Product::ofTranslation()->where('view', '>',0)->latest('view')->take(50)->get() as  $key=>$product)
-                                                    <tr>
-                                                        <td>{{$key+1}}</td>
-                                                        <td><a href="{{$product->slug}}" target="_blank"
-                                                               class="font-weight-bold">{{$product->name}}</a></td>
-                                                        <td>{{$visitor->view}}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    @endcan
-                                    @can('blog.view')
-                                        <div class="tab-pane" id="top-post" style="height: 334px">
-                                            <table class="table table-bordered table-hover bs-table"
-                                                   data-side-pagination="server"
-                                                   data-pagination="true"
-                                                   data-page-size="5"
-                                                   data-search="false"
-                                                   data-show-refresh="false"
-                                                   data-show-columns="false"
-                                                   data-show-export="false"
-                                                   data-search-on-enter-key="false"
-                                                   data-show-search-button="false"
-                                                   data-sort-name="created_at"
-                                                   data-sort-order="desc"
-                                                   data-filename="posts_most_views"
-                                                   data-cookie="true"
-                                                   data-cookie-id-table="posts_most_views"
-                                            >
-                                                <thead>
-                                                <tr>
-                                                    <th data-width="100" data-sortable="true">#</th>
-                                                    <th>
-                                                        {{__('lang.post')}}
-                                                    </th>
-
-                                                    <th data-field="view" data-width="150">
-                                                        {{__('lang.number_turns')}}
-                                                    </th>
-                                                </tr>
-
-                                                </thead>
-                                                <tbody>
-                                                @foreach(\App\Models\Post::where('view', '!=' ,0)->latest('view')->take(50)->get() as  $key=>$post)
-                                                    <tr>
-                                                        <td>{{$key+1}}</td>
-                                                        <td><a href="{{$post->slug}}" target="_blank"
-                                                               class="font-weight-bold">{{$post->title}}</a></td>
-                                                        <td>{{$post->view}}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    @endcan
-                                </div>
                             </div>
-                        </div> <!-- end col -->
-                </div>
-                <!-- end row -->
-
-                <div class="card-box">
-                    <div class="tool-share">
-                        <div class="w-100 mb-1"><a href="https://developers.facebook.com/tools/debug/"
-                                                   class="font-weight-bold"
-                                                   target="_blank">1. {{__('lang.error_share_facebook')}}</a></div>
-                        <div class="w-100 mb-1"><a href="https://developers.zalo.me/tools/debug-sharing"
-                                                   class="font-weight-bold"
-                                                   target="_blank">2. {{__('lang.error_share_zalo')}}</a></div>
-                        <div class="w-100 font-italic">* {{__('lang.tool_note')}}</div>
+                        </div>
+                        <div id="chart_visitors" dir="ltr"></div>
                     </div>
                 </div>
+
+                <div class="col-lg-6">
+                    <div class="card-box col-statistics">
+                        <h4 class="header-title mb-4">{{__('lang.statistics')}} </h4>
+                        <ul class="nav nav-tabs statistics tabs-bordered">
+                            @can('blog.view')
+                                <li class="nav-item">
+                                    <a href="#top-post" data-toggle="tab" aria-expanded="false"
+                                       class="nav-link">
+                                        <span class="d-block d-sm-none">{{__('lang.post')}}</span>
+                                        <span class="d-none d-sm-block">{{__('lang.top')}} {{\Illuminate\Support\Str::lower(__('lang.post'))}}</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('product.view')
+                                <li class="nav-item">
+                                    <a href="#top-product" data-toggle="tab" aria-expanded="false"
+                                       class="nav-link">
+                                        <span class="d-block d-sm-none">{{__('lang.product')}}</span>
+                                        <span class="d-none d-sm-block">{{__('lang.top')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                        <div class="tab-content h-100">
+                            @can('blog.view')
+                                <div class="tab-pane" id="top-post">
+                                    <table class="table table-bordered table-hover bs-table"
+                                           {{--                                                   data-side-pagination="server"--}}
+                                           data-pagination="true"
+                                           data-page-size="5"
+                                           data-search="false"
+                                           data-show-refresh="false"
+                                           data-show-columns="false"
+                                           data-show-export="false"
+                                           data-search-on-enter-key="false"
+                                           data-show-search-button="false"
+                                           data-sort-name="created_at"
+                                           data-sort-order="desc"
+                                           data-filename="posts_most_views"
+                                           data-cookie="true"
+                                           data-cookie-id-table="posts_most_views"
+                                    >
+                                        <thead>
+                                        <tr>
+                                            <th data-width="100" data-sortable="true">#</th>
+                                            <th>
+                                                {{__('lang.post')}}
+                                            </th>
+
+                                            <th data-field="view" data-width="150" data-sortable="true">
+                                                {{__('lang.number_turns')}}
+                                            </th>
+                                        </tr>
+
+                                        </thead>
+                                        <tbody>
+                                        @foreach($posts as  $key=>$post)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td><a href="{{$post->slug}}" target="_blank" title="{{$post->title}}"
+                                                       class="font-weight-bold">{{str_limit($post->title,10)}}</a></td>
+                                                <td>{{$post->view}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endcan
+
+                            @can('product.view')
+                                <div class="tab-pane" id="top-product">
+                                    <table class="table table-bordered table-hover bs-table"
+                                           {{--                                                   data-side-pagination="server"--}}
+                                           data-pagination="true"
+                                           data-page-size="5"
+                                           data-search="false"
+                                           data-show-refresh="false"
+                                           data-show-columns="false"
+                                           data-show-export="false"
+                                           data-search-on-enter-key="false"
+                                           data-show-search-button="false"
+                                           data-sort-name="view"
+                                           data-sort-order="desc"
+                                           data-filename="products_most"
+                                           data-cookie="true"
+                                           data-cookie-id-table="products_most"
+                                    >
+                                        <thead>
+                                        <tr>
+                                            <th data-width="100" data-sortable="true">#</th>
+                                            <th>
+                                                {{__('lang.product')}}
+                                            </th>
+
+                                            <th data-field="view" data-width="150" data-sortable="true">
+                                                {{__('lang.number_turns')}}
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($products as  $keys=>$product)
+                                            <tr>
+                                                <td>{{$keys+1}}</td>
+                                                <td><a href="{{$product->slug}}" target="_blank" title="{{$product->name}}"
+                                                       class="font-weight-bold">{{str_limit($product->name,10)}}</a></td>
+                                                <td>{{$product->view}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endcan
+
+                        </div>
+                    </div>
+                </div> <!-- end col -->
         </div>
-    @stop
+        <!-- end row -->
 
-    @section('scripts')
-        <!--C3 Chart-->
-            <script src="/lib/assets/libs/d3/d3.min.js"></script>
-            <script src="/lib/assets/libs/c3/c3.min.js"></script>
+        <div class="card-box">
+            <div class="tool-share">
+                <div class="w-100 mb-1"><a href="https://developers.facebook.com/tools/debug/"
+                                           class="font-weight-bold"
+                                           target="_blank">1. {{__('lang.error_share_facebook')}}</a></div>
+                <div class="w-100 mb-1"><a href="https://developers.zalo.me/tools/debug-sharing"
+                                           class="font-weight-bold"
+                                           target="_blank">2. {{__('lang.error_share_zalo')}}</a></div>
+                <div class="w-100 font-italic">* {{__('lang.tool_note')}}</div>
+            </div>
+        </div>
+    </div>
+@stop
 
-            <!-- Init js -->
-            <script src="/lib/assets/js/pages/c3.init.js"></script>
+@section('scripts')
+    <!--C3 Chart-->
+    <script src="/lib/assets/libs/d3/d3.min.js"></script>
+    <script src="/lib/assets/libs/c3/c3.min.js"></script>
 
-            <script>
-                var chart = c3.generate({
-                    bindto: '#chart',
-                    data: {
-                        x: 'x',
-                        columns: [
-                            ['x', '{!!   implode("','", array_keys($revenues)) !!}'],
-                            ['{{__("lang.revenue")}}',{{ implode(',', $total) }}],
-                            ['{{__("lang.profit")}}',{{ implode(',', $revenues) }}],
-                        ],
-                        type: 'bar',
-                        colors: {
-                            '{{__("lang.revenue")}}': "#5553ce",
-                            '{{__("lang.profit")}}': "#43b39c",
-                        }
-                    },
-                    tooltip: {
-                        show: true,
-                    },
-                    axis: {
-                        x: {
-                            type: 'timeseries',
-                            tick: {
-                                format: '%d/%m/%Y'
-                            }
-                        },
-                        y: {
-                            tick: {
-                                format: d3.format(",")
-                            }
-                        },
+    <!-- Init js -->
+    <script src="/lib/assets/js/pages/c3.init.js"></script>
+
+    <script>
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                x: 'x',
+                columns: [
+                    ['x', '{!!   implode("','", array_keys($revenues)) !!}'],
+                    ['{{__("lang.revenue")}}',{{ implode(',', $total) }}],
+                    ['{{__("lang.profit")}}',{{ implode(',', $revenues) }}],
+                ],
+                type: 'bar',
+                colors: {
+                    '{{__("lang.revenue")}}': "#5553ce",
+                    '{{__("lang.profit")}}': "#43b39c",
+                }
+            },
+            tooltip: {
+                show: true,
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%d/%m/%Y'
                     }
-                });
+                },
+                y: {
+                    tick: {
+                        format: d3.format(",")
+                    }
+                },
+            }
+        });
 
-            </script>
-    @endsection
-    @section('styles')
-        <!-- C3 Chart css -->
-            <link href="/lib/assets/libs/c3/c3.min.css" rel="stylesheet" type="text/css"/>
+    </script>
+
+    <script>
+        var chart = c3.generate({
+            bindto: '#chart_visitors',
+            data: {
+                columns: [
+                    ["{{__('lang.number_turns')}}",{{ implode(',', $referer_count) }}],
+                ],
+                type: 'area-spline',
+                labels: true
+
+            },
+            tooltip: {
+                show: true,
+            },
+            legend: {
+                show: false
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: ['{!!   implode("','", $referer_domain) !!}']
+                },
+
+            }
+        });
+
+    </script>
+
+    <script>
+        $('.statistics .nav-link').first().click();
+
+        const width = $('html, body').width();
+
+        if(width > 768) {
+            const browser = $('.col-browser').height();
+            $('.col-statistics').height(browser);
+        }
+    </script>
+@stop
+
+@section('styles')
+    <!-- C3 Chart css -->
+    <link href="/lib/assets/libs/c3/c3.min.css" rel="stylesheet" type="text/css"/>
 @stop

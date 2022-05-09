@@ -151,6 +151,7 @@ return [
         'g-recaptcha-response'  => 'captcha',
         'data.email'            => 'email',
         'data.type'             => 'phân loại',
+        'data.name'             => 'tên',
         'name'                  => 'tên',
         '*.name'                => 'tiêu đề hoặc tên',
         '*.slug'                => 'đường dẫn',

@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title') - {{setting('site.name',1)}}</title>
+    <title>@yield('title') - {{setting('site.name', true)}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -44,31 +44,28 @@
     <!-- Topbar Start -->
     <div class="navbar-custom">
         <ul class="list-unstyled topnav-menu float-right mb-0">
-            @php
-                $contact = \App\Models\Contact::whereRepId(0)->oldest('status')->latest()->get();
-            @endphp
             <li class="redirect-website"><a href="{{route('home')}}" class="nav-link dropdown-toggle mr-0 waves-effect waves-light" target="_blank"><i class="fas fa-home h3 text-white"></i></a> </li>
 
 
-            <li class="dropdown notification-list dropdown d-lg-inline-block"> <a class="nav-link dropdown-toggle mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">{{implode(languages()->where('value',Session::get('lang'))->pluck('name')->toArray())}} </a>
+            <li class="dropdown notification-list dropdown d-lg-inline-block"> <a class="nav-link dropdown-toggle mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">{{implode($languages->where('value',Session::get('lang'))->pluck('name')->toArray())}} </a>
                 @if(setting('site.languages'))
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                @foreach(\App\Models\Language::where('value','<>',session()->get('lang'))->get() as $item)
+                @foreach($languages->where('value','<>',session()->get('lang')) as $item)
                     <!-- item-->
                         <a href="{{route('admin.languages.change',$item->value)}}" class="dropdown-item notify-item"><span
                                 class="align-middle">{{$item->name}}</span> </a>
-                @endforeach
-                </div>
+        @endforeach
+    </div>
                 @endif
             </li>
 
-            <li class="dropdown notification-list"> <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="dripicons-bell noti-icon"></i> <span class="badge badge-pink rounded-circle noti-icon-badge">{{$contact->count()}}</span></a>
+            <li class="dropdown notification-list"> <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="dripicons-bell noti-icon"></i> <span class="badge badge-pink rounded-circle noti-icon-badge">{{$contacts->count()}}</span></a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <div class="dropdown-header noti-title">
-                        <h5 class="text-overflow m-0"><span class="float-right"> <span class="badge badge-danger float-right">{{$contact->count()}}</span> </span>{{__('lang.notify')}}</h5>
+                        <h5 class="text-overflow m-0"><span class="float-right"> <span class="badge badge-danger float-right">{{$contacts->count()}}</span> </span>{{__('lang.notify')}}</h5>
                     </div>
                     <div class="slimscroll noti-scroll">
-                        @foreach($contact->take(10) as $item)
+                        @foreach($contacts->take(10) as $item)
                             <a href="{{route('admin.contacts.show',$item)}}" class="dropdown-item notify-item">
                                 <div class="notify-icon rounded-circle"><img src="{{$item->avatar}}" class="rounded-circle"></div>
                                 <p class="notify-details">
@@ -169,9 +166,9 @@
                     @endcan
                     @can('contact.view')
                         <li>
-                            <a href="{{route('admin.contacts.index')}}">
+                            <a href="{{route('admin.contacts.index')}}" class="{{nav_active('admin/contacts*')}}">
                                 <i class="pe-7s-mail"></i>
-                                <span>{{__('lang.message')}}</span>
+                                <span>{{__('lang.messenger')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -191,16 +188,17 @@
                                 <li>
                                     <a href="{{route('admin.supports.index')}}">{{__('lang.support_team')}}</a>
                                 </li>
+
+                                    <li>
+                                        <a href="{{route('admin.supports.questions.index')}}">{{__('lang.questions')}}</a>
+                                    </li>
                                 @endcan
 
                             </ul>
                         </li>
                     @endcan
                     @can('comment.view')
-                        <?php
-                            $comments = \App\Models\Comment::whereStatus(\App\Enums\ActiveDisable::disable)->get();
-                        ?>
-                        <li>
+                        <li class="{{nav_active('admin/comments*','mm-active')}}">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-comment"></i>
                                 <span>{{__('lang.comment')}}</span>
@@ -229,11 +227,21 @@
                             </a>
                         </li>
                     @endcan
+
+                    @can('map.view')
+                        <li>
+                            <a href="{{route('admin.maps.index')}}" class="{{nav_active('admin/maps*')}}">
+                                <i class="fe-map-pin"></i>
+                                <span>Google map</span>
+                            </a>
+                        </li>
+                    @endcan
+
                     @canany(['blog.view', 'video.view','gallery.view'])
                     <li class="menu-title">{{__('lang.content')}}</li>
                     @endcan
                     @can('blog.view')
-                        <li class="">
+                        <li class="{{nav_active('admin/posts*','mm-active')}}">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-news-paper"></i>
                                 <span>{{__('lang.post')}}</span>
@@ -255,7 +263,7 @@
                         </li>
 
                         <li>
-                            <a href="{{route('admin.posts.pages.index')}}">
+                            <a href="{{route('admin.posts.pages.index')}}" class="{{nav_active('admin/pages*')}}">
                                 <i class="pe-7s-wallet"></i>
                                 <span>{{__('lang.page')}}</span>
                             </a>
@@ -265,7 +273,7 @@
 
                     @can('gallery.view')
                         <li>
-                            <a href="{{route('admin.posts.galleries.index')}}">
+                            <a href="{{route('admin.posts.galleries.index')}}" class="{{nav_active('admin/galleries*')}}">
                                 <i class="pe-7s-albums"></i>
                                 <span>{{__('lang.gallery')}}</span>
                             </a>
@@ -273,10 +281,34 @@
                     @endcan
                     @can('video.view')
                         <li>
-                            <a href="{{route('admin.posts.videos.index')}}">
+                            <a href="{{route('admin.posts.videos.index')}}" class="{{nav_active('admin/videos*')}}">
                                 <i class="pe-7s-video"></i>
                                 <span>{{__('lang.video')}}</span>
                             </a>
+                        </li>
+                    @endcan
+
+                    @can('recruitment.view')
+
+                        <li class="{{nav_active('admin/recruitments*','mm-active')}}">
+                            <a href="javascript:void(0)">
+                                <i class="fe-user-plus"></i>
+                                <span>{{__('lang.recruitment')}}</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                @can('recruitment.create')
+                                    <li>
+                                        <a href="{{route('admin.recruitments.create')}}">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.recruitment'))}}</a>
+                                    </li>
+                                @endcan
+                                <li>
+                                    <a href="{{route('admin.recruitments.index')}}">{{__('lang.list_post')}}</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('admin.recruitments.categories.index')}}">{{__('lang.category_post')}}</a>
+                                </li>
+                            </ul>
                         </li>
                     @endcan
 
@@ -284,7 +316,7 @@
                     <li class="menu-title">{{__('lang.transaction')}}</li>
                     @endcan
                     @can('product.view')
-                        <li>
+                        <li class="{{nav_active('admin/products*','mm-active')}}">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-plugin"></i>
                                 <span>{{__('lang.product')}}</span>
@@ -303,7 +335,7 @@
                                     <a href="{{route('admin.products.categories.index')}}">{{__('lang.category_product')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.attributes.index')}}">{{__('lang.filter')}}</a>
+                                    <a href="{{route('admin.filters.index')}}">{{__('lang.filter')}}</a>
                                 </li>
 
                             </ul>
@@ -312,7 +344,7 @@
 
                     @can('discount.view')
                         <li>
-                            <a href="{{route('admin.discounts.index')}}">
+                            <a href="{{route('admin.discounts.index')}}" class="{{nav_active('admin/discounts*')}}">
                                 <i class="pe-7s-bandaid"></i>
                                 <span> {{__('lang.discount')}}</span>
                             </a>
@@ -321,7 +353,7 @@
 
                     @can('order.view')
                         <li>
-                            <a href="{{route('admin.orders.index')}}">
+                            <a href="{{route('admin.orders.index')}}" class="{{nav_active('admin/orders*')}}">
                                 <i class="pe-7s-cart"></i>
                                 <span>{{__('lang.order')}}</span>
                             </a>
@@ -491,13 +523,16 @@
 
 <script src="/lib/assets/libs/tooltipster/tooltipster.bundle.min.js"></script>
 
+<script src="/lib/assets/libs/tooltipster/tooltipster.bundle.min.js"></script>
+<script src="/lib/assets/js/pages/tooltipster.init.js"></script>
+
 @include('errors.note')
 <style>
     .clearfix {
         clear: left;
     }
 </style>
-<script>
+<script type="text/javascript">
     moment.locale('{{session('lang')}}');
     function defaultQueryParams(params){
         params.start = params.offset;
@@ -534,7 +569,6 @@
         cookie: true,
         cookieExpire: '1m',
         cookieStorage: 'localStorage',
-        //     cookiesEnabled:['bs.table.sortOrder', 'bs.table.sortName',  'bs.table.columns'],
         cookiesEnabled:['bs.table.columns'],
         exportDataType: 'basic',
         showExport: 'true',
@@ -544,7 +578,7 @@
             return '{{__('lang.search')}}';
         },
         formatNoMatches () {
-            return '{{__('lang.no_data')}}'
+            return '{{__('lang.no_data')}}';
         },
         rowStyle: function (row, index) {
             if (row.deleted_at)
@@ -586,8 +620,6 @@
 
     }));
 </script>
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('select:not(".select2-multiple")').each(function() {
@@ -621,7 +653,7 @@
                 html = html.replaceAll('&nbsp;', "");
                  $(value).html(html);
             })
-        })
+        });
         var li = $('li.select2-selection__choice');
 
         $.each(li, function (index, value) {
@@ -631,7 +663,6 @@
         })
     })
 </script>
-
 <script type="text/javascript">
     $('#slider-file').on('change', function () {
 
@@ -659,9 +690,7 @@
                         "Authorization": "Client-ID "+ imgur_client_id
                     },
                 }
-            )
-                .then(response => response.json())
-                .then(result => {
+            ).then(response => response.json()).then(result => {
                     $(slider).removeClass('d-none').addClass('d-inline-block');
 
                     $('<li class="box-product-images">' +
@@ -682,8 +711,7 @@
                         '</li>').appendTo(slider);
                     $('#remove-label').removeClass('d-block').hide();
                     $('.loading').fadeOut();
-                })
-                .catch(error => {
+                }).catch(error => {
                     $('#remove-label').show();
                     $(slider).addClass('d-none');
 
@@ -706,13 +734,13 @@
             $(slider).addClass('d-none').removeClass('d-inline-block');
             $(remove).removeClass('d-none').show();
         }
-    })
+    });
     $(document).on('change','#slider-input',function(){
 
         let parent = $(this).parent().parent().parent().parent();
 
         $(parent).find('div > img').attr('src', $(this).val());
-    })
+    });
 
 
     $('.logo-upload, .og-upload, .favicon-upload, .image-upload, .background-upload').on('change', function () {
@@ -766,8 +794,7 @@
         }
     });
 </script>
-
-<script>
+<script type="text/javascript">
     $('.ajax-modal').off('dblclick');
     $(document).on('click','.ajax-modal',function(e){
         e.preventDefault();
@@ -779,11 +806,6 @@
         $('#ajax-modal, .modal-backdrop').remove();
         $modal=$('<div class="modal fade" id="ajax-modal" tabindex="-1" role="dialog"></div>');
         $('body').append($modal);
-        /*
-        $modal.load($remote,function(){
-            $modal.modal();
-        });
-  */
         $modal.load($remote,function(text,status,xhr){
             $('select').each(function() {
                 $(this).select2({
@@ -828,6 +850,7 @@
             ajaxlink(this);
         }
     });
+
     function ajaxlink(ele){
         var url= $(ele).attr('href');
         if (!url)
@@ -858,9 +881,8 @@
         return false;
     }
 </script>
-
 <script type="text/javascript">
-    // Ajax form
+
     function ajaxform(ele){
 
         $(ele).ajaxSubmit({
@@ -918,9 +940,7 @@
         return false;
     });
 </script>
-
 <script type="text/javascript">
-    // Ajax form
     function ajaxselect(ele){
 
         let selected = $(ele).data('selected');
@@ -945,7 +965,7 @@
                         var obj = {
                             'message': value,
                             'type' : 'error'
-                        }
+                        };
                         flash(obj);
                     });
                 }else{
@@ -973,11 +993,11 @@
         return false;
     });
 </script>
-<script>
+<script type="text/javascript">
     function sumFormatter(data) {
         field = this.field;
         var total_sum = data.reduce(function(sum, row) {
-            let value= 0
+            let value= 0;
             try{
                 value = eval('row.'+field) || 0;
             }catch{
@@ -1021,10 +1041,9 @@
             return moment(value).format('DD/MM HH:mm');
     }
 </script>
-<script>
+<script type="text/javascript">
     $('.datetimepicker').daterangepicker({
         singleDatePicker: true,
-        //    drops: 'up',
         timePicker: true,
         timePickerSeconds: true,
         timePicker24Hour: true,
@@ -1055,11 +1074,8 @@
     function ChangeToSlug(el)
     {
         var title, slug;
-        //Lấy text từ thẻ input title
         title = el.value;
-        //Đổi chữ hoa thành chữ thường
         slug = title.toLowerCase();
-        //Đổi ký tự có dấu thành không dấu
         slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
         slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
         slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
@@ -1067,26 +1083,19 @@
         slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
         slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
         slug = slug.replace(/đ/gi, 'd');
-        //Xóa các ký tự đặt biệt
         slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-        //Đổi khoảng trắng thành ký tự gạch ngang
         slug = slug.replace(/ /gi, "-");
-        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
         slug = slug.replace(/\-\-\-\-\-/gi, '-');
         slug = slug.replace(/\-\-\-\-/gi, '-');
         slug = slug.replace(/\-\-\-/gi, '-');
         slug = slug.replace(/\-\-/gi, '-');
-        //Xóa các ký tự gạch ngang ở đầu và cuối
         slug = '@' + slug + '@';
         slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-        //In slug ra textbox có id “slug”
         document.getElementById(el.getAttribute('language')).value = slug;
         document.getElementById(el.getAttribute('seo')).innerText = links + '/' + slug + '.html';
     }
 </script>
-
-<script>
+<script type="text/javascript">
     function changeToTitleSeo(el){
        return  document.getElementById(el.getAttribute('language')).innerText = el.value;
     }
@@ -1094,7 +1103,6 @@
       return  document.getElementById(el.getAttribute('language')).innerText = el.value;
     }
 </script>
-
 <script type="text/javascript">
     $(document).ready(function(){
         $(document).on('change','input[name=sort]',function () {
@@ -1112,7 +1120,7 @@
                     flash({'message':" {{__('lang.flash_update')}}", 'type': 'success'})
                 }
             });
-        })
+        });
 
         $(document).on('click', '.data_status', function(){
             url = "{{route('admin.ajax.data.status')}}";
@@ -1128,7 +1136,7 @@
                     flash({'message': "{{__('lang.flash_update')}}", 'type': 'success'})
                 }
             });
-        })
+        });
         $(document).on('click', '.data_public', function(){
             url = "{{route('admin.ajax.data.public')}}";
             id = $(this).attr('data-id');

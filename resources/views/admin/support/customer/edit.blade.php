@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.customer_reviews')}} #ID{{$customer->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.customer_reviews')}} #{{$customer->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -144,9 +144,6 @@
                 {title: "Div", format: "div"},
                 {title: "Pre", format: "pre"}
             ],
-            // content_css: [
-            //     '/public/css/app.css'
-            // ],
             link_class_list: [
                 {title: 'Geen', value: ''}
             ],
@@ -197,8 +194,7 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error)
-                console.error("Error:", error);
+                alert('Lỗi upload: '+error);
             });
 
     });
