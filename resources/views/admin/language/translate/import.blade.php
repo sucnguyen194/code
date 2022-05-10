@@ -3,17 +3,17 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Import Language</h5>
+                <h5 class="modal-title" id="exampleModalLabel">@lang('_import_language')</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-center text-danger">If you import keywords, Your current keywords will be removed and replaced by imported keyword</p>
+                <p class="text-center text-danger">@lang('_import_language_note')</p>
                 <div class="input-group">
-                    <label for="key" class="font-weight-bold">Key</label>
+                    <label for="key" class="font-weight-bold">@lang('_key')</label>
 
-                    <select class="form-control select2" name="from" data-placeholder="Import Keywords">
+                    <select class="form-control select2" name="from" data-placeholder="@lang('_import_keywords')">
                         <option value=""></option>
                         @foreach($languages as $language)
                         <option value="{{$language->value}}">{{$language->name}}</option>

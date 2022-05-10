@@ -196,10 +196,46 @@ class LanguageController extends Controller
             return flash(__('lang.error'), 0);
 
         $json = file_get_contents(resource_path('lang/') . $lang . '.json');
-        $jsons = (array)json_decode($json);
 
+        $jsons = (array) json_decode($json);
 
-        return view('admin.language.translate', compact('language', 'jsons'));
+        return view('admin.language.translate.index', compact('language', 'jsons'));
+    }
+
+    public function createTranslate($lang){
+
+        $this->authorize('setting.language');
+
+        return view('admin.language.translate.create', compact('lang'));
+    }
+
+    public function storeTranslate(Request $request, $value){
+
+        $this->authorize('setting.language');
+
+        $lang = Language::whereValue($value)->first();
+
+        $this->validate($request, [
+            'key' => 'required',
+            'value' => 'required'
+        ]);
+
+        $items = file_get_contents(resource_path('lang/') . $lang->value . '.json');
+
+        $reqKey = trim($request->key);
+
+        if (array_key_exists($reqKey, json_decode($items, true))) {
+            return flash(__('_record_already_exists'),0);
+
+        } else {
+            $newArr[$reqKey] = trim($request->value);
+            $itemsss = json_decode($items, true);
+            $result = array_merge($itemsss, $newArr);
+            file_put_contents(resource_path('lang/') . $lang->value . '.json', json_encode($result));
+
+            return flash(__('_the_record_is_added_successfully'),1, route('admin.languages.translate', $value));
+
+        }
     }
 
     /**
@@ -216,7 +252,7 @@ class LanguageController extends Controller
         $value = $request->value;
         $lang = $request->lang;
 
-        return view('admin.language.edit_translate', compact('key', 'value', 'lang'));
+        return view('admin.language.translate.edit', compact('key', 'value', 'lang'));
     }
 
     /**
@@ -248,7 +284,7 @@ class LanguageController extends Controller
 
         file_put_contents(resource_path('lang/') . $lang->value . '.json', json_encode($json_arr));
 
-        return flash('Updated Successfully', 1, route('admin.languages.translate', $value));
+        return flash('Updated Successfully', 1, route('admin.language.translate.index', $value));
     }
 
     /**
@@ -270,7 +306,7 @@ class LanguageController extends Controller
 
         file_put_contents(resource_path('lang/') . $lang->value . '.json', json_encode($json_arr));
 
-        return flash("`" . trim($request->key) . "` has been removed", 1, route('admin.languages.translate', $value));
+        return flash("`" . trim($request->key) . "` has been removed", 1, route('admin.language.translate.index', $value));
     }
 
     /**
@@ -286,7 +322,7 @@ class LanguageController extends Controller
         $to = $request->to;
 
         $languages = Language::where('value', '!=', $to)->get();
-        return view('admin.language.import', compact('languages', 'to'));
+        return view('admin.language.translate.import', compact('languages', 'to'));
     }
 
     /**
@@ -306,6 +342,6 @@ class LanguageController extends Controller
 
         file_put_contents(resource_path('lang/') . $tolang->value . '.json', json_encode($json_arr));
 
-        return flash('Import successfully', 1, route('admin.languages.translate', $tolang->value));
+        return flash('Import successfully', 1, route('admin.language.translate.index', $tolang->value));
     }
 }

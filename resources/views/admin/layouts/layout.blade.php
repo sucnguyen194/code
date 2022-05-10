@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title') - {{setting('site.name', true)}}</title>
+    <title>@yield('title') - {{setting('site.name')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -531,6 +531,9 @@
     .clearfix {
         clear: left;
     }
+    body, table{
+        color: #555!important;
+    }
 </style>
 <script type="text/javascript">
     moment.locale('{{session('lang')}}');
@@ -890,7 +893,7 @@
                 "X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')
             },
             beforeSubmit:function(formData, jqForm, options){
-                $(ele).find('[type=submit]').attr('disabled', true);
+                $(ele).find('[type=submit]').attr('disabled');
 
             },
             success: function(responseText, statusText, xhr, $form) {
@@ -951,7 +954,7 @@
                 "X-CSRF-Token": $('meta[name=_token]').attr('content')
             },
             beforeSubmit:function(formData, jqForm, options){
-                $(ele).find('[type=submit]').attr('disabled', true);
+                $(ele).find('[type=submit]').attr('disabled');
 
             },
             complete: function(xhr, statusText, $form  ){
@@ -974,7 +977,7 @@
                         text: result.translation.name
                     };
 
-                    var newOption = new Option(data.text, data.id, true, true);
+                    var newOption = new Option(data.text, data.id);
                     var addOption = new Option(data.text, data.id, false, false);
                     $(selected).append(newOption).trigger('change');
                     $(option).append(addOption).trigger('change');

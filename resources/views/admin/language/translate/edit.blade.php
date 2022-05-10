@@ -1,9 +1,9 @@
 <div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.languages.update.translate', $lang)}}" class="ajax-form" method="post" enctype="multipart/form-data">
+    <form action="{{route('admin.languages.update.item.translate', $lang)}}" class="ajax-form" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">@lang('edit')</h5>
+                <h5 class="modal-title" id="exampleModalLabel">@lang('_translate')</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

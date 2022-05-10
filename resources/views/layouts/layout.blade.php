@@ -4,26 +4,26 @@
   <meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="content-language" content="{{ str_replace('_', '-', app()->getLocale()) }}">
   <meta charset="utf-8">
-  <title>@hasSection('title') @yield('title') - @endif {{setting('site.name', true)}}</title>
-  <meta name="keywords" content="@yield('keywords',setting('site.keyword_seo', true))"/>
-  <meta name="description" content="@yield('description',setting('site.description_seo', true))"/>
+  <title>@hasSection('title') @yield('title') - @endif {{setting('site.name')}}</title>
+  <meta name="keywords" content="@yield('keywords',setting('site.keyword_seo'))"/>
+  <meta name="description" content="@yield('description',setting('site.description_seo'))"/>
   <meta property="og:url" content="@yield('url', url('/'))" />
-  <meta property="og:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name', true)}}" />
+  <meta property="og:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
   <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
   <meta property="og:type" content="website" />
     @if(setting('api.facebook_app_ip'))
   <meta property="fb:app_id" content="{{setting('api.facebook_app_ip')}}" />
     @endif
-  <meta property="og:description" content="@yield('description',setting('site.description_seo', true))" />
+  <meta property="og:description" content="@yield('description',setting('site.description_seo'))" />
   <meta property="og:image" content="@yield('image', setting('site.og_image') ?? setting('site.logo'))" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="400" />
   <meta property="og:image:height" content="300" />
-  <meta property="og:image:alt" content="@hasSection('title') @yield('title') - @endif {{setting('site.name', true)}}" />
-  <meta property="og:site_name" content="@hasSection('title') @yield('title') - @endif {{setting('site.name', true)}}" />
+  <meta property="og:image:alt" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
+  <meta property="og:site_name" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:description" content="@yield('description',setting('site.description_seo',true))"/>
-  <meta name="twitter:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name', true)}}"/>
+  <meta name="twitter:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}"/>
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="@yield('url',route('home'))">
   <link rel="icon" href="{{asset(setting('site.favicon'))}}">
@@ -505,7 +505,7 @@
                 "X-CSRF-Token": $('meta[name=_token]').attr('content')
             },
             beforeSubmit:function(formData, jqForm, options){
-                $(ele).find('[type=submit]').attr('disabled', true);
+                $(ele).find('[type=submit]').attr('disabled');
 
             },
             success: function(responseText, statusText, xhr, $form) {

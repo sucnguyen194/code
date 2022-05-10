@@ -68,7 +68,7 @@ if(!function_exists('user_avatar')){
 
 if (! function_exists('setting')) {
 
-    function setting($key=null, $language = false,  $default = null)
+    function setting($key=null, $default = null)
     {
         if (is_null($key)) {
             return new Setting();
@@ -78,7 +78,7 @@ if (! function_exists('setting')) {
             return Setting::set($key[0], $key[1]);
         }
 
-        if($language)
+        if(Setting::get($key.'.'.session('lang')))
             $key = $key.'.'. session('lang');
 
         $value = Setting::get($key);
