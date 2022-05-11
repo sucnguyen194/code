@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.permission')}} #{{$permission->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_permission')}} #{{$permission->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -24,7 +24,7 @@
                     </select>
                 </div>
                 <div class="mb-0">
-                    <label>{{__('lang.value')}} <span class="required">*</span></label>
+                    <label>{{__('_value')}} <span class="required">*</span></label>
                     <input type="text" value="{{$permission->name}}" name="name" required class="form-control">
                 </div>
             </div>

@@ -87,7 +87,7 @@
                         <h6 class="text-overflow m-0">{{__('lang.hello')}} !</h6>
                     </div>
                     <!-- item-->
-                    <a href="{{route('admin.admins.edit',Auth::id())}}" class="dropdown-item notify-item"> <i class="fe-user"></i> <span>{{__('lang.account')}}</span> </a>
+                    <a href="{{route('admin.admins.edit',Auth::id())}}" class="dropdown-item notify-item"> <i class="fe-user"></i> <span>{{__('_account')}}</span> </a>
                     <!-- item-->
                     <a href="{{route('admin.settings')}}" class="dropdown-item notify-item"> <i class="fe-settings"></i> <span>{{__('lang.setting')}}</span> </a>
                     <!-- item-->
@@ -121,7 +121,7 @@
                     <li>
                         <a href="{{route('admin.dashboard')}}">
                             <i class="pe-7s-home"></i>
-                            <span>{{__('lang.dashboard')}}</span>
+                            <span>{{__('_dashboard')}}</span>
                         </a>
                     </li>
                     @can('admin.view')
@@ -133,16 +133,16 @@
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{route('admin.admins.index')}}">{{__('lang.account')}}</a>
+                                    <a href="{{route('admin.admins.index')}}">{{__('_account')}}</a>
                                 </li>
                                 @can('role.view')
                                     <li>
-                                        <a href="{{route('admin.roles.index')}}">{{__('lang.role')}}</a>
+                                        <a href="{{route('admin.roles.index')}}">{{__('_role')}}</a>
                                     </li>
                                 @endcan
                                 @can('permission.view')
                                     <li>
-                                        <a href="{{route('admin.permissions.index')}}">{{__('lang.permission')}}</a>
+                                        <a href="{{route('admin.permissions.index')}}">{{__('_permission')}}</a>
                                     </li>
                                 @endcan
                             </ul>
@@ -250,7 +250,7 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('blog.create')
                                     <li>
-                                        <a href="{{route('admin.posts.create')}}">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.post'))}}</a>
+                                        <a href="{{route('admin.posts.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.post'))}}</a>
                                     </li>
                                 @endcan
                                 <li>
@@ -299,7 +299,7 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('recruitment.create')
                                     <li>
-                                        <a href="{{route('admin.recruitments.create')}}">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.recruitment'))}}</a>
+                                        <a href="{{route('admin.recruitments.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.recruitment'))}}</a>
                                     </li>
                                 @endcan
                                 <li>
@@ -325,7 +325,7 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('product.create')
                                     <li>
-                                        <a href="{{route('admin.products.create')}}">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</a>
+                                        <a href="{{route('admin.products.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</a>
                                     </li>
                                 @endcan
                                 <li>
@@ -355,7 +355,7 @@
                         <li>
                             <a href="{{route('admin.orders.index')}}" class="{{nav_active('admin/orders*')}}">
                                 <i class="pe-7s-cart"></i>
-                                <span>{{__('lang.order')}}</span>
+                                <span>{{__('_order')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -389,7 +389,7 @@
                                 @endcan
                                 @can('setting.language')
                                     <li>
-                                        <a href="{{route('admin.languages.index')}}">{{__('lang.language')}}</a>
+                                        <a href="{{route('admin.languages.index')}}">{{__('_language')}}</a>
                                     </li>
                                 @endcan
 
@@ -674,7 +674,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
+            return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
 
         for(var i=0 ; i < count ; i++){
             let file = $(this).prop('files')[i];
@@ -719,7 +719,7 @@
                     $(slider).addClass('d-none');
 
                     var obj  = {
-                        'message': '{{__("lang.error")}} {{__("lang.upload")}}: '+error,
+                        'message': '{{__("_error")}} {{__("_upload")}}: '+error,
                         'type' :'error'
                     };
                     flash(obj);
@@ -752,7 +752,7 @@
         if (!file)
             return false;
         if(!imgur_client_id)
-            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
+            return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
 
@@ -776,7 +776,7 @@
             })
             .catch(error => {
                 var obj  = {
-                    'message': '{{__("lang.error")}} upload: '+error,
+                    'message': '{{__("_error")}} upload: '+error,
                     'type' :'error'
                 };
                 flash(obj);
@@ -842,7 +842,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                cancelButtonText: '{{__("lang.back")}}',
+                cancelButtonText: '{{__("_back")}}',
                 confirmButtonText: '{{__("lang.confirm")}}',
             }).then((result) => {
                 if (result.isConfirmed) {

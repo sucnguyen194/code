@@ -47,7 +47,7 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         if(!$order)
-            return flash(__('lang.error'),0);
+            return flash(__('_error'),0);
 
         return  view('admin.order.print',compact('order'));
     }

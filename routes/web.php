@@ -181,6 +181,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
         Route::post('languages/{id}/active', [App\Http\Controllers\Admin\LanguageController::class, 'active'])->name('languages.active');
         Route::get('languages/{lang}/translate', [App\Http\Controllers\Admin\LanguageController::class, 'translate'])->name('languages.translate');
 
+        Route::get('languages/data/{lang}/translate', [App\Http\Controllers\Admin\LanguageController::class, 'dataTranslate'])->name('languages.translate.data');
+
         Route::get('languages/translate/{lang}/create', [App\Http\Controllers\Admin\LanguageController::class, 'createTranslate'])->name('languages.create.translate');
 
         Route::post('languages/translate/{lang}/create', [App\Http\Controllers\Admin\LanguageController::class, 'storeTranslate']);

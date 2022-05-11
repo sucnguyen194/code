@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}}  <span class="text-lowercase">{{__('lang.support_team')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}  <span class="text-lowercase">{{__('lang.support_team')}}</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,7 +20,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span id="basic-addon1" class="input-group-text">{{__('lang.roll')}}</span>
+                                            <span id="basic-addon1" class="input-group-text">{{__('_roll')}}</span>
                                         </div>
                                         <input type="text" class="form-control" id="job" name="translation[{{$key}}][job]">
                                     </div>
@@ -78,11 +78,11 @@
                 <input type="hidden" value="{{\App\Enums\SupportType::support}}" name="data[type]">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('_back')}}
                 </button>
 
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('_save')}}
                 </button>
             </div>
         </div>
@@ -151,7 +151,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
+            return flash({'message': '{{__('_api_not_configured')}}', 'type': 'error'});
 
         let target = $(this).data('target');
 

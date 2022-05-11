@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.dashboard')}}
+@section('title') {{__('_dashboard')}}
 @stop
 @section('content')
     <div class="container-fluid">
@@ -10,10 +10,10 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item active">{{__('lang.dashboard')}} </li>
+                            <li class="breadcrumb-item active">{{__('_dashboard')}} </li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.dashboard')}}</h4>
+                    <h4 class="page-title">{{__('_dashboard')}}</h4>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                             <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center"><i
                                         class="pe-7s-cart avatar-title font-30 text-white"></i></div>
                             <div class="wigdet-two-content media-body">
-                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('lang.order')}}</p>
+                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('_order')}}</p>
                                 <h3 class="font-weight-medium my-2"><span
                                             data-plugin="counterup">{{\App\Models\Order::count()}}</span></h3>
                             </div>
@@ -41,9 +41,9 @@
                             <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center"><i
                                         class="pe-7s-cash avatar-title font-30 text-white"></i></div>
                             <div class="wigdet-two-content media-body">
-                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('lang.monthly_revenue')}}</p>
+                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('_monthly_revenue')}}</p>
                                 <h3 class="font-weight-medium my-2"><span
-                                            data-plugin="counterup">{{number_format($total_month)}}</span> vnd</h3>
+                                            data-plugin="counterup">{{number_format($total_month)}}</span></h3>
                             </div>
                         </div>
                     </div>
@@ -55,9 +55,9 @@
                             <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center"><i
                                         class="pe-7s-cash avatar-title font-30 text-white"></i></div>
                             <div class="wigdet-two-content media-body">
-                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('lang.monthly_profit')}}</p>
+                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('_monthly_profit')}}</p>
                                 <h3 class="font-weight-medium my-2"><span
-                                            data-plugin="counterup">{{number_format($revenues_month)}}</span> vnd</h3>
+                                            data-plugin="counterup">{{number_format($revenues_month)}}</span></h3>
                             </div>
                         </div>
                     </div>
@@ -69,10 +69,9 @@
                             <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center"><i
                                         class="fe-alert-octagon avatar-title font-30 text-white"></i></div>
                             <div class="wigdet-two-content media-body">
-                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('lang.total_debt')}}
-                                    ({{__('lang.customer')}})</p>
+                                <p class="m-0 text-uppercase font-weight-medium text-truncate">{{__('_debt')}}</p>
                                 <h3 class="font-weight-medium my-2"><span
-                                            data-plugin="counterup">{{number_format($user_debt)}}</span> vnd</h3>
+                                            data-plugin="counterup">{{number_format($user_debt)}}</span></h3>
                             </div>
                         </div>
                     </div>
@@ -94,7 +93,7 @@
                                     <div class="mb-3">
 
                                         <h3 class="mb-2"><span data-plugin="counterup">{{$today}}</span></h3>
-                                        <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('lang.order_today')}}</p>
+                                        <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('_order_today')}}</p>
                                         @if($per_order >= 0)
                                             <p class="text-success">+{{$per_order}}% <i class="mdi mdi-trending-up"></i>
                                             </p>
@@ -107,9 +106,9 @@
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <h3 class="mb-2"><span
-                                                    data-plugin="counterup">{{number_format($total_today)}}</span> vnd
+                                                    data-plugin="counterup">{{number_format($total_today)}}</span>
                                         </h3>
-                                        <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('lang.today_revenue')}}</p>
+                                        <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('_today_revenue')}}</p>
                                         @if($percent >= 0)
                                             <p class="text-success">+{{$percent}}% <i class="mdi mdi-trending-up"></i>
                                             </p>
@@ -123,8 +122,8 @@
                                     <div class="mb-3">
                                         <h3 class="mb-2"><span
                                                     data-plugin="counterup">{{number_format($revenues_today)}}</span>
-                                            vnd</h3>
-                                        <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('lang.profit_today')}}</p>
+                                        </h3>
+                                        <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('_profit_today')}}</p>
                                         @if($percent_revenues >=0)
                                             <p class="text-success">+{{$percent_revenues}}% <i
                                                         class="mdi mdi-trending-up"></i></p>
@@ -144,12 +143,12 @@
 
                 <div class="col-lg-6">
                     <div class="card-box col-browser">
-                        <h4 class="header-title mb-4 pb-3">{{__('lang.statistics')}} {{\Illuminate\Support\Str::upper(__('lang.browser'))}}</h4>
+                        <h4 class="header-title mb-4 pb-3">{{__('_stats_browser')}}</h4>
                         <div class="text-center">
 
                             <div class="mb-3">
                                 <h3 class="mb-2"><span data-plugin="counterup">{{$sum_count}}</span></h3>
-                                <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('lang.total')}} {{__('lang.number_turns')}}</p>
+                                <p class="text-uppercase mb-1 font-13 font-weight-medium">{{__('_total_turn')}}</p>
 
                             </div>
                         </div>
@@ -159,14 +158,14 @@
 
                 <div class="col-lg-6">
                     <div class="card-box col-statistics">
-                        <h4 class="header-title mb-4">{{__('lang.statistics')}} </h4>
+                        <h4 class="header-title mb-4">{{__('_statistics')}} </h4>
                         <ul class="nav nav-tabs statistics tabs-bordered">
                             @can('blog.view')
                                 <li class="nav-item">
                                     <a href="#top-post" data-toggle="tab" aria-expanded="false"
                                        class="nav-link">
-                                        <span class="d-block d-sm-none">{{__('lang.post')}}</span>
-                                        <span class="d-none d-sm-block">{{__('lang.top')}} {{\Illuminate\Support\Str::lower(__('lang.post'))}}</span>
+                                        <span class="d-block d-sm-none">{{__('_top_post')}}</span>
+                                        <span class="d-none d-sm-block">{{__('_top_post')}}</span>
                                     </a>
                                 </li>
                             @endcan
@@ -175,8 +174,8 @@
                                 <li class="nav-item">
                                     <a href="#top-product" data-toggle="tab" aria-expanded="false"
                                        class="nav-link">
-                                        <span class="d-block d-sm-none">{{__('lang.product')}}</span>
-                                        <span class="d-none d-sm-block">{{__('lang.top')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</span>
+                                        <span class="d-block d-sm-none">{{__('_top_product')}}</span>
+                                        <span class="d-none d-sm-block">{{__('_top_product')}}</span>
                                     </a>
                                 </li>
                             @endcan
@@ -204,11 +203,11 @@
                                         <tr>
                                             <th data-width="100" data-sortable="true">#</th>
                                             <th>
-                                                {{__('lang.post')}}
+                                                {{__('_post')}}
                                             </th>
 
                                             <th data-field="view" data-width="150" data-sortable="true">
-                                                {{__('lang.number_turns')}}
+                                                {{__('_total_turn')}}
                                             </th>
                                         </tr>
 
@@ -249,11 +248,11 @@
                                         <tr>
                                             <th data-width="100" data-sortable="true">#</th>
                                             <th>
-                                                {{__('lang.product')}}
+                                                {{__('_product')}}
                                             </th>
 
                                             <th data-field="view" data-width="150" data-sortable="true">
-                                                {{__('lang.number_turns')}}
+                                                {{__('_total_turn')}}
                                             </th>
                                         </tr>
                                         </thead>
@@ -281,11 +280,11 @@
             <div class="tool-share">
                 <div class="w-100 mb-1"><a href="https://developers.facebook.com/tools/debug/"
                                            class="font-weight-bold"
-                                           target="_blank">1. {{__('lang.error_share_facebook')}}</a></div>
+                                           target="_blank">1. {{__('_error_share_facebook')}}</a></div>
                 <div class="w-100 mb-1"><a href="https://developers.zalo.me/tools/debug-sharing"
                                            class="font-weight-bold"
-                                           target="_blank">2. {{__('lang.error_share_zalo')}}</a></div>
-                <div class="w-100 font-italic">* {{__('lang.tool_note')}}</div>
+                                           target="_blank">2. {{__('_error_share_zalo')}}</a></div>
+                <div class="w-100 font-italic">* {{__('_tool_error_note')}}</div>
             </div>
         </div>
     </div>
@@ -306,13 +305,13 @@
                 x: 'x',
                 columns: [
                     ['x', '{!!   implode("','", array_keys($revenues)) !!}'],
-                    ['{{__("lang.revenue")}}',{{ implode(',', $total) }}],
-                    ['{{__("lang.profit")}}',{{ implode(',', $revenues) }}],
+                    ['{{__("_revenue")}}',{{ implode(',', $total) }}],
+                    ['{{__("_profit")}}',{{ implode(',', $revenues) }}],
                 ],
                 type: 'bar',
                 colors: {
-                    '{{__("lang.revenue")}}': "#5553ce",
-                    '{{__("lang.profit")}}': "#43b39c",
+                    '{{__("_revenue")}}': "#5553ce",
+                    '{{__("_profit")}}': "#43b39c",
                 }
             },
             tooltip: {
@@ -340,7 +339,7 @@
             bindto: '#chart_visitors',
             data: {
                 columns: [
-                    ["{{__('lang.number_turns')}}",{{ implode(',', $referer_count) }}],
+                    ["{{__('_total_turn')}}",{{ implode(',', $referer_count) }}],
                 ],
                 type: 'area-spline',
                 labels: true

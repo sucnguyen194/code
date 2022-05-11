@@ -49,7 +49,7 @@ class CommentController extends Controller
 
         $translation = Translation::whereSlug($request->slug)->first();
         if(!$translation)
-            return flash(__('lang.error'),0);
+            return flash(__('_error'),0);
 
             $comment = new Comment();
             $comment->forceFill($request->data);

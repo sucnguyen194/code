@@ -22,7 +22,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('lang.discount')}}</a></li>
                             <li class="breadcrumb-item active">#{{$discount->id}}</li>
                         </ol>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="form-group" style="max-width: 300px">
-                        <label class="form-label">{{__('lang.value')}} <span class="required">*</span></label>
+                        <label class="form-label">{{__('_value')}} <span class="required">*</span></label>
 
                         <div class="input-group discount">
                             <input type="number" name="discount[value]" step="0.01" min="0" class="form-control"  value="{{ $discount->value }}" required>

@@ -8,7 +8,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.comment')}}</li>
                         </ol>
                     </div>
@@ -64,7 +64,7 @@
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="150" data-switchable="false" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>
@@ -101,7 +101,7 @@
             html = '<a href="'+ '{{ route('admin.comments.reply', [':type', ':id' ]) }}'.replace(':id',row.id).replace(':type','{{$type}}') +'" class="btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
             @can('comment.destroy')
-            html+='<a href="'+ '{{ route('admin.comments.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.comments.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

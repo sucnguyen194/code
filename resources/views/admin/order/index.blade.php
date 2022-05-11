@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.order')}} @stop
+@section('title') {{__('_order')}} @stop
 @section('content')
     <div class="container-fluid" id="orders-index">
         <!-- start page title -->
@@ -8,11 +8,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.order')}}</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('_order')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.order')}}</h4>
+                    <h4 class="page-title">{{__('_order')}}</h4>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>
@@ -143,7 +143,7 @@
 
                     let html = '<a href="' + '{{ route('admin.orders.print', ':id') }}'.replace(':id', row.id) + '" class="ajax-modal btn btn-purple waves-effect waves-light"><i class="pe-7s-print"></i></a> ';
                     @can('order.destroy')
-                    html += '<a href="' + '{{ route('admin.orders.destroy', ':id') }}'.replace(':id', row.id) + '" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+                    html += '<a href="' + '{{ route('admin.orders.destroy', ':id') }}'.replace(':id', row.id) + '" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
                     @endcan
                     return html;
                 }

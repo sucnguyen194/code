@@ -55,7 +55,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
+            return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
 
@@ -79,7 +79,7 @@
             })
             .catch(error => {
                 var obj  = {
-                    'message': '{{__('lang.error')}} {{__('lang.upload')}}: '+error,
+                    'message': '{{__('_error')}} {{__('_upload')}}: '+error,
                     'type' :'error'
                 };
                 flash(obj);

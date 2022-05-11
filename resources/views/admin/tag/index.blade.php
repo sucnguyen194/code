@@ -8,7 +8,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.tag')}}</li>
                         </ol>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="action-datatable text-right">
                         @can('tag.create')
                         <a href="{{route('admin.tags.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} <span class="text-lowercase">{{__('lang.tag')}}</span></a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.tag')}}</span></a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -60,7 +60,7 @@
                                 <th data-field="id" data-width="150" data-sortable="true">ID</th>
 
                                 <th data-field="name" data-formatter="titleFormatter">
-                                    {{__('lang.name')}}
+                                    {{__('_name')}}
                                 </th>
 
                                 <th data-field="slug">
@@ -68,11 +68,11 @@
                                 </th>
 
                                 <th data-field="created_at" data-width="150" data-sortable="true" data-visible="true">
-                                    {{__('lang.created_at')}}
+                                    {{__('_created_at')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>
@@ -170,7 +170,7 @@
             @endcan
 
             @can('tag.destroy')
-            html+='<a href="'+ '{{ route('admin.tags.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__("lang.confirm_destroy")}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.tags.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__("_delete_record")}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
 
             return html;

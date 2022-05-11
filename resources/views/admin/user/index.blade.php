@@ -9,7 +9,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.customer')}}</li>
                         </ol>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="action-datatable text-right">
                         @can('user.create')
                         <a href="{{route('admin.users.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.customer'))}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.customer'))}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -57,11 +57,11 @@
                                 </th>
 
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
-                                    {{__('lang.created_at')}}
+                                    {{__('_created_at')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>

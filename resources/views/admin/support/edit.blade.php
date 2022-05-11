@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span id="basic-addon1" class="input-group-text">{{__('lang.roll')}}</span>
+                                        <span id="basic-addon1" class="input-group-text">{{__('_roll')}}</span>
                                     </div>
                                     <input type="text" class="form-control" value="{{$translation->job}}" id="job" name="translation[{{$key}}][job]">
                                 </div>
@@ -46,7 +46,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span id="basic-addon1" class="input-group-text">{{__('lang.roll')}}</span>
+                                                <span id="basic-addon1" class="input-group-text">{{__('_roll')}}</span>
                                             </div>
                                             <input type="text" class="form-control" id="job" name="translation[{{$key}}][job]">
                                         </div>
@@ -169,7 +169,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
+            return flash({'message': '{{__('_api_not_configured')}}', 'type': 'error'});
 
         let target = $(this).data('target');
 

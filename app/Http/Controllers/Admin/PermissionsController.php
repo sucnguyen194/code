@@ -103,7 +103,7 @@ class PermissionsController extends Controller
             'name' => 'required',
         ]);
         if(Permission::whereName($request->name)->where('id','<>', $permission->id)->count())
-            return flash(__('lang.value_already_exists'), 0);
+            return flash(__('_value_already_exists'), 0);
 
         $permission->update($request->all());
 

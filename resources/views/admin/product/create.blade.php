@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}
+    {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}
 @stop
 @section('content')
 {{--    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>--}}
@@ -11,12 +11,12 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</li>
+                            <li class="breadcrumb-item active">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</h4>
+                    <h4 class="page-title">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</h4>
                 </div>
             </div>
         </div>

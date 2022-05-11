@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.gallery'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.gallery'))}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,7 +78,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
+            return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
 
         for(var i=0 ; i < count ; i++){
             let file = $(this).prop('files')[i];
@@ -125,7 +125,7 @@
                     $('#remove-label').show();
                     $(slider).addClass('d-none');
                         var obj  = {
-                            'message': '{{__('lang.error')}} {{__('lang.upload')}}: '+error,
+                            'message': '{{__('_error')}} {{__('_upload')}}: '+error,
                             'type' :'error'
                         };
                      flash(obj);

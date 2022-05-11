@@ -61,7 +61,7 @@
                     </select>
                 </div>
                 <div class="form-group {{!setting('site.languages') ? "d-none" : "" }} ">
-                    <label>{{__('lang.language')}}</label>
+                    <label>{{__('_language')}}</label>
                     <select data-toggle="select2" name="data[lang]" class="form-control">
                         <option value="Nomal">----</option>
                         @foreach(languages() as $item)
@@ -73,10 +73,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('_back')}}
                 </button>
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('_save')}}
                 </button>
             </div>
         </div>
@@ -92,7 +92,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
+            return flash({'message': '{{__('_api_not_configured')}}', 'type': 'error'});
 
         let target = $(this).data('target');
 

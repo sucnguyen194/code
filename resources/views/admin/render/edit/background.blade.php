@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="media-body ml-3">
-        <label class="form-label">{{__('lang.background')}}</label>
+        <label class="form-label">{{__('_background')}}</label>
         <div class="form-group">
             <div class="input-group">
                 <input name="data[background]" id="background_url" value="{{$item->background}}" data-target="#background_src"
@@ -15,7 +15,7 @@
                                                  <label class="btn btn-default" type="button"><input type="file"
                                                                                                      class="d-none background-upload"
                                                                                                      id="background-upload"
-                                                                                                     data-target="#background_url">{{__('lang.upload')}}...</label>
+                                                                                                     data-target="#background_url">{{__('_upload')}}...</label>
                                             </span>
             </div>
         </div>

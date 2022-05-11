@@ -10,7 +10,7 @@
             <div class="input-group">
                 <input name="data[image]" id="image_url" data-target="#image_src" value="{{$item->image}}"  type="text" class="form-control image_url" placeholder="http://">
                 <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >{{__('lang.upload')}}...</label>
+                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >{{__('_upload')}}...</label>
                             </span>
             </div>
         </div>

@@ -11,7 +11,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a></li>
                             <li class="breadcrumb-item active">#{{$product->id}}</li>
                         </ol>
@@ -209,7 +209,7 @@
                         @include('admin.render.edit.status', ['item' => $product])
                     </div>
                     @include('admin.render.edit.category', ['item' => $product, 'type' => \App\Enums\CategoryType::product])
-                    
+
                     @include('admin.render.edit.tag', ['item' => $product, 'type' => \App\Enums\TagType::product])
                 </div>
 

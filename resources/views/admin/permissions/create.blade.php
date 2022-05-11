@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.permission'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_permission'))}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,7 +23,7 @@
                     </select>
                 </div>
                 <div class="mb-0">
-                    <label>{{__('lang.value')}} <span class="required">*</span></label>
+                    <label>{{__('_value')}} <span class="required">*</span></label>
                     <input type="text" value="{{old('name')}}" name="name" required class="form-control">
                 </div>
             </div>

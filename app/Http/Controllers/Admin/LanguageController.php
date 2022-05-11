@@ -8,6 +8,7 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class LanguageController extends Controller
 {
@@ -51,9 +52,7 @@ class LanguageController extends Controller
     {
         $this->authorize('setting.language');
 
-        $languages = Language::latest()->get();
-
-        return view('admin.language.create', compact('languages'));
+        return view('admin.language.create');
     }
 
     /**
@@ -105,9 +104,7 @@ class LanguageController extends Controller
     {
         $this->authorize('setting.language');
 
-        $languages = Language::latest()->get();
-
-        return view('admin.language.edit', compact('languages', 'language'));
+        return view('admin.language.edit', compact( 'language'));
     }
 
     /**
@@ -123,11 +120,9 @@ class LanguageController extends Controller
 
         $request->validate([
             'name' => 'required|string|unique:languages,name,' . $language->id,
-            'value' => 'required|string|max:2|unique:languages,value,' . $language->id,
         ]);
         $language->update([
             'name' => $request->name,
-            'value' => $request->value,
             'image' => $request->image
         ]);
         return flash(__('lang.flash_update'));
@@ -144,7 +139,7 @@ class LanguageController extends Controller
         $this->authorize('setting.language');
 
         if (Language::count() == 1)
-            return flash(__('lang.error'), 3);
+            return flash(__('_error'), 3);
 
         $path = resource_path('lang/') . $language->value . '.json';
 
@@ -168,7 +163,7 @@ class LanguageController extends Controller
         $language = Language::whereValue($lang)->first();
 
         if (!$language)
-            return flash(__('lang.error'), 0);
+            return flash(__('_error'), 0);
 
         Language::query()->update(['status' => ActiveDisable::disable]);
 
@@ -193,13 +188,44 @@ class LanguageController extends Controller
         $language = Language::whereValue($lang)->first();
 
         if (!$language)
-            return flash(__('lang.error'), 0);
+            return flash(__('_error'), 0);
+
+        return view('admin.language.translate.index', compact('language'));
+    }
+
+    public function dataTranslate(Request $request, $lang){
 
         $json = file_get_contents(resource_path('lang/') . $lang . '.json');
 
-        $jsons = (array) json_decode($json);
+        $jsons = collect((array) json_decode($json));
 
-        return view('admin.language.translate.index', compact('language', 'jsons'));
+        $collect = collect();
+
+        $data = [];
+        foreach ($jsons as $key => $value){
+            $data['key'] = $key;
+            $data['value'] = $value;
+
+            $collect->add($data);
+        }
+
+        $collection = collect($collect);
+
+        if ($request->has('search') && $request->filled('search')){
+
+            $keyword = $request->get('search');
+            $collection = $collection->filter(function ($item) use ($keyword) {
+
+                return false !== (stripos($item['value'], $keyword)  ||  stripos($item['key'], $keyword));
+            });
+        }
+
+        $collection = $collection->sortByDesc(function ($string){
+            return $string['key'];
+        });
+
+        return datatables()->of($collection)->make();
+
     }
 
     public function createTranslate($lang){
@@ -233,7 +259,7 @@ class LanguageController extends Controller
             $result = array_merge($itemsss, $newArr);
             file_put_contents(resource_path('lang/') . $lang->value . '.json', json_encode($result));
 
-            return flash(__('_the_record_is_added_successfully'),1, route('admin.languages.translate', $value));
+            return flash(__('_the_record_is_added_successfully'));
 
         }
     }
@@ -284,7 +310,7 @@ class LanguageController extends Controller
 
         file_put_contents(resource_path('lang/') . $lang->value . '.json', json_encode($json_arr));
 
-        return flash('Updated Successfully', 1, route('admin.language.translate.index', $value));
+        return flash('Updated Successfully');
     }
 
     /**
@@ -306,7 +332,7 @@ class LanguageController extends Controller
 
         file_put_contents(resource_path('lang/') . $lang->value . '.json', json_encode($json_arr));
 
-        return flash("`" . trim($request->key) . "` has been removed", 1, route('admin.language.translate.index', $value));
+        return flash("`" . trim($request->key) . "` has been removed");
     }
 
     /**
@@ -342,6 +368,6 @@ class LanguageController extends Controller
 
         file_put_contents(resource_path('lang/') . $tolang->value . '.json', json_encode($json_arr));
 
-        return flash('Import successfully', 1, route('admin.language.translate.index', $tolang->value));
+        return flash('Import successfully');
     }
 }

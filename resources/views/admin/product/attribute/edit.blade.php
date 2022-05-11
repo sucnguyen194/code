@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group d-none">
-                    <label>{{__('lang.value')}} <span class="required">*</span></label>
+                    <label>{{__('_value')}} <span class="required">*</span></label>
                     <input type="text" class="form-control" value="{{$attribute->value}}" id="value" name="data[value]" required>
                 </div>
 

@@ -8,7 +8,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.messenger')}}</li>
                         </ol>
                     </div>
@@ -26,8 +26,8 @@
                         <form method="get" class="form-inline filter-form">
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="status" data-allow-clear="true" data-placeholder="{{__('lang.status')}}">
-                                    <option value="">{{__('lang.status')}}</option>
+                                <select class="form-control" data-toggle="select2" name="status" data-allow-clear="true" data-placeholder="{{__('_status')}}">
+                                    <option value="">{{__('_status')}}</option>
                                     <option value="1">{{__('lang.unview')}}</option>
                                     <option value="2"> {{__('lang.viewed')}}</option>
                                 </select>
@@ -67,18 +67,18 @@
                                 </th>
 
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
-                                    {{__('lang.created_at')}}
+                                    {{__('_created_at')}}
                                 </th>
                                 <th data-field="updated_at" data-sortable="true" data-visible="true">
                                     {{__('lang.checked_at')}}
                                 </th>
 
                                 <th data-field="status" data-formatter="statusFormatter">
-                                    {{__('lang.status')}}
+                                    {{__('_status')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-switchable="false" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>
@@ -122,7 +122,7 @@
             html = '<a href="'+ '{{ route('admin.contacts.show', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light"><i class="pe-7s-look"></i></a> ';
             @endcan
             @can('contact.destroy')
-            html+='<a href="'+ '{{ route('admin.contacts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.contacts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

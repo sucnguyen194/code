@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} <span class="text-lowercase">{{__('lang.image')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('lang.image')}}</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -47,7 +47,7 @@
                     </select>
                 </div>
                 <div class="form-group {{!setting('site.languages') ? "d-none" : "" }} ">
-                    <label>{{__('lang.language')}}</label>
+                    <label>{{__('_language')}}</label>
                     <select data-toggle="select2" name="data[lang]" class="form-control">
                         <option value="Nomal">----</option>
                         @if(setting('site.languages'))
@@ -61,12 +61,12 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('_back')}}
                 </button>
                 <input type="hidden" name="data[type]" value="{{\App\Enums\PhotoType::photo}}">
 
                 <button type="submit" class="btn btn-primary waves-effect waves-light float-right" name="send"
-                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}
+                        value="save"><span class="icon-button"><i class="fe-plus"></i></span> {{__('_save')}}
                 </button>
             </div>
         </div>
@@ -95,7 +95,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__('lang.api_img_not_configured')}}', 'type': 'error'});
+            return flash({'message': '{{__('_api_not_configured')}}', 'type': 'error'});
 
         for(var i=0 ; i < count ; i++){
             let file = $(this).prop('files')[i];
@@ -152,7 +152,7 @@
                     $(slider).addClass('d-none');
 
                     var obj  = {
-                        'message': '{{__('lang.error')}} upload: '+error,
+                        'message': '{{__('_error')}} upload: '+error,
                         'type' :'error'
                     };
                     flash(obj);

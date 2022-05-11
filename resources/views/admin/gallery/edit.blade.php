@@ -93,7 +93,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
+            return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
 
 
         for(var i=0 ; i < count ; i++){
@@ -141,7 +141,7 @@
                     $('#remove-label').show();
                     $(slider).addClass('d-none');
                     var obj  = {
-                        'message': '{{__('lang.error')}} {{__('lang.upload')}}: '+error,
+                        'message': '{{__('_error')}} {{__('_upload')}}: '+error,
                         'type' :'error'
                     };
                     flash(obj);

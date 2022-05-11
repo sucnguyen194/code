@@ -13,7 +13,7 @@
                     <th>#</th>
                     <th>{{__('lang.time')}}</th>
                     <th>{{__('lang.customer')}}</th>
-                    <th>{{__('lang.order_money')}}</th>
+                    <th>{{__('_order_money')}}</th>
                     <th>{{__('lang.money_down')}}</th>
                 </tr>
                 </thead>

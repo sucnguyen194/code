@@ -11,7 +11,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.comments.list',$type)}}">{{__('lang.comment')}}</a></li>
                             <li class="breadcrumb-item">#{{$reply->id}}</li>
                         </ol>

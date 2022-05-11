@@ -10,7 +10,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.system_configuration')}}</li>
                         </ol>
                     </div>
@@ -27,7 +27,7 @@
             <form action="{{route('admin.settings')}}" method="post" id="form-update" class="ajax-form" enctype="multipart/form-data">
                 <div class="mt-3">
                     <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('lang.reset')}}</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('_save')}}</button>
                 </div>
                 @csrf
                 <div id="wizard-clickable" >
@@ -722,7 +722,7 @@
                                 <div class="card-box mb-0 bg-transparent">
                                     <input type="hidden" value="0" name="data[site.languages]">
 
-                                    <label for="site_languages"> {!! __('lang.language') !!} </label>
+                                    <label for="site_languages"> {!! __('_language') !!} </label>
                                     <p>
                                     <input type="checkbox" id="site_languages" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size=""/>
                                     </p>
@@ -766,12 +766,12 @@
                         </div>
                         <hr class="border-primary">
                     </fieldset>
-                    <button type="submit" class="btn btn-primary stepy-finish"><span class="icon-button"><i class="fe-send"></i></span> {{__('lang.save')}}</button>
+                    <button type="submit" class="btn btn-primary stepy-finish"><span class="icon-button"><i class="fe-send"></i></span> {{__('_save')}}</button>
                 </div>
 
                 <div class="">
                     <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('lang.reset')}}</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.save')}}</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('_save')}}</button>
                 </div>
             </form>
         </div>

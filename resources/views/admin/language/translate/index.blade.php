@@ -23,12 +23,12 @@
             <div class="col-12">
                 <div class="card-box table-responsive">
 
-                    <div class="action-datatable">
-                        <a href="{{route('admin.languages.import.translate', ['to' => $language->value])}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
+                    <div class="action-datatable text-right">
+                        <a href="{{route('admin.languages.import.translate', ['to' => $language->value])}}" class="btn btn-primary waves-effect width-md waves-light float-left mb-2 ajax-modal">
                             <span class="icon-button"><i class="fe-download"></i></span> @lang('_import_language')</a>
 
 
-                        @include('admin.render.add_new', ['route' => route('admin.languages.create.translate', $language->value)])
+                        @include('admin.render.add_new', ['route' => route('admin.languages.create.translate', $language->value), 'modal' => true])
                     </div>
                     <div id="custom-toolbar">
 
@@ -36,23 +36,25 @@
                     <div class="table-bootstrap">
                         <table class="table table-bordered table-hover bs-table"
                                data-toolbar="#custom-toolbar"
+                               data-url="{{ route('admin.languages.translate.data', $language->value)}}"
+                               data-side-pagination="server"
                                data-pagination="true"
                                data-search="true"
                                data-search-on-enter-key="false"
                                data-show-search-button="false"
                                data-sort-name="key"
-                               data-sort-order="desc"
+
                                data-filename="translates"
                                data-cookie="true"
                                data-cookie-id-table="translates"
                         >
                             <thead>
                             <tr>
-                                <th data-field="key">
+                                <th data-field="key" data-sortable="true">
                                    @lang('_key')
                                 </th>
 
-                                <th>
+                                <th data-field="value">
                                     @lang('_value')
                                 </th>
 
@@ -62,18 +64,18 @@
 
                             </tr>
                             </thead>
-                            <tbody>
-                            @foreach($jsons as $key => $json)
-                                <tr>
-                                    <td>{{$key}}</td>
-                                    <td>{{$json}}</td>
-                                    <td>
-                                        <a href="{{route('admin.languages.edit.translate', ['key' => $key, 'value' => $json,'lang' => $language->value])}}" title="@lang('_edit')" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a>
-                                        <a href="{{route('admin.languages.delete.translate',['key' => $key, 'lang' => $language->value])}}" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="@lang('_delete_record')" data-confirm="{{__('_delete_record')}}" data-refresh="true"><i class="fe-x"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
+{{--                            <tbody>--}}
+{{--                            @foreach($jsons as $key => $json)--}}
+{{--                                <tr>--}}
+{{--                                    <td class="font-weight-bold text-primary">{{$key}}</td>--}}
+{{--                                    <td>{{$json}}</td>--}}
+{{--                                    <td>--}}
+{{--                                        <a href="{{route('admin.languages.edit.translate', ['key' => $key, 'value' => $json,'lang' => $language->value])}}" title="@lang('_edit')" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a>--}}
+{{--                                        <a href="{{route('admin.languages.delete.translate',['key' => $key, 'lang' => $language->value])}}" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="@lang('_delete_record')" data-confirm="{{__('_delete_record')}}" data-refresh="true"><i class="fe-x"></i></a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @endforeach--}}
+{{--                            </tbody>--}}
                         </table>
                     </div>
                 </div>

@@ -12,7 +12,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.menu')}}</li>
                         </ol>
                     </div>
@@ -29,7 +29,7 @@
                     @can('menu.create')
                     <div class="action-datatable text-right mb-2">
                         <a href="{{route('admin.menus.create')}}" class="btn btn-primary waves-effect width-md waves-light ajax-modal">
-                            <span class="icon-button"><i class="fe-plus pr-1"></i></span> {{__('lang.create')}} <span class="text-lowercase">{{__('lang.menu')}}</span></a>
+                            <span class="icon-button"><i class="fe-plus pr-1"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.menu')}}</span></a>
 
                     </div>
                     @endcan
@@ -285,7 +285,7 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: '{{__("lang.confirm")}}',
-                    cancelButtonText: '{{__("lang.back")}}'
+                    cancelButtonText: '{{__("_back")}}'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         ajaxmenu(this);

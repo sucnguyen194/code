@@ -120,7 +120,7 @@ class RoleController extends Controller
         if(auth()->id() > 1) $this->authorize('role.destroy');
 
         if ($role->users()->count() > 0)
-            return flash(__('lang.error'),0);
+            return flash(__('_error'),0);
 
         $role->delete();
         return flash(__('lang.flash_destroy'));

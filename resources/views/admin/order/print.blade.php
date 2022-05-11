@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.order')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_order')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,7 +29,7 @@
                                    style="width: 100%;font-size:12px;line-height: 18px;">
                                 <tbody>
                                 <tr>
-                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('lang.name')}}
+                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('_name')}}
                                     </th>
                                     <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('lang.quantity')}}
                                     </th>
@@ -88,7 +88,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span
-                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}
+                        class="icon-button"><i class="fe-arrow-left"></i></span> {{__('_back')}}
                 </button>
 
                 <button type="button" class="btn btn-purple waves-effect waves-light"

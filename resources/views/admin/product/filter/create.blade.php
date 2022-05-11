@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.filter'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.filter'))}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -42,7 +42,7 @@
                                  <label class="btn btn-default" type="button"><input type="file"
                                                                                      class="d-none image-upload"
                                                                                      id="image-upload"
-                                                                                     data-target="#image_url">{{__('lang.upload')}}...</label>
+                                                                                     data-target="#image_url">{{__('_upload')}}...</label>
                             </span>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
         let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
         if(!imgur_client_id)
-            return flash({'message': '{{__("lang.api_img_not_configured")}}', 'type': 'error'});
+            return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
 

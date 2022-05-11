@@ -7,7 +7,7 @@
         @endcan
         @can('menu.destroy')
             <a href="{{route('admin.menus.destroy',$menu)}}" title="{{__('lang.destroy')}}"
-               class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}"
+               class="ajax-link-menu btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}"
                data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a>
         @endcan
     </div>

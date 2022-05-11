@@ -11,7 +11,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.contacts.index')}}">{{__('lang.messenger')}}</a></li>
                             <li class="breadcrumb-item active"># {{$contact->id}}</li>
                         </ol>
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="text-right">
-                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}</a>
+                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> {{__('_back')}}</a>
                             @if(setting('contact.email'))
                             <button type="submit" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> {{__('lang.reply')}}</button>
                             @else
@@ -84,7 +84,7 @@
                     </form>
                     @else
                         <div class="text-right">
-                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> {{__('lang.back')}}</a>
+                            <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> {{__('_back')}}</a>
                         </div>
                     @endif
                     <div class="clearfix"></div>

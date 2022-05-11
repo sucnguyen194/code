@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.account')}} @stop
+@section('title') {{__('_account')}} @stop
 @section('content')
     <div class="container-fluid">
 
@@ -9,11 +9,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.account')}}</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('_account')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.account')}}</h4>
+                    <h4 class="page-title">{{__('_account')}}</h4>
                 </div>
             </div>
         </div>
@@ -23,8 +23,8 @@
                 <div class="card-box table-responsive">
                     @can('admin.create')
                     <div class="action-datatable text-right">
-                        <a href="{{route('admin.admins.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.account'))}}</a>
+                        @include('admin.render.add_new', ['route' => route('admin.admins.create'), 'modal' => true])
+
                     </div>
                     @endif
                     <div id="custom-toolbar">
@@ -47,23 +47,23 @@
                         >
                             <thead>
                             <tr>
-                                <th data-field="id" data-sortable="true">ID</th>
+                                <th data-field="id" data-sortable="true">{{__('_id')}}</th>
                                 <th data-field="name">
-                                    {{__('lang.name')}}
+                                    {{__('_name')}}
                                 </th>
 
                                 <th data-field="email">
-                                    Email
+                                    {{__('_email')}}
                                 </th>
                                 <th data-field="roles" data-formatter="roleFormatter">
-                                    {{__('lang.role')}}
+                                    {{__('_role')}}
                                 </th>
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
-                                    {{__('lang.created_at')}}
+                                    {{__('_created_at')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-switchable="false" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>
@@ -97,7 +97,7 @@
             html += '<a href="'+ '{{ route('admin.admins.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             @endcan
             @can('admin.destroy')
-            html+='<a href="'+ '{{ route('admin.admins.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.admins.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

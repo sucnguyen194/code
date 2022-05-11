@@ -9,7 +9,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.image')}}</li>
                         </ol>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="action-datatable text-right">
                         @can('photo.create')
                         <a href="{{route('admin.photos.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} <span class="text-lowercase">{{__('lang.image')}}</span></a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.image')}}</span></a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -90,11 +90,11 @@
                                 </th>
 
                                 <th data-formatter="statusFormatter" data-width="150">
-                                    {{__('lang.status')}}
+                                    {{__('_status')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-switchable="false" data-width="200" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>
@@ -191,7 +191,7 @@
             html = '<a href="'+ '{{ route('admin.photos.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
                 @can('photo.destroy')
-            html+='<a href="'+ '{{ route('admin.photos.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.photos.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
 
             if(row.image)

@@ -8,7 +8,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('lang.dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item active">{{__('lang.gallery')}}</li>
                         </ol>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="action-datatable text-right">
                         @can('gallery.create')
                         <a href="{{route('admin.posts.galleries.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.gallery'))}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.gallery'))}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -90,15 +90,15 @@
                                     {{__('lang.author')}}
                                 </th>
                                 <th data-field="created_at" data-width="150" data-sortable="true" data-visible="true">
-                                    {{__('lang.created_at')}}
+                                    {{__('_created_at')}}
                                 </th>
 
                                 <th data-formatter="statusFormatter"  data-width="150">
-                                    {{__('lang.status')}}
+                                    {{__('_status')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
-                                    {{__('lang.action')}}
+                                    {{__('_action')}}
                                 </th>
 
                             </tr>
@@ -196,7 +196,7 @@
             @endcan
 
             @can('gallery.destroy')
-            html+='<a href="'+ '{{ route('admin.posts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm_destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.posts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
 
             return html;

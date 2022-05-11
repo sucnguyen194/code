@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.create')}} {{\Illuminate\Support\Str::lower(__('lang.filter'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.filter'))}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -21,7 +21,7 @@
                     </div>
 
                 <div class="form-group d-none">
-                    <label>{{__('lang.value')}} <span class="required">*</span></label>
+                    <label>{{__('_value')}} <span class="required">*</span></label>
                     <input type="text" class="form-control" value="{{old('data.value') ?? 0}}" id="value" name="data[value]" required>
                 </div>
 
