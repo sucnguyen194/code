@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVistorsTable extends Migration
+class CreateVisitorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,6 +29,6 @@ class CreateVistorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vistors');
+        Schema::dropIfExists('visitors');
     }
 }
