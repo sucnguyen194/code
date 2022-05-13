@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39cd00b9-c7b3-4f05-8377-5b1fe20f25df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_11_26_112115_create_vistors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_11_26_112115_create_visitors_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_03_05_151654_create_maps_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/LanguageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/LanguageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/language/translate/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/language/translate/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,6 +240,7 @@
       <workItem from="1652103640358" duration="8388000" />
       <workItem from="1652191755580" duration="14296000" />
       <workItem from="1652414813986" duration="112000" />
+      <workItem from="1652431716429" duration="3615000" />
     </task>
     <servers />
   </component>
@@ -259,5 +259,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1652433736193">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1652433736193" />
   </component>
 </project>

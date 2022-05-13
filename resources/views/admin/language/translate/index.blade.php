@@ -43,7 +43,6 @@
                                data-search-on-enter-key="false"
                                data-show-search-button="false"
                                data-sort-name="key"
-
                                data-filename="translates"
                                data-cookie="true"
                                data-cookie-id-table="translates"
@@ -58,7 +57,7 @@
                                     @lang('_value')
                                 </th>
 
-                                <th data-width="200" data-switchable="false" data-force-hide="true">
+                                <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">
                                     @lang('_action')
                                 </th>
 
@@ -83,4 +82,20 @@
         </div>
         <!-- end row -->
     </div>
+@stop
+
+@section('scripts')
+    <script>
+        function actionFormatter(value, row){
+            console.log(row);
+            const _value = row.value.replaceAll(' ', '_|_');
+
+            let html = '<a href="'+ '{{ route('admin.languages.edit.translate', [':lang',':key',':value']) }}'.replace(':key','key='+row.key).replace(':value','value='+_value).replace(':lang','lang='+row.lang) +'" title="{{__('_edit')}}" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a> ';
+
+            html+='<a href="'+ '{{ route('admin.languages.delete.translate', [':lang',':key']) }}'.replace(':key','key='+row.key).replace(':lang','lang='+row.lang) +'" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="Delete" data-confirm="{{__('_delete_record')}}" data-refresh="true"><i class="fe-x"></i></a> ';
+            return html;
+        }
+
+    </script>
+
 @stop

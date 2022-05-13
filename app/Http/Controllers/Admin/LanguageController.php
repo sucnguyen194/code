@@ -224,8 +224,10 @@ class LanguageController extends Controller
             return $string['key'];
         });
 
-        return datatables()->of($collection)->make();
-
+        return datatables()->of($collection)
+            ->addColumn('lang', function ($collect) use ($lang){
+                return $lang;
+            })->make();
     }
 
     public function createTranslate($lang){
@@ -275,7 +277,7 @@ class LanguageController extends Controller
         $this->authorize('setting.language');
 
         $key = $request->key;
-        $value = $request->value;
+        $value = Str::replace('_|_',' ',$request->value);
         $lang = $request->lang;
 
         return view('admin.language.translate.edit', compact('key', 'value', 'lang'));
