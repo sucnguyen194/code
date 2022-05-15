@@ -12,7 +12,7 @@
                 <tr>
                     <th>#</th>
                     <th>{{__('lang.time')}}</th>
-                    <th>{{__('lang.customer')}}</th>
+                    <th>{{__('_customer')}}</th>
                     <th>{{__('_order_money')}}</th>
                     <th>{{__('lang.money_down')}}</th>
                 </tr>

@@ -98,7 +98,7 @@ class CategoryController extends Controller
 
         $category->translations()->createMany($request->translation);
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -141,7 +141,7 @@ class CategoryController extends Controller
             $category->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -155,6 +155,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

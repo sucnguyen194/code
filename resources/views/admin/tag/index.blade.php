@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.tag')}} @stop
+@section('title') {{__('_tag')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.tag')}}</li>
+                            <li class="breadcrumb-item active">{{__('_tag')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.tag')}}</h4>
+                    <h4 class="page-title">{{__('_tag')}}</h4>
                 </div>
             </div>
         </div>
@@ -23,17 +23,16 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('tag.create')
-                        <a href="{{route('admin.tags.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.tag')}}</span></a>
+                            @include('admin.render.add_new', ['route' =>route('admin.tags.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.classify')}}" name="type">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('_classify')}}" name="type">
                                     <option value=""></option>
                                     @foreach(\App\Enums\TagType::getInstances() as $item)
-                                        <option value="{{$item->value}}">{{__('lang.'.$item->value)}}</option>
+                                        <option value="{{$item->value}}">{{__('_'.\Illuminate\Support\Str::lower($item->description))}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -64,7 +63,7 @@
                                 </th>
 
                                 <th data-field="slug">
-                                    {{__('lang.slug')}}
+                                    {{__('_slug')}}
                                 </th>
 
                                 <th data-field="created_at" data-width="150" data-sortable="true" data-visible="true">
@@ -128,12 +127,12 @@
             @can('tag.edit')
              html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
-            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__("lang.display")}}</label>';
+            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__("_display")}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox" >';
             html += '<input id="checkbox_status_'+row.id+'" '+status+' type="checkbox" name="status">';
-            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__("lang.highlights")}}</label>';
+            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__("_highlights")}}</label>';
             html += '</div>';
 
             @endcan
@@ -142,12 +141,12 @@
 
             html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';
-            html += '<label>{{__("lang.display")}}</label>';
+            html += '<label>{{__("_display")}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox">';
             html += '<input '+status+' type="checkbox" name="status">';
-            html += '<label class="mb-0">{{__("lang.highlights")}}</label>';
+            html += '<label class="mb-0">{{__("_highlights")}}</label>';
             html += '</div>';
 
             @endcan

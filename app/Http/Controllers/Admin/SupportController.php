@@ -87,7 +87,7 @@ class SupportController extends Controller
 
         $support->translations()->createMany($request->translation);
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -135,7 +135,7 @@ class SupportController extends Controller
             $support->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return flash(__('lang.flash_update'), 1);
+        return flash(__('_the_record_is_updated_successfully'), 1);
     }
 
     /**
@@ -150,7 +150,7 @@ class SupportController extends Controller
 
         $support->delete();
 
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 
 }

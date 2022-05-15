@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>{{__('lang.group')}}</label>
+                    <label>{{__('_group')}}</label>
                     <select class="form-control" data-toggle="select2" name="data[category_id]">
                         <option value="0">-----</option>
                         @foreach($categories as $item )

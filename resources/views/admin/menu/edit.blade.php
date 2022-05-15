@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.menu')}} #{{$menu->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_menu')}} #{{$menu->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,11 +15,11 @@
                         @foreach($translations as $key => $translation)
                             <div class="tab-pane  {{$translation->locale == session('lang') ? 'active' : null}} language-{{$translation->locale}}" id="language-{{$translation->locale}}">
                                 <div class="form-group">
-                                    <label>{{__('lang.title')}}</label>
+                                    <label>{{__('_title')}}</label>
                                     <input type="text" class="form-control" name="translation[{{$key}}][name]" value="{{$translation->name}}" >
                                 </div>
                                 <div class="form-group">
-                                    <label>{{__('lang.slug')}}</label>
+                                    <label>{{__('_slug')}}</label>
                                     <div class="d-flex form-control">
                                         <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$translation->locale}}" value="{{$translation->slug}}" language="{{$translation->locale}}" seo="{{$translation->language->name}}" name="translation[{{$key}}][slug]">
                                         <span>.html</span>
@@ -34,11 +34,11 @@
                             @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                                     <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                                         <div class="form-group">
-                                            <label>{{__('lang.title')}}</label>
+                                            <label>{{__('_title')}}</label>
                                             <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
                                         </div>
                                         <div class="form-group">
-                                            <label>{{__('lang.slug')}} </label>
+                                            <label>{{__('_slug')}} </label>
                                             <div class="d-flex form-control">
                                                 <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$language->value}}" value="{{old('data.alias')}}" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
                                                 <span>.html</span>
@@ -50,11 +50,11 @@
                         @endif
 
                             <div class="form-group">
-                                <label>{{__('lang.path')}}</label>
+                                <label>{{__('_path')}}</label>
                                 <input type="text" class="form-control" id="path" value="{{$menu->path}}" name="data[path]">
                             </div>
                             <div class="form-group">
-                                <label>{{__('lang.group')}}</label>
+                                <label>{{__('_group')}}</label>
                                 <select id="parent_id" name="data[parent_id]" class="form-control" data-toggle="select2">
                                     <option value="0">-----</option>
                                     @include('admin.render.options', ['options' => $menus, 'selected' => $menu->parent_id])
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>{{__('lang.target')}}</label>
+                                <label>{{__('_target')}}</label>
                                 <select id="target" name="data[target]" class="form-control" data-toggle="select2">
                                     <option {{selected($menu->target,'_self')}} value="_self">-----</option>
                                     <option {{selected($menu->target,'_parent')}} value="_parent">_parent</option>
@@ -72,7 +72,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>{{__('lang.type')}} <span class="text-lowercase">{{__('lang.menu')}}</span></label>
+                                <label>{{__('_type')}}</label>
                                 <select id="type" name="data[type]" class="form-control" data-toggle="select2">
                                     <option {{selected($menu->type,'default')}} value="default">Default</option>
                                     <option {{selected($menu->type,'mega')}} value="mega">Mega Menu</option>
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                     <div class="media-body ml-3">
-                                        <label class="form-label">{{__('lang.icon')}}</label>
+                                        <label class="form-label">{{__('_icon')}}</label>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input name="data[image]" id="image_url" data-target="#image_src" value="{{$menu->image}}"  type="text" class="form-control" placeholder="http://">
@@ -100,11 +100,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>{{__('lang.position')}}</label>
+                                <label>{{__('_position')}}</label>
 
                                 <select id="position" class="form-control" data-toggle="select2" name="data[position]">
                                     @foreach(\App\Enums\MenuPosition::getInstances() as $item)
-                                        <option value="{{$item->value}}" {{selected($item->value,$menu->value)}} class="form-control">MENU {{\Illuminate\Support\Str::upper($item->description) }}</option>
+                                        <option value="{{$item->value}}" {{selected($item->value,$menu->value)}} class="form-control">{{__('_menu')}} {{$item->description}}</option>
                                     @endforeach
                                 </select>
                                 <textarea id="nestable-output" name="menuval" style="display: none;"></textarea>

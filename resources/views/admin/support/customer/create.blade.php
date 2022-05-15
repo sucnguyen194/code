@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('lang.review')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,19 +15,19 @@
                     @foreach(languages() as $key => $language)
                         <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                             <div class="form-group">
-                                <label>{{__('lang.customer')}} <span class="required">*</span></label>
+                                <label>{{__('_customer')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][name]" >
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span id="basic-addon1" class="input-group-text">{{__('lang.job')}}</span>
+                                        <span id="basic-addon1" class="input-group-text">{{__('_job')}}</span>
                                     </div>
                                     <input type="text" class="form-control" id="job" name="translation[{{$key}}][job]">
                                 </div>
                             </div>
                             <div class="form-group" style="max-width: 770px">
-                                <label for="description">{{__('lang.comment')}}</label>
+                                <label for="description">{{__('_comment')}}</label>
                                 <textarea class="form-control summernote" id="summernote" data-height="200"
                                           name="translation[{{$key}}][description]"></textarea>
                             </div>
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span id="basic-addon1" class="input-group-text">{{__('lang.email')}}</span>
+                                <span id="basic-addon1" class="input-group-text">{{__('_email')}}</span>
                             </div>
                             <input type="email" class="form-control" id="email" value=""
                                    name="data[email]">
@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span id="basic-addon1" class="input-group-text">{{__('lang.phone')}}</span>
+                                <span id="basic-addon1" class="input-group-text">{{__('_phone')}}</span>
                             </div>
                             <input type="tel" class="form-control" id="hotline" value="" name="data[hotline]">
                         </div>

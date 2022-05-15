@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}  <span class="text-lowercase">{{__('lang.tag')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}  <span class="text-lowercase">{{__('_tag')}}</span></h5>
                 <button type="button" class="close close-tag" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -26,13 +26,13 @@
                     @foreach(languages() as $key => $language)
                         <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}-tag" id="language-{{$language->value}}-tag">
                             <div class="form-group">
-                                <label>{{__('lang.tag')}} <span class="required">*</span></label>
+                                <label>{{__('_tag')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="tag_{{$language->value}}"
                                        onkeyup="ChangeToSlug(this);"
                                        name="translation[{{$key}}][name]">
                             </div>
                             <div class="form-group mb-0">
-                                <label>{{__('lang.slug')}} <span class="required">*</span></label>
+                                <label>{{__('_slug')}} <span class="required">*</span></label>
                                 <div class="d-flex form-control">
                                     <span>{{route('home')}}/tag/</span><input type="text" class="border-0 slug" id="tag_{{$language->value}}" value="" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
                                     <span>.html</span>

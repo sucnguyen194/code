@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.page')}} @stop
+@section('title') {{__('_page')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.page')}}</li>
+                            <li class="breadcrumb-item active">{{__('_page')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.page')}}</h4>
+                    <h4 class="page-title">{{__('_page')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,22 +24,22 @@
                     <div class="action-datatable text-right">
                         @can('blog.create')
                         <a href="{{route('admin.posts.pages.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.page')}}</span></a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('_page')}}</span></a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.display')}}"  name="public">
-                                    <option value="">{{__('lang.display')}}</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('_display')}}"  name="public">
+                                    <option value="">{{__('_display')}}</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.highlights')}}" name="status">
-                                    <option value="">{{__('lang.highlights')}}</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('_highlights')}}" name="status">
+                                    <option value="">{{__('_highlights')}}</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
                                     @endforeach
@@ -47,8 +47,8 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.author')}}" name="author">
-                                    <option value="">{{__('lang.author')}}</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('_author')}}" name="author">
+                                    <option value="">{{__('_author')}}</option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>
                                     @endforeach
@@ -75,17 +75,17 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
-                                <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
+                                <th data-formatter="sortFormatter" data-width="100">{{__('_sort')}}</th>
                                 <th data-field="title" data-formatter="titleFormatter">
-                                    {{__('lang.title')}}
+                                    {{__('_title')}}
                                 </th>
                                 @can('comment.view')
                                 <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
-                                    {{__('lang.review')}}
+                                    {{__('_review')}}
                                 </th>
                                 @endcan
                                 <th data-field="admin.name">
-                                    {{__('lang.author')}}
+                                    {{__('_author')}}
                                 </th>
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
                                     {{__('_created_at')}}
@@ -144,12 +144,12 @@
             @can('blog.edit')
             html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
-            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('lang.display')}}</label>';
+            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('_display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox" >';
             html += '<input id="checkbox_status_'+row.id+'" '+status+' type="checkbox" name="status">';
-            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__('lang.highlights')}}</label>';
+            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__('_highlights')}}</label>';
             html += '</div>';
 
             @endcan
@@ -158,12 +158,12 @@
 
             html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';
-            html += '<label>{{__('lang.display')}}</label>';
+            html += '<label>{{__('_display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox">';
             html += '<input '+status+' type="checkbox" name="status">';
-            html += '<label class="mb-0">{{__('lang.highlights')}}</label>';
+            html += '<label class="mb-0">{{__('_highlights')}}</label>';
             html += '</div>';
 
             @endcan

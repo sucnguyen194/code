@@ -161,7 +161,7 @@ class PostController extends Controller
         $post->translations()->createMany($request->translation);
         $post->categories()->attach($request->category_id);
 
-        return flash(__('lang.flash_create'), 1 , $post->route);
+        return flash(__('_the_record_is_added_successfully'), 1 , $post->route);
     }
 
     /**
@@ -238,7 +238,7 @@ class PostController extends Controller
 
         $post->categories()->sync($request->category_id);
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -253,6 +253,6 @@ class PostController extends Controller
         $this->authorize('blog.destroy');
 
         $post->delete();
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

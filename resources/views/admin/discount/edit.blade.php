@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.discount')}} #{{$discount->id}}
+    {{__('_discount')}} #{{$discount->id}}
 @stop
 @section('content')
     <style>
@@ -23,11 +23,11 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('lang.discount')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('_discount')}}</a></li>
                             <li class="breadcrumb-item active">#{{$discount->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.discount')}} #{{$discount->id}}</h4>
+                    <h4 class="page-title">{{__('_discount')}} #{{$discount->id}}</h4>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.discount_name')}} <span class="required">*</span> </label>
+                        <label class="form-label">{{__('_discount_name')}} <span class="required">*</span> </label>
                         <input type="text" name="discount[name]" class="form-control" value="{{ $discount->name }}" required>
                     </div>
 
@@ -68,7 +68,7 @@
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">{{__('lang.product')}}</label>
+                    <label class="font-weight-bold mb-4">{{__('_product')}}</label>
                     <div class="form-group duallistbox-hidden-select">
                         <select class="custom-select" id="services" multiple name="products[]" size="10" required>
                             @foreach($products as $product)
@@ -123,7 +123,7 @@
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">{{__('lang.customers')}}</label>
+                    <label class="font-weight-bold mb-4">{{__('_customers')}}</label>
 
                     <div class="form-group">
                         <label class="custom-control custom-radio">
@@ -147,7 +147,7 @@
                 <hr class="m-0">
                 <div class="card-body pb-2">
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.description')}}</label>
+                        <label class="form-label">{{__('_description')}}</label>
                         <textarea class="form-control" name="discount[description]" rows="3">{{ $discount->description }}</textarea>
                     </div>
 

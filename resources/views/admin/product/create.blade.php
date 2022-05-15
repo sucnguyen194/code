@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}
+    {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_product'))}}
 @stop
 @section('content')
 {{--    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>--}}
@@ -13,10 +13,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</li>
+                            <li class="breadcrumb-item active">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_product'))}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</h4>
+                    <h4 class="page-title">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_product'))}}</h4>
                 </div>
             </div>
         </div>
@@ -193,7 +193,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('_image')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

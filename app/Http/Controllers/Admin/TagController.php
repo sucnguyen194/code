@@ -82,7 +82,7 @@ class TagController extends Controller
 
         $tag->translations()->createMany($request->translation);
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     public function ajax_create(){
@@ -164,7 +164,7 @@ class TagController extends Controller
             $tag->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return  flash(__('lang.flash_update'));
+        return  flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -178,6 +178,6 @@ class TagController extends Controller
         $this->authorize('tag.destroy');
 
         $tag->delete();
-        return  flash(__('lang.flash_destroy'));
+        return  flash(__('_the_record_is_deleted_successfully'));
     }
 }

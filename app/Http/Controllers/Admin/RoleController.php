@@ -66,7 +66,7 @@ class RoleController extends Controller
         ]);
         $role->syncPermissions($request->permissions);
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -106,7 +106,7 @@ class RoleController extends Controller
 
         $role->update(['name' => $request->name]);
         $role->syncPermissions($request->permissions);
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -123,6 +123,6 @@ class RoleController extends Controller
             return flash(__('_error'),0);
 
         $role->delete();
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

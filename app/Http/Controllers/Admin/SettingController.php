@@ -29,6 +29,6 @@ class SettingController extends Controller
             Setting::set($key,$value,$type);
         }
 
-     return  flash(__('lang.flash_update'));
+     return  flash(__('_the_record_is_updated_successfully'));
     }
 }

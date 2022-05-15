@@ -94,7 +94,7 @@ class DiscountController extends Controller
             $discount->users()->sync($request->users);
         }
 
-        return flash(__('lang.flash_update'), 1, route('admin.discounts.index'));
+        return flash(__('_the_record_is_updated_successfully'), 1, route('admin.discounts.index'));
 
     }
 
@@ -161,7 +161,7 @@ class DiscountController extends Controller
         }
 
 
-        return flash(__('lang.flash_update'), 1, route('admin.discounts.index'));
+        return flash(__('_the_record_is_updated_successfully'), 1, route('admin.discounts.index'));
     }
 
     /**
@@ -175,7 +175,7 @@ class DiscountController extends Controller
         $this->authorize('discount.destroy');
 
         $discount->delete();
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 
     public function history(Discount $discount){

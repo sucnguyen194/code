@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}
+    {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_discount'))}}
 @stop
 @section('content')
     <style>
@@ -23,11 +23,11 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('lang.discount')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.discounts.index')}}">{{__('_discount')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_discount'))}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}</h4>
+                    <h4 class="page-title">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_discount'))}}</h4>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <div class="card-body pb-2">
 
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.discount_name')}} <span class="required">*</span> </label>
+                        <label class="form-label">{{__('_discount_name')}} <span class="required">*</span> </label>
                         <input type="text" name="discount[name]" class="form-control" required>
                     </div>
 
@@ -68,7 +68,7 @@
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">{{__('lang.product')}}</label>
+                    <label class="font-weight-bold mb-4">{{__('_product')}}</label>
                     <div class="form-group duallistbox-hidden-select">
                         <select class="custom-select duallistbox d-none" multiple name="products[]" size="10" required style="display: none">
                             @foreach($products as $product)
@@ -123,7 +123,7 @@
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">{{__('lang.customers')}}</label>
+                    <label class="font-weight-bold mb-4">{{__('_customers')}}</label>
 
                     <div class="form-group">
                         <label class="custom-control custom-radio">
@@ -146,7 +146,7 @@
                 <hr class="m-0">
                 <div class="card-body pb-2">
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.description')}}</label>
+                        <label class="form-label">{{__('_description')}}</label>
                         <textarea class="form-control" name="discount[description]" rows="3"></textarea>
                     </div>
 

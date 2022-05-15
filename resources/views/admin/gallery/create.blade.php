@@ -39,7 +39,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content text-center">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_image')}}</h5>
                 <button type="button" class="close" onclick="jQuery('.modal-gallery').modal('hide');" data-dismiss="modal-gallery" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>

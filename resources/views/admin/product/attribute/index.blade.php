@@ -52,9 +52,9 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true" data-visible="true">ID</th>
-                                <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
+                                <th data-formatter="sortFormatter" data-width="100">{{__('_sort')}}</th>
                                 <th data-field="name" data-formatter="titleFormatter">
-                                    {{__('lang.title')}}
+                                    {{__('_title')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">

@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.post')}} #{{$post->id}}
+    {{__('_post')}} #{{$post->id}}
 @stop
 @section('content')
     <div class="container-fluid">
@@ -11,11 +11,11 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.posts.index')}}">{{__('lang.post')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.posts.index')}}">{{__('_post')}}</a></li>
                             <li class="breadcrumb-item">#{{$post->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.post')}} #{{$post->id}}</h4>
+                    <h4 class="page-title">{{__('_post')}} #{{$post->id}}</h4>
                 </div>
             </div>
         </div>

@@ -3,20 +3,20 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('lang.image')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('_image')}}</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group position-relative box-action-image">
-                    <label>{{__('lang.image')}}</label>
+                    <label>{{__('_image')}}</label>
                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:0;top:0">
                         <label class="item-input mb-0">
-                            <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> {{__('lang.select_image')}}
+                            <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> {{__('_select_image')}}
                         </label>
                     </div>
-                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
+                    <p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}</p>
                     <div class="dropzone pl-2 pr-2 pb-1">
                         <div class="dz-message text-center needsclick mb-1" id="remove-label">
                             <label for="slider-file" class="w-100 mb-0">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>{{__('lang.position')}}</label>
+                    <label>{{__('_position')}}</label>
                     <select name="data[position]" class="form-control">
                         <option value="Nomal">----</option>
                         @foreach(\App\Enums\Position::getInstances() as $item)
@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>{{__('lang.target')}}</label>
+                    <label>{{__('_target')}}</label>
                     <select id="target" name="data[target]" class="form-control" data-toggle="select2">
                         <option value="_self">-----</option>
                         <option value="_parent">_parent</option>
@@ -133,7 +133,7 @@
                     img += '</div></div>';
 
                     img += '<div class="form-group mb-1">';
-                    img += ' <input name="name[]" type="text" class="form-control" value="" placeholder="{{__('lang.title')}}">';
+                    img += ' <input name="name[]" type="text" class="form-control" value="" placeholder="{{__('_title')}}">';
                     img += '</div>';
 
                     img += '<div class="form-group mb-0">';

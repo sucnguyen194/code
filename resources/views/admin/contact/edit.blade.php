@@ -42,7 +42,7 @@
                         @if($contact->note)
                         <p>{!! nl2br($contact->note) !!}</p>
                         @else
-                            <p>{{__('lang.customer_request_to_receive_infomation')}}: <a href="mailto:{{$contact->email}}" class="font-weight-bold"> {{$contact->email}}</a></p>
+                            <p>{{__('_customer_request_to_receive_infomation')}}: <a href="mailto:{{$contact->email}}" class="font-weight-bold"> {{$contact->email}}</a></p>
                         @endif
                         <hr/>
                     </div> <!-- card-box -->
@@ -67,8 +67,8 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3 mt-5">
-                            <lable class="font-weight-bold mb-2">{{__('lang.reply')}}</lable>
-                            <p class="mt-2">* {{__('lang.content')}} email {{__('lang.not_null')}}!</p>
+                            <lable class="font-weight-bold mb-2">{{__('_answer')}}</lable>
+                            <p class="mt-2">* {{__('_content')}} email {{__('lang.not_null')}}!</p>
                             <textarea class="form-control summernote" data-height="600" name="data[note]"></textarea>
 
                         </div>
@@ -76,9 +76,9 @@
                         <div class="text-right">
                             <a href="{{route('admin.contacts.index')}}" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-arrow-left"></i></span> {{__('_back')}}</a>
                             @if(setting('contact.email'))
-                            <button type="submit" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> {{__('lang.reply')}}</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> {{__('_answer')}}</button>
                             @else
-                                <a href="{{route('admin.settings')}}" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> {{__('lang.email_null')}}</a>
+                                <a href="{{route('admin.settings')}}" class="btn btn-primary waves-effect waves-light"><span class="icon-button"><i class="fe-edit-1"></i></span> {{__('_email_null')}}</a>
                             @endif
                         </div>
                     </form>

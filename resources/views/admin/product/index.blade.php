@@ -25,13 +25,13 @@
                     <div class="action-datatable text-right">
                         @can('product.create')
                         <a href="{{route('admin.products.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_product'))}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="{{__('lang.display')}}">
+                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="{{__('_display')}}">
                                     <option value=""></option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
@@ -39,7 +39,7 @@
                                 </select>
                             </div>
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.highlights')}}" name="status">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('_highlights')}}" name="status">
                                     <option value=""></option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->value}}"> {{$public->description}}</option>
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.author')}}" name="author">
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('_author')}}" name="author">
                                     <option value=""></option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>
@@ -81,10 +81,10 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
-                                <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
-                                <th data-field="thumb" data-formatter="imageFormatter"  data-width="100">{{__('lang.image')}}</th>
+                                <th data-formatter="sortFormatter" data-width="100">{{__('_sort')}}</th>
+                                <th data-field="thumb" data-formatter="imageFormatter"  data-width="100">{{__('_image')}}</th>
                                 <th data-field="name" data-formatter="titleFormatter">
-                                    {{__('lang.product')}}
+                                    {{__('_product')}}
                                 </th>
                                 <th data-field="category" data-formatter="categoryFormatter">
                                     {{__('lang.category')}}
@@ -98,7 +98,7 @@
                                 </th>
                                 @can('comment.view')
                                     <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
-                                        {{__('lang.review')}}
+                                        {{__('_review')}}
                                     </th>
                                 @endcan
 
@@ -129,7 +129,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('_image')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -220,12 +220,12 @@
             @can('product.edit')
                 html += '<div class="checkbox" >';
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
-            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('lang.display')}}</label>';
+            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('_display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox" >';
             html += '<input id="checkbox_status_'+row.id+'" '+status+' type="checkbox" name="status">';
-            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__('lang.highlights')}}</label>';
+            html += '<label for="checkbox_status_'+row.id+'" class="mb-0 data_status" data-id="'+row.id+'">{{__('_highlights')}}</label>';
             html += '</div>';
 
             @endcan
@@ -234,12 +234,12 @@
 
                 html += '<div class="checkbox">';
             html += '<input '+public+' type="checkbox" name="public">';
-            html += '<label>{{__('lang.display')}}</label>';
+            html += '<label>{{__('_display')}}</label>';
             html += '</div>';
 
             html += '<div class="checkbox">';
             html += '<input '+status+' type="checkbox" name="status">';
-            html += '<label class="mb-0">{{__('lang.highlights')}}</label>';
+            html += '<label class="mb-0">{{__('_highlights')}}</label>';
             html += '</div>';
 
             @endcan

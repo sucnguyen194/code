@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.menu')}}
+    {{__('_menu')}}
 @stop
 @section('content')
 
@@ -13,10 +13,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.menu')}}</li>
+                            <li class="breadcrumb-item active">{{__('_menu')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.menu')}}</h4>
+                    <h4 class="page-title">{{__('_menu')}}</h4>
                 </div>
             </div>
         </div>
@@ -28,9 +28,7 @@
                 <div class="text-left" id="nestable_list_menu">
                     @can('menu.create')
                     <div class="action-datatable text-right mb-2">
-                        <a href="{{route('admin.menus.create')}}" class="btn btn-primary waves-effect width-md waves-light ajax-modal">
-                            <span class="icon-button"><i class="fe-plus pr-1"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.menu')}}</span></a>
-
+                        @include('admin.render.add_new', ['route' => route('admin.menus.create'), 'modal' => true])
                     </div>
                     @endcan
                 </div>
@@ -42,9 +40,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card-box">
-                            <h4 class="header-title">{{__('lang.quick_add')}}</h4>
+                            <h4 class="header-title">{{__('_quick_add')}}</h4>
                             <p class="sub-header mb-0">
-                                {!! __('lang.quick_add_note') !!}
+                                {!! __('_quick_add_note') !!}
                             </p>
                         </div>
                         @can('product.view')
@@ -72,7 +70,7 @@
                                     <thead>
                                     <tr>
                                         <th data-field="translation.name" data-formatter="categoryFormatter">
-                                            {{__('lang.category_product')}}
+                                            {{__('_category_product')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -107,7 +105,7 @@
                                     <thead>
                                     <tr>
                                         <th data-field="translation.name" data-formatter="categoryFormatter">
-                                            {{__('lang.category_post')}}
+                                            {{__('_category_post')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -137,7 +135,7 @@
                                     <thead>
                                     <tr>
                                         <th data-field="translation.name" data-formatter="titleFormatter">
-                                            {{__('lang.page')}}
+                                            {{__('_page')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -148,14 +146,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-box">
-                            <h4 class="header-title"><b>{{__('lang.menu_list')}}</b></h4>
+                            <h4 class="header-title"><b>{{__('_menu')}}</b></h4>
                             <p class="sub-header">
-                                {!! __('lang.menu_list_note') !!}
+                                {!! __('_menu_list_note') !!}
                             </p>
 
                                 <textarea id="nestable-output" class="d-none" name="menuval"></textarea>
                                 <div class="form-group">
-                                    <label><strong class="text-uppercase">{{__('lang.position')}}</strong></label>
+                                    <label><strong class="text-uppercase">{{__('_position')}}</strong></label>
                                     <select class="form-control position" data-toggle="select2">
                                         @foreach(\App\Enums\MenuPosition::getInstances() as $menu)
                                         <option value="{{$menu->value}}" {{selected(session('menu_position'),$menu->value)}} class="form-control">MENU {{\Illuminate\Support\Str::upper($menu->description) }}</option>
@@ -256,9 +254,9 @@
                     $('#ajax-modal').modal('hide');
 
                     if($(ele).find('input[name="_method"]').length){
-                        flash({'message':'{{__("lang.flash_update")}}', 'type': 'success'});
+                        flash({'message':'{{__("_the_record_is_updated_successfully")}}', 'type': 'success'});
                     }else{
-                        flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
+                        flash({'message':'{{__("_the_record_is_added_successfully")}}', 'type': 'success'});
                     }
                 }
 
@@ -278,13 +276,13 @@
             e.preventDefault();
             if($(this).data('confirm')){
                 Swal.fire({
-                    title: '{{__("lang.are_you_sure")}}',
+                    title: '{{__("_are_you_sure")}}',
                     text:  $(this).data('confirm'),
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: '{{__("lang.confirm")}}',
+                    confirmButtonText: '{{__("_confirm")}}',
                     cancelButtonText: '{{__("_back")}}'
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -313,7 +311,7 @@
             }).done(function( result ) {
                 let html = document.getElementById('result_data');
                 let  success = {
-                    'message' : '{{__("lang.flash_destroy")}}',
+                    'message' : '{{__("_the_record_is_deleted_successfully")}}',
                     'type' : 'success'
                 };
                 $(html).html(result);
@@ -372,7 +370,7 @@
                     success:function(result){
                         $('#result_data').append(result).show();
                         $('.dd-empty').hide();
-                        flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
+                        flash({'message':'{{__("_the_record_is_added_successfully")}}', 'type': 'success'});
                     }
                 })
             });

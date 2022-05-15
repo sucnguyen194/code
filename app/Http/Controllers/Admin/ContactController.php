@@ -40,7 +40,7 @@ class ContactController extends Controller
 
         return datatables()->of($contacts)
             ->editColumn('note',function ($contact){
-                return $contact->note ? str_limit($contact->note,100) : __('lang.customer_request_to_receive_infomation');
+                return $contact->note ? str_limit($contact->note,100) : __('_customer_request_to_receive_infomation');
             })
             ->editColumn('updated_at',function ($contact){
                 if($contact->updated_at != $contact->created_at)
@@ -129,7 +129,7 @@ class ContactController extends Controller
 
         send_email('reply',$request->data,$contact->email);
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -145,6 +145,6 @@ class ContactController extends Controller
 
         $contact->delete();
 
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

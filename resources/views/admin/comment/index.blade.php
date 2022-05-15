@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.comment')}} @stop
+@section('title') {{__('_comment')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.comment')}}</li>
+                            <li class="breadcrumb-item active">{{__('_comment')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.comment')}}</h4>
+                    <h4 class="page-title">{{__('_comment')}}</h4>
                 </div>
             </div>
         </div>
@@ -44,23 +44,23 @@
                             <tr>
                                 <th data-field="id" data-width="150" data-sortable="true">ID</th>
                                 <th data-field="title" data-formatter="titleFormatter">
-                                    {{__('lang.title')}}
+                                    {{__('_title')}}
                                 </th>
                                 <th data-field="comment_last">
-                                    {{__('lang.end_comment')}}
+                                    {{__('_last_comment')}}
                                 </th>
                                 <th data-field="commenter">
-                                    {{__('lang.commenter')}}
+                                    {{__('_author')}}
                                 </th>
                                 <th data-field="ratting" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
-                                    {{__('lang.review')}}
+                                    {{__('_review')}}
                                 </th>
 
                                 <th data-field="comment_count" data-width="150" data-sortable="true" data-visible="true">
-                                    {{__('lang.no_reply')}}
+                                    {{__('_not_answered')}}
                                 </th>
                                 <th data-field="created_at" data-width="150" data-sortable="true" data-visible="true">
-                                    {{__('lang.update')}}
+                                    {{__('_updated')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="150" data-switchable="false" data-force-hide="true">

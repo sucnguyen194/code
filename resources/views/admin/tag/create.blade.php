@@ -4,7 +4,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('lang.tag')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('_tag')}}</span></h5>
                 <button type="button" class="close close-tag" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,8 +14,8 @@
 
                 <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
                     <div class="form-group">
-                        <select class="form-control" data-toggle="select2" name="data[type]" data-placeholder="{{__('lang.classify')}}">
-                            <option value="">{{__('lang.classify')}}</option>
+                        <select class="form-control" data-toggle="select2" name="data[type]" data-placeholder="{{__('_classify')}}">
+                            <option value="">{{__('_classify')}}</option>
                             @foreach(\App\Enums\TagType::getInstances() as $item)
                                 <option value="{{$item->value}}">{{__('lang.'.$item->value)}}</option>
                             @endforeach
@@ -24,7 +24,7 @@
                     @foreach(languages() as $key => $language)
                         <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
                             <div class="form-group">
-                                <label>{{__('lang.tag')}} <span class="required">*</span></label>
+                                <label>{{__('_tag')}} <span class="required">*</span></label>
                                 <input type="text" class="form-control" language="{{$language->value}}"
                                        seo="{{$language->name}}" onkeyup="ChangeToSlug(this);"
                                        name="translation[{{$key}}][name]">

@@ -10,11 +10,11 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>{{__('lang.title')}} <span class="required">*</span></label>
+                    <label>{{__('_title')}} <span class="required">*</span></label>
                     <input type="text" class="form-control" value="{{old('title')}}" id="title" name="title" required>
                 </div>
                 <div class="form-group">
-                    <label>{{__('lang.group')}}</label>
+                    <label>{{__('_group')}}</label>
                     <select class="form-control" data-toggle="select2" name="parent_id">
                         <option value="0">-----</option>
                         @foreach($permissions as $item)

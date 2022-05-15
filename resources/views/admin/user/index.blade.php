@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.customer')}} @stop
+@section('title') {{__('_customer')}} @stop
 @section('content')
     <div class="container-fluid">
 
@@ -10,10 +10,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.customer')}}</li>
+                            <li class="breadcrumb-item active">{{__('_customer')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.customer')}}</h4>
+                    <h4 class="page-title">{{__('_customer')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     <div class="action-datatable text-right">
                         @can('user.create')
                         <a href="{{route('admin.users.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.customer'))}}</a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_customer'))}}</a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -53,7 +53,7 @@
                                 </th>
 
                                 <th data-field="email">
-                                    {{__('lang.email')}}
+                                    {{__('_email')}}
                                 </th>
 
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
@@ -95,7 +95,7 @@
             html += '<a href="'+ '{{ route('admin.users.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             @endcan
             @can('user.edit')
-            html+='<a href="'+ '{{ route('admin.users.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm.destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.users.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_confirm.destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

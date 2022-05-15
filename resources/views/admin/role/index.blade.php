@@ -49,7 +49,7 @@
                             <tr>
                                 <th data-field="id" data-sortable="true">{{__('_id')}}</th>
                                 <th data-field="name">
-                                    {{__('_roll')}}
+                                    {{__('_role')}}
                                 </th>
 
                                 <th data-field="permission" data-width="1100" data-formatter="permissionFormatter">
@@ -91,7 +91,7 @@
             html += '<a href="'+ '{{ route('admin.roles.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             @endcan
             @can('role.destroy')
-            html+='<a href="'+ '{{ route('admin.roles.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('lang.confirm.destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.roles.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_confirm.destroy')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.page'))}}
+    {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_page'))}}
 @stop
 @section('content')
 
@@ -12,11 +12,11 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.posts.index')}}">{{__('lang.page')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('_add_new')}} <span class="text-lowercase">{{__('lang.page')}}</span></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.posts.index')}}">{{__('_page')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('_add_new')}} <span class="text-lowercase">{{__('_page')}}</span></li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('_add_new')}} <span class="text-lowercase">{{__('lang.page')}}</span></h4>
+                    <h4 class="page-title">{{__('_add_new')}} <span class="text-lowercase">{{__('_page')}}</span></h4>
                 </div>
             </div>
         </div>

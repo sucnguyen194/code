@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.image')}} @stop
+@section('title') {{__('_image')}} @stop
 @section('content')
     <div class="container-fluid">
 
@@ -10,10 +10,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.image')}}</li>
+                            <li class="breadcrumb-item active">{{__('_image')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.image')}}</h4>
+                    <h4 class="page-title">{{__('_image')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,15 +24,14 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('photo.create')
-                        <a href="{{route('admin.photos.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.image')}}</span></a>
+                            @include('admin.render.add_new', ['route' => route('admin.photos.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">
                         <form method="get" class="form-inline filter-form">
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="{{__('lang.display')}}">
-                                    <option value="">{{__('lang.display')}}</option>
+                                <select class="form-control" data-toggle="select2" name="public" data-allow-clear="true" data-placeholder="{{__('_display')}}">
+                                    <option value="">{{__('_display')}}</option>
                                     @foreach(\App\Enums\ActiveDisable::getInstances() as $public)
                                         <option value="{{$public->key}}"> {{$public->description}}</option>
                                     @endforeach
@@ -40,8 +39,8 @@
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="position" data-allow-clear="true" data-placeholder="{{__('lang.position')}}">
-                                    <option value="">{{__('lang.position')}}</option>
+                                <select class="form-control" data-toggle="select2" name="position" data-allow-clear="true" data-placeholder="{{__('_position')}}">
+                                    <option value="">{{__('_position')}}</option>
                                     @foreach(\App\Enums\Position::getInstances() as $item)
                                         <option value="{{$item->value}}">{{$item->description}}</option>
                                     @endforeach
@@ -68,25 +67,25 @@
                             <thead>
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
-                                <th data-formatter="sortFormatter" data-width="100">{{__('lang.sort')}}</th>
+                                <th data-formatter="sortFormatter" data-width="100">{{__('_sort')}}</th>
                                 <th data-field="image" data-formatter="imageFormatter" data-width="120">
-                                    {{__('lang.image')}}
+                                    {{__('_image')}}
                                 </th>
 
                                 <th data-field="name">
-                                    {{__('lang.title')}}
+                                    {{__('_title')}}
                                 </th>
 
                                 <th data-field="path" data-formatter="pathFormatter">
-                                    {{__('lang.slug')}}
+                                    {{__('_slug')}}
                                 </th>
 
                                 <th data-field="position" data-width="150">
-                                    {{__('lang.position')}}
+                                    {{__('_position')}}
                                 </th>
 
                                 <th data-field="target" data-width="100" >
-                                    {{__('lang.target')}}
+                                    {{__('_target')}}
                                 </th>
 
                                 <th data-formatter="statusFormatter" data-width="150">
@@ -114,7 +113,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('_image')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -167,7 +166,7 @@
             }
 
             html += '<input id="checkbox_public_'+row.id+'" '+public+' type="checkbox" name="public">';
-            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('lang.display')}}</label>';
+            html += '<label for="checkbox_public_'+row.id+'" class="data_public" data-id="'+row.id+'">{{__('_display')}}</label>';
             html += '</div>';
 
             return html;
@@ -195,7 +194,7 @@
             @endcan
 
             if(row.image)
-              html +='<a href="javascript:void(0)" class="btn btn-facebook  coppy-image waves-effect waves-light tooltip-hover" title="{{__('lang.coppy')}} {{__('lang.image')}}" data-image="'+row.image+'"><i class="fe-copy"></i></a>';
+              html +='<a href="javascript:void(0)" class="btn btn-facebook  coppy-image waves-effect waves-light tooltip-hover" title="{{__('lang.coppy')}} {{__('_image')}}" data-image="'+row.image+'"><i class="fe-copy"></i></a>';
 
             return html;
         }

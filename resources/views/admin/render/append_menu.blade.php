@@ -2,7 +2,7 @@
     <div class="dd-handle">{{optional($menu->translation)->name}}</div>
     <div class="menu_action">
         @can('menu.edit')
-            <a href="{{route('admin.menus.edit',$menu)}}" title="{{__('lang.edit')}}"
+            <a href="{{route('admin.menus.edit',$menu)}}" title="{{__('_edit')}}"
                class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a>
         @endcan
         @can('menu.destroy')

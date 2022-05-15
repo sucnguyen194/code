@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="media-body ml-3">
-                            <label class="form-label">{{__('lang.icon')}}</label>
+                            <label class="form-label">{{__('_icon')}}</label>
                             <div class="form-group">
                                 <div class="input-group">
                                     <input name="data[image]" id="image_url" data-target="#image_src" value="{{$filter->image}}"  type="text" class="form-control" placeholder="http://">
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>{{__('lang.group')}}</label>
+                    <label>{{__('_group')}}</label>
                     <select class="form-control" data-toggle="select2" name="data[parent_id]">
                         <option value="0">-----</option>
                         @foreach($categories as $item )

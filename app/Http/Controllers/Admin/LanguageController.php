@@ -80,7 +80,7 @@ class LanguageController extends Controller
             'value' => $request->value,
             'image' => $request->image,
         ]);
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -125,7 +125,7 @@ class LanguageController extends Controller
             'name' => $request->name,
             'image' => $request->image
         ]);
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -147,7 +147,7 @@ class LanguageController extends Controller
 
         $language->delete();
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
 
     }
 
@@ -172,7 +172,7 @@ class LanguageController extends Controller
         session()->put('lang', $lang);
         App::setLocale($lang);
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -213,10 +213,13 @@ class LanguageController extends Controller
 
         if ($request->has('search') && $request->filled('search')){
 
-            $keyword = $request->get('search');
-            $collection = $collection->filter(function ($item) use ($keyword) {
+            $keyword = Str::replaceArray('_',['','_'], $request->get('search'));
 
-                return false !== (stripos($item['value'], $keyword)  ||  stripos($item['key'], $keyword));
+            $collection = $collection->filter(function ($item) use ($keyword) {
+                $keyword = Str::lower($keyword);
+                $value = Str::lower($item['value']);
+                $key = Str::lower($item['key']);
+                return false !== (str_contains($value, $keyword)  ||  str_contains($key, $keyword));
             });
         }
 
@@ -225,6 +228,7 @@ class LanguageController extends Controller
         });
 
         return datatables()->of($collection)
+
             ->addColumn('lang', function ($collect) use ($lang){
                 return $lang;
             })->make();

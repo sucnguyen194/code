@@ -49,7 +49,7 @@
                         >
                             <thead>
                             <tr>
-                                <th data-field="key" data-sortable="true">
+                                <th data-field="key" data-formatter="keyFormatter">
                                    @lang('_key')
                                 </th>
 
@@ -86,8 +86,12 @@
 
 @section('scripts')
     <script>
+        function keyFormatter(value) {
+            return '<strong class="text-primary">' + value + '</strong>';
+        }
+
         function actionFormatter(value, row){
-            console.log(row);
+
             const _value = row.value.replaceAll(' ', '_|_');
 
             let html = '<a href="'+ '{{ route('admin.languages.edit.translate', [':lang',':key',':value']) }}'.replace(':key','key='+row.key).replace(':value','value='+_value).replace(':lang','lang='+row.lang) +'" title="{{__('_edit')}}" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a> ';

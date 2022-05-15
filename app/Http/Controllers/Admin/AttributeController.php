@@ -63,7 +63,7 @@ class AttributeController extends Controller
         $attribute->save();
         $attribute->translations()->createMany($request->translation);
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -113,7 +113,7 @@ class AttributeController extends Controller
             $attribute->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -126,7 +126,7 @@ class AttributeController extends Controller
     {
         $this->authorize('product.destroy');
         $attribute->delete();
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 
     public function render($id){

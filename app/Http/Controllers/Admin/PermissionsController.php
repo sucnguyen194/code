@@ -59,7 +59,7 @@ class PermissionsController extends Controller
 
         Permission::create($request->all());
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -107,7 +107,7 @@ class PermissionsController extends Controller
 
         $permission->update($request->all());
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -123,6 +123,6 @@ class PermissionsController extends Controller
         Permission::whereParentId($permission->id)->delete();
         $permission->delete();
 
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

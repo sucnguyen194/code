@@ -22,7 +22,7 @@
                     @endforeach
                 </div>
                     <div class="form-group">
-                        <label>{{__('lang.slug')}} {{__('lang.video')}} Youtube <span class="required">*</span></label>
+                        <label>{{__('_slug')}} {{__('lang.video')}} Youtube <span class="required">*</span></label>
                         <p class="font-13"><code>*</code> {{__('lang.note_url_video')}}</p>
                         <p><img src="{{asset('lib/images/note_upload_video.png')}}" class="w-auto"></p>
                         <input class="form-control" value="" name="data[video]" required>

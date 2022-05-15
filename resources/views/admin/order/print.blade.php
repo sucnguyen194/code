@@ -22,7 +22,7 @@
                         </div>
                         <div class="CssPrintRow" style="padding: 2px 0;font-size: 13px;">{{__('lang.cashier')}}: {{setting('site.name', 1)}}</div>
                          <div class="CssPrintRow">{{__('lang.receipts')}}: #XBA.{{date('Y', time())}}.{{$order->id}}</div>
-                        <div class="CssPrintRow" style="padding: 2px 0 4px 0;font-size: 13px;">{{__('lang.customer')}}: {{$order->name}} <span>- {{$order->phone}}</span> <span>- {{$order->address}}</span>
+                        <div class="CssPrintRow" style="padding: 2px 0 4px 0;font-size: 13px;">{{__('_customer')}}: {{$order->name}} <span>- {{$order->phone}}</span> <span>- {{$order->address}}</span>
                         </div>
                         <div class="CssBillDetail">
                             <table class="table table-bordered"

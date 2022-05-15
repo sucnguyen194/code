@@ -60,7 +60,7 @@
                                 </th>
 
                                 <th data-field="phone">
-                                    {{__('lang.phone')}}
+                                    {{__('_phone')}}
                                 </th>
 
                                 <th data-field="amount">

@@ -81,7 +81,7 @@ class PhotoController extends Controller
         $images = $request->images;
 
         if(!$images)
-            return flash(__('lang.select_image'),3);
+            return flash(__('_select_image'),3);
 
         for ($i=0; $i < count($images); $i++){
             $photo = new Photo();
@@ -92,7 +92,7 @@ class PhotoController extends Controller
             $photo->save();
         }
 
-      return flash(__('lang.flash_create'));
+      return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -134,7 +134,7 @@ class PhotoController extends Controller
         $photo->admin_edit = auth()->id();
         $photo->save();
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -148,6 +148,6 @@ class PhotoController extends Controller
         $this->authorize('photo.destroy');
 
         $photo->delete();
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

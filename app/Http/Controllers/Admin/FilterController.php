@@ -62,7 +62,7 @@ class FilterController extends Controller
         $filter->save();
         $filter->translations()->createMany($request->translation);
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -112,7 +112,7 @@ class FilterController extends Controller
             $filter->translations()->updateOrCreate(['locale' => $translation['locale']], $translation);
         endforeach;
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -125,6 +125,6 @@ class FilterController extends Controller
     {
         $this->authorize('product.destroy');
         $filter->delete();
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

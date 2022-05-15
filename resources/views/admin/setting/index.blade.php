@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <form action="{{route('admin.settings')}}" method="post" id="form-update" class="ajax-form" enctype="multipart/form-data">
                 <div class="mt-3">
-                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('lang.reset')}}</button>
+                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('_back')}}</button>
                     <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('_save')}}</button>
                 </div>
                 @csrf
@@ -77,9 +77,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-box">
-                                                    <label for="footer">{{__('lang.content_footer')}}</label>
+                                                    <label for="footer">{{__('_content_footer')}}</label>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" name="data[site.footer_title.{{$language->value}}]" value="{{setting('site.footer_title.'.$language->value)}}" placeholder="{{__('lang.title')}}">
+                                                        <input type="text" class="form-control" name="data[site.footer_title.{{$language->value}}]" value="{{setting('site.footer_title.'.$language->value)}}" placeholder="{{__('_title')}}">
                                                     </div>
 
                                                     <textarea class="form-control summerdescription" id="summernote" name="data[site.footer.{{$language->value}}]">{!! setting('site.footer.'.$language->value) !!}</textarea>
@@ -87,7 +87,7 @@
                                                 <div class="card-box">
                                                     <div class="d-flex mb-2">
                                                         <label class="font-weight-bold">{{__('lang.optimization')}} {{__('lang.seo')}}</label>
-                                                        <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo">{{__('lang.edit')}} {{__('lang.seo')}}</a>
+                                                        <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo">{{__('_edit')}} {{__('lang.seo')}}</a>
                                                     </div>
 
                                                     <p class="font-13">{{__('lang.note_seo')}}</p>
@@ -105,7 +105,7 @@
                                                     <div class="change-seo" id="change-seo">
                                                         <hr>
                                                         <div class="form-group">
-                                                            <label>{{__('lang.description')}}</label>
+                                                            <label>{{__('_description')}}</label>
                                                             <p class="font-13"><code>*</code> {{__('lang.max')}} 320 {{__('lang.characters')}} </p>
                                                             <textarea  class="form-control" rows="3" name="data[site.description_seo.{{$language->value}}]" maxlength="320" id="alloptions" language="description_seo_{{$language->value}}" onkeyup="changeToDescriptionSeo(this)">{{setting('site.description_seo.'.$language->value)}}</textarea>
                                                         </div>
@@ -162,10 +162,10 @@
                                     <label>Logo</label>
                                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.3rem">
                                         <label class="item-input">
-                                            <input type="file" id="logo-upload" name="logo" class="d-none logo-upload" data-target="#site_logo_url"> {{__('lang.select_image')}}
+                                            <input type="file" id="logo-upload" name="logo" class="d-none logo-upload" data-target="#site_logo_url"> {{__('_select_image')}}
                                         </label>
                                     </div>
-                                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
+                                    <p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}</p>
                                     <div class="dropzone p-2 text-center">
                                             <div class="dz-message text-center needsclick mb-1 {{!setting('site.logo') ? '' : 'd-none'}}" id="site_logo_hidden">
                                                 <label for="logo-upload" class="w-100 mb-0">
@@ -180,7 +180,7 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
-                                            <input type="text" name="data[site.logo]" placeholder="{{__('lang.slug')}}" id="site_logo_url" value="{{setting('site.logo')}}" class="form-control logo-src" data-target="#site_logo_src" data-hidden="#site_logo_hidden">
+                                            <input type="text" name="data[site.logo]" placeholder="{{__('_slug')}}" id="site_logo_url" value="{{setting('site.logo')}}" class="form-control logo-src" data-target="#site_logo_src" data-hidden="#site_logo_hidden">
                                         </div>
                                     </div>
 
@@ -189,10 +189,10 @@
                                     <label>og:image</label>
                                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.3rem">
                                         <label class="item-input">
-                                            <input type="file" id="og-upload" name="logo" class="d-none og-upload" data-target="#site_og_url"> {{__('lang.select_image')}}
+                                            <input type="file" id="og-upload" name="logo" class="d-none og-upload" data-target="#site_og_url"> {{__('_select_image')}}
                                         </label>
                                     </div>
-                                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
+                                    <p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}</p>
                                     <div class="dropzone p-2 text-center">
                                         <div class="dz-message text-center needsclick mb-1 {{!setting('site.og_image') ? '' : 'd-none'}}" id="site_og_hidden">
                                             <label for="og-upload" class="w-100 mb-0">
@@ -205,7 +205,7 @@
                                         <img src="{{setting('site.og_image')}}" class="rounded mb-1 {{setting('site.og_image') ? '' : 'd-none'}}" id="site_og_src">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
-                                            <input type="text" name="data[site.og_image]" placeholder="{{__('lang.slug')}}" id="site_og_url" value="{{setting('site.og_image')}}" class="form-control og-src" data-target="#site_og_src" data-hidden="#site_og_hidden">
+                                            <input type="text" name="data[site.og_image]" placeholder="{{__('_slug')}}" id="site_og_url" value="{{setting('site.og_image')}}" class="form-control og-src" data-target="#site_og_src" data-hidden="#site_og_hidden">
                                         </div>
                                     </div>
 
@@ -214,10 +214,10 @@
                                     <label>Favicon</label>
                                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.3rem">
                                         <label class="item-input">
-                                            <input type="file" id="favicon-upload" name="logo" class="d-none favicon-upload" data-target="#site_favicon_url"> {{__('lang.select_image')}}
+                                            <input type="file" id="favicon-upload" name="logo" class="d-none favicon-upload" data-target="#site_favicon_url"> {{__('_select_image')}}
                                         </label>
                                     </div>
-                                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}  / {{__('lang.ratio')}} 1:1 / {{__('lang.size')}} 50x50 (px)</p>
+                                    <p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}  / {{__('lang.ratio')}} 1:1 / {{__('lang.size')}} 50x50 (px)</p>
                                     <div class="dropzone p-2 text-center">
                                         <div class="dz-message text-center needsclick mb-1 {{!setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_hidden">
                                             <label for="favicon-upload" class="w-100 mb-0">
@@ -230,7 +230,7 @@
                                         <img src="{{setting('site.favicon')}}" class="rounded mb-1 {{setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_src">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span id="basic-addon1" class="input-group-text">src</span></div>
-                                            <input type="text" name="data[site.favicon]" placeholder="{{__('lang.slug')}}" id="site_favicon_url" value="{{setting('site.favicon')}}" class="form-control favicon-src" data-target="#site_favicon_src" data-hidden="#site_favicon_hidden">
+                                            <input type="text" name="data[site.favicon]" placeholder="{{__('_slug')}}" id="site_favicon_url" value="{{setting('site.favicon')}}" class="form-control favicon-src" data-target="#site_favicon_src" data-hidden="#site_favicon_hidden">
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group">
-                                        <label for="email">{!! __('lang.email') !!} <code class="required">{!! __('lang.note_email') !!}</code></label>
+                                        <label for="email">{!! __('_email') !!} <code class="required">{!! __('lang.note_email') !!}</code></label>
                                         <input type="text" class="form-control" id="email" value="{{setting('contact.email')}}" name="data[contact.email]">
                                     </div>
                                     <div class="form-group">
@@ -258,7 +258,7 @@
                                         <input type="tel" class="form-control" value="{{setting('contact.hotline')}}" id="hotline" name="data[contact.hotline]">
                                     </div>
                                     <div class="form-group ">
-                                        <label for="phone">{!! __('lang.phone') !!}</label>
+                                        <label for="phone">{!! __('_phone') !!}</label>
                                         <input type="tel" class="form-control" id="phone" value="{{setting('contact.phone')}}" name="data[contact.phone]">
                                     </div>
 
@@ -644,7 +644,7 @@
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.post') !!} <code> ({!! __('lang.post') !!}, {!! __('lang.page') !!}, {!! __('lang.gallery') !!}, {!! __('lang.video') !!} ...) </code></label>
+                                    <label for="imgur_client_id">{!! __('_post') !!} <code> ({!! __('_post') !!}, {!! __('_page') !!}, {!! __('lang.gallery') !!}, {!! __('lang.video') !!} ...) </code></label>
                                     <p>{!! __('lang.note_config_post') !!} </p>
                                 </div>
                             </div>
@@ -669,7 +669,7 @@
                                         <input id="touchspin" type="text" value="{{setting('site.post.category')}}" name="data[site.post.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>{!! __('lang.post') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
+                                        <label>{!! __('_post') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.related')}}" name="data[site.post.related]">
                                     </div>
                                 </div>
@@ -682,7 +682,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.product') !!} </label>
+                                    <label for="imgur_client_id">{!! __('_product') !!} </label>
                                     <p>{!! __('lang.note_config_product') !!} </p>
                                 </div>
                             </div>
@@ -707,7 +707,7 @@
                                         <input id="touchspin" type="text" value="{{setting('site.product.category')}}" name="data[site.product.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>{!! __('lang.product') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
+                                        <label>{!! __('_product') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.related')}}" name="data[site.product.related]">
                                     </div>
                                 </div>
@@ -770,7 +770,7 @@
                 </div>
 
                 <div class="">
-                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('lang.reset')}}</button>
+                    <button type="reset" class="btn btn-default waves-effect waves-light"><span class="icon-button"><i class="fe-refresh-ccw"></i></span> {{__('_back')}}</button>
                     <button type="submit" class="btn btn-primary waves-effect waves-light float-right"><span class="icon-button"><i class="fe-plus"></i></span> {{__('_save')}}</button>
                 </div>
             </form>

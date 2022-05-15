@@ -80,7 +80,7 @@ class AdminController extends Controller
             $admin->syncRoles($request->roles);
         }
 
-        return  flash(__('lang.flash_create'));
+        return  flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -145,7 +145,7 @@ class AdminController extends Controller
             $admin->syncRoles($request->roles);
         }
 
-        return flash(__('lang.flash_update'));
+        return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -165,6 +165,6 @@ class AdminController extends Controller
             return flash('Lỗi',0);
 
         $admin->delete();
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

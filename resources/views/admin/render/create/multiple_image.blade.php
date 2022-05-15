@@ -1,10 +1,10 @@
-<label>{{__('lang.image')}}</label>
+<label>{{__('_image')}}</label>
 <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:1.5rem;top:1.5rem">
     <label class="item-input font-weight-medium mb-0">
-        <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> {{__('lang.select_image')}}
+        <input type="file" class="d-none" id="slider-file" data-target="#slide-input" multiple> {{__('_select_image')}}
     </label>
 </div>
-<p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
+<p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}</p>
 <div class="dropzone pl-2 pr-2 pb-1">
     <div class="dz-message text-center needsclick mb-1" id="remove-label">
         <label for="slider-file" class="w-100 mb-0">

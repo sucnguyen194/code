@@ -178,7 +178,7 @@ class ProductController extends Controller
 //
 //        }
 
-        return  flash(__('lang.flash_create'), 1 , route('admin.products.index'));
+        return  flash(__('_the_record_is_added_successfully'), 1 , route('admin.products.index'));
     }
 
     /**
@@ -260,7 +260,7 @@ class ProductController extends Controller
         //$product->attributes()->sync($request->attribute);
         $product->filters()->sync($request->filter);
 
-        return  flash(__('lang.flash_update'));
+        return  flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -276,6 +276,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return flash(__('lang.flash_destroy'));
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 }

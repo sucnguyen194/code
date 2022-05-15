@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.customer'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_customer'))}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
                     <input type="text" class="form-control" id="name" name="data[name]" value="" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">{{__('lang.email')}} <span class="required">*</span></label>
+                    <label for="email">{{__('_email')}} <span class="required">*</span></label>
                     <input type="email" class="form-control" id="email" name="data[email]"  value="">
                 </div>
                 <div class="form-group">
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">{{__('lang.phone')}}</label>
+                    <label for="phone">{{__('_phone')}}</label>
                     <input type="tel" class="form-control" id="phone" name="data[phone]" value="">
                 </div>
                 <div class="form-group">

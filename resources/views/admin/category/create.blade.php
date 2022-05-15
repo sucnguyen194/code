@@ -26,13 +26,13 @@
                     @foreach(languages() as $key => $language)
                         <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}-category" id="language-{{$language->value}}-category">
                             <div class="form-group">
-                            <label>{{__('lang.title')}} <span class="required">*</span></label>
+                            <label>{{__('_title')}} <span class="required">*</span></label>
                             <input type="text" class="form-control" language="category_{{$language->value}}"
                                    onkeyup="ChangeToSlug(this);"
                                    name="translation[{{$key}}][name]">
                             </div>
                             <div class="form-group">
-                                <label>{{__('lang.slug')}} <span class="required">*</span></label>
+                                <label>{{__('_slug')}} <span class="required">*</span></label>
                                 <div class="d-flex form-control">
                                     <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="category_{{$language->value}}" value="" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
                                     <span>.html</span>

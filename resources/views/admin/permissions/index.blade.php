@@ -23,8 +23,7 @@
                 <div class="card-box table-responsive">
                     @can('permission.create')
                     <div class="action-datatable text-right">
-                        <a href="{{route('admin.permissions.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_permission'))}}</a>
+                        @include('admin.render.add_new', ['route' => route('admin.permissions.create'), 'modal' => true])
                     </div>
                     @endcan
                     <div id="custom-toolbar">
@@ -94,11 +93,11 @@
         function actionFormatter(value, row){
             let html = '';
             @can('permission.edit')
-            html = '<a href="'+ '{{ route('admin.permissions.edit', ':id') }}'.replace(':id',row.id) +'" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
+            html = '<a href="'+ '{{ route('admin.permissions.edit', ':id') }}'.replace(':id',row.id) +'" title="{{__('_edit')}}" class="btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a> ';
             @endcan
 
             @can('permission.destroy')
-            html+='<a href="'+ '{{ route('admin.permissions.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.permissions.destroy', ':id') }}'.replace(':id',row.id) +'" title="{{__('_delete')}}" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
             return html;
         }

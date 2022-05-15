@@ -188,7 +188,7 @@
                 url: url,
                 data: data,
                 success: function (response) {
-                    flash({'message':'{{__('lang.flash_update')}}', 'type':'success'});
+                    flash({'message':'{{__('_the_record_is_updated_successfully')}}', 'type':'success'});
                 },
                 error: function (response) {
                     flash({'message':'{{__('lang.file_error')}}', 'type':'error'});

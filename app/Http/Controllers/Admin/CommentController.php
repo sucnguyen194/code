@@ -121,7 +121,7 @@ class CommentController extends Controller
           Comment::find($request->reply)->update(['status' => ActiveDisable::active]);
         }
         $route = route('admin.comments.reply',[$comment->comment_type, $comment->comment_id]);
-        return  flash(__('lang.flash_create'),1 , $route);
+        return  flash(__('_the_record_is_added_successfully'),1 , $route);
     }
 
     /**
@@ -169,7 +169,7 @@ class CommentController extends Controller
             ]);
         }
 
-       return flash(__('lang.flash_update'));
+       return flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -184,7 +184,7 @@ class CommentController extends Controller
 
         Comment::query()->whereCommentId($id)->delete();
 
-        return   flash(__('lang.flash_destroy'));
+        return   flash(__('_the_record_is_deleted_successfully'));
 
     }
 

@@ -72,7 +72,7 @@
                                     @if($item->status == 0)
                                         <strong class="bg-danger pl-1 pr-1 text-white rounded-circle">!</strong>
                                     @endif
-                                    {{$item->note ? str_limit($item->note) : __('lang.customer_request_to_receive_infomation')}}}<small class="text-muted">{{$item->created_at->diffForHumans()}}</small></p>
+                                    {{$item->note ? str_limit($item->note) : __('_customer_request_to_receive_infomation')}}}<small class="text-muted">{{$item->created_at->diffForHumans()}}</small></p>
                             </a>
                             <!-- item-->
                         @endforeach
@@ -160,7 +160,7 @@
                         <li>
                             <a href="{{route('admin.photos.index')}}">
                                 <i class="pe-7s-photo-gallery"></i>
-                                <span>{{__('lang.image')}}</span>
+                                <span>{{__('_image')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -176,21 +176,21 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-micro"></i>
-                                <span>{{__('lang.support')}}</span>
+                                <span>{{__('_support')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('support.view')
                                 <li>
-                                    <a href="{{route('admin.supports.customers.index')}}">{{__('lang.customer_reviews')}}</a>
+                                    <a href="{{route('admin.supports.customers.index')}}">{{__('_customer_reviews')}}</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{route('admin.supports.index')}}">{{__('lang.support_team')}}</a>
+                                    <a href="{{route('admin.supports.index')}}">{{__('_support_team')}}</a>
                                 </li>
 
                                     <li>
-                                        <a href="{{route('admin.supports.questions.index')}}">{{__('lang.questions')}}</a>
+                                        <a href="{{route('admin.supports.questions.index')}}">{{__('_frequently_asked_questions')}}</a>
                                     </li>
                                 @endcan
 
@@ -201,18 +201,18 @@
                         <li class="{{nav_active('admin/comments*','mm-active')}}">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-comment"></i>
-                                <span>{{__('lang.comment')}}</span>
+                                <span>{{__('_comment')}}</span>
                                 <span class="menu-arrow"></span>
                                @if($comments->count()) <span class="badge badge-danger badge-pill">{{$comments->count()}}</span>@endif
                                 <ul class="nav-second-level" aria-expanded="false">
                                     @can('blog.view')
                                         <li>
-                                            <a href="{{route('admin.comments.list','posts')}}">{{__('lang.post')}} <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::posts)->count()}}</span></a>
+                                            <a href="{{route('admin.comments.list','posts')}}">{{__('_post')}} <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::posts)->count()}}</span></a>
                                         </li>
                                     @endcan
                                     @can('product.view')
                                         <li>
-                                            <a href="{{route('admin.comments.list','products')}}">{{__('lang.product')}} <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::products)->count()}}</span></a>
+                                            <a href="{{route('admin.comments.list','products')}}">{{__('_product')}} <span class="badge badge-danger badge-pill">{{$comments->where('comment_type',\App\Enums\CommentMap::products)->count()}}</span></a>
                                         </li>
                                     @endcan
                                 </ul>
@@ -223,7 +223,7 @@
                         <li>
                             <a href="{{route('admin.tags.index')}}">
                                 <i class="pe-7s-ticket"></i>
-                                <span>{{__('lang.tag')}}</span>
+                                <span>{{__('_tag')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -238,26 +238,26 @@
                     @endcan
 
                     @canany(['blog.view', 'video.view','gallery.view'])
-                    <li class="menu-title">{{__('lang.content')}}</li>
+                    <li class="menu-title">{{__('_content')}}</li>
                     @endcan
                     @can('blog.view')
                         <li class="{{nav_active('admin/posts*','mm-active')}}">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-news-paper"></i>
-                                <span>{{__('lang.post')}}</span>
+                                <span>{{__('_post')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('blog.create')
                                     <li>
-                                        <a href="{{route('admin.posts.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.post'))}}</a>
+                                        <a href="{{route('admin.posts.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_post'))}}</a>
                                     </li>
                                 @endcan
                                 <li>
                                     <a href="{{route('admin.posts.index')}}">{{__('lang.list_post')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.posts.categories.index')}}">{{__('lang.category_post')}}</a>
+                                    <a href="{{route('admin.posts.categories.index')}}">{{__('_category_post')}}</a>
                                 </li>
                             </ul>
                         </li>
@@ -265,7 +265,7 @@
                         <li>
                             <a href="{{route('admin.posts.pages.index')}}" class="{{nav_active('admin/pages*')}}">
                                 <i class="pe-7s-wallet"></i>
-                                <span>{{__('lang.page')}}</span>
+                                <span>{{__('_page')}}</span>
                             </a>
                         </li>
 
@@ -306,33 +306,33 @@
                                     <a href="{{route('admin.recruitments.index')}}">{{__('lang.list_post')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.recruitments.categories.index')}}">{{__('lang.category_post')}}</a>
+                                    <a href="{{route('admin.recruitments.categories.index')}}">{{__('_category_post')}}</a>
                                 </li>
                             </ul>
                         </li>
                     @endcan
 
                     @canany(['product.view', 'discount.view','order.view','user.view'])
-                    <li class="menu-title">{{__('lang.transaction')}}</li>
+                    <li class="menu-title">{{__('_transaction')}}</li>
                     @endcan
                     @can('product.view')
                         <li class="{{nav_active('admin/products*','mm-active')}}">
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-plugin"></i>
-                                <span>{{__('lang.product')}}</span>
+                                <span>{{__('_product')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('product.create')
                                     <li>
-                                        <a href="{{route('admin.products.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.product'))}}</a>
+                                        <a href="{{route('admin.products.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_product'))}}</a>
                                     </li>
                                 @endcan
                                 <li>
                                     <a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.products.categories.index')}}">{{__('lang.category_product')}}</a>
+                                    <a href="{{route('admin.products.categories.index')}}">{{__('_category_product')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{route('admin.filters.index')}}">{{__('lang.filter')}}</a>
@@ -346,7 +346,7 @@
                         <li>
                             <a href="{{route('admin.discounts.index')}}" class="{{nav_active('admin/discounts*')}}">
                                 <i class="pe-7s-bandaid"></i>
-                                <span> {{__('lang.discount')}}</span>
+                                <span> {{__('_discount')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -364,7 +364,7 @@
                         <li>
                             <a href="{{route('admin.users.index')}}">
                                 <i class="pe-7s-users"></i>
-                                <span>{{__('lang.customer')}}</span>
+                                <span>{{__('_customer')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -384,7 +384,7 @@
 
                                 @can('setting.source')
                                     <li>
-                                        <a href="{{route('admin.sources.index')}}">{{__('lang.edit_website')}}</a>
+                                        <a href="{{route('admin.sources.index')}}">{{__('_edit_website')}}</a>
                                     </li>
                                 @endcan
                                 @can('setting.language')
@@ -578,7 +578,7 @@
         exportTypes: ['csv', 'txt', 'excel'],
         buttonsClass: 'default',
         formatSearch: function () {
-            return '{{__('lang.search')}}';
+            return '{{__('_search')}}';
         },
         formatNoMatches () {
             return '{{__('lang.no_data')}}';
@@ -836,14 +836,14 @@
         e.preventDefault();
         if($(this).data('confirm')){
             Swal.fire({
-                title: '{{__("lang.are_you_sure")}}',
+                title: '{{__("_are_you_sure")}}',
                 text:  $(this).data('confirm'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 cancelButtonText: '{{__("_back")}}',
-                confirmButtonText: '{{__("lang.confirm")}}',
+                confirmButtonText: '{{__("_confirm")}}',
             }).then((result) => {
                 if (result.isConfirmed) {
                 ajaxlink(this);
@@ -983,7 +983,7 @@
                     $(option).append(addOption).trigger('change');
 
                     $('#ajax-modal').modal('hide');
-                    flash({'message':'{{__("lang.flash_create")}}', 'type': 'success'});
+                    flash({'message':'{{__("_the_record_is_added_successfully")}}', 'type': 'success'});
                 }
             }
 
@@ -1120,7 +1120,7 @@
                 cache:false,
                 data:{'_token':_token,'id':id,'num':num,'type':type},
                 success:function(data){
-                    flash({'message':" {{__('lang.flash_update')}}", 'type': 'success'})
+                    flash({'message':" {{__('_the_record_is_updated_successfully')}}", 'type': 'success'})
                 }
             });
         });
@@ -1136,7 +1136,7 @@
                 cache:false,
                 data:{'_token':_token,'id':id,'type':type},
                 success:function(data){
-                    flash({'message': "{{__('lang.flash_update')}}", 'type': 'success'})
+                    flash({'message': "{{__('_the_record_is_updated_successfully')}}", 'type': 'success'})
                 }
             });
         });
@@ -1151,7 +1151,7 @@
                 cache:false,
                 data:{'_token':_token,'id':id,'type':type},
                 success:function(data){
-                    flash({'message': "{{__('lang.flash_update')}}", 'type': 'success'})
+                    flash({'message': "{{__('_the_record_is_updated_successfully')}}", 'type': 'success'})
                 }
             });
         })

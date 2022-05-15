@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.discount')}} @stop
+@section('title') {{__('_discount')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.discount')}}</li>
+                            <li class="breadcrumb-item active">{{__('_discount')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.discount')}}</h4>
+                    <h4 class="page-title">{{__('_discount')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="action-datatable text-right">
                     @can('discount.create')
                     <a href="{{route('admin.discounts.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                        <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.discount'))}}</a>
+                        <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_discount'))}}</a>
                     @endcan
                 </div>
                 <div id="custom-toolbar">
@@ -50,7 +50,7 @@
                         <tr>
                             <th data-field="id" data-sortable="true" data-switchable="false">ID</th>
                             <th data-field="name">
-                                {{__('lang.discount_name')}}
+                                {{__('_discount_name')}}
                             </th>
                             <th data-field="code">
                                 {{__('lang.code')}}

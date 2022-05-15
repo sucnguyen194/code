@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.product')}} #{{$product->id}}
+    {{__('_product')}} #{{$product->id}}
 @stop
 @section('content')
 
@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item active">#{{$product->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.product')}} #{{$product->id}}</h4>
+                    <h4 class="page-title">{{__('_product')}} #{{$product->id}}</h4>
                 </div>
             </div>
         </div>
@@ -225,7 +225,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('_image')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

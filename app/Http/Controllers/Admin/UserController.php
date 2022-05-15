@@ -66,7 +66,7 @@ class UserController extends Controller
         $user->password = bcrypt($password);
         $user->save();
 
-        return flash(__('lang.flash_create'));
+        return flash(__('_the_record_is_added_successfully'));
     }
 
     /**
@@ -120,7 +120,7 @@ class UserController extends Controller
         }
         $user->save();
 
-        return  flash(__('lang.flash_update'));
+        return  flash(__('_the_record_is_updated_successfully'));
     }
 
     /**
@@ -134,7 +134,7 @@ class UserController extends Controller
         $this->authorize('user.destroy');
 
         $user->delete();
-        return flash(__('lang.flash_destroy'), 1);
+        return flash(__('_the_record_is_deleted_successfully'), 1);
     }
 
 }

@@ -3,7 +3,7 @@
         <div class="dd-handle">{{$items->name}}</div>
         <div class="menu_action">
             @can('menu.edit')
-            <a href="{{route('admin.menus.edit',$items)}}" title="{{__('lang.edit')}}"
+            <a href="{{route('admin.menus.edit',$items)}}" title="{{__('_edit')}}"
                class="ajax-modal btn btn-primary waves-effect waves-light ajax-modal"><i class="fe-edit-2"></i></a>
             @endcan
 

@@ -4,20 +4,20 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.image')}} #{{$photo->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_image')}} #{{$photo->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group position-relative box-action-image">
-                    <label>{{__('lang.image')}}</label>
+                    <label>{{__('_image')}}</label>
                     <div class="position-absolute font-weight-normal text-primary" id="box-input" style="right:0;top:0">
                         <label class="item-input mb-0">
-                            <input type="file" id="image-upload" class="d-none image-upload" data-target="#image_url"> {{__('lang.select_image')}}
+                            <input type="file" id="image-upload" class="d-none image-upload" data-target="#image_url"> {{__('_select_image')}}
                         </label>
                     </div>
-                    <p class="font-13"><code>*</code> {{__('lang.note_upload_image')}}</p>
+                    <p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}</p>
                     <div class="dropzone text-center pl-2 pr-2 pb-1 pt-2">
                         <img src="{{$photo->image}}" class="rounded img-thumbnail" id="image_src">
 
@@ -29,19 +29,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label>{{__('lang.title')}}</label>
+                    <label>{{__('_title')}}</label>
                     <input type="text" value="{{$photo->name}}" name="data[name]" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>{{__('lang.description')}}</label>
-                    <textarea class="form-control" name="data[description]" row="4">{!! $photo->description !!}</textarea>
+                    <label>{{__('_description')}}</label>
+                    <textarea class="form-control" name="data[description]" rows="6">{!! $photo->description !!}</textarea>
                 </div>
                 <div class="form-group">
-                    <label>{{__('lang.slug')}}</label>
+                    <label>{{__('_slug')}}</label>
                     <input type="url" value="{{$photo->path}}" name="data[path]" placeholder="http://" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>{{__('lang.position')}}</label>
+                    <label>{{__('_position')}}</label>
 
                     <select data-toggle="select2" name="data[position]" class="form-control">
                         <option value="Nomal">----</option>
@@ -51,7 +51,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>{{__('lang.target')}}</label>
+                    <label>{{__('_target')}}</label>
                     <select id="target" name="data[target]" class="form-control" data-toggle="select2">
                         <option value="_self">-----</option>
                         <option value="_parent" {{selected($photo->target, '_parent')}}>_parent</option>
