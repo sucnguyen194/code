@@ -28,14 +28,14 @@
                             <div class="mr-2 mb-2" style="width: 200px">
                                 <select class="form-control" data-toggle="select2" name="status" data-allow-clear="true" data-placeholder="{{__('_status')}}">
                                     <option value="">{{__('_status')}}</option>
-                                    <option value="1">{{__('lang.unview')}}</option>
-                                    <option value="2"> {{__('lang.viewed')}}</option>
+                                    <option value="1">{{__('_unview')}}</option>
+                                    <option value="2"> {{__('_viewed')}}</option>
                                 </select>
                             </div>
 
                             <div class="mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="user" data-allow-clear="true" data-placeholder="{{__('lang.checker')}}" name="author">
-                                    <option value="">{{__('lang.checker')}}</option>
+                                <select class="form-control" data-toggle="select2" name="user" data-allow-clear="true" data-placeholder="{{__('_checker')}}" name="author">
+                                    <option value="">{{__('_checker')}}</option>
                                     @foreach($admins as $item)
                                         <option value="{{$item->id}}">{{$item->name ?? $item->email}}</option>
                                     @endforeach
@@ -63,14 +63,14 @@
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-field="note">
-                                    {{__('lang.message')}}
+                                    {{__('_messenger')}}
                                 </th>
 
                                 <th data-field="created_at" data-sortable="true" data-visible="true">
                                     {{__('_created_at')}}
                                 </th>
                                 <th data-field="updated_at" data-sortable="true" data-visible="true">
-                                    {{__('lang.checked_at')}}
+                                    {{__('_updated_at_at')}}
                                 </th>
 
                                 <th data-field="status" data-formatter="statusFormatter">
@@ -107,9 +107,9 @@
 
         function statusFormatter(value, row) {
             if(value == 1)
-                return '<a class="font-weight-bold text-primary">{{__('lang.unview')}}</a>';
+                return '<a class="font-weight-bold text-primary">{{__('_unview')}}</a>';
 
-            return  '<a class="font-weight-bold text-danger">{{__('lang.viewed')}}</a>';
+            return  '<a class="font-weight-bold text-danger">{{__('_viewed')}}</a>';
         }
 
         function titleFormatter(value, row){

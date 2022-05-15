@@ -4,14 +4,14 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_roll')}} #{{$role->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_role')}} #{{$role->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>{{__('_roll')}} <span class="required">*</span></label>
+                    <label>{{__('_role')}} <span class="required">*</span></label>
                     <input type="text" class="form-control" value="{{$role->name}}" name="name" required>
                 </div>
                 <div class="row">

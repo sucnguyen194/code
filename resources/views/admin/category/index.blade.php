@@ -21,9 +21,8 @@
             <div class="col-12">
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
-                        @can('blog.create')
-                        <a href="{{route('admin.posts.categories.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('_category')}}</span></a>
+                        @canany(['blog.create','product.create'])
+                            @include('admin.render.add_new', ['route' => route('admin.posts.categories.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">

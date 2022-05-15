@@ -1087,7 +1087,7 @@
         slug = '@' + slug + '@';
         slug = slug.replace(/\@\-|\-\@|\@/gi, '');
         document.getElementById(el.getAttribute('language')).value = slug;
-        document.getElementById(el.getAttribute('seo')).innerText = links + '/' + slug + '.html';
+        document.getElementById(el.getAttribute('seo')).innerText = links + '/' + slug ;
     }
 </script>
 <script type="text/javascript">

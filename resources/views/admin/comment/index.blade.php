@@ -60,7 +60,7 @@
                                     {{__('_not_answered')}}
                                 </th>
                                 <th data-field="created_at" data-width="150" data-sortable="true" data-visible="true">
-                                    {{__('_updated')}}
+                                    {{__('_updated_at')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="150" data-switchable="false" data-force-hide="true">

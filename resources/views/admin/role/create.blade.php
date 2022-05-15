@@ -3,14 +3,14 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_role'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>{{__('_roll')}} <span class="required">*</span></label>
+                    <label>{{__('_role')}} <span class="required">*</span></label>
                     <input type="text" class="form-control" name="name" required>
                 </div>
                 <div class="row">

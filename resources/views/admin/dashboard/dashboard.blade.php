@@ -85,7 +85,7 @@
             @can('order.view')
                 <div class="col-lg-12">
                     <div class="card-box">
-                        <h4 class="header-title">{{__('lang.chart_by_month')}}</h4>
+                        <h4 class="header-title">{{__('_chart_by_month')}}</h4>
 
                         <div class="text-center">
                             <div class="row">

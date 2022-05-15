@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item active"># {{$contact->id}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title"><strong>{{__('lang.viewed')}}</strong></h4>
+                    <h4 class="page-title"><strong>{{__('_viewed')}}</strong></h4>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                         @method('PUT')
                         <div class="mb-3 mt-5">
                             <lable class="font-weight-bold mb-2">{{__('_answer')}}</lable>
-                            <p class="mt-2">* {{__('_content')}} email {{__('lang.not_null')}}!</p>
+                            <p class="mt-2">* Email {{__('_not_null')}}!</p>
                             <textarea class="form-control summernote" data-height="600" name="data[note]"></textarea>
 
                         </div>
