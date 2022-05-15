@@ -34,6 +34,7 @@
                                 <div class="card-box">
                                     @include('admin.render.edit.title')
                                     @include('admin.render.edit.description')
+                                    @include('admin.render.edit.content')
                                 </div>
 
                                 <div class="card-box">
@@ -50,6 +51,7 @@
                                     <div class="card-box">
                                         @include('admin.render.create.title')
                                         @include('admin.render.create.description')
+                                        @include('admin.render.create.content')
                                     </div>
 
                                     <div class="card-box">

@@ -23,8 +23,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('blog.create')
-                        <a href="{{route('admin.posts.pages.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('_page')}}</span></a>
+                            @include('admin.render.add_new', ['route' => route('admin.posts.pages.create')])
                         @endcan
                     </div>
                     <div id="custom-toolbar">

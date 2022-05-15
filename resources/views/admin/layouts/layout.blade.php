@@ -84,12 +84,12 @@
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
                     <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{__('lang.hello')}} !</h6>
+                        <h6 class="text-overflow m-0">{{Auth::user()->name}} !</h6>
                     </div>
                     <!-- item-->
                     <a href="{{route('admin.admins.edit',Auth::id())}}" class="dropdown-item notify-item"> <i class="fe-user"></i> <span>{{__('_account')}}</span> </a>
                     <!-- item-->
-                    <a href="{{route('admin.settings')}}" class="dropdown-item notify-item"> <i class="fe-settings"></i> <span>{{__('lang.setting')}}</span> </a>
+                    <a href="{{route('admin.settings')}}" class="dropdown-item notify-item"> <i class="fe-settings"></i> <span>{{__('_setting')}}</span> </a>
                     <!-- item-->
                     <div class="dropdown-divider"></div>
                     <!-- item-->
@@ -128,7 +128,7 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-user"></i>
-                                <span>{{__('lang.administration')}}</span>
+                                <span>{{__('_admin')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
@@ -168,7 +168,7 @@
                         <li>
                             <a href="{{route('admin.contacts.index')}}" class="{{nav_active('admin/contacts*')}}">
                                 <i class="pe-7s-mail"></i>
-                                <span>{{__('lang.messenger')}}</span>
+                                <span>{{__('_messenger')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -228,18 +228,10 @@
                         </li>
                     @endcan
 
-                    @can('map.view')
-                        <li>
-                            <a href="{{route('admin.maps.index')}}" class="{{nav_active('admin/maps*')}}">
-                                <i class="fe-map-pin"></i>
-                                <span>Google map</span>
-                            </a>
-                        </li>
-                    @endcan
-
                     @canany(['blog.view', 'video.view','gallery.view'])
                     <li class="menu-title">{{__('_content')}}</li>
                     @endcan
+
                     @can('blog.view')
                         <li class="{{nav_active('admin/posts*','mm-active')}}">
                             <a href="javascript:void(0)">
@@ -250,11 +242,11 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('blog.create')
                                     <li>
-                                        <a href="{{route('admin.posts.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_post'))}}</a>
+                                        <a href="{{route('admin.posts.create')}}">{{__('_add_new')}} </a>
                                     </li>
                                 @endcan
                                 <li>
-                                    <a href="{{route('admin.posts.index')}}">{{__('lang.list_post')}}</a>
+                                    <a href="{{route('admin.posts.index')}}">{{__('_list_post')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{route('admin.posts.categories.index')}}">{{__('_category_post')}}</a>
@@ -275,7 +267,7 @@
                         <li>
                             <a href="{{route('admin.posts.galleries.index')}}" class="{{nav_active('admin/galleries*')}}">
                                 <i class="pe-7s-albums"></i>
-                                <span>{{__('lang.gallery')}}</span>
+                                <span>{{__('_gallery')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -283,7 +275,7 @@
                         <li>
                             <a href="{{route('admin.posts.videos.index')}}" class="{{nav_active('admin/videos*')}}">
                                 <i class="pe-7s-video"></i>
-                                <span>{{__('lang.video')}}</span>
+                                <span>{{__('_video')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -299,11 +291,11 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('recruitment.create')
                                     <li>
-                                        <a href="{{route('admin.recruitments.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.recruitment'))}}</a>
+                                        <a href="{{route('admin.recruitments.create')}}">{{__('_add_new')}}</a>
                                     </li>
                                 @endcan
                                 <li>
-                                    <a href="{{route('admin.recruitments.index')}}">{{__('lang.list_post')}}</a>
+                                    <a href="{{route('admin.recruitments.index')}}">{{__('_list_post')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{route('admin.recruitments.categories.index')}}">{{__('_category_post')}}</a>
@@ -325,17 +317,17 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 @can('product.create')
                                     <li>
-                                        <a href="{{route('admin.products.create')}}">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_product'))}}</a>
+                                        <a href="{{route('admin.products.create')}}">{{__('_add_new')}}</a>
                                     </li>
                                 @endcan
                                 <li>
-                                    <a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a>
+                                    <a href="{{route('admin.products.index')}}">{{__('_list_product')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{route('admin.products.categories.index')}}">{{__('_category_product')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.filters.index')}}">{{__('lang.filter')}}</a>
+                                    <a href="{{route('admin.filters.index')}}">{{__('_filter')}}</a>
                                 </li>
 
                             </ul>
@@ -370,7 +362,7 @@
                     @endcan
 
                     @can('setting.update')
-                        <li class="menu-title">{{__('lang.setting')}}</li>
+                        <li class="menu-title">{{__('_setting')}}</li>
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="pe-7s-global"></i>
@@ -379,7 +371,7 @@
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{route('admin.settings')}}">{{__('lang.system_configuration')}}</a>
+                                    <a href="{{route('admin.settings')}}">{{__('_system_configuration')}}</a>
                                 </li>
 
                                 @can('setting.source')
@@ -581,7 +573,7 @@
             return '{{__('_search')}}';
         },
         formatNoMatches () {
-            return '{{__('lang.no_data')}}';
+            return '{{__('_no_data')}}';
         },
         rowStyle: function (row, index) {
             if (row.deleted_at)

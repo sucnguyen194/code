@@ -52,11 +52,11 @@
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
                                 <th data-field="created_at">
-                                    {{__('lang.date_created')}}
+                                    {{__('_created_at')}}
                                 </th>
 
                                 <th data-field="name">
-                                    {{__('lang.user_created')}}
+                                    {{__('_creater')}}
                                 </th>
 
                                 <th data-field="phone">
@@ -64,11 +64,11 @@
                                 </th>
 
                                 <th data-field="amount">
-                                    {{__('lang.quantity')}}
+                                    {{__('_quantity')}}
                                 </th>
 
                                 <th data-field="total" data-footer-formatter="sumFormatter" data-type="number" data-formatter="numberFormatter">
-                                    {{__('lang.total_money')}}
+                                    {{__('_total_money')}}
                                 </th>
 
                                 <th data-formatter="actionFormatter" data-width="200" data-switchable="false" data-force-hide="true">

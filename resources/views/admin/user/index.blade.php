@@ -23,8 +23,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('user.create')
-                        <a href="{{route('admin.users.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_customer'))}}</a>
+                            @include('admin.render.add_new', ['route' => route('admin.users.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -49,7 +48,7 @@
                             <tr>
                                 <th data-field="id" data-width="100" data-sortable="true">ID</th>
                                 <th data-field="name">
-                                    {{__('lang.fullname')}}
+                                    {{__('_fullname')}}
                                 </th>
 
                                 <th data-field="email">

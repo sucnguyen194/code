@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-    {{__('lang.system_configuration')}}
+    {{__('_system_configuration')}}
 @stop
 @section('content')
     <div class="container-fluid">
@@ -11,10 +11,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.system_configuration')}}</li>
+                            <li class="breadcrumb-item active">{{__('_system_configuration')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.system_configuration')}}</h4>
+                    <h4 class="page-title">{{__('_system_configuration')}}</h4>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 @csrf
                 <div id="wizard-clickable" >
                     <fieldset title="1" class="p-0">
-                        <legend>{{__('lang.website_information')}}</legend>
+                        <legend>{{__('_website_information')}}</legend>
                         <div class="row mt-1">
                             <div class="col-md-8">
                                 @if(setting('site.languages'))
@@ -52,32 +52,32 @@
                                             <div class="tab-pane  {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                                 <div class="card-box">
                                                     <div class="form-group">
-                                                        <label for="name">{{__('lang.website_title')}} <span class="required">*</span></label>
+                                                        <label for="name">{{__('_website_title')}} <span class="required">*</span></label>
                                                         <input type="text" class="form-control" name="data[site.name.{{$language->value}}]" id="name" value="{{setting('site.name.'.$language->value)}}" language="title_seo_{{$language->value}}" onkeyup="changeToTitleSeo(this)">
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="company">{{__('lang.company_name')}}</label>
+                                                        <label for="company">{{__('_company_name')}}</label>
                                                         <input type="text" class="form-control" name="data[site.company.{{$language->value}}]" id="company" value="{{setting('site.company.'.$language->value)}}">
                                                     </div>
 
                                                     <div class="form-group mb-0">
-                                                        <label for="slogan">{{__('lang.slogan')}}</label>
+                                                        <label for="slogan">{{__('_slogan')}}</label>
                                                         <input type="text" class="form-control" name="data[site.slogan.{{$language->value}}]" id="slogan" value="{{setting('site.slogan.'.$language->value)}}">
                                                     </div>
                                                 </div>
                                                 <div class="card-box">
                                                     <div class="form-group">
-                                                        <label for="address">{{__('lang.address')}}</label>
+                                                        <label for="address">{{__('_address')}}</label>
                                                         <textarea name="data[contact.address.{{$language->value}}]" id="address" cols="30" rows="5" class="form-control">{{setting('contact.address.'.$language->value)}}</textarea>
                                                     </div>
                                                     <div class="form-group mb-0">
-                                                        <label for="contact">{{__('lang.contact_details')}}</label>
+                                                        <label for="contact">{{__('_contact_detail')}}</label>
                                                         <textarea class="form-control summerdescription" id="summercontact" name="data[contact.detail.{{$language->value}}]">{!! setting('contact.detail.'.$language->value) !!}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="card-box">
-                                                    <label for="footer">{{__('_content_footer')}}</label>
+                                                    <label for="footer">{{__('_info_footer')}}</label>
                                                     <div class="form-group">
                                                         <input type="text" class="form-control" name="data[site.footer_title.{{$language->value}}]" value="{{setting('site.footer_title.'.$language->value)}}" placeholder="{{__('_title')}}">
                                                     </div>
@@ -86,11 +86,11 @@
                                                 </div>
                                                 <div class="card-box">
                                                     <div class="d-flex mb-2">
-                                                        <label class="font-weight-bold">{{__('lang.optimization')}} {{__('lang.seo')}}</label>
-                                                        <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo">{{__('_edit')}} {{__('lang.seo')}}</a>
+                                                        <label class="font-weight-bold">{{__('_optimization_seo')}}</label>
+                                                        <a href="javascript:void(0)" onclick="changeSeo()" class="edit-seo">{{__('_edit_seo')}}</a>
                                                     </div>
 
-                                                    <p class="font-13">{{__('lang.note_seo')}}</p>
+                                                    <p class="font-13">{{__('_note_seo')}}</p>
                                                     <div class="test-seo">
                                                         <div class="mb-1">
                                                             <a href="javascript:void(0)"  class="title-seo" id="title_seo_{{$language->value}}">{{setting('site.name.'.$language->value)}}</a>
@@ -106,12 +106,12 @@
                                                         <hr>
                                                         <div class="form-group">
                                                             <label>{{__('_description')}}</label>
-                                                            <p class="font-13"><code>*</code> {{__('lang.max')}} 320 {{__('lang.characters')}} </p>
+                                                            <p class="font-13"><code>*</code> {{__('_max')}} 320 {{__('_characters')}} </p>
                                                             <textarea  class="form-control" rows="3" name="data[site.description_seo.{{$language->value}}]" maxlength="320" id="alloptions" language="description_seo_{{$language->value}}" onkeyup="changeToDescriptionSeo(this)">{{setting('site.description_seo.'.$language->value)}}</textarea>
                                                         </div>
                                                         <div class="form-group example mb-0">
-                                                            <label>{{__('lang.keyword')}}</label>
-                                                            <p class="font-13">{!! __('lang.note_keyword') !!}</p>
+                                                            <label>{{__('_keyword')}}</label>
+                                                            <p class="font-13">{!! __('_note_keyword') !!}</p>
 
                                                             <input type="text" name="data[site.keyword_seo.{{$language->value}}]" value="{{setting('site.keyword_seo.'.$language->value)}}" class="form-control"  data-role="tagsinput"/>
                                                         </div>
@@ -119,42 +119,8 @@
                                                 </div>
                                             </div>
                                         @endforeach
-
                                 </div>
 
-                                <div class="card-box">
-                                    <label>Thông kê</label>
-
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="data[site.v1.title]" value="{{setting('site.v1.title')}}">
-                                            </div>
-                                            <input type="number" class="form-control" name="data[site.v1.int]" value="{{setting('site.v1.title')}}">
-                                        </div>
-
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="data[site.v2.title]" value="{{setting('site.v2.title')}}">
-                                            </div>
-                                            <input type="number" class="form-control" name="data[site.v2.int]" value="{{setting('site.v2.title')}}">
-                                        </div>
-
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="data[site.v3.title]" value="{{setting('site.v3.title')}}">
-                                            </div>
-                                            <input type="number" class="form-control" name="data[site.v3.int]" value="{{setting('site.v3.title')}}">
-                                        </div>
-
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="data[site.v4.title]" value="{{setting('site.v4.title')}}">
-                                            </div>
-                                            <input type="number" class="form-control" name="data[site.v4.int]" value="{{setting('site.v4.title')}}">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="col-md-4">
@@ -172,7 +138,7 @@
                                                     <div class="icon-dropzone pt-2">
                                                         <i class="h1 text-muted dripicons-cloud-upload"></i>
                                                     </div>
-                                                    <span class="text-muted font-13">{!! __('lang.note_select_image') !!}</span>
+                                                    <span class="text-muted font-13">{!! __('_note_select_image') !!}</span>
                                                 </label>
                                             </div>
 
@@ -199,7 +165,7 @@
                                                 <div class="icon-dropzone pt-2">
                                                     <i class="h1 text-muted dripicons-cloud-upload"></i>
                                                 </div>
-                                                <span class="text-muted font-13">{!! __('lang.note_select_image') !!}</span>
+                                                <span class="text-muted font-13">{!! __('_note_select_image') !!}</span>
                                             </label>
                                         </div>
                                         <img src="{{setting('site.og_image')}}" class="rounded mb-1 {{setting('site.og_image') ? '' : 'd-none'}}" id="site_og_src">
@@ -217,14 +183,14 @@
                                             <input type="file" id="favicon-upload" name="logo" class="d-none favicon-upload" data-target="#site_favicon_url"> {{__('_select_image')}}
                                         </label>
                                     </div>
-                                    <p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}  / {{__('lang.ratio')}} 1:1 / {{__('lang.size')}} 50x50 (px)</p>
+                                    <p class="font-13"><code>*</code> {!! __('_note_upload_image') !!}  / {{__('_ratio')}} 1:1 / {{__('_size')}} 50x50 (px)</p>
                                     <div class="dropzone p-2 text-center">
                                         <div class="dz-message text-center needsclick mb-1 {{!setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_hidden">
                                             <label for="favicon-upload" class="w-100 mb-0">
                                                 <div class="icon-dropzone pt-2">
                                                     <i class="h1 text-muted dripicons-cloud-upload"></i>
                                                 </div>
-                                                <span class="text-muted font-13">{!! __('lang.note_select_image') !!}</span>
+                                                <span class="text-muted font-13">{!! __('_note_select_image') !!}</span>
                                             </label>
                                         </div>
                                         <img src="{{setting('site.favicon')}}" class="rounded mb-1 {{setting('site.favicon') ? '' : 'd-none'}}" id="site_favicon_src">
@@ -238,23 +204,23 @@
                         </div>
                     </fieldset>
                     <fieldset title="2" class="p-0">
-                        <legend>{!! __('lang.contact_info') !!}</legend>
+                        <legend>{!! __('_contact_info') !!}</legend>
 
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.contact_info') !!}</label>
-                                    <p>{!! __('lang.note_contact_info') !!}</p>
+                                    <label for="imgur_client_id">{!! __('_contact_info') !!}</label>
+                                    <p>{!! __('_note_contact_info') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group">
-                                        <label for="email">{!! __('_email') !!} <code class="required">{!! __('lang.note_email') !!}</code></label>
+                                        <label for="email">{!! __('_email') !!} <code class="required">{!! __('_note_email') !!}</code></label>
                                         <input type="text" class="form-control" id="email" value="{{setting('contact.email')}}" name="data[contact.email]">
                                     </div>
                                     <div class="form-group">
-                                        <label for="hotline">{!! __('lang.hotline') !!}</label>
+                                        <label for="hotline">{!! __('_hotline') !!}</label>
                                         <input type="tel" class="form-control" value="{{setting('contact.hotline')}}" id="hotline" name="data[contact.hotline]">
                                     </div>
                                     <div class="form-group ">
@@ -263,11 +229,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="fax">{!! __('lang.fax') !!}</label>
+                                        <label for="fax">{!! __('_fax') !!}</label>
                                         <input type="text" class="form-control" value="{{setting('contact.fax')}}" id="fax" name="data[contact.fax]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="time_open">{!! __('lang.time_open') !!}</label>
+                                        <label for="time_open">{!! __('_time_open') !!}</label>
                                         <input type="text" class="form-control" value="{{setting('contact.time_open')}}" id="time_open" name="data[contact.time_open]">
                                     </div>
                                 </div>
@@ -277,14 +243,14 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.google_map') !!}</label>
-                                    <p>{!! __('lang.note_google_map') !!} <a href="https://www.google.com/maps/place/H%C3%A0+N%E1%BB%99i,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0227788,105.8194541,14z/data=!3m1!4b1!4m5!3m4!1s0x3135ab9bd9861ca1:0xe7887f7b72ca17a9!8m2!3d21.0277644!4d105.8341598?hl=vi-VN" target="_blank">{!! __('lang.learn_more') !!}.</a> </p>
+                                    <label for="imgur_client_id">{!! __('_google_map') !!}</label>
+                                    <p>{!! __('_note_google_map') !!} <a href="https://www.google.com/maps/place/H%C3%A0+N%E1%BB%99i,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0227788,105.8194541,14z/data=!3m1!4b1!4m5!3m4!1s0x3135ab9bd9861ca1:0xe7887f7b72ca17a9!8m2!3d21.0277644!4d105.8341598?hl=vi-VN" target="_blank">{!! __('_learn_more') !!}.</a> </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="map">iFrame {!! __('lang.google_map') !!}</label>
+                                        <label for="map">iFrame {!! __('_google_map') !!}</label>
                                         <textarea name="data[contact.map]" id="map" cols="30" rows="5" class="form-control">{!! setting('contact.map') !!}</textarea>
                                     </div>
                                 </div>
@@ -299,7 +265,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="facebook">Fanpage facebook</label>
-                                    <p>{!! __('lang.note_facebook') !!} </p>
+                                    <p>{!! __('_note_facebook') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -317,7 +283,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="youtube">Youtube channel</label>
-                                    <p>{!! __('lang.note_youtube') !!}</p>
+                                    <p>{!! __('_note_youtube') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -335,7 +301,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="google">Google+</label>
-                                    <p>{!! __('lang.note_google') !!}</p>
+                                    <p>{!! __('_note_google') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -353,7 +319,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="zalo">Zalo</label>
-                                    <p>{!! __('lang.note_zalo') !!}</p>
+                                    <p>{!! __('_note_zalo') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -371,7 +337,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="skype">Skype</label>
-                                    <p>{!! __('lang.note_skype') !!} </p>
+                                    <p>{!! __('_note_skype') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -389,7 +355,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="twitter">Twitter</label>
-                                    <p>{!! __('lang.note_twitter') !!}</p>
+                                    <p>{!! __('_note_twitter') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -407,7 +373,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="instagram">Instagram</label>
-                                    <p>{!! __('lang.note_instagram') !!} </p>
+                                    <p>{!! __('_note_instagram') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -425,7 +391,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="linkedin">Linkedin</label>
-                                    <p>{!! __('lang.note_linkedin') !!} </p>
+                                    <p>{!! __('_note_linkedin') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -443,7 +409,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="pinterest">Pinterest</label>
-                                    <p>{!! __('lang.note_pinterest') !!} </p>
+                                    <p>{!! __('_note_pinterest') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -459,19 +425,19 @@
 
                     </fieldset>
                     <fieldset title="4" class="p-0">
-                        <legend>{!! __('lang.additional_code') !!}</legend>
+                        <legend>{!! __('_additional_code') !!}</legend>
 
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code> &lt;/head&gt; </code></label>
-                                    <p>{!! __('lang.note_head') !!} </p>
+                                    <label for="imgur_client_id">{!! __('_pre_additional_code') !!}  <code> &lt;/head&gt; </code></label>
+                                    <p>{!! __('_note_head') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="remarketing_header">{!! __('lang.additional_code') !!} <code> &lt;/head&gt; </code></label>
+                                        <label for="remarketing_header">{!! __('_additional_code') !!} <code> &lt;/head&gt; </code></label>
                                         <textarea class="form-control" rows="12" name="data[site.remarketing_header]">{!! setting('site.remarketing_header')!!}</textarea>
                                     </div>
                                 </div>
@@ -482,14 +448,14 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('lang.pre_additional_code') !!}  <code>  &lt;/body&gt;  </code></label>
-                                    <p>{!! __('lang.note_body') !!}</p>
+                                    <label for="imgur_client_id">{!! __('_pre_additional_code') !!}  <code>  &lt;/body&gt;  </code></label>
+                                    <p>{!! __('_note_body') !!}</p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group mb-0">
-                                        <label for="remarketing_footer">{!! __('lang.additional_code') !!} <code>  &lt;/body&gt;  </code></label>
+                                        <label for="remarketing_footer">{!! __('_additional_code') !!} <code>  &lt;/body&gt;  </code></label>
                                         <textarea class="form-control" rows="12" name="data[site.remarketing_footer]">{!! setting('site.remarketing_footer') !!}</textarea>
                                     </div>
                                 </div>
@@ -505,7 +471,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label for="google_analytics_id">Google Analytics</label>
-                                        <p>{!! __('lang.note_google_analytics') !!}</p>
+                                        <p>{!! __('_note_google_analytics') !!}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -526,7 +492,7 @@
                                             <input type="checkbox" id="login_facebook" {{checked(setting('api.login_facebook'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.login_facebook]" data-size=""/>
                                         </p>
 
-                                        <p>{!! __('lang.note_facebook_app') !!} <a href="https://developers.facebook.com/apps/" class="" target="_blank">{!! __('lang.learn_more') !!}</a> </p>
+                                        <p>{!! __('_note_facebook_app') !!} <a href="https://developers.facebook.com/apps/" class="" target="_blank">{!! __('_learn_more') !!}</a> </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -554,7 +520,7 @@
                                             <input type="checkbox" id="login_google" {{checked(setting('api.login_google'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.login_google]" data-size=""/>
                                         </p>
 
-                                        <p>{!! __('lang.note_google_app') !!} <a href="https://console.cloud.google.com/projectcreate" class="" target="_blank">{!! __('lang.learn_more') !!}</a> </p>
+                                        <p>{!! __('_note_google_app') !!} <a href="https://console.cloud.google.com/projectcreate" class="" target="_blank">{!! __('_learn_more') !!}</a> </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -577,7 +543,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label for="imgur_client_id">Facebook Messenger</label>
-                                        <p>{!! __('lang.note_messenger') !!}</p>
+                                        <p>{!! __('_note_messenger') !!}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -602,7 +568,7 @@
 {{--                                        <p>--}}
 {{--                                            <input type="checkbox" id="google_captcha" {{checked(setting('api.google_captcha'), true)}} data-plugin="switchery" data-color="#64b0f2" name="data[api.google_captcha]" data-size=""/>--}}
 {{--                                        </p>--}}
-{{--                                        <p>{!! __('lang.note_google_capcha') !!} <a href="https://www.google.com/recaptcha/admin/create" class="" target="_blank">{!! __('lang.learn_more') !!}</a></p>--}}
+{{--                                        <p>{!! __('_note_google_capcha') !!} <a href="https://www.google.com/recaptcha/admin/create" class="" target="_blank">{!! __('_learn_more') !!}</a></p>--}}
 {{--                                    </div>--}}
 {{--                                </div>--}}
 {{--                                <div class="col-lg-7">--}}
@@ -624,7 +590,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-box mb-0 bg-transparent">
                                         <label for="imgur_client_id">Imgur</label>
-                                        <p>{!! __('lang.note_imgur') !!}</p>
+                                        <p>{!! __('_note_imgur') !!}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
@@ -639,13 +605,13 @@
 
                     </fieldset>
                     <fieldset title="6" class="p-0">
-                        <legend>{!! __('lang.setting') !!}</legend>
+                        <legend>{!! __('_setting') !!}</legend>
                         @canany(['blog.view','video.view','gallery.view'])
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
-                                    <label for="imgur_client_id">{!! __('_post') !!} <code> ({!! __('_post') !!}, {!! __('_page') !!}, {!! __('lang.gallery') !!}, {!! __('lang.video') !!} ...) </code></label>
-                                    <p>{!! __('lang.note_config_post') !!} </p>
+                                    <label for="imgur_client_id">{!! __('_post') !!} <code> ({!! __('_post') !!}, {!! __('_page') !!}, {!! __('_gallery') !!}, {!! __('_video') !!} ...) </code></label>
+                                    <p>{!! __('_note_config_post') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -661,15 +627,15 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>{!! __('lang.home') !!}</label>
+                                        <label>{!! __('_home') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.index')}}" name="data[site.post.index]">
                                     </div>
                                     <div class="form-group">
-                                        <label>{!! __('lang.category') !!}</label>
+                                        <label>{!! __('_category') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.category')}}" name="data[site.post.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>{!! __('_post') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
+                                        <label>{!! __('_post') !!} <span class="text-lowercase">{!! __('_related') !!}</span></label>
                                         <input id="touchspin" type="text" value="{{setting('site.post.related')}}" name="data[site.post.related]">
                                     </div>
                                 </div>
@@ -683,7 +649,7 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <label for="imgur_client_id">{!! __('_product') !!} </label>
-                                    <p>{!! __('lang.note_config_product') !!} </p>
+                                    <p>{!! __('_note_config_product') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -699,15 +665,15 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>{!! __('lang.home') !!}</label>
+                                        <label>{!! __('_home') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.index')}}" name="data[site.product.index]">
                                     </div>
                                     <div class="form-group">
-                                        <label>{!! __('lang.category') !!}</label>
+                                        <label>{!! __('_category') !!}</label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.category')}}" name="data[site.product.category]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label>{!! __('_product') !!} <span class="text-lowercase">{!! __('lang.related') !!}</span></label>
+                                        <label>{!! __('_product') !!} <span class="text-lowercase">{!! __('_related') !!}</span></label>
                                         <input id="touchspin" type="text" value="{{setting('site.product.related')}}" name="data[site.product.related]">
                                     </div>
                                 </div>
@@ -726,12 +692,12 @@
                                     <p>
                                     <input type="checkbox" id="site_languages" {{checked(setting('site.languages'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.languages]" data-size=""/>
                                     </p>
-                                    <p class="mb-0">{!! __('lang.note_language') !!} <a href="{{route('admin.languages.index')}}">{!! __('lang.here') !!} </a> </p>
+                                    <p class="mb-0">{!! __('_note_language') !!} <a href="{{route('admin.languages.index')}}">{!! __('_here') !!} </a> </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
-                                    <label>{!! __('lang.list_language') !!}</label>
+                                    <label>{!! __('_list_language') !!}</label>
                                     @foreach(\App\Models\Language::oldest()->get() as $item)
                                         <blockquote class="blockquote mb-0">
                                             <footer class="blockquote-footer"><cite title="{{$item->name}} ({{$item->value}})" class="font-weight-bold">{{$item->name}} ({{$item->value}})</cite></footer>
@@ -746,19 +712,19 @@
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">
                                     <input type="hidden" value="0" name="data[site.maintenance]">
-                                    <label for="maintenance"> {!! __('lang.maintenance') !!} </label>
+                                    <label for="maintenance"> {!! __('_maintenance') !!} </label>
                                     <p><input type="checkbox" id="maintenance" {{checked(setting('site.maintenance'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.maintenance]" data-size=""/></p>
-                                    <p>{!! __('lang.note_maintenance') !!} </p>
+                                    <p>{!! __('_note_maintenance') !!} </p>
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="card-box mb-0">
                                     <div class="form-group">
-                                        <label for="password">{{__('lang.password')}}  <code>{{__('lang.note_maintenance_password')}}</code></label>
+                                        <label for="password">{{__('_password')}}  <code>{{__('_note_maintenance_password')}}</code></label>
                                         <input type="text" class="form-control" value="{{setting('site.password')}}" id="password" name="data[site.password]">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="note_maintenance">{{__('lang.note')}}</label>
+                                        <label for="note_maintenance">{{__('_note')}}</label>
                                         <textarea type="text" class="form-control" id="note_maintenance" rows="4"  name="data[site.note.maintenance]">{{setting('site.note.maintenance')}}</textarea>
                                     </div>
                                 </div>

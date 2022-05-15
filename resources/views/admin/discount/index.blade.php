@@ -23,8 +23,7 @@
             <div class="card-box table-responsive">
                 <div class="action-datatable text-right">
                     @can('discount.create')
-                    <a href="{{route('admin.discounts.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                        <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_discount'))}}</a>
+                        @include('admin.render.add_new', ['route' => route('admin.discounts.create')])
                     @endcan
                 </div>
                 <div id="custom-toolbar">
@@ -48,27 +47,27 @@
                     >
                         <thead>
                         <tr>
-                            <th data-field="id" data-sortable="true" data-switchable="false">ID</th>
+                            <th data-field="id" data-sortable="true" data-switchable="false">@lang('_id')</th>
                             <th data-field="name">
-                                {{__('_discount_name')}}
+                                {{__('_discount')}}
                             </th>
                             <th data-field="code">
-                                {{__('lang.code')}}
+                                {{__('_code')}}
                             </th>
                             <th data-field="value" data-formatter="valueFormatter">
                                 {{__('_value_down')}}
                             </th>
                             <th data-field="start_at" data-formatter="shortDateTimeFormatter">
-                                {{__('lang.start')}}
+                                {{__('_start')}}
                             </th>
                             <th data-field="end_at" data-formatter="shortDateTimeFormatter">
-                                {{__('lang.end')}}
+                                {{__('_end')}}
                             </th>
                             <th data-field="invoices_count" data-formatter="usedFormatter">
-                                {{__('lang.used')}}
+                                {{__('_used')}}
                             </th>
                             <th data-field="discount" data-formatter="numberFormatter">
-                                {{__('lang.money_down')}}
+                                {{__('_money_down')}}
                             </th>
 
                             <th data-field="status" data-formatter="statusFormatter" data-visible="true">

@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.list_product')}} @stop
+@section('title') {{__('_list_product')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.list_product')}}</li>
+                            <li class="breadcrumb-item active">{{__('_list_product')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.list_product')}}</h4>
+                    <h4 class="page-title">{{__('_list_product')}}</h4>
                 </div>
             </div>
         </div>
@@ -24,8 +24,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('product.create')
-                        <a href="{{route('admin.products.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_product'))}}</a>
+                            @include('admin.render.add_new', ['route' => route('admin.products.create')])
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -56,7 +55,7 @@
                                 </select>
                             </div>
                             <div class="form-group mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" name="category" data-allow-clear="true" data-placeholder="{{__('lang.category')}}">
+                                <select class="form-control" data-toggle="select2" name="category" data-allow-clear="true" data-placeholder="{{__('_category')}}">
                                     <option value=""></option>
                                     @include('admin.render.options', ['options' => $categories, 'selected' => 0])
                                 </select>
@@ -87,15 +86,16 @@
                                     {{__('_product')}}
                                 </th>
                                 <th data-field="category" data-formatter="categoryFormatter">
-                                    {{__('lang.category')}}
+                                    {{__('_category')}}
                                 </th>
 {{--                                <th data-field="code">--}}
-{{--                                    {{__('lang.code')}}--}}
+{{--                                    {{__('_code')}}--}}
 {{--                                </th>--}}
 
                                 <th data-field="price" data-formatter="priceFormatter">
-                                    Gói dịch vụ
+                                    @lang('_price')
                                 </th>
+
                                 @can('comment.view')
                                     <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">
                                         {{__('_review')}}

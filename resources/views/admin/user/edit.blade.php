@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="name">{{__('lang.fullname')}} <span class="required">*</span></label>
+                    <label for="name">{{__('_fullname')}} <span class="required">*</span></label>
                     <input type="text" class="form-control" id="name" name="data[name]" value="{{$user->name}}" required>
                 </div>
                 <div class="form-group">
@@ -19,7 +19,7 @@
                     <input type="email" class="form-control" id="email" name="data[email]"  value="{{$user->email}}">
                 </div>
                 <div class="form-group">
-                    <label for="password">{{__('lang.password')}} </label>
+                    <label for="password">{{__('_password')}} </label>
                     <input type="text" class="form-control" id="password" name="password">
                 </div>
 
@@ -28,7 +28,7 @@
                     <input type="tel" class="form-control" id="phone" name="data[phone]" value="{{$user->phone}}">
                 </div>
                 <div class="form-group">
-                    <label for="address">{{__('lang.address')}}</label>
+                    <label for="address">{{__('_address')}}</label>
                     <input name="data[address]" id="address" class="form-control" value="{{$user->address}}">
                 </div>
             </div>

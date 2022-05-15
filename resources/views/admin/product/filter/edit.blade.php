@@ -4,7 +4,7 @@
         @method('PUT')
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('lang.filter')}} #{{$filter->id}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_filter')}} #{{$filter->id}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>{{__('lang.color')}}</label>
+                    <label>{{__('_color')}}</label>
                     <input class="form-control" id="example-color" type="color" value="{{$filter->color ?? '#ffffff'}}">
                     <input type="hidden" value="{{$filter->color}}" id="data-color" name="data[color]" >
                 </div>

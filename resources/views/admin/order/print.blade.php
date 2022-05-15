@@ -31,13 +31,13 @@
                                 <tr>
                                     <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('_name')}}
                                     </th>
-                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('lang.quantity')}}
+                                    <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">{{__('_quantity')}}
                                     </th>
                                     <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">
-                                        {{__('lang.price')}}
+                                        {{__('_price')}}
                                     </th>
                                     <th nowrap="" style="padding-right:4px;border-bottom:dotted 1px black">
-                                        {{__('lang.total_money')}}
+                                        {{__('_total_money')}}
                                     </th>
                                 </tr>
 
@@ -59,7 +59,7 @@
                                 </tr>
                                 @endforeach
                                 <tr>
-                                    <td nowrap="" colspan="3" class="CssNoLine" style="font-weight: bold">{{__('lang.total_money')}}
+                                    <td nowrap="" colspan="3" class="CssNoLine" style="font-weight: bold">{{__('_total_money')}}
                                     </td>
                                     <td nowrap="" class="CssNoLine" style="font-weight: bold">
                                         {{number_format($order->total)}}

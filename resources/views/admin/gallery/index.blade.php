@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.gallery')}} @stop
+@section('title') {{__('_gallery')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.gallery')}}</li>
+                            <li class="breadcrumb-item active">{{__('_gallery')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.gallery')}}</h4>
+                    <h4 class="page-title">{{__('_gallery')}}</h4>
                 </div>
             </div>
         </div>
@@ -23,8 +23,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('gallery.create')
-                        <a href="{{route('admin.posts.galleries.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.gallery'))}}</a>
+                            @include('admin.render.add_new', ['route' => route('admin.posts.galleries.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -192,11 +191,11 @@
         function actionFormatter(value, row){
             let html = '';
             @can('gallery.edit')
-            html = '<a href="'+ '{{ route('admin.posts.galleries.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+            html = '<a href="'+ '{{ route('admin.posts.galleries.edit', ':id') }}'.replace(':id',row.id) +'" title="@lang('_edit')" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
 
             @can('gallery.destroy')
-            html+='<a href="'+ '{{ route('admin.posts.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+            html+='<a href="'+ '{{ route('admin.posts.destroy', ':id') }}'.replace(':id',row.id) +'" title="@lang('_delete')" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
 
             return html;

@@ -12,7 +12,7 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('_dashboard')}}</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.products.index')}}">{{__('lang.list_product')}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.products.index')}}">{{__('_list_product')}}</a></li>
                             <li class="breadcrumb-item active">#{{$product->id}}</li>
                         </ol>
                     </div>
@@ -34,8 +34,7 @@
                             <div class="tab-pane language-{{$translation->locale}} {{$translation->locale == session('lang') ? 'active' : null}}" id="language-{{$translation->locale}}">
                                 <div class="card-box">
                                     @include('admin.render.edit.name')
-                                    @include('admin.render.edit.description')
-                                    @include('admin.render.edit.content')
+                                    @include('admin.render.edit.tab_product')
                                 </div>
                             </div>
                         @endforeach
@@ -44,72 +43,95 @@
                                 <div class="tab-pane language-{{$language->value}} {{$language->value == session('lang') ? 'active' : null}}" id="language-{{$language->value}}">
                                     <div class="card-box">
                                         @include('admin.render.create.name')
-                                        @include('admin.render.create.description')
-                                        @include('admin.render.create.content')
+                                        @include('admin.render.create.tab_product')
                                     </div>
                                 </div>
                             @endforeach
 
                         </div>
-
                     <div class="card-box">
-                        <label class="form-label">Gói dịch vụ</label>
-                        <div class="table-responsive">
-                            <table class="table product-options text-center" data-dynamicrows>
-                                <thead>
-                                <tr>
-                                    <th>Tên dịch vụ <span class="required">*</span></th>
-                                    <th>Giá ($)</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if($product->options)
-                                    @foreach($product->options as $key=>$option)
-                                <tr>
-                                    <td>
-                                        <input type="text" name="fields[{{$key}}][name]" class="form-control" value="{{$option['name']}}" required>
-                                    </td>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
+                                    <label>{{__('_code')}}</label>
+                                    <input type="text" class="form-control" value="{{$product->code}}" id="code" name="data[code]">
+                                </div>
+                            </div>
 
-
-                                    <td>
-                                        <input type="price" step="0.1" name="fields[{{$key}}][price]" class="form-control" value="{{$option['price'] ?? '0.00'}}">
-                                    </td>
-
-                                    <td>
-                                        <i class="fa fa-minus" data-remove></i>
-                                        <i class="fa fa-arrows" data-move></i>
-                                        <i class="fa fa-plus" data-add></i>
-
-                                    </td>
-                                </tr>
-                                @endforeach
-
-                                @else
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="fields[0][name]" class="form-control" value="" required>
-                                        </td>
-
-
-                                        <td>
-                                            <input type="price" step="0.1" name="fields[0][price]" class="form-control" value="0.00">
-                                        </td>
-
-                                        <td>
-                                            <i class="fa fa-minus" data-remove></i>
-                                            <i class="fa fa-arrows" data-move></i>
-                                            <i class="fa fa-plus" data-add></i>
-
-                                        </td>
-                                    </tr>
-                                @endif
-
-
-                                </tbody>
-                            </table>
+                            <div class="col-lg-4">
+                                <div class="form-group mb-lg-0 mb-sm-0 mb-md-0">
+                                    <label>{{__('_price')}}</label>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" min="0" value="{{number_format($product->price)}}" id="price">
+                                    <input type="text" class="form-control d-none" min="0" value="{{$product->price}}" id="format-price" name="data[price]">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group mb-0">
+                                    <label>{{__('_price_sale')}}</label>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  class="form-control text-primary font-weight-bold" value="{{number_format($product->price_sale)}}" min="0" id="price_sale">
+                                    <input type="text" class="form-control d-none" value="{{$product->price_sale}}" min="0" id="format-price-sale" name="data[price_sale]">
+                                </div>
+                            </div>
                         </div>
                     </div>
+{{--                    <div class="card-box">--}}
+{{--                        <label class="form-label">Gói dịch vụ</label>--}}
+{{--                        <div class="table-responsive">--}}
+{{--                            <table class="table product-options text-center" data-dynamicrows>--}}
+{{--                                <thead>--}}
+{{--                                <tr>--}}
+{{--                                    <th>Tên dịch vụ <span class="required">*</span></th>--}}
+{{--                                    <th>Giá ($)</th>--}}
+{{--                                    <th></th>--}}
+{{--                                </tr>--}}
+{{--                                </thead>--}}
+{{--                                <tbody>--}}
+{{--                                @if($product->options)--}}
+{{--                                    @foreach($product->options as $key=>$option)--}}
+{{--                                <tr>--}}
+{{--                                    <td>--}}
+{{--                                        <input type="text" name="fields[{{$key}}][name]" class="form-control" value="{{$option['name']}}" required>--}}
+{{--                                    </td>--}}
+
+
+{{--                                    <td>--}}
+{{--                                        <input type="price" step="0.1" name="fields[{{$key}}][price]" class="form-control" value="{{$option['price'] ?? '0.00'}}">--}}
+{{--                                    </td>--}}
+
+{{--                                    <td>--}}
+{{--                                        <i class="fa fa-minus" data-remove></i>--}}
+{{--                                        <i class="fa fa-arrows" data-move></i>--}}
+{{--                                        <i class="fa fa-plus" data-add></i>--}}
+
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                @endforeach--}}
+
+{{--                                @else--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            <input type="text" name="fields[0][name]" class="form-control" value="" required>--}}
+{{--                                        </td>--}}
+
+
+{{--                                        <td>--}}
+{{--                                            <input type="price" step="0.1" name="fields[0][price]" class="form-control" value="0.00">--}}
+{{--                                        </td>--}}
+
+{{--                                        <td>--}}
+{{--                                            <i class="fa fa-minus" data-remove></i>--}}
+{{--                                            <i class="fa fa-arrows" data-move></i>--}}
+{{--                                            <i class="fa fa-plus" data-add></i>--}}
+
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endif--}}
+
+
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                     <div class="card-box position-relative box-action-image float-left w-100">
                         @include('admin.render.edit.multiple_image', ['item' => $product])
@@ -123,7 +145,7 @@
 
                         @if($filters->count())
                             <div class="card-box pb-1 clearfix">
-                                <label>{{__('lang.filter')}}</label>
+                                <label>{{__('_filter')}}</label>
 
                                 <div class="row">
                                     @foreach($filters->where('parent_id',0) as $filter)

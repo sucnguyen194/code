@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.filter'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,7 +20,7 @@
                         @endforeach
                     </div>
                 <div class="form-group">
-                    <label>{{__('lang.color')}}</label>
+                    <label>{{__('_color')}}</label>
                     <input class="form-control" id="example-color" type="color" value="#ffffff">
                     <input type="hidden" value="" id="data-color" name="data[color]">
                 </div>

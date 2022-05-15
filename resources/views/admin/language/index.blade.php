@@ -89,9 +89,8 @@
 
             html += '<a href="'+ '{{ route('admin.languages.edit', ':id') }}'.replace(':id',row.id) +'" title="Edit" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a> ';
 
-            html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="Delete" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
-
             if(row.status != 1) {
+                html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="Delete" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
                 html+='<a href="'+ '{{ route('admin.languages.change', ':value') }}'.replace(':value',row.value) +'" class="ajax-link btn btn-info waves-effect waves-light" title="Active" id="tooltip-hover"  data-confirm="{{__('_confirm_change_language')}}" data-refresh="true" data-method="GET"><i class="fa fa-language"></i></a> ';
             }
 

@@ -56,8 +56,8 @@
                                 </select>
                             </div>
                             <div class="form-group mr-2 mb-2" style="width: 200px">
-                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('lang.category')}}" name="category">
-                                    <option value="">{{__('lang.category')}}</option>
+                                <select class="form-control" data-toggle="select2" data-allow-clear="true" data-placeholder="{{__('_category')}}" name="category">
+                                    <option value="">{{__('_category')}}</option>
                                     @include('admin.render.options', ['options' => $categories, 'selected' => 0])
                                 </select>
                             </div>
@@ -90,7 +90,7 @@
                                     {{__('lang.deadline')}}
                                 </th>
                                 <th data-field="category" data-formatter="categoryFormatter">
-                                    {{__('lang.category')}}
+                                    {{__('_category')}}
                                 </th>
 
                                 @can('comment.view')

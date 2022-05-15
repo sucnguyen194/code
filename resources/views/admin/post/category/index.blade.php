@@ -22,8 +22,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('blog.create')
-                        <a href="{{route('admin.posts.categories.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.category')}}</span></a>
+                            @include('admin.render.add_new', ['route' => route('admin.posts.categories.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -176,11 +175,11 @@
         function actionFormatter(value, row){
             let html = '';
             @can('blog.edit')
-                html += '<a href="'+ '{{ route('admin.posts.categories.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+                html += '<a href="'+ '{{ route('admin.posts.categories.edit', ':id') }}'.replace(':id',row.id) +'" title="@lang('_edit')" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
 
                 @can('blog.destroy')
-                html+='<a href="'+ '{{ route('admin.categories.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+                html+='<a href="'+ '{{ route('admin.categories.destroy', ':id') }}'.replace(':id',row.id) +'" title="@lang('_delete')"  class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
                 return html;
         }

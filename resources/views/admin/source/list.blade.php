@@ -1,6 +1,6 @@
 @extends('admin.layouts.layout')
 @section('title')
-{!! __('lang.source_code_editor') !!}
+{!! __('_source_code_editor') !!}
 @stop
 @section('content')
 
@@ -13,10 +13,10 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{!! __('_dashboard') !!}</a></li>
-                        <li class="breadcrumb-item active">{!! __('lang.source_code_editor') !!}</li>
+                        <li class="breadcrumb-item active">{!! __('_source_code_editor') !!}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{!! __('lang.source_code_editor') !!}</h4>
+                <h4 class="page-title">{!! __('_source_code_editor') !!}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card-box">
-                <h4 class="header-title mb-3">{!! __('lang.source_code') !!}</h4>
+                <h4 class="header-title mb-3">{!! __('_source') !!}</h4>
                 <div id="">
                     <div class="list-group">
                         <ul class="pl-0">
@@ -46,7 +46,7 @@
                 <form id="put-content-file" class="loading-file" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="card-box">
-                        <h4 class="header-title mb-3">{!! __('lang.source_code_editor') !!}: <span class="path_file"></span></h4>
+                        <h4 class="header-title mb-3">{!! __('_source_code_editor') !!}: <span class="path_file"></span></h4>
                         <div class="autohide-scroll view-source bg-listSource">
                             <div id="editor" class="views-source"></div>
                             <input class="hidden" name="dir" id="dir-file">
@@ -191,7 +191,7 @@
                     flash({'message':'{{__('_the_record_is_updated_successfully')}}', 'type':'success'});
                 },
                 error: function (response) {
-                    flash({'message':'{{__('lang.file_error')}}', 'type':'error'});
+                    flash({'message':'{{__('_file_error')}}', 'type':'error'});
                 }
             });
         })

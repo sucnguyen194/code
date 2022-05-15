@@ -3,7 +3,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.video'))}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -22,8 +22,8 @@
                     @endforeach
                 </div>
                     <div class="form-group">
-                        <label>{{__('_slug')}} {{__('lang.video')}} Youtube <span class="required">*</span></label>
-                        <p class="font-13"><code>*</code> {{__('lang.note_url_video')}}</p>
+                        <label>{{__('_slug')}} {{__('_video')}} Youtube <span class="required">*</span></label>
+                        <p class="font-13"><code>*</code> {{__('_note_video')}}</p>
                         <p><img src="{{asset('lib/images/note_upload_video.png')}}" class="w-auto"></p>
                         <input class="form-control" value="" name="data[video]" required>
 

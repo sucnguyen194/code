@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
+                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('_fullname')}} *">
                             </div>
                             <div class="col-lg-6">
                                 <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('_email')}} *">
@@ -102,7 +102,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
+                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('_fullname')}} *">
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('_email')}} *">
@@ -162,7 +162,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
+                                                        <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('_fullname')}} *">
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('_email')}} *">
@@ -224,7 +224,7 @@
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('lang.fullname')}} *">
+                                                                <input type="text" name="data[name]" class="form-control" value="{{auth()->user()->name}}" placeholder="{{__('_fullname')}} *">
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <input type="email" name="data[email]" class="form-control" value="{{auth()->user()->email}}" placeholder="{{__('_email')}} *">

@@ -23,7 +23,7 @@
                     <div class="action-datatable text-right">
                         @can('blog.create')
                         <a href="{{route('admin.recruitments.categories.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('lang.category')}}</span></a>
+                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} <span class="text-lowercase">{{__('_category')}}</span></a>
                         @endcan
                     </div>
                     <div id="custom-toolbar">

@@ -19,7 +19,7 @@
                     <input type="email" class="form-control" id="email" name="data[email]" required value="{{$admin->email}}">
                 </div>
                 <div class="form-group">
-                    <label for="password">{{__('lang.password')}}</label>
+                    <label for="password">{{__('_password')}}</label>
                     <input type="text" class="form-control" id="password" name="password" placeholder="******">
                 </div>
                 <div class="form-group mb-0">

@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title') {{__('lang.video')}} @stop
+@section('title') {{__('_video')}} @stop
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('dashboard')}}</a></li>
-                            <li class="breadcrumb-item active">{{__('lang.video')}}</li>
+                            <li class="breadcrumb-item active">{{__('_video')}}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{__('lang.video')}}</h4>
+                    <h4 class="page-title">{{__('_video')}}</h4>
                 </div>
             </div>
         </div>
@@ -23,8 +23,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('video.create')
-                        <a href="{{route('admin.posts.videos.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('lang.video'))}}</a>
+                            @include('admin.render.add_new', ['route' => route('admin.posts.videos.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">
@@ -81,7 +80,7 @@
                                     {{__('_title')}}
                                 </th>
                                 <th data-field="video" data-formatter="videoFormatter">
-                                    {{__('lang.video')}}
+                                    {{__('_video')}}
                                 </th>
                                 @can('comment.view')
 {{--                                    <th data-field="comments" data-formatter="commentFormatter" data-sortable="true" data-visible="true">--}}

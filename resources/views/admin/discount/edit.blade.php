@@ -42,12 +42,12 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label class="form-label">{{__('_discount_name')}} <span class="required">*</span> </label>
+                        <label class="form-label">{{__('_discount')}} <span class="required">*</span> </label>
                         <input type="text" name="discount[name]" class="form-control" value="{{ $discount->name }}" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.code')}} <span class="required">*</span></label>
+                        <label class="form-label">{{__('_code')}} <span class="required">*</span></label>
                         <input type="text" name="discount[code]" class="form-control" value="{{ Str::upper($discount->code) }}" required>
                     </div>
 
@@ -81,26 +81,26 @@
 
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">{{__('lang.limit')}}</label>
+                    <label class="font-weight-bold mb-4">{{__('_limit')}}</label>
 
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.total_usage')}}</label>
-                        <input type="number" name="discount[uses_total]" class="form-control" min="0" value="{{ $discount->uses_total }}" placeholder="{{__('lang.unlimit')}}">
+                        <label class="form-label">{{__('_total_usage')}}</label>
+                        <input type="number" name="discount[uses_total]" class="form-control" min="0" value="{{ $discount->uses_total }}" placeholder="{{__('_unlimit')}}">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.usage_per_person')}}</label>
-                        <input type="number" name="discount[uses_user]" class="form-control" min="0" value="{{ $discount->uses_user }}" placeholder="{{__('lang.unlimit')}}">
+                        <label class="form-label">{{__('_usage_per_person')}}</label>
+                        <input type="number" name="discount[uses_user]" class="form-control" min="0" value="{{ $discount->uses_user }}" placeholder="{{__('_unlimit')}}">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="form-label">{{__('lang.start_time')}} <span class="required">*</span></label>
+                            <label class="form-label">{{__('_start_time')}} <span class="required">*</span></label>
                             <input type="text" name="discount[start_at]" class="form-control datetimepicker" value="{{ optional($discount->start_at)->format('d-m-Y H:i:s') }}" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="form-label">{{__('lang.end_time')}}</label>
-                            <input type="text" name="discount[end_at]" class="form-control datetimepicker" value="{{ optional($discount->end_at)->format('d-m-Y H:i:s')  }}" placeholder="{{__('lang.unlimit')}}">
+                            <label class="form-label">{{__('_end_time')}}</label>
+                            <input type="text" name="discount[end_at]" class="form-control datetimepicker" value="{{ optional($discount->end_at)->format('d-m-Y H:i:s')  }}" placeholder="{{__('_unlimit')}}">
                         </div>
                     </div>
 
@@ -108,34 +108,34 @@
 
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">{{__('lang.condition')}}</label>
+                    <label class="font-weight-bold mb-4">{{__('_condition')}}</label>
 
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.minimum_purchase_quantity')}}</label>
+                        <label class="form-label">{{__('_minimum_purchase_quantity')}}</label>
                         <input type="number" name="discount[minimum_quantity]" class="form-control" min="1" value="{{ $discount->minimum_quantity }}" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">{{__('lang.minimum_order_amount')}}</label>
+                        <label class="form-label">{{__('_minimum_order_amount')}}</label>
                         <input type="number" name="discount[minimum_amount]" class="form-control" min="0" value="{{ $discount->minimum_amount }}">
                     </div>
 
                 </div>
                 <hr class="m-0">
                 <div class="card-body pb-2">
-                    <label class="font-weight-bold mb-4">{{__('_customers')}}</label>
+                    <label class="font-weight-bold mb-4">{{__('_customer')}}</label>
 
                     <div class="form-group">
                         <label class="custom-control custom-radio">
                             <input name="discount[user_selection]" type="radio" class="custom-control-input" value="all" checked>
-                            <span class="custom-control-label">{{__('lang.all_customers')}}</span>
+                            <span class="custom-control-label">{{__('_all_customer')}}</span>
                         </label>
                         <label class="custom-control custom-radio">
                             <input name="discount[user_selection]" type="radio" class="custom-control-input" value="users" {{ checked($discount->user_selection, 'users') }}>
-                            <span class="custom-control-label">{{__('lang.choose_customer')}}</span>
+                            <span class="custom-control-label">{{__('_choose_customer')}}</span>
                         </label>
 
-                        <select class="custom-select select2" id="users" data-allow-clear="true" data-placeholder="{{__('lang.choose_customer')}}" data-multiple="true" multiple name="users[]" size="6">
+                        <select class="custom-select select2" id="users" data-allow-clear="true" data-placeholder="{{__('_choose_customer')}}" data-multiple="true" multiple name="users[]" size="6">
                             @foreach($users as $users)
                                 <option value="{{ $users->id }}" {{ selected($users->id, optional(optional($discount->users)->pluck('id'))->toArray()) }}>#{{ $users->id }} {{ $users->name }}</option>
                             @endforeach
@@ -155,7 +155,7 @@
                         <div class="checkbox">
                             <input type="hidden" name="discount[status]" value="0">
                             <input id="checkbox_status" type="checkbox" name="discount[status]" value="1" {{ checked($discount->status , \App\Enums\Activation::true()) }}>
-                            <label for="checkbox_status" class="mb-0">{{__('lang.active')}}</label>
+                            <label for="checkbox_status" class="mb-0">{{__('_public')}}</label>
                         </div>
 
                         <div class="checkbox d-none">
@@ -187,15 +187,15 @@
         $(function() {
 
             $('#services').bootstrapDualListbox({
-                nonSelectedListLabel: '{{__('lang.existing_products')}}',
-                selectedListLabel: '{{__('lang.selected_products')}}',
+                nonSelectedListLabel: '{{__('_existing_products')}}',
+                selectedListLabel: '{{__('_selected_products')}}',
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false
             });
 
             $('#userss').bootstrapDualListbox({
-                nonSelectedListLabel: '{{__('lang.list_customers')}}',
-                selectedListLabel: '{{__('lang.selected_customers')}}',
+                nonSelectedListLabel: '{{__('lang.list_customer')}}',
+                selectedListLabel: '{{__('lang.selected_customer')}}',
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false
             });
