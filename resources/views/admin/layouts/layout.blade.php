@@ -36,7 +36,7 @@
 {{--    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>--}}
     <script src="/lib/tinymce/tinymce.min.js"></script>
     <!-- Cpanel -->
-    <script src="{{asset('lib/js/cpanel.js')}}"></script>
+    <script src="/lib/js/cpanel.js"></script>
 </head>
 <body>
 <!-- Begin page -->
@@ -510,11 +510,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js" integrity="sha512-mh+AjlD3nxImTUGisMpHXW03gE6F4WdQyvuFRkjecwuWLwD2yCijw4tKA3NsEFpA1C3neiKhGXPSIGSfCYPMlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css" integrity="sha512-gp+RQIipEa1X7Sq1vYXnuOW96C4704yI1n0YB9T/KqdvqaEgL6nAuTSrKufUX3VBONq/TPuKiXGLVgBKicZ0KA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script src="/lib/assets/libs/tooltipster/tooltipster.bundle.min.js"></script>
-
 <script src="/lib/assets/libs/tooltipster/tooltipster.bundle.min.js"></script>
 <script src="/lib/assets/js/pages/tooltipster.init.js"></script>
 
@@ -617,12 +614,30 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('select:not(".select2-multiple")').each(function() {
+        $("select.select2-multiple").on("select2:select select2:unselect", function (e) {
+            var li = $('li.select2-selection__choice');
+
+            $.each(li, function (index, value) {
+                var html = $(value).html();
+                html = html.replaceAll('&nbsp;', "");
+                $(value).html(html);
+            })
+        });
+
+        var li = $('li.select2-selection__choice');
+
+        $.each(li, function (index, value) {
+            var html = $(value).html();
+            html = html.replaceAll('&nbsp;', "");
+            $(value).html(html);
+        })
+
+        $('select').not(".select2-multiple").each(function() {
             $(this).select2({
                 dropdownParent: $(this).parent(),
                 placeholder: $(this).data('placeholder'),
             }).on('change', function(e){
-                var span = $('.select2-selection__rendered');
+                var span = $('span.select2-selection__rendered');
 
                 $.each(span, function (index, value) {
                     var html = $(value).html();
@@ -631,31 +646,13 @@
                 });
             });
 
-            var span = $('.select2-selection__rendered');
+            var _selected = $('span.select2-selection__rendered');
 
-            $.each(span, function (index, value) {
-                var html = $(value).html();
-                html = html.replaceAll('&nbsp;', "");
-                $(value).html(html);
+            $.each(_selected, function (i, v) {
+                var _html = $(v).html();
+                $(v).html(_html.replaceAll('&nbsp;', ''));
             });
         });
-
-        $("select.select2-multiple").on("select2:select select2:unselect", function (e) {
-            var li = $('li.select2-selection__choice');
-
-            $.each(li, function (index, value) {
-                var html = $(value).html();
-                html = html.replaceAll('&nbsp;', "");
-                 $(value).html(html);
-            })
-        });
-        var li = $('li.select2-selection__choice');
-
-        $.each(li, function (index, value) {
-            var html = $(value).html();
-            html = html.replaceAll('&nbsp;', "");
-            $(value).html(html);
-        })
     })
 </script>
 <script type="text/javascript">
@@ -878,7 +875,7 @@
 </script>
 <script type="text/javascript">
 
-    function ajaxform(ele){
+    function ajaxForm(ele){
 
         $(ele).ajaxSubmit({
             headers: {
@@ -931,12 +928,12 @@
     $(document).on('submit','.ajax-form',function(e){
         e.preventDefault();
 
-        ajaxform(this);
+        ajaxForm(this);
         return false;
     });
 </script>
 <script type="text/javascript">
-    function ajaxselect(ele){
+    function ajaxSelect(ele){
 
         let selected = $(ele).data('selected');
         let option = $(ele).data('option');
@@ -969,10 +966,11 @@
                         text: result.translation.name
                     };
 
-                    var newOption = new Option(data.text, data.id);
+                    var newOption = new Option(data.text, data.id, true, true);
                     var addOption = new Option(data.text, data.id, false, false);
+
                     $(selected).append(newOption).trigger('change');
-                    $(option).append(addOption).trigger('change');
+                    $(option).prepend(addOption).trigger('change');
 
                     $('#ajax-modal').modal('hide');
                     flash({'message':'{{__("_the_record_is_added_successfully")}}', 'type': 'success'});
@@ -984,7 +982,7 @@
     }
     $(document).on('submit','.ajax-select',function(e){
         e.preventDefault();
-        ajaxselect(this);
+        ajaxSelect(this);
         return false;
     });
 </script>
@@ -1086,7 +1084,9 @@
         slug = slug.replace(/\-\-/gi, '-');
         slug = '@' + slug + '@';
         slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+        if(document.getElementById(el.getAttribute('language')))
         document.getElementById(el.getAttribute('language')).value = slug;
+        if(document.getElementById(el.getAttribute('seo')))
         document.getElementById(el.getAttribute('seo')).innerText = links + '/' + slug ;
     }
 </script>

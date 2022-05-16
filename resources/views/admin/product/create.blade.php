@@ -1,7 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title')
-    {{__('_add_new')}}
-@stop
+@section('title', __('_add_new'))
 @section('content')
 {{--    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>--}}
     <div class="container-fluid">

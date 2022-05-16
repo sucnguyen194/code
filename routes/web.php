@@ -32,25 +32,21 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
          * Logs
          */
         Route::get('logs', [App\Http\Controllers\Admin\DashboardController::class, 'logs'])->name('logs');
-
         /**
          * Roles
          */
         Route::get('data/roles', [App\Http\Controllers\Admin\RoleController::class, 'data'])->name('roles.data');
         Route::resource('roles', RoleController::class);
-
         /**
          * Permissions
          */
         Route::get('data/permissions', [App\Http\Controllers\Admin\PermissionsController::class, 'data'])->name('permissions.data');
         Route::resource('permissions', PermissionsController::class);
-
         /**
          * Admin
          */
         Route::get('data/admins', [App\Http\Controllers\Admin\AdminController::class, 'data'])->name('admins.data');
         Route::resource('admins', AdminController::class);
-
         /**
          * Tags
          */
@@ -58,20 +54,17 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
         Route::post('add/tags', [App\Http\Controllers\Admin\TagController::class, 'add'])->name('tags.add');
         Route::get('data/tags', [App\Http\Controllers\Admin\TagController::class, 'data'])->name('tags.data');
         Route::resource('tags', TagController::class);
-
         /**
          * Categories
          */
-        Route::post('/add/categories', [App\Http\Controllers\Admin\CategoryController::class, 'add'])->name('categories.add');
+        Route::post('/ajax/store/categories', [App\Http\Controllers\Admin\CategoryController::class, 'ajaxStore'])->name('categories.ajax.store');
         Route::get('/data/categories', [App\Http\Controllers\Admin\CategoryController::class, 'data'])->name('categories.data');
         Route::resource('categories', CategoryController::class);
-
         /**
          * Recruitments
          */
         Route::resource('/recruitments/categories', RecruitmentCategoryController::class, ['as' => 'recruitments']);
         Route::resource('/recruitments', RecruitmentController::class);
-
         /**
          * Video
          */
@@ -84,55 +77,46 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
          * Pages
          */
         Route::resource('/pages', PageController::class, ['as' => 'posts']);
-
         /**
          * Post Categories
          */
         Route::resource('/posts/categories', PostCategoryController::class, ['as' => 'posts']);
-
         /**
          * Posts
          */
         Route::get('/data/posts/', [App\Http\Controllers\Admin\PostController::class, 'data'])->name('posts.data');
         Route::resource('posts', PostController::class);
-
         /**
          * Product Categories
          */
         Route::resource('/products/categories', ProductCategoryController::class, ['as' => 'products']);
-
         /**
          * Products
          */
         Route::get('data/products', [App\Http\Controllers\Admin\ProductController::class, 'data'])->name('products.data');
         Route::resource('products', ProductController::class);
-
         /**
          * Discounts
          */
         Route::get('data/discounts', [App\Http\Controllers\Admin\DiscountController::class, 'data'])->name('discounts.data');
         Route::get('discounts/{discount}/history', [App\Http\Controllers\Admin\DiscountController::class, 'history'])->name('discounts.history');
         Route::resource('discounts', DiscountController::class);
-
         /**
          * Attributes
          */
 //        Route::get('attributes/{id}/render',[App\Http\Controllers\Admin\AttributeController::class,'render'])->name('attributes.render');
         Route::get('data/attributes', [App\Http\Controllers\Admin\AttributeController::class, 'data'])->name('attributes.data');
         Route::resource('attributes', AttributeController::class);
-
         /**
          * Filters
          */
         Route::get('data/filters', [App\Http\Controllers\Admin\FilterController::class, 'data'])->name('filters.data');
         Route::resource('filters', FilterController::class);
-
         /**
          * Photos
          */
         Route::get('data/photos', [App\Http\Controllers\Admin\PhotoController::class, 'data'])->name('photos.data');
         Route::resource('photos', PhotoController::class);
-
         /**
          * Menus
          */

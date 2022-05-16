@@ -1,5 +1,5 @@
 <div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.categories.add')}}" method="post" class="ajax-select" data-selected="{{request()->selected}}" data-option="{{request()->option}}" enctype="multipart/form-data">
+    <form action="{{route('admin.categories.ajax.store')}}" method="post" class="ajax-select" data-selected="{{request()->selected}}" data-option="{{request()->option}}" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">
@@ -35,7 +35,7 @@
                                 <label>{{__('_slug')}} <span class="required">*</span></label>
                                 <div class="d-flex form-control">
                                     <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="category_{{$language->value}}" value="" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
-                                    <span>.html</span>
+{{--                                    <span>.html</span>--}}
                                 </div>
                                 <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
                             </div>
@@ -52,58 +52,3 @@
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-    $('#image-upload').on('change', function () {
-        let file = $(this).prop('files')[0];
-        if (!file)
-            return false;
-
-        let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
-
-        if(!imgur_client_id)
-            return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
-
-        let target = $(this).data('target');
-
-        let formData = new FormData();
-        formData.append('image', file);
-        $('.loading').fadeIn()
-        fetch(
-            "https://api.imgur.com/3/image",
-            {
-                method: "POST",
-                body: formData,
-                "headers": {
-                    "Authorization": "Client-ID "+ imgur_client_id
-                },
-            }
-        )
-            .then(response => response.json())
-            .then(result => {
-                $(target).val(result.data.link).trigger('change');
-                $('.loading').fadeOut();
-            })
-            .catch(error => {
-                var obj  = {
-                    'message': '{{__('_error')}} {{__('_upload')}}: '+error,
-                    'type' :'error'
-                };
-                flash(obj);
-                console.error("Error:", error);
-            });
-
-    });
-
-    $('#image_url').on('change', function (){
-        let target = $(this).data('target');
-        let  hidden = $(this).data('hidden');
-        if ($(this).val()){
-            $(target).removeClass('d-none').attr('src', $(this).val()).show();
-            $(hidden).hide();
-        }else{
-            $(target).hide();
-            $(hidden).removeClass('d-none').show();
-        }
-    });
-</script>

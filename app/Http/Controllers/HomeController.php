@@ -2,26 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ActiveDisable;
 use App\Enums\CategoryType;
-use App\Enums\PhotoType;
 use App\Enums\Position;
 use App\Enums\PostType;
-use App\Enums\SupportType;
 use App\Enums\TakeItem;
 use App\Models\Admin;
 use App\Models\Category;
-use App\Models\Filter;
-use App\Models\Map;
 use App\Models\Photo;
 use App\Models\Post;
 use App\Models\Product;
-use App\Models\Support;
 use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Str;
-use voku\helper\HtmlDomParser;
 
 class HomeController extends Controller
 {

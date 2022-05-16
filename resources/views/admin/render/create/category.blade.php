@@ -13,7 +13,6 @@
     <div class="form-group mb-0">
         <label>{{__('_sub_category')}} </label>
         <a href="{{route('admin.categories.create',['type' => $type, 'selected' => '.category-sub', 'option' => '.category-main'])}}" class="edit-seo ajax-modal font-weight-medium add-category">{{__('_add_new')}}</a>
-
         <select class="form-control category-sub select2-multiple" data-toggle="select2" multiple="multiple" name="category_id[]" data-placeholder="-----">
             @include('admin.render.options', ['options' => $categories, 'selected' => 0])
         </select>

@@ -69,7 +69,7 @@ class CategoryController extends Controller
         return view('admin.category.create', compact('categories'));
     }
 
-    public function add(StoreTranslationRequest $request){
+    public function ajaxStore(StoreTranslationRequest $request){
 
         $category =  new Category();
         $category->forceFill($request->data);
