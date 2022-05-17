@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Filter extends Model
+class Filter extends AppModel
 {
     use HasFactory, LogsActivity;
 
@@ -15,22 +15,8 @@ class Filter extends Model
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
 
-    protected $guarded = [];
-
-    public function translations(){
-        return $this->hasMany(FilterTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());;
-    }
-
     public function parents(){
         return $this->hasMany(Filter::class,'parent_id')->oldest('sort');
-    }
-
-    public function translation(){
-        return $this->hasOne(FilterTranslation::class)->whereLocale(session('lang'));
-    }
-
-    public function getNameAttribute(){
-        return optional($this->translation)->name;
     }
 
     public function getSlugAttribute(){
@@ -41,7 +27,7 @@ class Filter extends Model
 
         $slug = request()->fullUrl().'?attr='.$name;
 
-        if(request()->attr && !empty(request()->attr))
+        if(request()->has('attr') && request()->filled('attr'))
             $slug = request()->fullUrl().','.$name;
 
         if(empty(request()->attr) && request()->has('attr'))

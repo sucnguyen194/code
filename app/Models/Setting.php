@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Setting extends Model{
+class Setting extends Model {
 
     use LogsActivity;
 

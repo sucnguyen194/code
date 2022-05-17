@@ -27,7 +27,7 @@
 
                             <div class="mr-2 mb-2" style="width: 200px">
                                 <input type="text" id="reportrange" name="date" value="{{request()->date}}"
-                                       placeholder="{{__('lang.reportrange')}}" class="form-control"/>
+                                       placeholder="{{__('_date_to_from')}}" class="form-control"/>
                             </div>
 
                         </form>
@@ -127,12 +127,12 @@
                     }
 
                     html += '<input id="checkbox_public_' + row.id + '" ' + public + ' type="checkbox" name="public">';
-                    html += '<label for="checkbox_public_' + row.id + '" class="data_public" data-id="' + row.id + '">Hiển thị</label>';
+                    html += '<label for="checkbox_public_' + row.id + '" class="data_public" data-id="' + row.id + '">@lang('_display')</label>';
                     html += '</div>';
 
                     html += '<div class="checkbox" >';
                     html += '<input id="checkbox_status_' + row.id + '" ' + status + ' type="checkbox" name="status">';
-                    html += '<label for="checkbox_status_' + row.id + '" class="mb-0 data_status" data-id="' + row.id + '">Nổi bật</label>';
+                    html += '<label for="checkbox_status_' + row.id + '" class="mb-0 data_status" data-id="' + row.id + '">@lang('_highlights')</label>';
                     html += '</div>';
 
                     return html;

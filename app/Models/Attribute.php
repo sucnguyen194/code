@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Attribute extends Model
+class Attribute extends AppModel
 {
     use LogsActivity;
 
     protected static $logUnguarded = true;
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
-
-    protected $guarded = [];
 
     public $timestamps = false;
 

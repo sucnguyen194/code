@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-use App\Enums\ActiveDisable;
 use App\Enums\PostType;
 use App\Enums\TakeItem;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Post extends Model
+class Post extends AppModel
 {
     use LogsActivity, SoftDeletes;
 
@@ -19,19 +16,13 @@ class Post extends Model
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
 
-    protected $guarded = [];
-
     protected $casts = [
         'photo' => 'array'
     ];
 
-    protected $with = ['translation','comments','tags'];
+    protected $with = ['comments','tags','translation','translations'];
 
     protected $withCount = ['comments','tags'];
-
-    public function comments(){
-        return $this->morphMany(Comment::class,'comment');
-    }
 
     public function translations(){
         return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
@@ -39,42 +30,6 @@ class Post extends Model
 
     public function translation(){
         return $this->hasOne(Translation::class)->whereLocale(session('lang'));
-    }
-
-    public function admin(){
-        return $this->belongsTo(Admin::class);
-    }
-
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
-
-    public function categories(){
-        return $this->belongsToMany(Category::class);
-    }
-
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
-    }
-
-    public function getSlugAttribute(){
-        if(!$this->translation)
-            return '#';
-
-        return route('slug', optional($this->translation)->slug);
-    }
-
-    public function getTitleAttribute(){
-
-        return optional($this->translation)->name;
-    }
-
-    public function getDescriptionAttribute(){
-        return optional($this->translation)->description;
-    }
-
-    public function getContentAttribute(){
-        return optional($this->translation)->content;
     }
 
     public function getRouteAttribute(){
@@ -88,18 +43,6 @@ class Post extends Model
         return ;
     }
 
-    public function scopeOfCategory($q, $category){
-        return $q->whereCategoryId($category)->orWhere(function($q) use ($category){
-           $q->whereHas('categories',function($q) use ($category){
-              $q->whereCategoryId($category);
-           });
-        });
-    }
-
-    public function scopeOfType($q, $type){
-        return $q->whereType($type)->public()->sort();
-    }
-
     public function scopeOfTake($q, $take){
         if($take == TakeItem::index)
             return $q->take(setting('site.post.index'));
@@ -109,18 +52,6 @@ class Post extends Model
             return $q->take(setting('site.post.related'));
 
         return $q->take(6);
-    }
-
-    public function scopeSort($q){
-        return $q->oldest('sort')->latest();
-    }
-
-    public function scopePublic($q){
-        return $q->wherePublic(ActiveDisable::active);
-    }
-
-    public function scopeStatus($q){
-        return $q->whereStatus(ActiveDisable::active);
     }
 
     public function getThumbAttribute(){

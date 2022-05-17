@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Order extends Model
+class Order extends AppModel
 {
     use LogsActivity;
 

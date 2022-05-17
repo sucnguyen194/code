@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Comment extends Model
+class Comment extends AppModel
 {
     use LogsActivity;
 
@@ -31,6 +31,7 @@ class Comment extends Model
     public function getRatingAttribute(){
         if(!$this->rate)
             return;
+
         $max = 5;
         $rate = null;
         for($i = 0; $i < $this->rate; $i++ ){

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Contact extends Model
+class Contact extends AppModel
 {
     use LogsActivity;
 
@@ -17,10 +17,6 @@ class Contact extends Model
 
     public function getAvatarAttribute(){
         return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email ?? $this->note)).'.jpg?s=200&d=identicon';
-    }
-
-    public function user(){
-        return $this->belongsTo(User::class);
     }
 
     public function replys(){

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Product extends Model
+class Product extends AppModel
 {
     use LogsActivity, SoftDeletes;
 
@@ -22,47 +22,27 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['comments','tags','translation','translations'];
+
     protected $casts = [
         'options' => 'array',
         'photo' => 'array'
     ];
 
-    public function comments(){
-        return $this->morphMany(Comment::class,'comment');
-    }
-
     public function translations(){
-        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());;
+        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
     }
 
     public function translation(){
         return $this->hasOne(Translation::class)->whereLocale(session('lang'));
     }
 
-    public function category(){
-        return  $this->belongsTo(Category::class);
-    }
-    public function categories(){
-        return $this->belongsToMany(Category::class);
-    }
     public function attributes(){
         return $this->hasMany(Attribute::class);
     }
 
     public function filters(){
         return $this->belongsToMany(Filter::class);
-    }
-
-    public function user(){
-        return  $this->belongsTo(User::class);
-    }
-
-    public function admin(){
-        return  $this->belongsTo(Admin::class);
-    }
-
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
     }
 
     public function getPriceAttribute(){
@@ -81,6 +61,7 @@ class Product extends Model
             $image = $this->photo[0];
         return $image;
     }
+
     public function getThumbAttribute(){
         return resize_image($this->image, setting('site.product.size'));
     }
@@ -91,34 +72,6 @@ class Product extends Model
         $percent = ($this->price_sale - $this->price) / $this->price * 100;
 
         return round($percent,2);
-    }
-
-    public function getSlugAttribute(){
-        if(!$this->translation)
-            return '#';
-
-        return route('slug', $this->translation->slug);
-    }
-
-    public function getNameAttribute(){
-
-        return optional($this->translation)->name;
-    }
-
-    public function getDescriptionAttribute(){
-        return optional($this->translation)->description;
-    }
-
-    public function getContentAttribute(){
-        return optional($this->translation)->content;
-    }
-
-    public function scopeOfCategory($q, $category){
-        return $q->whereCategoryId($category)->orWhere(function($q) use ($category){
-            $q->whereHas('categories',function($q) use ($category){
-                $q->whereCategoryId($category);
-            });
-        });
     }
 
     public function scopeOfTake($q, $take = null){
@@ -133,18 +86,7 @@ class Product extends Model
     }
 
     public function scopeOfTranslation($q){
-        return $q->with('translation')->public()->sort();
-    }
-
-    public function scopeSort($q){
-        return $q->oldest('sort')->latest();
-    }
-
-    public function scopePublic($q){
-        $q->wherePublic(ActiveDisable::active);
-    }
-    public function scopeStatus($q){
-        $q->whereStatus(ActiveDisable::active);
+        return $q->public()->sort();
     }
 
     public static function boot()

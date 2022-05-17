@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 
-class Discount extends Model
+class Discount extends AppModel
 {
     use HasFactory, CastsEnums, SoftDeletes, LogsActivity;
 

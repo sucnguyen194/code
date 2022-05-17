@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Menu extends Model
+class Menu extends AppModel
 {
     use LogsActivity;
 
@@ -13,9 +13,7 @@ class Menu extends Model
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
 
-    protected $guarded = ['id'];
-
-    protected $with = ['translation'];
+    protected $with = ['translation','translations'];
 
     public function translations(){
         return $this->hasMany(MenuTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());;
@@ -30,10 +28,6 @@ class Menu extends Model
     }
     public function scopePosition($q){
         $q->wherePosition(session('menu_position'));
-    }
-
-    public function scopeSort($q){
-        $q->oldest('sort');
     }
 
     public function scopeOfPosition($q, $position){
@@ -51,11 +45,6 @@ class Menu extends Model
             return '#';
 
         return route('slug', optional($this->translation)->slug);
-    }
-
-    public function getNameAttribute(){
-
-        return optional($this->translation)->name;
     }
 
     public static function boot(){

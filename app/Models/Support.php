@@ -7,7 +7,7 @@ use App\Enums\SystemType;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Support extends Model
+class Support extends AppModel
 {
 
     use LogsActivity;
@@ -16,7 +16,7 @@ class Support extends Model
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
 
-    protected $guarded = ['id'];
+    protected $with = ['translation','translations'];
 
     public function translations(){
         return $this->hasMany(SupportTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());
@@ -24,10 +24,6 @@ class Support extends Model
 
     public function translation(){
         return $this->hasOne(SupportTranslation::class)->whereLocale(session('lang'));
-    }
-
-    public function admin(){
-        return $this->belongsTo(Admin::class);
     }
 
     public function getRouteAttribute(){
@@ -39,26 +35,6 @@ class Support extends Model
                 return route('admin.supports.index');
                 break;
         }
-    }
-
-    public function getNameAttribute(){
-        return optional($this->translation)->name;
-    }
-
-    public function getDescriptionAttribute(){
-        return optional($this->translation)->description;
-    }
-
-    public function scopeOfType($q, $type){
-        return $q->with('translation')->whereType($type)->public()->oldest('sort')->latest();
-    }
-
-    public function scopePublic($q){
-        $q->wherePublic(ActiveDisable::active);
-    }
-
-    public function scopeStatus($q){
-        $q->whereStatus(ActiveDisable::active);
     }
 
     protected static function boot()

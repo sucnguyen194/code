@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Language extends Model
+class Language extends AppModel
 {
     use HasFactory, LogsActivity;
 

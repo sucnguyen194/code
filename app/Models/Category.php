@@ -9,7 +9,7 @@ use App\Enums\SystemType;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Category extends Model
+class Category extends AppModel
 {
     use LogsActivity;
 
@@ -19,7 +19,7 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['translation'];
+    protected $with = ['translation','translations'];
 
     public function translations(){
         return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
@@ -43,36 +43,6 @@ class Category extends Model
 
     public function parents(){
         return $this->hasMany(Category::class,'parent_id');
-    }
-
-    public function scopeOfType($q, $type){
-        return $q->whereType($type)->public()->sort();
-    }
-
-    public function scopeSort($q){
-        return $q->oldest('sort')->latest();
-    }
-
-    public function scopePublic($q) {
-        $q->wherePublic(ActiveDisable::active);
-    }
-
-    public function scopeStatus($q) {
-        $q->whereStatus(ActiveDisable::active);
-    }
-    public function getNameAttribute(){
-        return optional($this->translation)->name;
-    }
-
-    public function getSlugAttribute(){
-        if(!$this->translation)
-            return '#';
-
-        return route('slug', $this->translation->slug);
-    }
-
-    public function getDescriptionAttribute(){
-        return optional($this->translation)->description;
     }
 
     public function getThumbAttribute(){
