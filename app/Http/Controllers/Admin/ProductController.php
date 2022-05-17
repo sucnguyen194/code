@@ -28,13 +28,9 @@ class ProductController extends Controller
     {
         $this->authorize('product.view');
 
-        $categories = Category::query()->with('translation', function($q){
-            $q->select('id','name','category_id');
-        })->whereType(CategoryType::product)->public()->latest()->get();
+        $categories = Category::ofType(CategoryType::product)->get();
 
-        $admins = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
-            $q->where('id','>', 1);
-        })->get();
+        $admins = Controller::getAllAdmins();
 
         return view('admin.product.index',compact('categories','admins'));
     }
@@ -56,10 +52,7 @@ class ProductController extends Controller
             })
             ->when(request()->search, function ($q, $keyword){
                 return $q->whereHas('translation',function ($q) use ($keyword){
-                    return $q->where('id', $keyword)
-                        ->orWhere('name', 'like', '%'.$keyword.'%')
-                        ->orWhere('slug', 'like', '%'.$keyword.'%')
-                        ->orWhere('code', 'like', '%'.$keyword.'%');
+                    return $q->whereLike(['id','name','slug','code'], $keyword);
                 });
             })
             ->when(request()->status,function($q, $status){
@@ -116,8 +109,8 @@ class ProductController extends Controller
     {
         $this->authorize('product.create');
 
-        $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $filters = Filter::with('translation')->oldest('sort')->get();
+        $categories = Category::ofType(CategoryType::product)->get();
+        $filters = Filter::sort()->get();
         $tags = Tag::ofType(TagType::product)->get();
 
         return view('admin.product.create', compact('categories','filters', 'tags'));
@@ -205,8 +198,8 @@ class ProductController extends Controller
     {
         $this->authorize('product.edit');
 
-        $categories = Category::with('translation')->whereType(CategoryType::product)->public()->latest()->get();
-        $filters = Filter::with('translation')->oldest('sort')->get();
+        $categories = Category::ofType(CategoryType::product)->get();
+        $filters = Filter::sort()->get();
         $translations = $product->translations->load('language');
 
         $tags = Tag::ofType(TagType::product)->get();

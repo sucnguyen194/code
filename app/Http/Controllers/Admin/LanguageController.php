@@ -33,7 +33,7 @@ class LanguageController extends Controller
     {
         $this->authorize('setting.language');
         $langs = Language::query()->when(\request()->search, function ($q, $search) {
-            return $q->where('name', 'like', "%{$search}%")->orWhere('id', $search);
+            return $q->whereLie('name', 'like', "%{$search}%")->orWhere('id', $search);
         });
 
         return datatables()->of($langs)

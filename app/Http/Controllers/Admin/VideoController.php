@@ -10,9 +10,7 @@ class VideoController extends Controller {
 
 	    $this->authorize('video.view');
 
-        $admins = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
-            $q->where('id','>', 1);
-        })->get();
+        $admins = Controller::getAllAdmins();
 
         return view('admin.video.index',compact('admins'));
 	}

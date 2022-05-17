@@ -43,6 +43,22 @@ class Post extends AppModel
         return ;
     }
 
+    public function getViewsAttribute(){
+
+        if($this->type == PostType::page)
+            return 'post.page';
+        if($this->type == PostType::post)
+            return 'post.show';
+        if($this->type == PostType::video)
+            return 'post.video.show';
+        if($this->type == PostType::gallery)
+            return 'post.gallery.show';
+        if($this->type == PostType::recruitment)
+            return 'post.recruitment.show';
+
+        return abort(404);
+    }
+
     public function scopeOfTake($q, $take){
         if($take == TakeItem::index)
             return $q->take(setting('site.post.index'));

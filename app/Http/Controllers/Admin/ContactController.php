@@ -20,9 +20,7 @@ class ContactController extends Controller
     {
         $this->authorize('contact.view');
 
-        $admins = Admin::select('name','id','email')->when(auth()->id() > 1, function ($q){
-            $q->where('id','>', 1);
-        })->get();
+        $admins = Controller::getAllAdmins();
 
         return view('admin.contact.index',compact('admins'));
     }

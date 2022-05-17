@@ -22,13 +22,10 @@ class AdminController extends Controller
 
     public function data(){
 
-        $admins = Admin::query()->where('id','>',1);
+        $admins = Controller::getAllAdmins();
 
-        if(auth()->id() == 1)
-            $admins = Admin::query();
-
-        $admins->select('id','name','email','created_at')->with('roles')->when(\request('search'),function ($q, $search){
-            return $q->where('id', $search)->orWhere('name', 'like', '%'.$search.'%')->orWhere('email', 'like', '%'.$search.'%');
+        $admins->with('roles')->when(\request('search'),function ($q, $search){
+            return $q->whereLike(['id','name','email'], $search);
         });
 
         return datatables()->of($admins)
@@ -50,7 +47,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-      if(auth()->id() > 1)  $this->authorize('admin.create');
+       $this->authorize('admin.create');
 
         $roles = Role::get();
         return view('admin.admin.create',compact('roles'));
@@ -64,11 +61,11 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->id() > 1)  $this->authorize('admin.create');
+        $this->authorize('admin.create');
 
         $request->validate([
             'data.name' => 'required',
-            'data.email' => 'required',
+            'data.email' => 'required|unique:admins,email',
         ]);
 
         $admin = new Admin();
@@ -102,10 +99,10 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        if(auth()->id() > 1)  $this->authorize('admin.edit');
+        $this->authorize('admin.edit');
 
         if($admin->id == 1 && auth()->id() > 1)
-            return flash('Lỗi',0);
+            return flash(___('_error'),0);
 
         $roles = Role::get();
 
@@ -121,20 +118,17 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
-        if(auth()->id() > 1)  $this->authorize('admin.edit');
-
-        if($admin->id == 1 && auth()->id() > 1)
-            return flash('Lỗi',0);
+        $this->authorize('admin.edit');
 
         $request->validate([
             'data.name' => 'required',
-            'data.email' => 'required',
+            'data.email' => 'required|unique:admins,email,'.$admin->id,
         ]);
 
-        $admin->forceFill($request->data);
+        if($admin->id == 1 && auth()->id() > 1)
+            return flash(___('_error'),0);
 
-        if (Admin::where('email', $request->password)->where('id', '<>', $admin->id)->count())
-            return flash('Email đã tồn tại', 0);
+        $admin->forceFill($request->data);
 
         if($request->has('password'))
             $admin->password = bcrypt($request->password);
@@ -156,13 +150,11 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        if(auth()->id() > 1)  $this->authorize('admin.destroy');
+        $this->authorize('admin.destroy');
 
-        if ($admin->id == auth()->id()){
-            return flash('?????', 3);
+        if ($admin->id == auth()->id() || ($admin->id == 1 && auth()->id() > 1) ){
+            return flash(__('_error'), 0);
         }
-        if($admin->id == 1 && auth()->id() > 1)
-            return flash('Lỗi',0);
 
         $admin->delete();
         return flash(__('_the_record_is_deleted_successfully'));

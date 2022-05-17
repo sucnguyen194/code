@@ -52,7 +52,7 @@ class User extends Authenticatable
     }
 
     public function orders(){
-        return $this->hasMany(Order::class)->latest();
+        return $this->hasMany(Order::class);
     }
 
     public function identities()
@@ -64,7 +64,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::deleting(function($user){
-            $user->email = $user->email.'.'.now();
+            $user->email = now().'_'.$user->email;
         });
     }
 }

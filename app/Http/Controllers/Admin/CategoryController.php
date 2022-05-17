@@ -23,15 +23,13 @@ class CategoryController extends Controller
 
     public function data(){
 
-        $categories = Category::with(['admin', 'translation' => function($q){
-                $q->select('id','name','slug','category_id');
-            }])->whereType(\request()->type)
+        $categories = Category::ofType(\request()->type)
             ->when(\request()->author,function ($q, $author){
                 return $q->whereAdminId($author);
             })
             ->when(request()->search, function ($q, $keyword){
                 return $q->whereHas('translation',function ($q) use ($keyword){
-                    return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%');
+                    return $q->whereLike(['id','name','slug'], $keyword);
                 });
             })
             ->when(request()->status, function ($q, $status){

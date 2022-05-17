@@ -15,7 +15,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        if(auth()->id() > 1) $this->authorize('permission.view');
+        $this->authorize('permission.view');
 
         return view('admin.permissions.index');
     }
@@ -34,7 +34,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        if(auth()->id() > 1) $this->authorize('permission.create');
+        $this->authorize('permission.create');
 
         $permissions = Permission::whereParentId(0)->get();
         return view('admin.permissions.create',compact('permissions'));
@@ -48,14 +48,12 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->id() > 1) $this->authorize('permission.create');
+        $this->authorize('permission.create');
 
         $request->validate([
             'title' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:permissions,name',
         ]);
-        if(Permission::whereName($request->name)->count())
-            return flash('Giá trị đã tồn tại', 0);
 
         Permission::create($request->all());
 
@@ -81,7 +79,7 @@ class PermissionsController extends Controller
      */
     public function edit(Permission $permission)
     {
-        if(auth()->id() > 1) $this->authorize('permission.edit');
+        $this->authorize('permission.edit');
 
         $permissions = Permission::whereParentId(0)->get();
         return view('admin.permissions.edit',compact('permission','permissions'));
@@ -96,14 +94,12 @@ class PermissionsController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        if(auth()->id() > 1) $this->authorize('permission.edit');
+        $this->authorize('permission.edit');
 
         $request->validate([
             'title' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:permissions,email,'.$permission->id,
         ]);
-        if(Permission::whereName($request->name)->where('id','<>', $permission->id)->count())
-            return flash(__('_value_already_exists'), 0);
 
         $permission->update($request->all());
 
@@ -118,9 +114,10 @@ class PermissionsController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        if(auth()->id() > 1) $this->authorize('permission.destroy');
+        $this->authorize('permission.destroy');
 
         Permission::whereParentId($permission->id)->delete();
+
         $permission->delete();
 
         return flash(__('_the_record_is_deleted_successfully'));

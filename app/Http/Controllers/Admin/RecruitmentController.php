@@ -26,9 +26,7 @@ class RecruitmentController extends Controller
             $q->select('id','name','category_id');
         })->whereType(CategoryType::recruitment)->public()->latest()->get();
 
-        $authors = Admin::query()->select('id','name','email')->when(auth()->id() > 1, function ($q){
-            $q->where('id','>', 1);
-        })->get();
+        $authors = Controller::getAllAdmins();
 
         return  view('admin.recruitment.index' ,compact('authors','categories'));
     }
@@ -42,9 +40,7 @@ class RecruitmentController extends Controller
     {
         $this->authorize('recruitment.create');
 
-        $categories = Category::query()->with('translation',function($q){
-            $q->select('id','name','category_id');
-        })->whereType(CategoryType::recruitment)->public()->latest()->get();
+        $categories = Category::ofType(CategoryType::recruitment)->get();
 
         $tags = Tag::ofType(TagType::post)->get();
 
@@ -83,9 +79,7 @@ class RecruitmentController extends Controller
     {
         $this->authorize('recruitment.edit');
 
-        $categories = Category::query()->with('translation',function($q){
-            $q->select('id','name','category_id');
-        })->whereType(CategoryType::recruitment)->public()->latest()->get();
+        $categories = Category::ofType(CategoryType::recruitment)->get();
 
         $translations = $recruitment->translations->load('language');
 

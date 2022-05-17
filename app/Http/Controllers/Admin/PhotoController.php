@@ -26,10 +26,10 @@ class PhotoController extends Controller
 
         $photos = Photo::query()
             ->when(request()->position, function ($q, $position){
-                $q->wherePosition($position);
+                return  $q->wherePosition($position);
             })
             ->when(request()->search, function ($q, $key){
-                $q->where('name','like',"%$key%")->orWhere('position','like',"%$key%")->orWhere('image','like',"%$key%");
+                return  $q->whereLike(['id','name','position','image'], $key);
             })
             ->when(request()->author,function ($q, $author){
                 return $q->whereAdminId($author);

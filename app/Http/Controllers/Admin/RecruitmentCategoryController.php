@@ -29,7 +29,7 @@ class RecruitmentCategoryController extends Controller
     public function create()
     {
         $this->authorize('recruitment.create');
-        $categories = Category::with('translation')->whereType(CategoryType::recruitment)->latest()->get();
+        $categories = Category::ofType(CategoryType::recruitment)->get();
 
         return view('admin.recruitment.category.create',compact('categories'));
     }

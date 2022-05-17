@@ -58,7 +58,7 @@ class PostController extends Controller
             })
             ->when(request()->search, function ($q, $keyword){
                 return $q->whereHas('translation',function ($q) use ($keyword){
-                    return $q->where('id', $keyword)->orWhere('name', 'like', '%'.$keyword.'%')->orWhere('slug', 'like', '%'.$keyword.'%');
+                    return $q->whereLike(['id','name','slug'] , $keyword);
                 });
             })
             ->when(\request()->author,function ($q, $author){
@@ -118,9 +118,7 @@ class PostController extends Controller
     {
         $this->authorize('blog.create');
 
-        $categories = Category::query()->with('translation',function($q){
-            $q->select('id','name','category_id');
-        })->whereType(CategoryType::post)->public()->latest()->get();
+        $categories = Category::ofType(CategoryType::post)->get();
 
         $tags = Tag::ofType(TagType::post)->get();
 
@@ -184,9 +182,7 @@ class PostController extends Controller
     {
         $this->authorize('blog.edit');
 
-        $categories = Category::query()->with('translation',function($q){
-            $q->select('id','name','category_id');
-        })->whereType(CategoryType::post)->public()->latest()->get();
+        $categories = Category::ofType(CategoryType::post)->get();
 
         $translations = $post->translations->load('language');
 

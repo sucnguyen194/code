@@ -44,11 +44,8 @@ class OrderController extends Controller
 
     public function print($id){
         $this->authorize('order.view');
-        $order = Order::find($id);
 
-        if(!$order)
-            return flash(__('_error'),0);
-
+        $order = Order::findOrFail($id);
         return  view('admin.order.print',compact('order'));
     }
 

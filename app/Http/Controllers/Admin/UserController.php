@@ -23,8 +23,9 @@ class UserController extends Controller
     }
 
     public function data(){
-        $users = User::query()->select('id','name','email','created_at')->when(request()->search,function($q, $search){
-           return $q->where('name','like',"%$search%")->orWhere('id',$search)->orWhere('email','like',"%$search%");
+        $users = User::query()->select('id','name','email','created_at')
+            ->when(request()->search,function($q, $search){
+                return $q->whereLike(['id','name','email'], $search);
         });
 
         return datatables()->of($users)
@@ -134,7 +135,7 @@ class UserController extends Controller
         $this->authorize('user.destroy');
 
         $user->delete();
-        return flash(__('_the_record_is_deleted_successfully'), 1);
+        return flash(__('_the_record_is_deleted_successfully'));
     }
 
 }

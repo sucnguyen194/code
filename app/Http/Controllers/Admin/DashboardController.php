@@ -145,7 +145,7 @@ class DashboardController extends Controller {
             $data['today'] = $today;
 
 
-            $data['products'] = Product::ofTranslation()->where('view', '>',0)->latest('view')->take(50)->get();
+            $data['products'] = Product::where('view', '>',0)->latest('view')->take(50)->get();
             $data['posts'] = Post::with('translation')->where('view', '!=' ,0)->latest('view')->take(50)->get();
 
             $visitors = Visitor::selectRaw('SUM(referer_count) as count, referer_domain')->groupByRaw('referer_domain')->oldest('referer_domain')->get();

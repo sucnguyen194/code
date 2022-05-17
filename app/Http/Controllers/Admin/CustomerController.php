@@ -17,9 +17,7 @@ class CustomerController extends Controller
     {
         $this->authorize('support.view');
 
-        $admins = Admin::select('name','email','id')->when(auth()->id() > 1, function ($q){
-            $q->where('id','>', 1);
-        })->get();
+        $admins = Controller::getAllAdmins();
 
         return view('admin.support.customer.index',compact('admins'));
     }

@@ -21,9 +21,7 @@ class FilterController extends Controller
     }
 
     public function data(){
-        $attributes = Filter::query()->with('translation',function($q){
-            $q->select('name','filter_id');
-        });
+        $attributes = Filter::query();
 
         return datatables()->of($attributes)
             ->editColumn('name', function ($attribute){

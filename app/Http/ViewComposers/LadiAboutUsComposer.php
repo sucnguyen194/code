@@ -29,7 +29,11 @@ class LadiAboutUsComposer
     public function compose(View $view)
     {
         $data['idols'] = Photo::ofPosition(Position::Idol)->get();
-        $data['posts']  = Post::ofType(PostType::post)->with(['categories','admin','category'])->withCount('comments')->ofTake(TakeItem::index)->status()->get();
+        $data['posts']  = Post::ofType(PostType::post)
+            ->with(['categories','admin','category'])
+            ->withCount('comments')
+            ->ofTake(TakeItem::index)
+            ->status()->get();
 
         $view->with($data);
     }

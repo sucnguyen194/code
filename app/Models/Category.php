@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ActiveDisable;
 use App\Enums\AliasType;
+use App\Enums\CategoryType;
 use App\Enums\PostType;
 use App\Enums\SystemType;
 use Illuminate\Database\Eloquent\Model;

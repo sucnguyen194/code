@@ -27,7 +27,7 @@ class ProductCategoryController extends Controller
     public function create()
     {
         $this->authorize('product.create');
-        $categories = Category::with('translation')->whereType(CategoryType::product)->latest()->get();
+        $categories = Category::ofType(CategoryType::product)->get();
 
         return view('admin.product.category.create',compact('categories'));
     }
@@ -41,7 +41,7 @@ class ProductCategoryController extends Controller
     public function edit(Category $category){
 
         $this->authorize('product.edit');
-        $categories = Category::with('translation')->whereType($category->type)->whereNotIn('id',[$category->id])->latest()->get();
+        $categories = Category::ofType($category->type)->whereNotIn('id',[$category->id])->get();
         $translations = $category->translations->load('language');
 
         return view('admin.product.category.edit',compact('categories','category','translations'));

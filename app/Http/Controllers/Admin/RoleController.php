@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        if(auth()->id() > 1) $this->authorize('role.view');
+        $this->authorize('role.view');
 
         return view('admin.role.index');
     }

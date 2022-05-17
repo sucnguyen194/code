@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -10,4 +11,11 @@ class Controller extends BaseController {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public static function getAllAdmins(){
+        $admins = Admin::query()->when(auth()->id() > 1, function ($q){
+            $q->where('id','>', 1);
+        });
+
+        return $admins;
+    }
 }
