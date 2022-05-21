@@ -32,8 +32,14 @@
 
                 <div class="form-group">
                     <label>{{__('_color')}}</label>
-                    <input class="form-control" id="example-color" type="color" value="{{$filter->color ?? '#ffffff'}}">
-                    <input type="hidden" value="{{$filter->color}}" id="data-color" name="data[color]" >
+
+                    <div class="input-group colorpicker-default" data-color-format="rgb"
+                         data-color="{{$filter->color}}">
+                        <input type="text" readonly="readonly" value="{{$filter->color}}" name="data[color]" class="form-control">
+                        <div class="input-group-append add-on">
+                            <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group position-relative">
@@ -74,6 +80,14 @@
         </div>
     </form>
 </div>
+        <link href="/lib/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="/lib/assets/libs/clockpicker/bootstrap-clockpicker.min.css" rel="stylesheet">
+        <script src="/lib/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".colorpicker-default").colorpicker({format: "hex"});
+    });
+</script>
 <script type="text/javascript">
     $('#image-upload').on('change', function () {
         let file = $(this).prop('files')[0];
@@ -106,7 +120,7 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error);
+                alert('@lang('_error'): '+error);
             });
 
     });

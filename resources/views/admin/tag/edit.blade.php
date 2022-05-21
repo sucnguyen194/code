@@ -17,7 +17,7 @@
                         <select class="form-control" data-toggle="select2" name="data[type]" data-placeholder="{{__('_classify')}}">
                             <option value="">{{__('_classify')}}</option>
                             @foreach(\App\Enums\TagType::getInstances() as $item)
-                                <option value="{{$item->value}}" {{selected($item->value, $tag->type)}}>{{__('lang.'.$item->value)}}</option>
+                                <option value="{{$item->value}}" {{selected($item->value, $tag->type)}}>{{__('_'.\Illuminate\Support\Str::lower($item->description))}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -34,8 +34,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
 
                         @foreach(languages()->whereNotIn('value', $translations->pluck('locale')->toArray()) as $key => $language)
                             <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">

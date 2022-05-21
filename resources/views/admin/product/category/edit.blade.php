@@ -89,7 +89,7 @@
             })
             .catch(error => {
                 var obj  = {
-                    'message': 'Lỗi upload: '+error,
+                    'message': '@lang('_error'): '+error,
                     'type' :'error'
                 };
                 flash(obj);

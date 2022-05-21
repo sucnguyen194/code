@@ -116,7 +116,7 @@
                 $('.loading').fadeOut();
             })
             .catch(error => {
-                alert('Lỗi upload: '+error);
+                alert('@lang('_error'): '+error);
             });
 
     });

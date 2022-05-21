@@ -110,18 +110,18 @@
         function colorFormatter(value, row){
             if(!value)
                 return '';
-            return '<a class="btn btn-xs avatar-title text-white " style="background: '+value+'; border: 1px dashed #8c9396;">'+value +'</a>';
+            return '<a class="btn btn-xs avatar-title text-white " style="background: '+value+'; height: 30px"></a>';
         }
 
         function actionFormatter(value, row){
 
             let html = '';
             @can('product.edit')
-                html += '<a href="'+ '{{ route('admin.filters.edit', ':id') }}'.replace(':id',row.id) +'" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
+                html += '<a href="'+ '{{ route('admin.filters.edit', ':id') }}'.replace(':id',row.id) +'" title="@lang('_edit')" class="ajax-modal btn btn-primary waves-effect waves-light"><i class="fe-edit-2"></i></a> ';
             @endcan
 
                 @can('product.destroy')
-                html+='<a href="'+ '{{ route('admin.filters.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+                html+='<a href="'+ '{{ route('admin.filters.destroy', ':id') }}'.replace(':id',row.id) +'" title="@lang('_delete')" class="ajax-link btn btn-warning waves-effect waves-light" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
             @endcan
                 return html;
         }

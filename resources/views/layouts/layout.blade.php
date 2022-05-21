@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-  <meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="content-language" content="{{ str_replace('_', '-', app()->getLocale()) }}">
-  <meta charset="utf-8">
-  <title>@hasSection('title') @yield('title') - @endif {{setting('site.name')}}</title>
-  <meta name="keywords" content="@yield('keywords',setting('site.keyword_seo'))"/>
-  <meta name="description" content="@yield('description',setting('site.description_seo'))"/>
-  <meta property="og:url" content="@yield('url', url('/'))" />
-  <meta property="og:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
-  <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
-  <meta property="og:type" content="website" />
+    <meta http-equiv="content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-language" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta charset="utf-8">
+    <title>@hasSection('title') @yield('title') - @endif {{setting('site.name')}}</title>
+    <meta name="keywords" content="@yield('keywords',setting('site.keyword_seo'))"/>
+    <meta name="description" content="@yield('description',setting('site.description_seo'))"/>
+    <meta property="og:url" content="@yield('url', url('/'))"/>
+    <meta property="og:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}"/>
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}"/>
+    <meta property="og:type" content="website"/>
     @if(setting('api.facebook_app_ip'))
-  <meta property="fb:app_id" content="{{setting('api.facebook_app_ip')}}" />
+        <meta property="fb:app_id" content="{{setting('api.facebook_app_ip')}}"/>
     @endif
-  <meta property="og:description" content="@yield('description',setting('site.description_seo'))" />
-  <meta property="og:image" content="@yield('image', setting('site.og_image') ?? setting('site.logo'))" />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="400" />
-  <meta property="og:image:height" content="300" />
-  <meta property="og:image:alt" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
-  <meta property="og:site_name" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
-  <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:description" content="@yield('description',setting('site.description_seo'))"/>
-  <meta name="twitter:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}"/>
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="@yield('url',route('home'))">
-  <link rel="icon" href="{{asset(setting('site.favicon'))}}">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-  <!--*************************---->
+    <meta property="og:description" content="@yield('description',setting('site.description_seo'))"/>
+    <meta property="og:image" content="@yield('image', setting('site.og_image') ?? setting('site.logo'))"/>
+    <meta property="og:image:type" content="image/jpeg"/>
+    <meta property="og:image:width" content="400"/>
+    <meta property="og:image:height" content="300"/>
+    <meta property="og:image:alt" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}"/>
+    <meta property="og:site_name" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:description" content="@yield('description',setting('site.description_seo'))"/>
+    <meta name="twitter:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}"/>
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="@yield('url',route('home'))">
+    <link rel="icon" href="{{asset(setting('site.favicon'))}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <!--*************************---->
 
-  <!-- Latest compiled and minified CSS & JS -->
-{{--    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>--}}
+    <!-- Latest compiled and minified CSS & JS -->
+    {{--    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>--}}
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+            integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
 
+    {{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--}}
+    {{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--}}
+    {{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">--}}
 
-{{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--}}
-{{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--}}
-{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">--}}
-
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css" integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
-{{--    <!-- Vendor js -->--}}
-{{--    <script src="/lib/assets/js/vendor.min.js"></script>--}}
+    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css" integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
+    {{--    <!-- Vendor js -->--}}
+    {{--    <script src="/lib/assets/js/vendor.min.js"></script>--}}
 <!-- Stylesheets
     ============================================= -->
     <script type="text/javascript">
@@ -390,11 +390,11 @@
         /* ]]> */
     </script>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.select2').select2();
         });
     </script>
@@ -471,19 +471,23 @@
     <link rel="stylesheet" href="/client/css/style.css">
     <link rel="stylesheet" href="/client/css/responsive.css">
     <!--*********************************---->
+    @if(setting('site.nocopy'))
+    <script src="/lib/js/nocoppy.js"></script>
+    @endif
     {!! setting('site.remarketing_header') !!}
     @yield('styles')
+
 </head>
 <body>
-    <div id="app-vue">
-        @include('layouts.header')
-        @yield('content')
-        @include('layouts.footer')
-    </div>
+<div id="app-vue">
+    @include('layouts.header')
+    @yield('content')
+    @include('layouts.footer')
+</div>
 
-    {!! setting('site.remarketing_footer') !!}
+{!! setting('site.remarketing_footer') !!}
 </body>
-  <!--************START*************---->
+<!--************START*************---->
 @yield('scripts')
 <!-- Vendor js -->
 {{--<script src="{{asset('lib/assets/js/vendor.min.js')}}"></script>--}}
@@ -492,38 +496,38 @@
 <!-- Tost-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 @include('errors.note')
 <script type="text/javascript">
     // Ajax form
-    function ajaxform(ele){
+    function ajaxform(ele) {
 
         jQuery(ele).ajaxSubmit({
             headers: {
                 "X-CSRF-Token": $('meta[name=_token]').attr('content')
             },
-            beforeSubmit:function(formData, jqForm, options){
+            beforeSubmit: function (formData, jqForm, options) {
                 $(ele).find('[type=submit]').attr('disabled');
 
             },
-            success: function(responseText, statusText, xhr, $form) {
+            success: function (responseText, statusText, xhr, $form) {
 
 
             },
-            error: function(xhr, status, errMsg, $form) {
+            error: function (xhr, status, errMsg, $form) {
 
             },
-            complete: function(xhr, statusText, $form  ){
+            complete: function (xhr, statusText, $form) {
 
                 $(ele).find('[type=submit]').attr('disabled', false);
 
                 let result = xhr.responseText;
 
-                try{
+                try {
                     result = $.parseJSON(result);
-                }catch{
+                } catch {
                     console.log('invalid json response');
                     $('#ajax-modal').html(result).modal();
                     return;
@@ -531,16 +535,17 @@
 
                 flash(result);
 
-                if(result.type=='success' || result.type=='info'){
+                if (result.type == 'success' || result.type == 'info') {
 
-                    if($form.data('reset')==true)
+                    if ($form.data('reset') == true)
                         $form.resetForm();
 
                     $('#ajax-modal').modal('hide');
 
-                    try{
-                        $table.bootstrapTable('refresh',{silent: true});
-                    }catch{}
+                    try {
+                        $table.bootstrapTable('refresh', {silent: true});
+                    } catch {
+                    }
                 }
 
             }
@@ -548,7 +553,8 @@
         });
         return false;
     }
-    $(document).on('submit','.ajax-form',function(e){
+
+    $(document).on('submit', '.ajax-form', function (e) {
         e.preventDefault();
 
         ajaxform(this);
@@ -558,7 +564,7 @@
 
 <script src="/lib/js/cpanel.js"></script>
 
-  <!--*************************---->
+<!--*************************---->
 {{--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>--}}
 {{--<script type="text/javascript">--}}
 {{--    let alias = $('.vue-alias').val();--}}
@@ -678,20 +684,20 @@
 
 <script>
 
-    function flash(obj){
-        if(obj.hasOwnProperty('errors')){
-            $.each( obj.errors, function( key, value ) {
+    function flash(obj) {
+        if (obj.hasOwnProperty('errors')) {
+            $.each(obj.errors, function (key, value) {
                 toastr['error'](value);
             });
-        }else if(obj.type){
+        } else if (obj.type) {
 
             toastr[obj.type](obj.message);
-        }else if(obj.message){
+        } else if (obj.message) {
             toastr['error'](obj.message);
-        }else
+        } else
             toastr['warning']('Đã có lỗi xảy ra');
 
-        if (obj.hasOwnProperty('url') && (obj.url!=null && obj.url!='')){
+        if (obj.hasOwnProperty('url') && (obj.url != null && obj.url != '')) {
             window.open(obj.url, obj.target)
         }
 
@@ -736,64 +742,74 @@
 <script src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0"></script>
 <!--*****END ACTION CALL*****---->
 @if(setting('api.messenger_id'))
-<div class="fb-customerchat" page_id="{{setting('api.messenger_id')}}" greeting_dialog_delay="30" logged_in_greeting="{{setting('api.messenger_text')}} " logged_out_greeting="{{setting('api.messenger_text')}} "></div>
+    <div class="fb-customerchat" page_id="{{setting('api.messenger_id')}}" greeting_dialog_delay="30"
+         logged_in_greeting="{{setting('api.messenger_text')}} "
+         logged_out_greeting="{{setting('api.messenger_text')}} "></div>
 
-<div id='fb-root'></div>
-<script type="text/javascript">
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml            : true,
-            version          : 'v6.0'
-        });
-    };
+    <div id='fb-root'></div>
+    <script type="text/javascript">
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v6.0'
+            });
+        };
 
-    window.addEventListener('load', function() {
-        var is_load = 0
-        function loadfb() {
-            if (is_load == 0) {
-                is_load = 1
-                var an = document.createElement('script')
-                an.async = true;
-                an.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1'
-                var sc = document.getElementsByTagName('script')[0]
-                sc.parentNode.insertBefore(an, sc)
+        window.addEventListener('load', function () {
+            var is_load = 0
+
+            function loadfb() {
+                if (is_load == 0) {
+                    is_load = 1
+                    var an = document.createElement('script')
+                    an.async = true;
+                    an.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1'
+                    var sc = document.getElementsByTagName('script')[0]
+                    sc.parentNode.insertBefore(an, sc)
+                }
             }
-        }
-        window.addEventListener('scroll', function() {
-            loadfb()
-        })
-        setTimeout(function(){loadfb()},5000)
-    });
-</script>
+
+            window.addEventListener('scroll', function () {
+                loadfb()
+            })
+            setTimeout(function () {
+                loadfb()
+            }, 5000)
+        });
+    </script>
 @endif
 
 @if(setting('api.google_analytics_id'))
-<script type="text/javascript">
-    window.addEventListener('load', function() {
-        var is_load = 0
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            var is_load = 0
 
-        function loadanalytics() {
-            if (is_load == 0) {
-                is_load = 1
-                var an = document.createElement('script')
-                an.async = true;
-                an.src = 'https://www.googletagmanager.com/gtag/js?id={{setting('api.google_analytics_id')}}'
-                var sc = document.getElementsByTagName('script')[0]
-                sc.parentNode.insertBefore(an, sc)
-                window.dataLayer = window.dataLayer || [];
+            function loadanalytics() {
+                if (is_load == 0) {
+                    is_load = 1
+                    var an = document.createElement('script')
+                    an.async = true;
+                    an.src = 'https://www.googletagmanager.com/gtag/js?id={{setting('api.google_analytics_id')}}'
+                    var sc = document.getElementsByTagName('script')[0]
+                    sc.parentNode.insertBefore(an, sc)
+                    window.dataLayer = window.dataLayer || [];
 
-                function gtag() {
-                    dataLayer.push(arguments);
+                    function gtag() {
+                        dataLayer.push(arguments);
+                    }
+
+                    gtag('js', new Date());
+                    gtag('config', '{{setting('api.google_analytics_id')}}');
                 }
-                gtag('js', new Date());
-                gtag('config', '{{setting('api.google_analytics_id')}}');
             }
-        }
-        window.addEventListener('scroll', function() {
-            loadanalytics()
+
+            window.addEventListener('scroll', function () {
+                loadanalytics()
+            })
+            setTimeout(function () {
+                loadanalytics()
+            }, 3000)
         })
-        setTimeout(function(){loadanalytics()},3000)
-    })
-</script>
+    </script>
 @endif
 </html>

@@ -4,7 +4,7 @@
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('_tag')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}</h5>
                 <button type="button" class="close close-tag" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,7 +17,7 @@
                         <select class="form-control" data-toggle="select2" name="data[type]" data-placeholder="{{__('_classify')}}">
                             <option value="">{{__('_classify')}}</option>
                             @foreach(\App\Enums\TagType::getInstances() as $item)
-                                <option value="{{$item->value}}">{{__('lang.'.$item->value)}}</option>
+                                <option value="{{$item->value}}">{{__('_'.\Illuminate\Support\Str::lower($item->description))}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -708,6 +708,18 @@
                         </div>
                         <hr class="border-primary">
                         @endcan
+                         <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box mb-0 bg-transparent">
+                                    <input type="hidden" value="0" name="data[site.nocopy]">
+                                    <label for="nocoppy"> {!! __('_no_copy') !!} </label>
+                                    <p><input type="checkbox" id="nocopy" {{checked(setting('site.nocopy'),true)}} data-plugin="switchery" data-color="#64b0f2" name="data[site.nocopy]" data-size=""/></p>
+                                    <p>{!! __('_note_no_copy') !!} </p>
+                                </div>
+                            </div>
+
+                        </div>
+                         <hr class="border-primary">
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">

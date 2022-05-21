@@ -9,20 +9,27 @@
                 </button>
             </div>
             <div class="modal-body">
-               @include('admin.render.create.nav')
+                @include('admin.render.create.nav')
 
-                    <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
-                        @foreach(languages() as $key => $language)
-                            <div class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}" id="language-{{$language->value}}">
-                                @include('admin.render.create.title')
-                                <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
-                            </div>
-                        @endforeach
-                    </div>
+                <div class="tab-content {{!setting('site.languages') ? "pt-0" : ""}}">
+                    @foreach(languages() as $key => $language)
+                        <div
+                            class="tab-pane {{$language->value == session('lang') ? 'active' : null}} language-{{$language->value}}"
+                            id="language-{{$language->value}}">
+                            @include('admin.render.create.title')
+                            <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
+                        </div>
+                    @endforeach
+                </div>
                 <div class="form-group">
                     <label>{{__('_color')}}</label>
-                    <input class="form-control" id="example-color" type="color" value="#ffffff">
-                    <input type="hidden" value="" id="data-color" name="data[color]">
+                    <div class="input-group colorpicker-default" data-color-format="rgb"
+                         data-color="">
+                        <input type="text" readonly="readonly" name="data[color]" class="form-control">
+                        <div class="input-group-append add-on">
+                            <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group position-relative">
@@ -67,6 +74,14 @@
         </div>
     </form>
 </div>
+        <link href="/lib/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="/lib/assets/libs/clockpicker/bootstrap-clockpicker.min.css" rel="stylesheet">
+        <script src="/lib/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".colorpicker-default").colorpicker({format: "hex"});
+    });
+</script>
 
 <script type="text/javascript">
     $('#image-upload').on('change', function () {
@@ -74,9 +89,9 @@
         if (!file)
             return false;
 
-        let  imgur_client_id = "{{setting('api.imgur_client_id')}}";
+        let imgur_client_id = "{{setting('api.imgur_client_id')}}";
 
-        if(!imgur_client_id)
+        if (!imgur_client_id)
             return flash({'message': '{{__("_api_not_configured")}}', 'type': 'error'});
 
         let target = $(this).data('target');
@@ -84,53 +99,40 @@
         let formData = new FormData();
         formData.append('image', file);
         $('.loading').fadeIn();
-        fetch(
-            "https://api.imgur.com/3/image",
+        fetch("https://api.imgur.com/3/image",
             {
                 method: "POST",
                 body: formData,
                 "headers": {
-                    "Authorization": "Client-ID "+ imgur_client_id
+                    "Authorization": "Client-ID " + imgur_client_id
                 },
             }
         )
-            .then(response => response.json())
-            .then(result => {
-                $(target).val(result.data.link).trigger('change');
-                $('.loading').fadeOut();
-            })
-            .catch(error => {
-                alert('Lỗi upload: '+error);
-            });
+            .then(response = > response.json()
+    ).
+        then(result = > {
+            $(target).val(result.data.link).trigger('change');
+        $('.loading').fadeOut();
+    })
+    .
+        catch(error = > {
+            alert('@lang('_error'): '+error
+    )
+        ;
+    })
+        ;
 
     });
-
-    $('#image_url').on('change', function (){
+    $('#image_url').on('change', function () {
         let target = $(this).data('target');
-        let  hidden = $(this).data('hidden');
-        if ($(this).val()){
+        let hidden = $(this).data('hidden');
+        if ($(this).val()) {
             $(target).removeClass('d-none').attr('src', $(this).val()).show();
             $(hidden).hide();
-        }else{
+        } else {
             $(target).hide();
             $(hidden).removeClass('d-none').show();
         }
     });
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('select').each(function () {
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                placeholder: $(this).data('placeholder'),
-            });
-        });
-
-        $('#example-color').on('change',function (){
-            var color = $(this).val();
-            $('#data-color').val(color);
-        });
-    });
-
 </script>
 
