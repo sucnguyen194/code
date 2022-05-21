@@ -1,5 +1,5 @@
-
 @foreach($menus->where('parent_id', 0) as $items)
+    {{$items}}
     <li class="dd-item" data-id="{{$items->id}}">
         <div class="dd-handle">{{$items->name}}</div>
         <div class="menu_action">

@@ -22,7 +22,7 @@
   <meta property="og:image:alt" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
   <meta property="og:site_name" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}" />
   <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:description" content="@yield('description',setting('site.description_seo',true))"/>
+  <meta name="twitter:description" content="@yield('description',setting('site.description_seo'))"/>
   <meta name="twitter:title" content="@hasSection('title') @yield('title') - @endif {{setting('site.name')}}"/>
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="@yield('url',route('home'))">

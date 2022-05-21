@@ -29,9 +29,7 @@ class MenuController extends Controller
     {
         $this->authorize('menu.view');
 
-        $menus = Menu::query()->select('id','parent_id')->with('translation', function($q){
-            $q->select('name','slug','menu_id');
-        })->position()->sort()->get();
+        $menus = Menu::query()->position()->sort()->get();
 
         return view('admin.menu.index', compact('menus'));
     }

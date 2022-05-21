@@ -260,7 +260,7 @@
                         <hr class="border-primary">
                     </fieldset>
                     <fieldset title="3" class="p-0">
-                        <legend>Liên kết</legend>
+                        <legend>@lang('_connect')</legend>
                         <div class="row mt-1">
                             <div class="col-lg-5">
                                 <div class="card-box mb-0 bg-transparent">

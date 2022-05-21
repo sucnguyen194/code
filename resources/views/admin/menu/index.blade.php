@@ -156,7 +156,7 @@
                                     <label><strong class="text-uppercase">{{__('_position')}}</strong></label>
                                     <select class="form-control position" data-toggle="select2">
                                         @foreach(\App\Enums\MenuPosition::getInstances() as $menu)
-                                        <option value="{{$menu->value}}" {{selected(session('menu_position'),$menu->value)}} class="form-control">MENU {{\Illuminate\Support\Str::upper($menu->description) }}</option>
+                                        <option value="{{$menu->value}}" {{selected(session('menu_position'),$menu->value)}} class="form-control">{{__('_menu')}} {{$menu->description}}</option>
                                         @endforeach
 
                                     </select>

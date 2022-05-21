@@ -145,14 +145,14 @@
                 <ul class="metismenu" id="side-menu">
                     <li>
                         <a href="{{route('admin.dashboard')}}">
-                            <i class="pe-7s-home"></i>
+                            <i class="fe-home"></i>
                             <span>{{__('_dashboard')}}</span>
                         </a>
                     </li>
                     @can('admin.view')
                         <li>
                             <a href="javascript:void(0)">
-                                <i class="pe-7s-user"></i>
+                                <i class="fe-user"></i>
                                 <span>{{__('_admin')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -176,7 +176,7 @@
                     @can('menu.view')
                         <li>
                             <a href="{{route('admin.menus.index')}}">
-                                <i class="pe-7s-menu"></i>
+                                <i class="fe-align-left"></i>
                                 <span>@lang('_menu')</span>
                             </a>
                         </li>
@@ -184,7 +184,7 @@
                     @can('photo.view')
                         <li>
                             <a href="{{route('admin.photos.index')}}">
-                                <i class="pe-7s-photo-gallery"></i>
+                                <i class="fe-image"></i>
                                 <span>{{__('_image')}}</span>
                             </a>
                         </li>
@@ -192,7 +192,7 @@
                     @can('contact.view')
                         <li>
                             <a href="{{route('admin.contacts.index')}}" class="{{nav_active('admin/contacts*')}}">
-                                <i class="pe-7s-mail"></i>
+                                <i class="fe-mail"></i>
                                 <span>{{__('_messenger')}}</span>
                             </a>
                         </li>
@@ -200,7 +200,7 @@
                     @canany('support.view')
                         <li>
                             <a href="javascript:void(0)">
-                                <i class="pe-7s-micro"></i>
+                                <i class="fe-mic"></i>
                                 <span>{{__('_support')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -225,7 +225,7 @@
                     @can('comment.view')
                         <li class="{{nav_active('admin/comments*','mm-active')}}">
                             <a href="javascript:void(0)">
-                                <i class="pe-7s-comment"></i>
+                                <i class="fe-message-square"></i>
                                 <span>{{__('_comment')}}</span>
                                 <span class="menu-arrow"></span>
                                 @if($comments->count()) <span
@@ -251,7 +251,7 @@
                     @can('tag.view')
                         <li>
                             <a href="{{route('admin.tags.index')}}">
-                                <i class="pe-7s-ticket"></i>
+                                <i class="fe-tag"></i>
                                 <span>{{__('_tag')}}</span>
                             </a>
                         </li>
@@ -264,7 +264,7 @@
                     @can('blog.view')
                         <li class="{{nav_active('admin/posts*','mm-active')}}">
                             <a href="javascript:void(0)">
-                                <i class="pe-7s-news-paper"></i>
+                                <i class="fe-book"></i>
                                 <span>{{__('_post')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -285,7 +285,7 @@
 
                         <li>
                             <a href="{{route('admin.posts.pages.index')}}" class="{{nav_active('admin/pages*')}}">
-                                <i class="pe-7s-wallet"></i>
+                                <i class="fe-file-text"></i>
                                 <span>{{__('_page')}}</span>
                             </a>
                         </li>
@@ -296,7 +296,7 @@
                         <li>
                             <a href="{{route('admin.posts.galleries.index')}}"
                                class="{{nav_active('admin/galleries*')}}">
-                                <i class="pe-7s-albums"></i>
+                                <i class="fe-upload-cloud"></i>
                                 <span>{{__('_gallery')}}</span>
                             </a>
                         </li>
@@ -304,7 +304,7 @@
                     @can('video.view')
                         <li>
                             <a href="{{route('admin.posts.videos.index')}}" class="{{nav_active('admin/videos*')}}">
-                                <i class="pe-7s-video"></i>
+                                <i class="fe-film"></i>
                                 <span>{{__('_video')}}</span>
                             </a>
                         </li>
@@ -340,7 +340,7 @@
                     @can('product.view')
                         <li class="{{nav_active('admin/products*','mm-active')}}">
                             <a href="javascript:void(0)">
-                                <i class="pe-7s-plugin"></i>
+                                <i class="fe-box"></i>
                                 <span>{{__('_product')}}</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -367,7 +367,7 @@
                     @can('discount.view')
                         <li>
                             <a href="{{route('admin.discounts.index')}}" class="{{nav_active('admin/discounts*')}}">
-                                <i class="pe-7s-bandaid"></i>
+                                <i class="fe-gift"></i>
                                 <span> {{__('_discount')}}</span>
                             </a>
                         </li>
@@ -376,7 +376,7 @@
                     @can('order.view')
                         <li>
                             <a href="{{route('admin.orders.index')}}" class="{{nav_active('admin/orders*')}}">
-                                <i class="pe-7s-cart"></i>
+                                <i class="fe-shopping-cart"></i>
                                 <span>{{__('_order')}}</span>
                             </a>
                         </li>
@@ -385,7 +385,7 @@
                     @can('user.view')
                         <li>
                             <a href="{{route('admin.users.index')}}">
-                                <i class="pe-7s-users"></i>
+                                <i class="fe-users"></i>
                                 <span>{{__('_customer')}}</span>
                             </a>
                         </li>
@@ -395,7 +395,7 @@
                         <li class="menu-title">{{__('_setting')}}</li>
                         <li>
                             <a href="javascript:void(0)">
-                                <i class="pe-7s-global"></i>
+                                <i class="fe-settings"></i>
                                 <span>Website</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -419,7 +419,7 @@
                         </li>
                         <li>
                             <a href="{{route('admin.logs')}}">
-                                <i class="pe-7s-attention"></i>
+                                <i class="fe-activity"></i>
                                 <span>System Logs</span>
                             </a>
                         </li>

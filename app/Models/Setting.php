@@ -77,7 +77,6 @@ class Setting extends Model {
      */
     public static function set($key, $val, $type = 'string')
     {
-
         if ( $setting = self::getAllSettings()->where('name', $key)->first() ) {
             if(is_array($val) || is_object($val))
                 $val = json_encode($val);

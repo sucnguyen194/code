@@ -30,7 +30,7 @@
                                                                           seo="{{$language->name}}"
                                                                           onkeyup="ChangeToSlug(this);"
                                                                           name="translation[{{$key}}][slug]">
-                                    <span>.html</span>
+{{--                                    <span>.html</span>--}}
                                 </div>
                                 <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
                             </div>

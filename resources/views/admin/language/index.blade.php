@@ -85,13 +85,13 @@
 
         function actionFormatter(value, row){
 
-            let html = '<a href="'+ '{{ route('admin.languages.translate', ':lang') }}'.replace(':lang',row.value) +'" title="Translate" class="btn btn-success waves-effect waves-light tooltip-hover"><i class="fe-code"></i></a> ';
+            let html = '<a href="'+ '{{ route('admin.languages.translate', ':lang') }}'.replace(':lang',row.value) +'" title="@lang('_translate')" class="btn btn-info waves-effect waves-light tooltip-hover"><i class="fa fa-language"></i></a> ';
 
-            html += '<a href="'+ '{{ route('admin.languages.edit', ':id') }}'.replace(':id',row.id) +'" title="Edit" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a> ';
+            html += '<a href="'+ '{{ route('admin.languages.edit', ':id') }}'.replace(':id',row.id) +'" title="@lang('_edit')" class="btn btn-primary waves-effect waves-light tooltip-hover ajax-modal"><i class="fe-edit-2"></i></a> ';
 
             if(row.status != 1) {
-                html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="Delete" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
-                html+='<a href="'+ '{{ route('admin.languages.change', ':value') }}'.replace(':value',row.value) +'" class="ajax-link btn btn-info waves-effect waves-light" title="Active" id="tooltip-hover"  data-confirm="{{__('_confirm_change_language')}}" data-refresh="true" data-method="GET"><i class="fa fa-language"></i></a> ';
+                html+='<a href="'+ '{{ route('admin.languages.destroy', ':id') }}'.replace(':id',row.id) +'" class="ajax-link btn btn-warning waves-effect waves-light tooltip-hover" title="@lang('_delete')" data-confirm="{{__('_delete_record')}}" data-refresh="true" data-method="DELETE"><i class="fe-x"></i></a> ';
+                html+='<a href="'+ '{{ route('admin.languages.change', ':value') }}'.replace(':value',row.value) +'" class="ajax-link btn btn-primary waves-effect waves-light" title="@lang('_active')" id="tooltip-hover"  data-confirm="{{__('_confirm_change_language')}}" data-refresh="true" data-method="GET"><i class="fe-settings"></i></a> ';
             }
 
             return html;

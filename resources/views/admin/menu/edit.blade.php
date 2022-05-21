@@ -22,7 +22,7 @@
                                     <label>{{__('_slug')}}</label>
                                     <div class="d-flex form-control">
                                         <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$translation->locale}}" value="{{$translation->slug}}" language="{{$translation->locale}}" seo="{{$translation->language->name}}" name="translation[{{$key}}][slug]">
-                                        <span>.html</span>
+{{--                                        <span>.html</span>--}}
                                     </div>
                                     <input type="hidden" name="translation[{{$key}}][locale]" value="{{$translation->locale}}">
                                 </div>
@@ -41,7 +41,7 @@
                                             <label>{{__('_slug')}} </label>
                                             <div class="d-flex form-control">
                                                 <span>{{route('home')}}/</span><input type="text" class="border-0 slug" id="{{$language->value}}" value="{{old('data.alias')}}" language="{{$language->value}}" seo="{{$language->name}}" onkeyup="ChangeToSlug(this);" name="translation[{{$key}}][slug]">
-                                                <span>.html</span>
+{{--                                                <span>.html</span>--}}
                                             </div>
                                             <input type="hidden" name="translation[{{$key}}][locale]" value="{{$language->value}}">
                                         </div>
