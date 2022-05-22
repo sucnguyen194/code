@@ -92,7 +92,7 @@
                                             <div class="input-group">
                                                 <input name="data[image]" id="image_url" data-target="#image_src" value="{{$menu->image}}"  type="text" class="form-control" placeholder="http://">
                                                 <span class="input-group-append">
-                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >Upload..</label>
+                                 <label class="btn btn-default" type="button"><input type="file" class="d-none image-upload" id="image-upload" data-target="#image_url" >@lang('_upload')...</label>
                             </span>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
 
                                 <select id="position" class="form-control" data-toggle="select2" name="data[position]">
                                     @foreach(\App\Enums\MenuPosition::getInstances() as $item)
-                                        <option value="{{$item->value}}" {{selected($item->value,$menu->value)}} class="form-control">{{__('_menu')}} {{$item->description}}</option>
+                                        <option value="{{$item->value}}" {{selected($item->value,$menu->position)}} class="form-control">{{__('_menu')}} {{$item->description}}</option>
                                     @endforeach
                                 </select>
                                 <textarea id="nestable-output" name="menuval" style="display: none;"></textarea>
