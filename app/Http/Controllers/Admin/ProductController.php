@@ -155,7 +155,7 @@ class ProductController extends Controller
 
         $product->translations()->createMany($request->translation);
         $product->categories()->attach($request->category_id);
-        //$product->filters()->attach($request->filter);
+        $product->filters()->attach($request->filter);
 
       //  $product->settAttributeProduct();
 
