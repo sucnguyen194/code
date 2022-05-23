@@ -13,6 +13,18 @@ class AppModel extends Model
 
     protected $guarded = ['id'];
 
+    public function translations(){
+        return $this->hasMany(Translation::class)->where(function($q){
+            $q->whereIn('locale', Language::pluck('value')->toArray());
+        });
+    }
+
+    public function translation(){
+        return $this->hasOne(Translation::class)->withDefault(function ($translation){
+            $translation->locale = session('lang');
+        });
+    }
+
     public function comments(){
         return $this->morphMany(Comment::class,'comment');
     }

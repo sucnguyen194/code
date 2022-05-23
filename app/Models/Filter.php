@@ -15,14 +15,18 @@ class Filter extends AppModel
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
 
-    protected $with = ['translation','translations'];
+    protected $with = ['translation'];
 
     public function translations(){
-        return $this->hasMany(FilterTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());;
+        return $this->hasMany(FilterTranslation::class)->where(function($q){
+            $q->whereIn('locale', Language::pluck('value')->toArray());
+        });
     }
 
     public function translation(){
-        return $this->hasOne(FilterTranslation::class)->whereLocale(session('lang'));
+        return $this->hasOne(FilterTranslation::class)->withDefault(function ($translation){
+            $translation->locale = session('lang');
+        });
     }
 
     public function parents(){

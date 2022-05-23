@@ -169,12 +169,12 @@ class MenuController extends Controller
         $menu->update(['sort' => $menu->id]);
 
         if($request->type == CategoryType::category)
-            $transltions = Category::find($request->id);
+            $translations = Category::find($request->id);
 
         if($request->type == PostType::page)
-            $transltions = Post::find($request->id);
+            $translations = Post::find($request->id);
 
-        foreach ($transltions->translations as $translation){
+        foreach ($translations->translations as $translation){
             $menu->translations()->create(['name' => $translation->name, 'slug' => $translation->slug,'locale' => $translation->locale]);
         }
 

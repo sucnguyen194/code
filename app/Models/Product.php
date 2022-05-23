@@ -22,20 +22,12 @@ class Product extends AppModel
 
     protected $guarded = ['id'];
 
-    protected $with = ['comments','tags','translation','translations'];
+    protected $with = ['comments','tags','translation'];
 
     protected $casts = [
         'options' => 'array',
         'photo' => 'array'
     ];
-
-    public function translations(){
-        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
-    }
-
-    public function translation(){
-        return $this->hasOne(Translation::class)->whereLocale(session('lang'));
-    }
 
     public function attributes(){
         return $this->hasMany(Attribute::class);

@@ -15,14 +15,18 @@ class Tag extends AppModel
 
     protected $guarded = [];
 
-    protected $with = ['translation','translations'];
+    protected $with = ['translation'];
 
     public function translations(){
-        return $this->hasMany(TagTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());
+        return $this->hasMany(TagTranslation::class)->where(function($q){
+            $q->whereIn('locale', Language::pluck('value')->toArray());
+        });
     }
 
     public function translation(){
-        return $this->hasOne(TagTranslation::class)->whereLocale(session('lang'));
+        return $this->hasOne(TagTranslation::class)->withDefault(function ($translation){
+            $translation->locale = session('lang');
+        });
     }
 
     public function scopeOfType($q, $type){

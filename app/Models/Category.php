@@ -20,15 +20,7 @@ class Category extends AppModel
 
     protected $guarded = ['id'];
 
-    protected $with = ['translation','translations'];
-
-    public function translations(){
-        return $this->hasMany(Translation::class)->whereIn('locale', Language::pluck('value')->toArray());
-    }
-
-    public function translation(){
-        return $this->hasOne(Translation::class,'category_id')->where('locale',session()->get('lang'));
-    }
+    protected $with = ['translation'];
 
     public function admin(){
         return $this->belongsTo(Admin::class);

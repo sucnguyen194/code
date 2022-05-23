@@ -9,21 +9,24 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Support extends AppModel
 {
-
     use LogsActivity;
 
     protected static $logUnguarded = true;
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
 
-    protected $with = ['translation','translations'];
+    protected $with = ['translation'];
 
     public function translations(){
-        return $this->hasMany(SupportTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());
+        return $this->hasMany(SupportTranslation::class)->where(function($q){
+            $q->whereIn('locale', Language::pluck('value')->toArray());
+        });
     }
 
     public function translation(){
-        return $this->hasOne(SupportTranslation::class)->whereLocale(session('lang'));
+        return $this->hasOne(SupportTranslation::class)->withDefault(function ($translation){
+            $translation->locale = session('lang');
+        });
     }
 
     public function getRouteAttribute(){

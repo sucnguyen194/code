@@ -88,17 +88,9 @@
                             </span>
                                 </div>
                             </div>
+                            <input type="hidden" name="data[position]" value="{{session('menu_position')}}">
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>{{__('_position')}}</label>
-                    <select id="position" class="form-control" data-toggle="select2" name="data[position]">
-                        @foreach(\App\Enums\MenuPosition::getInstances() as $menu)
-                            <option value="{{$menu->value}}" {{selected(session('menu_position'),$menu->value)}} class="form-control">{{__('_menu')}} {{$menu->description}}</option>
-                        @endforeach
-                    </select>
-                    <textarea id="nestable-output" name="menuval" style="display: none;"></textarea>
                 </div>
             </div>
             <div class="modal-footer">

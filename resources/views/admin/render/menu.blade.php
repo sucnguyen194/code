@@ -1,17 +1,5 @@
-<textarea id="nestable-output" class="d-none" name="menuval"></textarea>
-<div class="form-group">
-    <label><strong class="text-uppercase">{{__('_position')}}</strong></label>
-    <select class="form-control position" data-toggle="select2">
-        @foreach(\App\Enums\MenuPosition::getInstances() as $menu)
-            <option value="{{$menu->value}}"
-                    {{selected(session('menu_position'),$menu->value)}} class="form-control">{{__('_menu')}} {{$menu->description}}</option>
-        @endforeach
-
-    </select>
-</div>
-
 <div class="custom-dd dd" id="nestable">
-    <ol class="dd-list" id="result_data">
+    <ol class="dd-list">
         @foreach($menus->where('parent_id', 0) as $items)
             <li class="dd-item" data-id="{{$items->id}}">
                 <div class="dd-handle">{{$items->name}}</div>

@@ -13,14 +13,18 @@ class Menu extends AppModel
     protected static $submitEmptyLogs = false;
     protected static $logOnlyDirty = true;
 
-    protected $with = ['translation','translations'];
+    protected $with = ['translation'];
 
     public function translations(){
-        return $this->hasMany(MenuTranslation::class)->whereIn('locale', Language::pluck('value')->toArray());;
+        return $this->hasMany(MenuTranslation::class)->where(function($q){
+            $q->whereIn('locale', Language::pluck('value')->toArray());
+        });
     }
 
     public function translation(){
-        return $this->hasOne(MenuTranslation::class)->whereLocale(session('lang'));
+        return $this->hasOne(MenuTranslation::class)->withDefault(function ($translation){
+            $translation->locale = session('lang');
+        });
     }
 
     public function parents(){

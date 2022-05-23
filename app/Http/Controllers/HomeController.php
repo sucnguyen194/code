@@ -62,11 +62,11 @@ class HomeController extends Controller
         ]);
 
         if($request->password != setting('site.password'))
-            return flash(__('client.password_wrong'), 0);
+            return flash(__('_password_wrong'), 0);
 
         session()->put('site.password', setting('site.password'));
 
-        return flash(__('client.login_success'),1, session('url'));
+        return flash(__('_login_success'),1, session('url'));
     }
 
 

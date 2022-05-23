@@ -18,51 +18,21 @@ use Illuminate\Database\Migrations\Migration;
 class UserController extends Controller {
 
 	public function profile(){
-	    if(Auth::check())
-            return view('User.profile');
-
-        return flash(__('client.please_login'),3,route('home'));
+        return view('user.profile');
 	}
+
 	public function update(Request $request){
 
-//		$password = $request->password;
-//		$re_password = $request->re_password;
+        $user = auth()->user();
 
-		$email = $request->input('data.email');
-		if($email){
+        $request->validate([
+           'email' => 'required|unique:users,email,'.$user->id
+        ]);
 
-		    $user = auth()->user();
+        $user->forceFill($request->data);
+        $user->save();
 
-			if(User::where('email',$email)->whereNotIn('id',[$user->id])->count())
-                return flash(__('client.email_already_exists'),3);
-
-			$user->forceFill($request->data);
-			$user->save();
-
-
-//				if($password == NULL && $re_password== NULL){
-//					$password = $user->password;
-//					$re_password = $user->password;
-//				}else{
-//					$password = bcrypt($request->password);
-//					$re_password = bcrypt($request->re_password);
-//				}
-
-//				if($password != $re_password){
-//                    return flash('Mật khẩu không khớp',3);
-//				}else{
-//
-//				$user->update([
-//                    'password' => $password,
-//                    'name' => $name,
-//                    'address' => $address,
-//                    'phone' => $phone,
-//                    'email' => $email,
-//                ]);
-//
-//			}
-            return flash(__('_the_record_is_updated_successfully'));
-			}
+        return flash(__('_the_record_is_updated_successfully'));
 	}
 
 	public function password(){

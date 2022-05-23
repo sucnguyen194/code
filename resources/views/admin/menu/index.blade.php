@@ -151,6 +151,17 @@
                             <p class="sub-header">
                                 {!! __('_menu_list_note') !!}
                             </p>
+                            <textarea id="nestable-output" class="d-none" name="menuval"></textarea>
+                            <div class="form-group">
+                                <label><strong class="text-uppercase">{{__('_position')}}</strong></label>
+                                <select class="form-control position" data-toggle="select2">
+                                    @foreach(\App\Enums\MenuPosition::getInstances() as $menu)
+                                        <option value="{{$menu->value}}"
+                                                {{selected(session('menu_position'),$menu->value)}} class="form-control">{{__('_menu')}} {{$menu->description}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                             <div id="menus">
                                 @include('admin.render.menu',['menus' => $menus])
                             </div>
@@ -375,7 +386,7 @@
                         'type': type, 'id': id, '_token': _token,
                     },
                     success: function (result) {
-                        $('#result_data').append(result).show();
+                        $('.menus').append(result).show();
                         $('.dd-empty').hide();
                         flash({'message': '{{__("_the_record_is_added_successfully")}}', 'type': 'success'});
                     }
@@ -388,7 +399,7 @@
                 var _token = $('meta[name=_token]').attr('content');
                 var position = $(this).val();
                 var url = "{{route('admin.change.position.menu',":position")}}".replace(':position', position);
-                var html = document.getElementById('result_data');
+                var html = document.getElementById('menus');
                 $.ajax({
                     url: url,
                     type: 'get',
