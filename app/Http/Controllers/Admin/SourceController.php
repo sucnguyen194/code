@@ -15,8 +15,9 @@ class SourceController extends Controller
     public function index()
     {
         $this->authorize('setting.source');
+        $icon = ['/', '_'];
 
-        return view('admin.source.list');
+        return view('admin.source.list', compact('icon'));
     }
 
     public function load(Request $request){

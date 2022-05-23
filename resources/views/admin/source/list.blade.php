@@ -1,52 +1,57 @@
 @extends('admin.layouts.layout')
 @section('title')
-{!! __('_source_code_editor') !!}
+    {!! __('_source_code_editor') !!}
 @stop
 @section('content')
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
-    <!-- start page title -->
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{!! __('_dashboard') !!}</a></li>
-                        <li class="breadcrumb-item active">{!! __('_source_code_editor') !!}</li>
-                    </ol>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a
+                                    href="{{route('admin.dashboard')}}">{!! __('_dashboard') !!}</a></li>
+                            <li class="breadcrumb-item active">{!! __('_source_code_editor') !!}</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">{!! __('_source_code_editor') !!}</h4>
                 </div>
-                <h4 class="page-title">{!! __('_source_code_editor') !!}</h4>
             </div>
         </div>
-    </div>
-    <!-- end page title -->
+        <!-- end page title -->
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card-box">
-                <h4 class="header-title mb-3">{!! __('_source') !!}</h4>
-                <div id="">
-                    <div class="list-group">
-                        <ul class="pl-0">
-                            <li class="folder-name">
-                                <a href="javascript:void(0)" id="open-folder" class="open-folder text-primary" data-path="folder_public"><i class="icon-img"><img src="https://s2d142.cloudnetwork.vn:8443/cp/theme/icons/16/plesk/file-folder.png?377a0415c8e86b629f04f2de969b6dc7"> </i> public</a>
-                                <ul class="parent-folder" id="folder_public">
-                                    {{scan_full_dir('../public')}}
-                                </ul>
-                            </li>
-                            {{scan_full_dir('../resources')}}
-                        </ul>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card-box">
+                    <h4 class="header-title mb-3">{!! __('_source') !!}</h4>
+                    <div id="">
+                        <div class="list-group">
+                            <ul class="pl-0">
+                                <li class="folder-name">
+                                    <a href="javascript:void(0)" id="open-folder" class="open-folder text-primary"
+                                       data-path="folder_public"><i class="icon-img"><img
+                                                src="https://s2d142.cloudnetwork.vn:8443/cp/theme/icons/16/plesk/file-folder.png?377a0415c8e86b629f04f2de969b6dc7">
+                                        </i> public</a>
+                                    <ul class="parent-folder" id="folder_public">
+                                        @include('admin.source.show',['dir' => '../public', 'icon'=> $icon, 'child' => false])
+                                    </ul>
+                                </li>
+                                @include('admin.source.show',['dir' => '../resources', 'icon'=> $icon, 'child' => false])
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- end col -->
+            </div><!-- end col -->
 
-        <div class="col-md-8">
+            <div class="col-md-8">
                 <form id="put-content-file" class="loading-file" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="card-box">
-                        <h4 class="header-title mb-3">{!! __('_source_code_editor') !!}: <span class="path_file"></span></h4>
+                        <h4 class="header-title mb-3">{!! __('_source_code_editor') !!}: <span class="path_file"></span>
+                        </h4>
                         <div class="autohide-scroll view-source bg-listSource">
                             <div id="editor" class="views-source"></div>
                             <input class="hidden" name="dir" id="dir-file">
@@ -57,54 +62,56 @@
                     <div class="">
                         @include('admin.render.button', ['route' => route('admin.sources.index')])
                     </div>
-            </form>
+                </form>
 
+            </div>
         </div>
-    </div>
-    <!-- end row -->
-</div> <!-- end container-fluid -->
+        <!-- end row -->
+    </div> <!-- end container-fluid -->
 
-  @stop
+@stop
 @section('styles')
     <style type="text/css">
         .file-name {
             word-wrap: break-word;
         }
+
         .hidden {
             display: none;
         }
+
         #editor, .view-source {
-            height: 600px!important;
+            height: 600px !important;
         }
     </style>
 @stop
 @section('scripts')
-<script src="{{asset('lib/sources/ace.js')}}" type="text/javascript"></script>
-<!-- scrollbar init-->
-<script src="https://coderthemes.com/adminox/layouts/vertical/assets/js/pages/scrollbar.init.js"></script>
+    <script src="{{asset('lib/sources/ace.js')}}" type="text/javascript"></script>
+    <!-- scrollbar init-->
+    <script src="https://coderthemes.com/adminox/layouts/vertical/assets/js/pages/scrollbar.init.js"></script>
     <script>
-        $(document).on('click','#open-folder',function(){
+        $(document).on('click', '#open-folder', function () {
             var path = $(this).attr('data-path');
-            var result = $('#'+path);
-            if(result.css('display') == 'block'){
+            var result = $('#' + path);
+            if (result.css('display') == 'block') {
                 result.slideUp();
-            }else{
+            } else {
                 result.slideDown();
             }
         });
 
-        $(document).on('click','#open-sub-folder',function(){
+        $(document).on('click', '#open-sub-folder', function () {
             var path = $(this).attr('data-path');
-            var result = $('#'+path);
-            if(result.css('display') == 'block'){
+            var result = $('#' + path);
+            if (result.css('display') == 'block') {
                 result.slideUp();
-            }else{
+            } else {
                 result.slideDown();
             }
 
         });
         $(document).on("click", "#show-file", function () {
-            var white_list = ['html', 'ctp', 'txt', 'xml', 'css', 'js','php'];
+            var white_list = ['html', 'ctp', 'txt', 'xml', 'css', 'js', 'php'];
             var ext = $(this).attr('data-ext');
             var path = $(this).attr('data-path');
             if (path != 'undefined' && ext != 'undefined' && $.inArray(ext, white_list) > -1) {
@@ -119,8 +126,8 @@
                 var editor = ace.edit("editor");
                 var url = '{{route('admin.ajax.load.sources')}}';
 
-                if(typeof ext != "undefined" && ext.length > 0){
-                    switch(ext) {
+                if (typeof ext != "undefined" && ext.length > 0) {
+                    switch (ext) {
                         case 'css':
                             editor.session.setMode("ace/mode/css");
                             break;
@@ -176,22 +183,22 @@
             textarea.val(editor.getSession().getValue());
         });
         textarea.val(editor.getSession().getValue());
-        $('#submit').click(function(e){
+        $('#submit').click(function (e) {
             e.preventDefault();
             data = $('form#put-content-file').serialize();
-            var url =  '{{route('admin.ajax.push.sources')}}';
+            var url = '{{route('admin.ajax.push.sources')}}';
             var _token = $('input[name="_token"]').val();
             var dir = $('#dir-file').val();
             $.ajax({
                 type: "post",
-                cache:false,
+                cache: false,
                 url: url,
                 data: data,
                 success: function (response) {
-                    flash({'message':'{{__('_the_record_is_updated_successfully')}}', 'type':'success'});
+                    flash({'message': '{{__('_the_record_is_updated_successfully')}}', 'type': 'success'});
                 },
                 error: function (response) {
-                    flash({'message':'{{__('_file_error')}}', 'type':'error'});
+                    flash({'message': '{{__('_file_error')}}', 'type': 'error'});
                 }
             });
         })
