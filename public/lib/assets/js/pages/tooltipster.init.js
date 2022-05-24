@@ -5,7 +5,7 @@
         t("#tooltip-events").tooltipster({
         trigger: "click"
     }), t("#tooltip-html").tooltipster({
-        content: t('<img src="/lib/assets/images/users/avatar-2.jpg" width="50" height="50" /><p style="text-align:left;"><strong>SoufflÃ© chocolate cake powder.</strong> Applicake lollipop oat cake gingerbread.</p>'),
+        content: t('<p style="text-align:left;"><strong>SoufflÃ© chocolate cake powder.</strong> Applicake lollipop oat cake gingerbread.</p>'),
         minWidth: 300,
         maxWidth: 300,
         position: "right"
