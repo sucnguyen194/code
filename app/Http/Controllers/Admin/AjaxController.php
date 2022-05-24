@@ -1,24 +1,19 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Enums\ActiveDisable;
-use App\Enums\AttributeType;
 use App\Enums\CategoryType;
 use App\Enums\FilterType;
 use App\Enums\PhotoType;
 use App\Enums\PostType;
-use App\Enums\ProductType;
 use App\Enums\SupportType;
 use App\Enums\TagType;
 use App\Http\Controllers\Controller;
-use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Filter;
-use App\Models\Map;
 use App\Models\Photo;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Support;
-use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller {
 
@@ -42,9 +37,6 @@ class AjaxController extends Controller {
 
             case FilterType::filter:
                 $data = Filter::find(request()->id);
-                break;
-            case 'map':
-                $data = Map::find(request()->id);
                 break;
             default;
         }

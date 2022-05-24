@@ -17,7 +17,7 @@
     @php($folder = "/lib/images/file-folder.png")
 {{--    @php($privat = "/assets/images/file-private.png")--}}
 
-    @if(\Illuminate\Support\Str::contains($value,  ['.html','.css','.php','.js']))
+    @if(\Illuminate\Support\Str::contains($value,  ['.html','.css','.php','.js','.scss','.sass']))
     @php($ext = 'html')
     @php($folder = '/lib/images/file-webscript.png')
     @php($event = "id=show-file")

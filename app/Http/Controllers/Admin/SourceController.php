@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SourceController extends Controller
 {
@@ -24,8 +25,9 @@ class SourceController extends Controller
         $this->authorize('setting.source');
 
         $path = $request->path;
-        $file = file_get_contents($path);
-        return $file;
+        $data['file'] = Str::afterLast($path,'/');
+        $data['content'] = file_get_contents($path);
+        return response()->json($data);
     }
 
     public function push(Request $request){

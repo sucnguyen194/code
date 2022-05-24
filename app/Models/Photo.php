@@ -7,7 +7,7 @@ use App\Enums\MediaType;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Photo extends AppModel
+class Photo extends Model
 {
     use LogsActivity;
 

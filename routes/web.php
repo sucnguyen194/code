@@ -155,8 +155,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
         /**
          * Edit website
          */
-        Route::get('ajax/load/sources', [App\Http\Controllers\Admin\SourceController::class, 'load'])->name('ajax.load.sources');
-        Route::post('ajax/push/sources', [App\Http\Controllers\Admin\SourceController::class, 'push'])->name('ajax.push.sources');
+        Route::get('/load/sources', [App\Http\Controllers\Admin\SourceController::class, 'load'])->name('load.sources');
+        Route::post('/push/sources', [App\Http\Controllers\Admin\SourceController::class, 'push'])->name('push.sources');
         Route::resource('sources', SourceController::class);
         /**
          * languages
