@@ -11,3 +11,4 @@
                data-refresh="true" data-method="DELETE"><i class="fe-x"></i> </a>
         @endcan
     </div>
+</li>

@@ -294,7 +294,7 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: '{{__("_confirm")}}',
                     cancelButtonText: '{{__("_back")}}'
-                }).then((result) = > {
+                }).then((result) => {
                     if(result.isConfirmed
             )
                 {
@@ -386,7 +386,7 @@
                         'type': type, 'id': id, '_token': _token,
                     },
                     success: function (result) {
-                        $('.menus').append(result).show();
+                        $('#append-menu').append(result).show();
                         $('.dd-empty').hide();
                         flash({'message': '{{__("_the_record_is_added_successfully")}}', 'type': 'success'});
                     }

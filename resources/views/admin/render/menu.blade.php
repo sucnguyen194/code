@@ -1,5 +1,5 @@
 <div class="custom-dd dd" id="nestable">
-    <ol class="dd-list">
+    <ol class="dd-list" id="append-menu">
         @foreach($menus->where('parent_id', 0) as $items)
             <li class="dd-item" data-id="{{$items->id}}">
                 <div class="dd-handle">{{$items->name}}</div>
