@@ -20,9 +20,9 @@ class Post extends AppModel
         'photo' => 'array'
     ];
 
-    protected $with = ['comments','tags','translation'];
+    protected $with = ['translation'];
 
-    protected $withCount = ['comments','tags'];
+   // protected $withCount = ['comments','tags'];
 
     public function getRouteAttribute(){
         if($this->type == PostType::page)

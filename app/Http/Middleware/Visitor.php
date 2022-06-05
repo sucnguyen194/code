@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class Vistor
+class Visitor
 {
     /**
      * Handle an incoming request.
@@ -14,17 +15,23 @@ class Vistor
      * @param  \Closure  $next
      * @return mixed
      */
+
+    public function getDomain($url)
+    {
+        preg_match("/[a-z0-9\-]{1,63}\.[a-z\.]{2,6}$/", parse_url($url, PHP_URL_HOST), $domain);
+        return $domain[0];
+    }
+
     public function handle(Request $request, Closure $next)
     {
-
         if(empty($request->headers->get('referer')))
             return $next($request);
 
         $ip = $request->ip();
-        $ref = parse_url($request->headers->get('referer'), PHP_URL_HOST);
+        $ref =  $this->getDomain($request->headers->get('referer'));
         $host = $request->getHost();
 
-        if(substr($ref, 0 - strlen($host)) == $host)
+        if($ref == $host)
             return $next($request);
 
         $vistor = \App\Models\Visitor::whereRefererDomain($ref)->whereRefererIp($ip)->first();

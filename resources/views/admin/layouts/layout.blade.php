@@ -497,6 +497,7 @@
 <!-- Vendor js -->
 <script src="/lib/assets/js/vendor.min.js"></script>
 
+
 <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
 <script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
@@ -713,39 +714,40 @@
                         "Authorization": "Client-ID " + imgur_client_id
                     },
                 }
-            ).then(response => response.json()).then(result => {
+            ).then(response => response.json()
+        ).
+            then(result => {
                 $(slider).removeClass('d-none').addClass('d-inline-block');
 
-                $('<li class="box-product-images">' +
-                    '<div class="item-image position-relative">' +
-                    '<div class="img-rounded"><img src="' + result.data.link + '" class="position-image-product"/></div>' +
-                    '<input name="photos[]" type="hidden" value="' + result.data.link + '">' +
-                    '<div class="photo-hover-overlay">' +
-                    '<div class="box-hover-overlay">' +
-                    '<a class="tooltip-hover view-image text-white" data-image="' + result.data.link + '" data-toggle="modal" data-target="#viewImage" title="{{__('lang.detail')}}">' +
-                    '<i class="far fa-eye"></i>' +
-                    '</a>' +
-                    '<a class="pl-2 tooltip-hover text-white" id="slider-delete" title="{{__('lang.destroy')}}">' +
-                    '<i class="far fa-trash-alt"></i>' +
-                    '</a>' +
-                    '</div> ' +
-                    '</div>' +
-                    '</div>' +
-                    '</li>').appendTo(slider);
-                $('#remove-label').removeClass('d-block').hide();
-                $('.loading').fadeOut();
-            }).catch(error => {
+            $('<li class="box-product-images">' +
+                '<div class="item-image position-relative">' +
+                '<div class="img-rounded"><img src="' + result.data.link + '" class="position-image-product"/></div>' +
+                '<input name="photos[]" type="hidden" value="' + result.data.link + '">' +
+                '<div class="photo-hover-overlay">' +
+                '<div class="box-hover-overlay">' +
+                '<a class="tooltip-hover view-image text-white" data-image="' + result.data.link + '" data-toggle="modal" data-target="#viewImage" title="{{__('lang.detail')}}">' +
+                '<i class="far fa-eye"></i>' +
+                '</a>' +
+                '<a class="pl-2 tooltip-hover text-white" id="slider-delete" title="{{__('lang.destroy')}}">' +
+                '<i class="far fa-trash-alt"></i>' +
+                '</a>' +
+                '</div> ' +
+                '</div>' +
+                '</div>' +
+                '</li>').appendTo(slider);
+            $('#remove-label').removeClass('d-block').hide();
+            $('.loading').fadeOut();
+        }).catch(error => {
                 $('#remove-label').show();
                 $(slider).addClass('d-none');
 
-                var obj = {
-                    'message': '{{__("_error")}} {{__("_upload")}}: ' + error,
-                    'type': 'error'
-                };
-                flash(obj);
-            });
+            var obj = {
+                'message': '{{__("_error")}} {{__("_upload")}}: ' + error,
+                'type': 'error'
+            };
+            flash(obj);
+        });
         }
-
     });
 
     $(document).on('click', '#slider-delete', function () {
@@ -789,18 +791,22 @@
                 },
             }
         )
-            .then(response => response.json())
-            .then(result => {
-                $(target).val(result.data.link).trigger('change');
-                $('.loading').fadeOut();
-            })
-            .catch(error => {
-                var obj = {
-                    'message': '{{__("_error")}} upload: ' + error,
-                    'type': 'error'
-                };
-                flash(obj);
-            });
+            .then(response => response.json()
+    )
+    .
+        then(result => {
+            $(target).val(result.data.link).trigger('change');
+        $('.loading').fadeOut();
+    })
+    .
+        catch(error => {
+            var obj = {
+                'message': '{{__("_error")}} upload: ' + error,
+                'type': 'error'
+            };
+        flash(obj);
+    })
+        ;
 
     });
 
@@ -865,10 +871,12 @@
                 cancelButtonText: '{{__("_back")}}',
                 confirmButtonText: '{{__("_confirm")}}',
             }).then((result) => {
-                if (result.isConfirmed) {
-                    ajaxlink(this);
-                }
-            })
+                if(result.isConfirmed
+        )
+            {
+                ajaxlink(this);
+            }
+        })
         } else {
             ajaxlink(this);
         }

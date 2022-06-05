@@ -22,7 +22,7 @@ class Product extends AppModel
 
     protected $guarded = ['id'];
 
-    protected $with = ['comments','tags','translation'];
+    protected $with = ['translation'];
 
     protected $casts = [
         'options' => 'array',

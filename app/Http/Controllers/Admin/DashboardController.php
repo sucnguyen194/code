@@ -22,7 +22,6 @@ class DashboardController extends Controller {
                 ->groupByRaw('date')
                 ->get()->keyBy('date')->toArray();
 
-
             $revenues = [];
             $total_month = 0;
             $total_today = 0;
@@ -42,7 +41,6 @@ class DashboardController extends Controller {
             $total_yesterday += $order[$yesterday]['total'] ?? 0;
             $revenues_yesterday += $order[$yesterday]['revenue'] ?? 0;
             $revenues_today += $order[$today]['revenue'] ?? 0;
-
 
             if($total_today >= 0 && $total_yesterday == 0){
 
@@ -144,17 +142,12 @@ class DashboardController extends Controller {
             $data['per_order'] = $per_order;
             $data['today'] = $today;
 
-
             $data['products'] = Product::where('view', '>',0)->latest('view')->take(50)->get();
-            $data['posts'] = Post::with('translation')->where('view', '!=' ,0)->latest('view')->take(50)->get();
+            $data['posts'] = Post::where('view', '>' ,0)->latest('view')->take(50)->get();
 
             $visitors = Visitor::selectRaw('SUM(referer_count) as count, referer_domain')->groupByRaw('referer_domain')->oldest('referer_domain')->get();
 
-            $data['referer_domain'] = $visitors->pluck('referer_domain')->toArray();
-
-            $data['referer_count'] = $visitors->pluck('count')->toArray();
-
-            $data['sum_count'] = $visitors->sum('count');
+            $data['visitors'] = $visitors;
 
 	        return view('admin.dashboard.dashboard', $data);
 	}
