@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 if (!function_exists('show_item')) {
@@ -82,8 +83,8 @@ if (!function_exists('setting')) {
             return Setting::set($key[0], $key[1]);
         }
 
-        if(Setting::has($key.'.'.session('lang')))
-            $key = $key.'.'.session('lang');
+        if (Setting::has($key . '.' . session('lang')))
+            $key = $key . '.' . session('lang');
 
         $value = Setting::get($key);
 

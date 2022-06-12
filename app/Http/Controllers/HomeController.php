@@ -85,12 +85,9 @@ class HomeController extends Controller
             return  redirect()->route('home');
 
         if($translation->locale != session('lang')){
-
             $translation = $translation->item->translation;
-
             App::setLocale($translation->locale);
             session()->put('lang', $translation->locale);
-
             return  redirect()->route('slug', $translation->slug);
         }
 
