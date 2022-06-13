@@ -338,7 +338,7 @@ class LanguageController extends Controller
 
         file_put_contents(resource_path('lang/') . $lang->value . '.json', json_encode($json_arr));
 
-        return flash("`" . trim($request->key) . "` has been removed");
+        return flash(trim($request->key). "has been removed");
     }
 
     /**

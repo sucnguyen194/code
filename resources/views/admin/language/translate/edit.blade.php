@@ -1,5 +1,5 @@
-<div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.languages.update.item.translate', $lang)}}" class="ajax-form" method="post" enctype="multipart/form-data">
+<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <form action="{{route('admin.languages.update.item.translate', $lang)}}" class="ajax-form w-100" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">

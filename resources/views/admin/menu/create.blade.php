@@ -1,5 +1,5 @@
-<div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.menus.store')}}" method="post" class="ajax-form-menu" enctype="multipart/form-data">
+<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <form action="{{route('admin.menus.store')}}" method="post" class="ajax-form-menu w-100" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">

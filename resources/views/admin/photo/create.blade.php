@@ -1,9 +1,9 @@
-<div class="modal-dialog" role="document">
-    <form action="{{route('admin.photos.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="{{route('admin.photos.store')}}" method="post" class="ajax-form w-100" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}} <span class="text-lowercase">{{__('_image')}}</span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('_add_new')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -128,7 +128,7 @@
                     img += '<div class="input-group">';
                     img += ' <input name="images[]" id="slider-input" type="text" class="form-control" value="'+result.data.link+'" placeholder="http://" >';
                     img += '<span class="input-group-append">';
-                    img += '<label class="btn btn-default mb-0" type="button"><input type="button" class="d-none" id="photo-delete">{{__('lang.destroy')}}</label>';
+                    img += '<label class="btn btn-default mb-0" type="button"><input type="button" class="d-none" id="photo-delete">{{__('_destroy')}}</label>';
                     img += '</span>';
                     img += '</div></div>';
 

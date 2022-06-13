@@ -23,8 +23,7 @@
             <div class="col-12">
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
-                        <a href="{{route('admin.languages.create')}}" class="btn btn-primary waves-effect width-md waves-light mb-2 ajax-modal">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {!! __('_add_new') !!}</a>
+                        @include('admin.render.add_new', ['route' => route('admin.languages.create'), 'modal' => true])
                     </div>
                     <div id="custom-toolbar">
 

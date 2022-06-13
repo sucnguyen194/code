@@ -1,6 +1,11 @@
 @extends('layouts.layout')
 @section('content')
-
+    <form method="post" action="{{route('send.contact')}}">
+        @csrf
+        <input name="data[name]" value="1">
+        <input name="data[email]" value="admin@gmail.com">
+        <button type="submit">Send</button>
+    </form>
 @endsection
 
 @section('styles')

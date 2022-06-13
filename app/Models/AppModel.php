@@ -89,11 +89,25 @@ class AppModel extends Model
     }
 
     public function scopeOfCategory($q, $category){
-        return $q->whereCategoryId($category)->orWhere(function($q) use ($category){
+        return $q->with(['category','admin'])->whereCategoryId($category)->orWhere(function($q) use ($category){
             $q->whereHas('categories',function($q) use ($category){
                 $q->whereCategoryId($category);
             });
+        })->when(request()->filters, function ($q){
+            $q->whereHas('filters', function ($q) {
+                $q->whereHas('translation', function($q) {
+                    $q->whereIn('name', collect(\request()->filters));
+                });
+            });
         });
+    }
+
+    public function scopeOfRelated($q, $related){
+
+        return $q->with(['categories','admin'])
+            ->where('id','!=', $related->id)
+            ->ofCategory(optional($related->category)->id)
+            ->ofTake(TakeItem::replated);
     }
 
     public function scopeOfType($q, $type){

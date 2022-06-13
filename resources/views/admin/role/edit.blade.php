@@ -1,5 +1,5 @@
-<div class="modal-dialog modal-lg" style="max-width: 800px" role="document">
-    <form action="{{route('admin.roles.update',$role)}}" method="post" class="ajax-form" enctype="multipart/form-data">
+<div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 800px" role="document">
+    <form action="{{route('admin.roles.update',$role)}}" method="post" class="ajax-form w-100" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="modal-content">

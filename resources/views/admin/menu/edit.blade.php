@@ -1,5 +1,5 @@
-<div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.menus.update',$menu)}}" method="post" class="ajax-form-menu"
+<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <form action="{{route('admin.menus.update',$menu)}}" method="post" class="ajax-form-menu w-100"
           enctype="multipart/form-data">
         @csrf
         @method('PUT')

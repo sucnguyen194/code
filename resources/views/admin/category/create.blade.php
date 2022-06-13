@@ -1,5 +1,5 @@
-<div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.categories.ajax.store')}}" method="post" class="ajax-select" data-selected="{{request()->selected}}" data-option="{{request()->option}}" enctype="multipart/form-data">
+<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <form action="{{route('admin.categories.ajax.store')}}" method="post" class="ajax-select w-100" data-selected="{{request()->selected}}" data-option="{{request()->option}}" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">

@@ -1,5 +1,5 @@
-<div class="modal-dialog modal-md" role="document">
-    <form action="{{route('admin.filters.update',$filter)}}" method="post" class="ajax-form" enctype="multipart/form-data">
+<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <form action="{{route('admin.filters.update',$filter)}}" method="post" class="ajax-form w-100" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="modal-content">

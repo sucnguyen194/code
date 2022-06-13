@@ -176,7 +176,7 @@
             @endcan
 
             if(row.image)
-                html +='<a href="javascript:void(0)" class="btn btn-xs btn-facebook  coppy-image waves-effect waves-light tooltip-hover" title="{{__('lang.coppy')}} {{__('_image')}}" data-image="'+row.image+'"><i class="fe-copy"></i></a>';
+                html +='<a href="javascript:void(0)" class="btn btn-xs btn-facebook  coppy-image waves-effect waves-light tooltip-hover" title="{{__('_copy_image')}}" data-image="'+row.image+'"><i class="fe-copy"></i></a>';
 
             return html;
         }

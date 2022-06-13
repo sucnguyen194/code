@@ -1,6 +1,6 @@
 
-<div class="modal-dialog modal-tag modal-lg" style="max-width: 800px!important" role="document">
-    <form action="{{route('admin.tags.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
+<div class="modal-dialog modal-tag modal-dialog-centered modal-lg" style="max-width: 800px!important" role="document">
+    <form action="{{route('admin.tags.store')}}" method="post" class="ajax-form w-100" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">

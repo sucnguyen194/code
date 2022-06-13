@@ -22,8 +22,7 @@
                 <div class="card-box table-responsive">
                     <div class="action-datatable text-right">
                         @can('product.create')
-                        <a href="{{route('admin.products.categories.create')}}" class="ajax-modal btn btn-primary waves-effect width-md waves-light mb-2">
-                            <span class="icon-button"><i class="fe-plus"></i></span> {{__('_add_new')}} {{\Illuminate\Support\Str::lower(__('_category'))}}</a>
+                            @include('admin.render.add_new', ['route' => route('admin.products.categories.create'), 'modal' => true])
                         @endcan
                     </div>
                     <div id="custom-toolbar">

@@ -1,5 +1,5 @@
-<div class="modal-dialog modal-lg" style="max-width: 800px!important" role="document">
-    <form action="{{route('admin.posts.store')}}" method="post" class="ajax-form" enctype="multipart/form-data">
+<div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 800px!important" role="document">
+    <form action="{{route('admin.posts.store')}}" method="post" class="ajax-form w-100" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
             <div class="modal-header">

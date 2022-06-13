@@ -35,25 +35,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        if(setting('site.maintenance')){
-            if(!session()->has('site.password') && setting('site.password')){
-                session()->put('url', request()->url());
-                return view('errors.lock');
-            }
-        }
-
-       $data['sliders'] = Photo::ofPosition(Position::Slider)->get();
-       $data['partners'] = Photo::ofPosition(Position::Partner)->get();
-       $data['idols'] = Photo::ofPosition(Position::Idol)->get();
-//       $data['posts']  = Post::ofType(PostType::post)->with(['categories','admin','category'])->withCount('comments')->ofTake(TakeItem::index)->status()->get();
-
-       $data['categoris'] = Category::with(['posts' => function($q){
-           $q->sort();
-       }])->ofType(CategoryType::post)->status()->get();
-
-       $data['fixed'] = true;
-
-        return view('layouts.home', $data);
+        return view('layouts.home');
     }
 
     public function maintenance(Request $request){
@@ -72,13 +54,6 @@ class HomeController extends Controller
 
     public function translation($slug)
     {
-        if(setting('site.maintenance')){
-            if(!session()->has('site.password') && setting('site.password')){
-                session()->put('url', request()->url());
-                return view('errors.lock');
-            }
-        }
-
         $translation = Translation::ofSlug($slug)->first();
 
         if(!$translation || !$translation->item)
@@ -97,10 +72,7 @@ class HomeController extends Controller
                 $this->setView($translation->post);
                 $post = $translation->post;
 
-                $related = Post::with(['categories','admin'])
-                    ->where('id','!=', $post->id)
-                    ->ofCategory(optional($post->category)->id)
-                    ->ofTake(TakeItem::replated)->get();
+                $related = Post::ofRelated($post)->get();
 
                 return view($post->views, compact('post', 'related'));
 
@@ -110,10 +82,7 @@ class HomeController extends Controller
                 $this->setView($translation->product);
                 $product = $translation->product;
 
-                $related = Product::with(['categories' ,'admin','translation'])
-                    ->where('id','!=', $product->id)
-                    ->ofCategory(optional($product->category)->id)
-                    ->ofTake(TakeItem::replated)->get();
+                $related = Product::ofRelated($product)->get();;
 
                 return view('product.show', compact('product', 'related'));
 
@@ -123,25 +92,12 @@ class HomeController extends Controller
 
                 switch ($category->type) {
                     case (CategoryType::product):
-                        $products = Product::with(['category','admin'])
-                            ->when(request()->filters, function ($q){
-                                $q->whereHas('filters', function ($q) {
-                                    $q->whereHas('translation', function($q) {
-                                        $q->whereIn('name', collect(\request()->filters));
-                                    });
-                                });
-                            })
-                            ->ofTranslation()
-                            ->ofCategory($category->id)
-                            ->paginate(setting('site.product.category', 12));
+                        $products = Product::ofCategory($category)->paginate(setting('site.product.category', 12));
 
                         return view('product.category', compact('category','products'));
                         break;
                     case (CategoryType::post):
-                        $posts = Post::with(['category','admin'])
-                            ->ofType(PostType::post)
-                            ->ofCategory($category->id)
-                            ->paginate(setting('site.post.category',  12));
+                        $posts = Post::ofCategory($category)->paginate(setting('site.post.category',  12));
 
                         return view('post.category', compact('category','posts'));
                         break;
@@ -150,16 +106,16 @@ class HomeController extends Controller
         }
     }
 
-    public function author($id){
-        $author = Admin::find($id);
-
-            if(!$author)
-                return redirect()->back()->withInput();
-
-        $posts = auth()->post->latest()->paginate(setting('site.post.category', 12));
-
-        return view('post.author',compact('posts','author'));
-    }
+//    public function author($id){
+//        $author = Admin::find($id);
+//
+//            if(!$author)
+//                return redirect()->back()->withInput();
+//
+//        $posts = auth()->post->latest()->paginate(setting('site.post.category', 12));
+//
+//        return view('post.author',compact('posts','author'));
+//    }
 
     public function setView($translation){
 
