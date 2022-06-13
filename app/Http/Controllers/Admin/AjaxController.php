@@ -17,7 +17,7 @@ use App\Models\Support;
 
 class AjaxController extends Controller {
 
-    public function getSystem($type){
+    public function getModule($type){
         switch ($type){
             case TagType::product:
                 $data = Product::find(request()->id);
@@ -42,19 +42,19 @@ class AjaxController extends Controller {
         }
         return $data;
     }
-    public function getEditDataSort(){
-        $data = $this->getSystem(request()->type);
+    public function updateSort(){
+        $data = $this->getModule(request()->type);
         $data->update(['sort' => request()->num]);
         return $data;
     }
-    public function getEditDataStatus(){
-        $data = $this->getSystem(request()->type);
+    public function updateStatus(){
+        $data = $this->getModule(request()->type);
         $status = $data->status == ActiveDisable::active ? ActiveDisable::disable :  ActiveDisable::active;
         $data->update(['status' => $status]);
         return $data;
     }
-    public function getEditDataPublic(){
-        $data = $this->getSystem(request()->type);
+    public function updatePublic(){
+        $data = $this->getModule(request()->type);
         $public = $data->public == ActiveDisable::active ? ActiveDisable::disable :  ActiveDisable::active;
         $data->update(['public' => $public]);
         return $data;

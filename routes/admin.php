@@ -195,9 +195,9 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
         /**
          * Ajax Admin
          */
-        Route::get('update/sort', [App\Http\Controllers\Admin\AjaxController::class, 'getEditDataSort'])->name('ajax.data.sort');
-        Route::get('update/public', [App\Http\Controllers\Admin\AjaxController::class, 'getEditDataPublic'])->name('ajax.data.public');
-        Route::get('update/status', [App\Http\Controllers\Admin\AjaxController::class, 'getEditDataStatus'])->name('ajax.data.status');
+        Route::get('update/sort', [App\Http\Controllers\Admin\AjaxController::class, 'updateSort'])->name('ajax.data.sort');
+        Route::get('update/public', [App\Http\Controllers\Admin\AjaxController::class, 'updatePublic'])->name('ajax.data.public');
+        Route::get('update/status', [App\Http\Controllers\Admin\AjaxController::class, 'updateStatus'])->name('ajax.data.status');
 
     });
 });
